@@ -1,0 +1,177 @@
+<template>
+    <div class="articles">
+        <div class="main-container">
+            <h5>Featured</h5>
+            <div class="rowed featured">
+                <div class="column featured-1">
+                   <router-link :to="{name: 'bible-teachings'}">
+                       <img src="\images\carousel-img\5_principles_of_the_faith-filled_life_159634769.jpg" style="width: 100%" alt="">
+                    </router-link>
+                   <router-link :to="{name: 'bible-teachings'}">Studying the Word</router-link>
+                </div>
+                <div class="column featured-2">
+                    <router-link :to="{name: 'bible-teachings'}">
+                        <img src="\images\carousel-img\images.jfif" style="width: 100%" alt="">
+                    </router-link>
+                    <router-link :to="{name: ''}">Christianity and Technology</router-link>
+                </div>
+                <div class="column featured-3">
+                   <router-link :to="{name: 'bible-teachings'}">
+                       <img src="\images\carousel-img\images (3).jfif" style="width: 100%" alt="">
+                   </router-link>
+                   <router-link :to="{name: ''}">Understanding God's Creatures</router-link>
+                </div>
+            </div>
+            <h5>Select a Category</h5>
+            <div class="rowed mrl-auto category">
+                <router-link :to="{name: '' }"><div class="column cols cat-1">Bible Teachings</div></router-link>
+                 <router-link :to="{name: '' }"><div class="column cols cat-2">Godly Living</div></router-link>
+                 <router-link :to="{name: '' }"><div class="column cols cat-3">Spirit-Controlled Life</div></router-link>
+            
+                 <router-link :to="{name: '' }"><div class="column cols cat-4">In his Presence</div></router-link>
+                 <router-link :to="{name: '' }"><div class="column cols cat-5">Seeking Comfort</div></router-link>
+                 <router-link :to="{name: '' }"><div class="column cols cat-6">Breaking Habits</div></router-link>
+            </div>
+            <h5 class="inline-block">Videos</h5>
+            <router-link :to="{name: 'library'}" class="waves-effect waves-light btn-small"><i class="material-icons right">chevron_right</i>See all</router-link>
+            <div class="video">
+                <video width="800" height="400" class="responsive-video" controls>
+                    <source src="videos/1-Basic-Databinding.mp4" type="video/mp4">
+                    <source src="movie.ogg" type="video/ogg">
+                    Your browser does not support the video tag.
+                </video>
+                <p>Making the Best Life</p>
+            </div>
+            
+        </div>
+        <!-- <div >
+            <a href=""><div class="col s6 m4 3 cat-7"></div></a>
+            <a href=""><div class="col s6 m4 3 cat-8"></div></a>
+            <a href=""><div class="col s6 m4 3 cat-9"></div></a>
+        </div> -->
+    </div>
+</template>
+<script>
+    export default {
+        data() {
+            return {
+                
+            }
+        },
+        created() {
+            
+        },
+        mounted() {
+        },
+    }
+</script>
+<style scoped>
+    .mrl-auto {
+        margin-left: 35px;
+    }
+    .column {
+        float: left;
+        width: 33.33%;
+        padding: 5px;
+    }
+    .featured, .category {
+        padding-bottom: 30px;
+        border-bottom: 0.4px solid;
+        margin-bottom: 30px;
+    }
+    /* Clear floats after image containers */
+    .rowed::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+    @media screen and (max-width: 500px) {
+        .column {
+            width: 100%;
+        }
+    }
+    .cols {
+        margin-right: 15px;
+        margin-bottom: 20px;
+    }
+    .column:hover {
+        text-decoration: underline;
+    }
+    .cat-1 {
+        background-image: url("/images/article-img/502014315_univ_lss_lg.jpg");
+        background-repeat: repeat-x;
+        background-position: center;
+        color: #ffffff;
+        padding-top: 60px;
+        font-size: 1.2em;
+        font-weight: 500;
+        width: 280px;
+        height: 100px;
+    }
+    .cat-2 {
+        background-image: url("/images/article-img/501000004_univ_lss_lg.jpg");
+        background-repeat: repeat-x;
+        background-position: center;
+        color: #ffffff;
+        padding-top: 60px;
+        font-size: 1.2em;
+        font-weight: 500;
+        width: 280px;
+        height: 100px;
+    }
+    .cat-3 {
+        background-image: url("/images/article-img/501100004_univ_lss_lg.jpg");
+        background-repeat: repeat-x;
+        background-position: center;
+        color: #ffffff;
+        padding-top: 60px;
+        font-size: 1.2em;
+        font-weight: 500;
+        width: 280px;
+        height: 100px;
+    }
+    .cat-4 {
+        background-image: url("/images/article-img/501600101_univ_lss_lg.jpg");
+        background-repeat: repeat-x;
+        background-position: center;
+        color: #ffffff;
+        padding-top: 60px;
+        font-size: 1.2em;
+        font-weight: 500;
+        width: 280px;
+        height: 100px;
+    }
+    .cat-5 {
+        background-image: url("/images/article-img/502014311_univ_lss_lg.jpg");
+        background-repeat: repeat-x;
+        background-position: center;
+        color: #ffffff;
+        padding-top: 60px;
+        font-size: 1.2em;
+        font-weight: 500;
+        width: 280px;
+        height: 100px;
+    }
+    .cat-6 {
+        background-image: url("/images/article-img/502014315_univ_lss_lg.jpg");
+        background-repeat: repeat-x;
+        background-position: center;
+        color: #ffffff;
+        padding-top: 60px;
+        font-size: 1.2em;
+        font-weight: 500;
+        width: 280px;
+        height: 100px;
+    }
+    .inline-block {
+        display: inline-block;
+    }
+    .btn-small {
+        float: right;
+        margin-top: 20px;
+    }
+    .video {
+        padding-bottom: 50px;
+    }
+
+</style>
