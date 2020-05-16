@@ -24,7 +24,8 @@
                                 <input type="file">
                             </div>
                             <div class="file-path-wrapper">
-                                <input class="file-path validate" type="text" placeholder="Upload book cover">
+                                <input class="file-path validate" v-on:change="onImageChange"
+			                        name="image" type="text" placeholder="Upload book cover">
                             </div>
                         </div>
                         <div class="file-field input-field col s4">
@@ -33,7 +34,8 @@
                                 <input type="file">
                             </div>
                             <div class="file-path-wrapper">
-                                <input class="file-path validate" type="text" placeholder="Upload Book">
+                                <input class="file-path validate" v-on:change="onPathChange" 
+			                        name="path" type="text" placeholder="Upload Book">
                             </div>
                         </div>
                     </div>
