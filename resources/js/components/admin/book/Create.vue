@@ -5,25 +5,42 @@
                 <form class="col s12" @submit="registerUser">
                     <div class="row">
                         <div class="input-field col s6">
-                            <input placeholder="Name" v-model="book.name" id="title" type="text" class="validate">
+                            <input placeholder="Name" v-model="book.name" id="name" type="text" class="validate">
                         </div>
                         <div class="input-field col s6">
-                            <textarea id="description" placeholder="Description" v-model="book.description"  type="text" class="validate materialize-textarea">
+                            <textarea id="description" placeholder="Description" v-model="book.description" class="validate materialize-textarea"></textarea>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="input-field col s6">
-                            <input placeholder="Name" v-model="book.name" id="title" type="text" class="validate">
+                        <div class="input-field col s4">
+                            <select>
+                                <option :value="null" disabled selected>Select Category</option>
+                                <option v-for="option in options" :key="option.id" v-bind:value="option.id">{{ option.categoryName }}</option>
+                            </select>
                         </div>
-                        <div class="input-field col s6">
-                            <textarea id="description" placeholder="Description" v-model="book.description"  type="text" class="validate materialize-textarea">
+                        <div class="file-field input-field col s4">
+                            <div class="btn">
+                                <span>File</span>
+                                <input type="file">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text" placeholder="Upload book cover">
+                            </div>
+                        </div>
+                        <div class="file-field input-field col s4">
+                            <div class="btn">
+                                <span>File</span>
+                                <input type="file">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text" placeholder="Upload Book">
+                            </div>
                         </div>
                     </div>
                 </form>
            </div>
     </b-container>
-</template>
-'category_id', 'image
+</template>'image
 <script>
   export default {
     data() {
