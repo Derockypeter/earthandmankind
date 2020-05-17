@@ -1,72 +1,89 @@
 <template>
-    <b-container>
-		<div class="mt-5"></div>
-        <b-form  @submit="createVideo" enctype="multipart/form-data" novalidate>
-         	<b-form-group id="input-group-1" label="Title:" label-for="input-1">
-				<b-form-input
-                    id="input-1"
-                    v-model="video.title"
-					name="title"
-                    required
-                    placeholder="Enter Title">
-                </b-form-input>
-            </b-form-group>
-            <b-form-file
-            	accept="video/*"
-                v-on:change="onVideoChange"
-                name="videoName"
-                placeholder="Choose a video or drop it here... One video per upload"
-                drop-placeholder="Drop file here..."
-                required=""
-            ></b-form-file>
-            <b-form-group id="input-group-3" label="Category:" label-for="input-3">
-				<b-form-select v-model="video.category_id" class="mb-3" size="sm" required name="category">
-					<b-form-select-option :value="null">Please select an option</b-form-select-option>
-					<b-form-select-option v-for="option in options" :key="option.id" v-bind:value="option.id">{{ option.categoryName }}</b-form-select-option>
-				></b-form-select>
-			</b-form-group>
-            <b-row class="ml-auto">
-                <b-col>
-                    <b-button type="submit" pill variant="secondary">Save</b-button>
-                </b-col>
-            </b-row>
-        </b-form>
-    </b-container>
+
+    <div class="container">
+        <div class="articles">
+            <div class="main-container">
+                <center>
+                    <h2>Create New Video</h2>
+                    <div v-if="message" class="alert">{{ message }}</div>
+                    <div class="row">
+                        <form class="col s12" @submit="createVideo" enctype="multipart/form-data" novalidate>
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input v-model="video.title" name="title" required placeholder="Enter Title" type="text" class="validate">
+                                </div>
+                                <div class="input-field col s6">
+                                    <select v-model="video.category_id" required class="browser-default">
+                                        <option value="" disabled selected>Select Category</option>
+                                        <option v-for="option in options" v-bind:value="option.id" :key="option.id" >{{option.categoryName}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="file-field input-field col s9">
+                                    <div class="btn">
+                                        <span>File</span>
+                                        <input type="file" v-on:change="onVideoChange">
+                                    </div>
+                                    <div class="file-path-wrapper">
+                                        <input class="file-path validate"  v-model="video.videoName"
+                                          name="videoName"
+                                          placeholder="Choose a video or drop it here... One video per upload"
+                                          required>
+                                    </div>
+                                </div>
+								<div class="col s3">
+                                	<button :disabled="saving"  class="btn waves-effect" type="submit">{{ saving ? 'Creating...' : 'Create' }}</button>
+                            	</div>
+                            </div>
+                        </form>
+                    </div>
+                </center>
+            </div>
+        </div>
+    </div>
+    
 </template>
 
 <script>
   export default {
     data() {
 		return {
+			message: false,
 			video: {
                 videoName: null,
 				category_id: '',
 				title: '',
 			},
 			options: [],
-			novalidate: true
+			novalidate: true,
+			saving: false,
 		}
     },
     created() {
       let uri = 'http://127.0.0.1:8000/api/getAllCat';
       this.axios.get(uri).then(response => {
-        this.options = response.data;
+		this.options = response.data;
+		console.log(response.data)
       });
     },
     methods: {
       	createVideo(evt) {
 			evt.preventDefault();
-            const data = new FormData();
-            data.append('category_id', this.video.category_id)
-			data.append('videoName', this.video.videoName)
-			data.append('title', this.video.title)
-			let uri = 'http://127.0.0.1:8000/api/saveVideo';
-			this.axios.post(uri, data).then((response) => {
-				this.$router.push({name: 'admin'});
-			})
-			.catch(err => {
-				console.log(err.response.data, err.response.header)
-			})
+			// if(this.video.title != '' && this.video.videoName != '' && this.video.category_id != ''){
+				this.saving = true
+				const data = new FormData();
+				data.append('category_id', this.video.category_id)
+				data.append('videoName', this.video.videoName)
+				data.append('title', this.video.title)
+				let uri = 'http://127.0.0.1:8000/api/saveVideo';
+				this.axios.post(uri, data).then((response) => {
+					this.$router.push({name: 'admin'});
+				})
+				.catch(err => {
+					this.message = err.response.data || err.response.header || 'Invalid'
+				})
+			
 		},
 		onVideoChange(event) {
 			this.video.videoName = event.target.files[0];

@@ -11,7 +11,7 @@
 
                     <div class="container">
                         <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
-
+                        <div class="alert" v-if="message">{{message}}</div>
                         <form class="col s12" @submit="loginUser">
                             <div class='row'>
                                 <div class='col s12'>
@@ -63,6 +63,7 @@
 export default {
     data() {
         return {
+            message: false,
             user: {
                 email: '',
                 password: ''
@@ -74,10 +75,17 @@ export default {
             evt.preventDefault()
             let uri = 'http://127.0.0.1:8000/api/login';
             this.axios.post(uri, this.user).then((response) => {
-            	this.$router.push({name: 'home'});
+                if(response.data == "Invalid credentials"){
+                    M.Toast({html: "Can't find User"})
+                    this.$router.push({name: 'register'})
+                }
+                else {
+                    this.$router.push({name: 'home'})
+                }
             })
             .catch(error => {
-                console.log(error)
+                if(error)
+                    this.message = error.response.data || 'We can\'t log you in at the moment' 
             })
         }
     }

@@ -11,13 +11,13 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $validation = Validator::make($request->all(), [
-            'name' => 'required|string|unique:books',
+            'name' => 'required|unique:books',
             'description' => 'required|unique:books',
             'category_id' => 'nullable',
             'path' => 'required',
-            'path.*' => 'mimes:doc,docx,pdf,zip|max:20000',
+            'path.*' => 'file|mimes:ppt,pptx,doc,docx,pdf,xls,xlsx|max:20000',
             'image' => 'required',
-            'image.*' => 'mimes:'
+            'image.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
         if($validation->fails())
         {
@@ -30,7 +30,7 @@ class BookController extends Controller
 
             $request->path->move(public_path('books/path'), $input['path']);
             // $request->image->move(public_path('books/images'), $input['image']);
-            \Image::make($request->file('image'))->resize(50, 100)->save(public_path('books/images').$input['image']);
+            \Image::make($request->file('image'))->resize(50, 100)->save(public_path('books/images/').$input['image']);
 
             $book = Book::insert($input);
             
@@ -44,14 +44,14 @@ class BookController extends Controller
         $books = new Book();
         if($books){
             $getBooks = $books::join('categories', 'books.category_id', '=', 'categories.id')
-                ->select('books.id', 'name', 'description', 'categoryName', 'path', 'image');
+                ->select('books.id', 'description', 'categoryName', 'path', 'image', 'name');
             return response()->json($getBooks->simplePaginate(5), 200);
         }
         else{
             return 0;
         }
     }
-    // Getting only posts with Bible Teachings
+    // Getting only books with Bible Teachings
     public function bibleTeaching()
     {
         $books = Category::where([
@@ -60,7 +60,7 @@ class BookController extends Controller
         ->join('books', 'categories.id', '=', 'books.category_id')
         ->select('name', 'description', 'categoryName', 'path');
 		if($books){
-			$book = $books->get();
+			$book = $books->latest();
 
 			return response()->json($book);
 		}
@@ -95,36 +95,83 @@ class BookController extends Controller
     public function editBook(Request $request, $id)
     {
         $request->validate([
-            'path' => 'nullable|mimes:doc,docx,pdf,epub,zip|max:20000',
+            'name' => 'required|unique:books',
+            'description' => 'required|unique:books',
+            'category_id' => 'nullable',
+            'path.*' => 'file|mimes:ppt,pptx,doc,docx,pdf,xls,xlsx|max:20000',
+            'image.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        $bookToUpdate = Book::whereId($id);
+        $bookToUpdate = Book::where('id', $id)->first();
 
-        if($request->hasFile('path'))
+        if($request->hasFile('path' && 'image'))
+        {
+            $file = $request->file('path');
+            $file2 = $request->file('image');
+            $name = $file->getClientOriginalName();
+            $name2 = $file->getClientOriginalName();
+            $file->move(public_path('books/path'), $name);
+            $file2->move(public_path('books/images'), $name2);
+
+            $pathToDelete = public_path("books/path/{$book->path}");
+            if (Book::exists($pathToDelete))
+            {
+                unlink($pathToDelete);
+            }
+            $imageToDelete = public_path("books/path/{$book->path}");
+            if (Book::exists($imageToDelete))
+            {
+                unlink($imageToDelete);
+            }
+            $bookToUpdate->path = $name;
+            $bookToUpdate->image = $name2;
+            $bookToUpdate->category_id = $request->category_id;
+            $bookToUpdate->description = $request->description;
+            $bookToUpdate->name = $request->name;
+
+        }
+        elseif ($request->hasFile('path')) 
         {
             $file = $request->file('path');
             $name = $file->getClientOriginalName();
-            $file->move(public_path('books'), $name);
-
-            $bookToDelete = public_path("books/{$book->path}");
-            if (Book::exists($bookToDelete))
+            $file->move(public_path('books/path'), $name);
+            $pathToDelete = public_path("books/path/{$book->path}");
+            if (Book::exists($pathToDelete))
             {
-                unlink($bookToDelete);
+                unlink($pathToDelete);
             }
+
             $bookToUpdate->path = $name;
             $bookToUpdate->category_id = $request->category_id;
-            $bookToUpdate->description = $request->descritpion;
+            $bookToUpdate->description = $request->description;
             $bookToUpdate->name = $request->name;
 
         }
-        elseif (!($request->hasFile('videoName'))) 
+        elseif ($request->hasFile('path')) 
         {
+            $file2 = $request->file('image');
+            $name2 = $file2->getClientOriginalName();
+            $file2->move(public_path('books/images'), $name2);
+            $imageToDelete = public_path("books/images/{$book->image}");
+            if (Book::exists($imageToDelete))
+            {
+                unlink($imageToDelete);
+            }
+            
+            $bookToUpdate->image = $name2;
             $bookToUpdate->category_id = $request->category_id;
-            $bookToUpdate->description = $request->descritpion;
+            $bookToUpdate->description = $request->description;
             $bookToUpdate->name = $request->name;
 
         }
-        $bookToUpdate->update();
+        else{
+            $bookToUpdate->category_id = $request->category_id;
+            $bookToUpdate->description = $request->description;
+            $bookToUpdate->name = $request->name;
+            // $bookToUpdate->save();
+        }
+
+        $bookToUpdate->save();
         return response()->json($bookToUpdate);
     }
     // Deleting a video
@@ -133,10 +180,15 @@ class BookController extends Controller
         $book = Book::findOrFail($id);
         if ($book)
         {
-            $bookToDelete = public_path("books/{$book->path}");
-            if ( file_exists($bookToDelete) )
+            $bookToDelete = public_path("books/path/{$book->path}");
+            if ( file_exists($bookToDelete))
             {
-                unlink($bookToDelete);public_path("books/{$book->path}");
+                unlink($bookToDelete);
+            }
+            $imageToDelete = public_path("books/images/{$book->image}");
+            if ( file_exists($imageToDelete))
+            {
+                unlink($imageToDelete);
             }
             $book->delete();
             return response()->json(null, 204);

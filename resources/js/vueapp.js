@@ -24,6 +24,7 @@ import About from './components/AboutUsComponent.vue'
 import Login from './components/LoginComponent.vue'
 import Register from './components/RegisterComponent.vue'
 import Pagination from './components/reusable/Pagination.vue'
+import NotFound from './components/reusable/NotFound.vue'
 
 // ADMIN SECTION
 import CreatePost from './components/admin/post/CreateComponent.vue'
@@ -31,6 +32,7 @@ import EditPost from './components/admin/post/EditComponent.vue'
 import Admin from './components/admin/AdminComponent.vue'
 import IndexPost from './components/admin/post/IndexComponent.vue'
 import Postbody from './components/PostBodyComponent.vue'
+import PostCategory from './components/PostCategory.vue'
 
 import EditCategory from './components/admin/category/EditComponent.vue'
 import CreateCategory from './components/admin/category/CreateComponent.vue'
@@ -39,6 +41,10 @@ import IndexCategory from './components/admin/category/IndexComponent.vue'
 import EditVideo from './components/admin/videos/EditComponent.vue'
 import CreateVideo from './components/admin/videos/CreateComponent.vue'
 import IndexVideo from './components/admin/videos/IndexComponent.vue'
+
+import EditBook from './components/admin/book/EditComponent.vue'
+import CreateBook from './components/admin/book/CreateComponent.vue'
+import IndexBook from './components/admin/book/IndexComponent.vue'
 
 
 const router = new VueRouter ({
@@ -85,7 +91,7 @@ const router = new VueRouter ({
             }
         },
         {
-            path: '/admin/posts/create-post',
+            path: '/admin/create-post',
             name: 'create-post',
             component: CreatePost,
             props: {
@@ -93,31 +99,31 @@ const router = new VueRouter ({
             }
         },
         {
-            path: '/admin/posts/edit-post/:id',
+            path: '/admin/edit-post/:id',
             name: 'edit-post',
             component: EditPost,
             props: {
                 
             }
         },
-        {
-            path: '/admin/post/index',
-            name: 'index-post',
-            component: IndexPost,
-            props: {
+        // {
+        //     path: '/admin/post/index',
+        //     name: 'index-post',
+        //     component: IndexPost,
+        //     props: {
                 
-            }
-        },
-        {
-            path: '/admin/category/index',
-            name: 'index-category',
-            component: IndexCategory,
-            props: {
+        //     }
+        // },
+        // {
+        //     path: '/admin/category/index',
+        //     name: 'index-category',
+        //     component: IndexCategory,
+        //     props: {
                 
-            }
-        },
+        //     }
+        // },
         {
-            path: '/admin/category/edit/:id',
+            path: '/admin/edit/:id',
             name: 'edit-cat',
             component: EditCategory,
             props: {
@@ -125,21 +131,21 @@ const router = new VueRouter ({
             }
         },
         {
-            path: '/admin/category/create-cat',
+            path: '/admin/create-cat',
             name: 'create-cat',
             component: CreateCategory,
             props: {},
         },
-        {
-            path: '/admin/video/index',
-            name: 'index-video',
-            component: IndexVideo,
-            props: {
+        // {
+        //     path: '/admin/video/index',
+        //     name: 'index-video',
+        //     component: IndexVideo,
+        //     props: {
                 
-            }
-        },
+        //     }
+        // },
         {
-            path: '/admin/video/edit/:id',
+            path: '/admin/edit-vid/:id',
             name: 'edit-video',
             component: EditVideo,
             props: {
@@ -147,15 +153,45 @@ const router = new VueRouter ({
             }
         },
         {
-            path: '/admin/video/create-vid',
+            path: '/admin/create-vid',
             name: 'create-vid',
             component: CreateVideo,
             props: {},
         },
         {
+            path: '/admin/create-book',
+            name: 'create-book',
+            component: CreateBook,
+            props: {
+
+            }
+        },
+        {
+            path: '/admin/edit-book/:id',
+            name: 'edit-book',
+            component: EditBook,
+            props: {
+                
+            }
+        },
+        // {
+        //     path: '/admin/index',
+        //     name: 'index-book',
+        //     component: IndexBook,
+        //     props: {
+                
+        //     }
+        // },
+        {
             path: '/posts/:title',
-            name: 'post',
+            name: 'post-title',
             component: Postbody,
+            props: {}
+        },
+        {
+            path: '/posts/',
+            name: 'post',
+            component: PostCategory,
             props: {}
         },
         {
@@ -171,20 +207,23 @@ const router = new VueRouter ({
             props: {}
         },
         {
-            path: '/auth/login',
+            path: '/login',
             name: 'login',
             component: Login,
             props: {}
         },
         {
-            path: '/auth/register',
+            path: '/register',
             name: 'register',
             component: Register,
             props: {}
         },
-        {
-            path: '*',
-            redirect: '/'
+        {   path: '/404',
+            name: '404', 
+            component: NotFound 
+        },
+        {   path: '*', 
+            redirect: '/404' 
         },
     ]
 })

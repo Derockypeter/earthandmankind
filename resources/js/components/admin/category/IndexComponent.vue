@@ -1,14 +1,14 @@
 <template>
-  <b-container>
+  <div class="container">
       <h1>Category</h1>
         <div class="row">
-            <div class="col-md-10"></div>
-            <div class="col-md-2">
-                <router-link :to="{ name: 'create-cat' }" class="btn btn-primary">Create Category</router-link>
+            <div class="col m10"></div>
+            <div class="col m2">
+                <router-link :to="{ name: 'create-cat' }" class="btn grey">Create Category</router-link>
             </div>
         </div><br />
 
-        <table class="table table-hover">
+        <table class="striped highlight responsive-table">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -19,19 +19,19 @@
                 <tr v-for="category in categories" :key="category.id">
                     <td>{{ category.id }}</td>
                     <td>{{ category.categoryName }}</td>
-                    <td><router-link :to="{name: 'edit-cat', params: { id: category.id }}" class="btn btn-primary">Edit</router-link></td>
-                    <td><button class="btn btn-danger sm" @click.prevent="deleteCategory(category.id)">Delete</button></td>
+                    <td><router-link :to="{name: 'edit-cat', params: { id: category.id }}" class="btn cyan pulse"><i class="material-icons">edit</i></router-link></td>
+                    <td><button class="btn red" :disabled="saving" @click.prevent="deleteCategory(category.id)"><i class="material-icons">delete</i></button></td>
                 </tr>
             </tbody>
         </table>
-    </b-container>
+    </div>
 </template>
 
 <script>
     export default {
         data() {
             return {
-                isBusy: false,
+                saving: false,
                 categories: [],
             }
         },
@@ -47,13 +47,15 @@
         methods: {
             deleteCategory(id)
             {
+                this.saving = true
                 let uri = `http://127.0.0.1:8000/api/delCat/${id}`;
                 this.axios.delete(uri).then(response => {
                     this.categories.splice(this.categories.findIndex(category => category.id === id), 1);
                 }).catch(err => {
-                    console.log(err.response.header)
-                    console.log(err.response.data)
-                })
+                    this.$router.push({ name: '404' });
+                }).then(
+                    this.saving = false
+                )
             }
         },
 

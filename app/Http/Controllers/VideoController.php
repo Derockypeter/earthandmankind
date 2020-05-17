@@ -12,8 +12,8 @@ class VideoController extends Controller
     public function store(Request $request)
     {
         $validation = Validator::make($request->all(), [
-            'videoName' => 'required',
-            'videoName.*' => 'mimetypes:video/avi,video/mpeg,video/quicktime,video/mp4',
+            // 'videoName' => 'required',
+            'videoName.*' => 'required|mimetypes:video/x-ms-asf,video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/quicktime,video/x-msvideo,video/x-ms-wmv,video/avi',
             'category_id' => 'required',
             'title' => 'required'
         ]);
@@ -73,10 +73,12 @@ class VideoController extends Controller
     public function editVid(Request $request, $id)
     {
         $request->validate([
-            'videoName' => 'nullable|mimes:video',
+            'category_id' => 'required',
+            'title' => 'required',
+            'videoName.*' => 'nullable|mimes:video',
         ]);
 
-        $videoToUpdate = Video::whereId($id);
+        $videoToUpdate = Video::where('id', $id)->first();
 
         if($request->hasFile('videoName'))
         {
@@ -110,7 +112,7 @@ class VideoController extends Controller
             $videoToDelete = public_path("videos/{$video->videoName}");
             if ( file_exists($videoToDelete) )
             {
-                unlink($videoToDelete);public_path("videos/{$video->videoName}");
+                unlink($videoToDelete);
             }
             $video->delete();
             return response()->json(null, 204);

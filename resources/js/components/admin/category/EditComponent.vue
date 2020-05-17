@@ -1,22 +1,24 @@
 <template>
-  <b-container>
-        <b-form @submit="updateCategory">
-            <b-form-group id="input-group-1" label="Category:" label-for="category">
-				<b-form-input
-                    id="category"
-                    v-model="category.categoryName"
-					name="category"
-                    required>
-                </b-form-input>
-            </b-form-group>
-
-            <b-row class="ml-auto">
-                <b-col>
-                    <b-button type="submit" pill variant="secondary">Update</b-button>
-                </b-col>
-            </b-row>
-        </b-form>
-    </b-container>
+    <div class="container">
+        <div class="articles">
+            <div class="main-container">
+                <h2>Edit Category</h2>
+                <div class="row">
+                    <form @submit="updateCategory" class="col s12">
+                        <div class="row">
+                             <div class="input-field col s6">
+                                <div class="input-field col s6">
+                                    <input v-model="category.categoryName" id="category" type="text" class="validate">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn waves-effect">Edit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+                    
 </template>
 
 <script>

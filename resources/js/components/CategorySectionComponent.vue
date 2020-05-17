@@ -13,24 +13,24 @@
                     <router-link :to="{name: 'bible-teachings'}">
                         <img src="\images\carousel-img\images.jfif" style="width: 100%" alt="">
                     </router-link>
-                    <router-link :to="{name: ''}">Christianity and Technology</router-link>
+                    <router-link :to="{name: 'post'}">Christianity and Technology</router-link>
                 </div>
                 <div class="column featured-3">
                    <router-link :to="{name: 'bible-teachings'}">
                        <img src="\images\carousel-img\images (3).jfif" style="width: 100%" alt="">
                    </router-link>
-                   <router-link :to="{name: ''}">Understanding God's Creatures</router-link>
+                   <router-link :to="{name: 'post'}">Understanding God's Creatures</router-link>
                 </div>
             </div>
             <h5>Select a Category</h5>
             <div class="rowed mrl-auto category">
-                <router-link :to="{name: '' }"><div class="column cols cat-1">Bible Teachings</div></router-link>
-                 <router-link :to="{name: '' }"><div class="column cols cat-2">Godly Living</div></router-link>
-                 <router-link :to="{name: '' }"><div class="column cols cat-3">Spirit-Controlled Life</div></router-link>
+                <router-link :to="{name: 'bible-teachings' }"><div class="column cols cat-1">Bible Teachings</div></router-link>
+                 <router-link :to="{name: 'post', params: {categoryName: post.category_id} }"><div class="column cols cat-2">Godly Living</div></router-link>
+                 <router-link :to="{name: 'post', params: {categoryName: post.category_id} }"><div class="column cols cat-3">Spirit-Controlled Life</div></router-link>
             
-                 <router-link :to="{name: '' }"><div class="column cols cat-4">In his Presence</div></router-link>
-                 <router-link :to="{name: '' }"><div class="column cols cat-5">Seeking Comfort</div></router-link>
-                 <router-link :to="{name: '' }"><div class="column cols cat-6">Breaking Habits</div></router-link>
+                 <router-link :to="{name: 'post', params: {categoryName: post.category_id} }"><div class="column cols cat-4">In his Presence</div></router-link>
+                 <router-link :to="{name: 'post', params: {categoryName: post.category_id} }"><div class="column cols cat-5">Seeking Comfort</div></router-link>
+                 <router-link :to="{name: 'post', params: {categoryName: post.category_id} }"><div class="column cols cat-6">Breaking Habits</div></router-link>
             </div>
             <h5 class="inline-block">Videos</h5>
             <router-link :to="{name: 'library'}" class="waves-effect waves-light btn-small"><i class="material-icons right">chevron_right</i>See all</router-link>
@@ -55,11 +55,11 @@
     export default {
         data() {
             return {
-                
+                post:[]
             }
         },
         created() {
-            
+          
         },
         mounted() {
         },

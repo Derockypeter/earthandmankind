@@ -27,7 +27,7 @@ Route::post('/saveBook', 'BookController@store');
 Route::get('/books', 'BookController@getAllBooks');
 Route::get('/book/{id}', 'BookController@edit');
 Route::get('/books/{book_name}', 'BookController@book');
-Route::put('/book/{id}', 'BookController@editBook');
+Route::put('/bookEdit/{id}', 'BookController@editBook');
 Route::delete('delBook/{id}', 'BookController@delete');
 
 
@@ -42,7 +42,7 @@ Route::delete('/delCat/{category_id}', 'CategoryController@delete');
 Route::post('/saveVideo', 'VideoController@store');
 Route::get('/edit/{id}', 'VideoController@edit');
 Route::put('/updateVideo/{video_id}', 'VideoController@editVid');
-Route::get('/getAllVideos', 'VideoController@allVideos')->middleware('auth:api');
+Route::get('/getAllVideos', 'VideoController@allVideos');
 Route::get('/video/{video_id}', 'VideoController@video')->middleware('auth:api');
 Route::delete('/deleteVideo/{video_id}', 'VideoController@delete');
 
@@ -52,6 +52,8 @@ Route::post('/publishPost', 'PostController@publishPost');
 Route::get('/publishedPosts', 'PostController@getPosts');
 Route::get('/editPost/{id}', 'PostController@edit');
 Route::get('/posts', 'PostController@getAllPost');
+Route::get('/category/{category_id}', 'PostController@categorizedPosts');
+
 Route::put('/disablePost/{post_id}', 'PostController@disablePost');
 Route::get('/disabledPosts', 'PostController@disabledPosts');
 Route::get('/post/{post_id}', 'PostController@getPost');

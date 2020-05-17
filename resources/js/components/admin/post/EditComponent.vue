@@ -1,47 +1,55 @@
 <template>
   <div class="container">
-    <h1>Edit Post</h1>
-    <form @submit.prevent="updatePost" enctype="multipart/form-data">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form-group">
-            <label>Post Title:</label>
-            <input type="text" class="form-control" v-model="post.title">
-          </div>
-        </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label>Post Body:</label>
-              <textarea class="form-control" v-model="post.body" rows="5"></textarea>
+        <div class="articles">
+            <div class="main-container">
+				<h1>Edit Post</h1>
+                <div v-if="message" class="alert">{{ message }}</div>
+                <div v-if="! loaded">Loading...</div>
+                <div class="row">
+                    <form class="col s12" @submit.prevent="updatePost" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input v-model="post.title" id="title" type="text" class="validate">
+                            </div>
+                            <div class="input-field col s6">
+                                <textarea id="description" v-model="post.body" class="validate materialize-textarea"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <select v-model="post.category_id" class="browser-default">
+                                    <option :value="null" disabled selected>Select Category</option>
+                                    <option v-for="option in options" :key="option.id" v-bind:value="option.id">{{ option.categoryName }}</option>
+                                </select>
+                            </div>
+                            <!-- <div class="file-field input-field col s4">
+                                <div class="btn">
+                                    <span>File</span>
+                                    <input type="file">
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" 
+										v-on:change="onImageChange"
+										name="imageName"
+										v-model="post.imageName"
+										placeholder="Choose a file or drop it here...">
+                                </div>
+                            </div> -->
+                            <button class="btn waves-effect" :disabled="saving" type="submit">Edit</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-          </div>
-        </div><br />
-        <!-- <b-form-file
-            accept="image/*"
-            v-on:change="onImageChange"
-            name="imageName"
-            placeholder="Choose a file or drop it here..."
-            drop-placeholder="Drop file here..."
-        ></b-form-file> -->
-         <b-form-group id="input-group-3" label="Category:" label-for="input-3">
-           <b-form-select v-model="post.category_id" class="mb-3" size="sm" required name="category">
-					<b-form-select-option :value="null">Please select an option</b-form-select-option>
-					<b-form-select-option v-for="option in options" :key="option.id" v-bind:value="option.id">{{ option.categoryName }}</b-form-select-option>
-				></b-form-select>
-        </b-form-group><br />
-        <div class="form-group">
-          <button class="btn btn-primary">Update</button>
         </div>
-    </form>
-  </div>
+    </div>
 </template>
-
 <script>
     export default {
         data() {
             return {
+				saving: false,
+				loaded: false,
+				message: false,
                 post: {},
                 options: [],
             }
@@ -49,7 +57,10 @@
         created() {
             let uri = `http://127.0.0.1:8000/api/editPost/${this.$route.params.id}`;
             this.axios.get(uri).then((response) => {
-                this.post = response.data;
+				setTimeout(() => {
+                    this.loaded = true;
+                	this.post = response.data;
+                }, 5000);
 			});
 			let uri2 = 'http://127.0.0.1:8000/api/getAllCat';
 			this.axios.get(uri2).then(response => {
@@ -58,13 +69,14 @@
         },
         methods: {
             updatePost() {
-            let uri = `http://127.0.0.1:8000/api/post/${this.$route.params.id}`;
-            this.axios.put(uri, this.post).then((response) => {
-                this.$router.push({name: 'admin'});
-            }).catch(err => {
-                console.log(err.response.data)
-                console.log(err.response.header)
-            })
+				this.saving = true
+				let uri = `http://127.0.0.1:8000/api/post/${this.$route.params.id}`;
+				this.axios.put(uri, this.post).then((response) => {
+					M.toast({html: 'Post updated'})
+					this.$router.push({name: 'admin'});
+				}).catch(err => {
+					this.message = err.response.data
+				});
             },
             // onImageChange(event) {
             //     this.post.imageName = event.target.files[0];

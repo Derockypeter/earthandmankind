@@ -31,3 +31,12 @@ html, body {
 .pb-5 {
     padding-bottom: 50px;
 }
+.alert {
+    background: rgb(226, 181, 181);
+    color: darkRed;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    /* width: 50%; */
+    border: 1px solid darkRed;
+    border-radius: 5px;
+}

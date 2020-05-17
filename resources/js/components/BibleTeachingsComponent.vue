@@ -5,8 +5,8 @@
                 <h1>Bible Teachings</h1>
                 <p class="">Get all the bible teachings you need here</p>
                 <div></div>
-                <div class="row">
-                    <div v-for="bible in bibleTeaching" :key="bible.id" class="col l6 s12">
+                <div v-for="bible in bibleTeaching" :key="bible.id" class="row">
+                    <div class="col l6 s12">
                         <div>
                             <img :src="'/blogImages/'+bible.imageName"/>
                         </div>

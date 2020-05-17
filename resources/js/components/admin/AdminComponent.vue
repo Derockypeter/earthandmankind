@@ -2,13 +2,29 @@
     <main class="container">
         <div class="articles">
             <div class="main-container">
-                <Category></Category>
+                <div class="row">
+                    <div class="col s12">
+                        <Category></Category>
+                    </div>
+                </div>
                 <hr/>
-                <Post></Post>
+                <div class="row">
+                    <div class="col s12">
+                        <Post></Post>
+                    </div>
+                </div>
                 <hr/>
-                <Video></Video>
+                <div class="row">
+                    <div class="col s12">
+                        <Video></Video>
+                    </div>
+                </div>
                 <hr/>
-                <Book>
+                <div class="row">
+                    <div class="col s12">
+                        <Book/>
+                    </div>
+                </div>
             </div>
         </div>
         
@@ -27,7 +43,8 @@ export default {
     components: {
         Post,
         Category,
-        Video
+        Video,
+        Book,
     }
 }
 </script>

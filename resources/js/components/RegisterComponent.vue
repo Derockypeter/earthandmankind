@@ -11,6 +11,7 @@
 
                     <div class="container">
                         <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+                        <div class="alert" v-if="message">{{message}}</div>
                         <div class="row">
                             <form class="col s12" @submit="registerUser">
                                 <div class="row">
@@ -102,6 +103,7 @@
 export default {
     data() {
         return {
+            message: false,
             user: {
                 firstname: '',
                 lastname: '',
@@ -126,28 +128,24 @@ export default {
     methods: {
         registerUser(evt){
             evt.preventDefault()
-            if(this.user.password != ''){
-                 // console.log(this.user)
-                let uri = 'http://127.0.0.1:8000/api/register';
-                this.axios.post(uri, this.user)
-                    .then((response) => {
-                        this.$router.push({name: 'home'});
-                    })
-                    .catch(err => {
-                        if(err.response){
-                            console.log(err.response);
-                        }
-                        else if(err.request){
-                            console.log(err.request)
-                        }
-                        else{
-                            console.log(err)
-                        }
-                    });
-            }
-            else {
-                console.log('Invalid data')
-            }
+                // console.log(this.user)
+            let uri = 'http://127.0.0.1:8000/api/register';
+            this.axios.post(uri, this.user)
+                .then((response) => {
+                    console.log(response.data.data)
+                    this.$router.push({name: 'home'});
+                })
+                .catch(err => {
+                    if(err.response){
+                        this.message = err.response.data.errors || 'Invalid';
+                        console.log(err.response.data.errors)
+                    }
+                    // else if(err.request){
+                    //     this.message = err.request || 'Invalid';
+
+                    // }
+                });
+            
            
         }
     }

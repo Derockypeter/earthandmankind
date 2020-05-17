@@ -1,14 +1,14 @@
 <template>
-  <b-container>
+  <div class="container">
       <h1>Posts</h1>
         <div class="row">
-            <div class="col-md-10"></div>
-            <div class="col-md-2">
-                <router-link :to="{ name: 'create-post' }" class="btn btn-primary">Create Post</router-link>
+            <div class="col m10"></div>
+            <div class="col m2">
+                <router-link :to="{ name: 'create-post' }" class="btn grey">Create Post</router-link>
             </div>
         </div><br />
-
-        <table class="table table-hover">
+        <div v-if="! loaded">Loading...</div>
+        <table class="striped highlight responsive-table">
             <thead>
             <tr>
                 <th>ID</th>
@@ -24,13 +24,13 @@
                     <td>{{ post.title }}</td>
                     <td>{{ post.body }}</td>
                     <td>{{ post.categoryName }}</td>
-                    <td><b-img thumbnail fluid :src="'/blogImages/'+post.imageName"></b-img></td>
-                    <td><router-link :to="{name: 'edit-post', params: { id: post.id }}" class="btn btn-primary">Edit</router-link></td>
-                    <td><button class="btn btn-danger"  @click.prevent="deletePost(post.id)">Delete</button></td>
+                    <td><img :src="'/blogImages/'+post.imageName" class="circle responsive-img" height="100" width="100"></td>
+                    <td><router-link :to="{name: 'edit-post', params: { id: post.id }}" class="btn cyan pulse"><i class="material-icons">edit</i></router-link></td>
+                    <td><button class="btn red" :disabled="saving" @click.prevent="deletePost(post.id)"><i class="material-icons">delete</i></button></td>
                 </tr>
             </tbody>
         </table>
-    </b-container>
+    </div>
 </template>
 <style scoped>
  
@@ -40,40 +40,35 @@
     export default {
         data() {
             return {
-                isBusy: false,
+                saving: false,
+                loaded: false,
                 posts: [],
             }
         },
         created() {
             let uri = 'http://127.0.0.1:8000/api/posts';
             this.axios.get(uri).then(response => {
-                this.posts = response.data.data;
-                console.log(response.data)
+                setTimeout(() => {
+                    this.loaded = true;
+                    this.posts = response.data.data;
+                }, 5000);
             })
             .catch(err => 
                 console.error.response.data.data
             )
         },
         methods: {
-            // myProvider(){
-            //     let uri = 'http://127.0.0.1:8000/api/posts';
-            //     this.axios.get(uri).then(response => {
-            //         this.posts = response.data.data;
-            //         console.log(response.data)
-            //     })
-            //     .catch(err => 
-            //         console.error.response.data.data
-            //     )
-            // },
             deletePost(id)
             {
+                this.saving = true
                 let uri = `http://127.0.0.1:8000/api/deletePost/${id}`;
                 this.axios.delete(uri).then(response => {
                     console.log(response)
                     this.posts.splice(this.posts.findIndex(post => post.id === id), 1);
+                    thsi.saving = false
                 }).catch(err => {
-                    console.log(err.response.header)
-                    console.log(err.response.data)
+                    // this.$router.push({ name: '404' });
+                    this.saving = false
                 })
             }
         },

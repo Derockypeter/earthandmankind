@@ -158,7 +158,7 @@ class PostController extends Controller
         ])
         ->join('images', 'posts.id', '=', 'images.post_id')
         ->join('categories', 'posts.category_id', '=', 'categories.id')
-        ->select('title', 'body', 'imageName', 'categoryName', 'posts.created_at');
+        ->select('title', 'body', 'imageName', 'categoryName', 'posts.created_at', 'category_id');
 		if($posts){
             // dd($posts->created_at);
             // Carbon::parse($posts->created_at)->isoFormat('MMMM Do YYYY, h:mm:ss a');
@@ -282,18 +282,21 @@ class PostController extends Controller
 	public function deletePost($id)
 	{
         $post = Post::findOrFail($id);
-        $image = new Image();
-        $imageToDelete = $post->images()->first('imageName'); // TODO Enable removal from server
-		if($post){
-            $final = Storage::delete("blogImages/{$imageToDelete}");
-            dd($imageToDelete,$final);
+        if ($post)
+        {
+            $imageToDelete = $post->images()->first('imageName');
+            $imageToDelete = public_path("blogImages/{$imageToDelete}");
+            if ( file_exists($imageToDelete) )
+            {
+                unlink($imageToDelete);
+            }
             $post->delete();
-
-			return response()->json(null, 204);
-		}
-		else{
-			return 0;
-		}
+            return response()->json(null, 204);
+        }
+        else
+        {
+            return 0;
+        }
 	}
 	// Data to validate for post
 	protected function dataToValidate()

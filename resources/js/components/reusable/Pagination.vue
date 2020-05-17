@@ -11,6 +11,7 @@
                     @click.prevent="next(page)" 
                     class="page-link">
                     {{ page }}
+                </a>
             </li>
             <li :class="{ 'disabled': meta_data.current_page === meta_data.last_page }">
                 <a  href="#" class="page-link" @click="next(meta_data.current_page+1)"><i class="material-icons">chevron_right</i></a>
