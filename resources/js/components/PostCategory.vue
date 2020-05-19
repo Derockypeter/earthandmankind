@@ -7,7 +7,7 @@
                     <p class="uppercase">{{post.categoryName}}</p>
                     <div class="col l3 s12">
                         <div>
-                            <img :src="'/blogImages/'+post.imageName" class="responsive-image"/>
+                            <img :src="'/blogImages/'+post.imageName" class="responsive-img"/>
                         </div>
                     </div>
                     <div class="col l4 offset-l2 s12 mb-5">
@@ -44,6 +44,8 @@
 </style>
 <script>
 import Pagination from './reusable/Pagination'
+import axios from 'axios'
+
 export default {
     props: [
 
@@ -66,7 +68,7 @@ export default {
     },
     methods: {
         fetchPosts(page = 1) {
-            this.axios.get('http://127.0.0.1:8000/api/posts', {
+            axios.get('http://127.0.0.1:8000/api/posts', {
                 params: {
                     page
                 }

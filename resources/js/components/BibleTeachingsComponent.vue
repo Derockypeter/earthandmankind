@@ -3,18 +3,18 @@
         <div class="articles">
             <div class="main-container">
                 <h1>Bible Teachings</h1>
-                <p class="">Get all the bible teachings you need here</p>
+                <p class="lead">Get all the bible teachings you need here</p>
                 <div></div>
                 <div v-for="bible in bibleTeaching" :key="bible.id" class="row">
                     <div class="col l6 s12">
                         <div>
-                            <img :src="'/blogImages/'+bible.imageName"/>
+                            <img :src="'/blogImages/'+bible.imageName" class="responsive-img"/>
                         </div>
                     </div>
-                    <div class="col l4 offset-l2 s12">
+                    <div class="col l5 s12">
                         <p class="uppercase">{{bible.categoryName}}</p>
                         <h6 class="grey-text">
-                            <router-link :to="{name: 'blog', params: {title: bible.title}}">
+                            <router-link :to="{name: 'post-title', params: {title: bible.title}}">
                                 {{bible.title}}
                             </router-link>
                         </h6>
@@ -30,6 +30,7 @@
     }
 </style>
 <script>
+import axios from 'axios'
 export default {
     data() {
         return {
@@ -37,9 +38,9 @@ export default {
         }
     },
     created() {
-        let uri = 'http://127.0.0.1:8000/api/post/bible-teachings';
-        this.axios.get(uri).then(response => {
-            this.bibleTeaching = response.data.data;
+        let uri = 'http://127.0.0.1:8000/api/post';
+        axios.get(uri).then(response => {
+            this.bibleTeaching = response.data;
             console.log(response.data)
         })
         .catch(err => 

@@ -30,7 +30,7 @@ class BookController extends Controller
 
             $request->path->move(public_path('books/path'), $input['path']);
             // $request->image->move(public_path('books/images'), $input['image']);
-            \Image::make($request->file('image'))->resize(50, 100)->save(public_path('books/images/').$input['image']);
+            \Image::make($request->file('image'))->resize(100, 110)->save(public_path('books/images/').$input['image']);
 
             $book = Book::insert($input);
             

@@ -20,14 +20,14 @@
 
                             <div class='row'>
                                 <div class='input-field col s12'>
-                                    <input class='validate' v-model="user.email" type='email' name='email' id='email' />
+                                    <input class='validate' v-model="user.email" type='email' name='email' id='email' required />
                                     <label for='email'>Enter your email</label>
                                 </div>
                             </div>
 
                             <div class='row'>
                                 <div class='input-field col s12'>
-                                    <input class='validate' v-model="user.password" type='password' name='password' id='password' />
+                                    <input class='validate' v-model="user.password" type='password' name='password' id='password' required />
                                     <label for='password'>Enter your password</label>
                                 </div>
                                 <label style='float: right;'>
@@ -38,7 +38,7 @@
                             <br />
                             <center>
                             <div class='row'>
-                                <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect indigo'>Login</button>
+                                <button type='submit' :disabled="saving" name='btn_login' class='col s12 btn btn-large waves-effect indigo'>{{saving ? 'Login you in' : 'Login'}}</button>
                             </div>
                             </center>
                         </form>
@@ -63,6 +63,7 @@
 export default {
     data() {
         return {
+            saving: false,
             message: false,
             user: {
                 email: '',
@@ -73,20 +74,16 @@ export default {
     methods: {
         loginUser(evt){
             evt.preventDefault()
-            let uri = 'http://127.0.0.1:8000/api/login';
-            this.axios.post(uri, this.user).then((response) => {
-                if(response.data == "Invalid credentials"){
-                    M.Toast({html: "Can't find User"})
-                    this.$router.push({name: 'register'})
-                }
-                else {
-                    this.$router.push({name: 'home'})
-                }
-            })
-            .catch(error => {
-                if(error)
-                    this.message = error.response.data || 'We can\'t log you in at the moment' 
-            })
+            const formData = {
+            email: this.user.email,
+            password: this.user.password,
+            }
+            console.log(formData)
+            this.saving = true
+            this.$store.dispatch('login', {email: formData.email, password: formData.password})
+            this.saving = false
+            
+           
         }
     }
 }

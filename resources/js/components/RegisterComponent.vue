@@ -107,7 +107,7 @@ export default {
             user: {
                 firstname: '',
                 lastname: '',
-                dob: '',
+                dob: null,
                 gender: '',
                 phone: '',
                 country: '',
@@ -128,23 +128,38 @@ export default {
     methods: {
         registerUser(evt){
             evt.preventDefault()
+            const formData = {
+                firstname: this.user.firstname,
+                lastname: this.user.lastname,
+                // DOB: this.user.dob,
+                gender: this.user.gender,
+                phone: this.user.phone,
+                country: this.user.country,
+                state: this.user.state,
+                city: this.user.city,
+                email: this.user.email,
+                password: this.user.password,
+                password_confirmation: this.user.password_confirmation
+            }
+            console.log(formData)
+            this.$store.dispatch('signup', formData, message)
                 // console.log(this.user)
-            let uri = 'http://127.0.0.1:8000/api/register';
-            this.axios.post(uri, this.user)
-                .then((response) => {
-                    console.log(response.data.data)
-                    this.$router.push({name: 'home'});
-                })
-                .catch(err => {
-                    if(err.response){
-                        this.message = err.response.data.errors || 'Invalid';
-                        console.log(err.response.data.errors)
-                    }
-                    // else if(err.request){
-                    //     this.message = err.request || 'Invalid';
+            // let uri = 'http://127.0.0.1:8000/api/register';
+            // this.axios.post(uri, this.user)
+            //     .then((response) => {
+            //         console.log(response.data.data)
+            //         this.$router.push({name: 'home'});
+            //     })
+            //     .catch(err => {
+            //         if(err.response){
+            //             this.message = err.response.data.errors || 'Invalid';
+            //             console.log(err.response.data.errors)
+            //         }
+            //         // else if(err.request){
+            //         //     this.message = err.request || 'Invalid';
 
-                    // }
-                });
+            //         // }
+            //     });
             
            
         }

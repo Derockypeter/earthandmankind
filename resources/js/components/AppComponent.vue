@@ -11,7 +11,14 @@
                             <li><router-link :to="{ name:'bible-teachings'}">BIBLE TEACHINGS</router-link></li>
                             <li><router-link :to="{ name:'library'}">LIBRARY</router-link></li>
                             <li><router-link :to="{ name:'blog'}">BLOG</router-link></li>
-                            <li><router-link :to="{ name:'login'}"><em>Login</em></router-link></li>
+                            <li v-if='!auth'><router-link :to="{ name:'login'}"><em>Login</em></router-link></li>
+                            <li v-if='auth'><a class='dropdown-trigger' data-target='userInfo'>Dashboard</a></li>
+                            
+                            <!-- Dropdown Structure -->
+                            <ul id='userInfo' class='dropdown-content'>
+                                <li v-if='auth'><a href="#!" @click="onLogout">Logout {{auth}}</a></li>
+                                <li><router-link :to="{name: 'profile'}">Profile</router-link></li>
+                            </ul>
                         </ul>
                     </div>
                 </div>
@@ -22,7 +29,14 @@
                 <li><router-link :to="{ name:'bible-teachings'}">BIBLE TEACHINGS</router-link></li>
                 <li><router-link :to="{ name:'library'}">LIBRARY</router-link></li>
                 <li><router-link :to="{ name:'blog'}">BLOG</router-link></li>
-                <li><router-link :to="{ name:'login'}"><em>Login</em></router-link></li>
+                <li v-if='!auth'><router-link :to="{ name:'login'}"><em>Login</em></router-link></li>
+                <li v-if='auth'><a class='dropdown-trigger' data-target='userInfo'>Dashboard</a></li>      
+                <!-- Dropdown Structure -->
+                <ul id='userInfo' class='dropdown-content'>
+                    <li v-if='auth'><a href="#!" @click="onLogout">Logout</a></li>
+                    <li><router-link :to="{name: 'profile'}">Profile</router-link></li>
+                    <li class="divider" tabindex="-1"></li>
+                </ul>
             </ul>
         </header>
         <main>
@@ -39,7 +53,7 @@
         background-color: black;
     }
     .pr-6 {
-        padding-right: 250px;
+        padding-right: 200px;
     }
 </style>
 <script>
@@ -48,7 +62,25 @@ import Footer from './FooterComponent'
         components: {
             Footer
         },
-        created() {
+        data () {
+            return {
+                // isLogged: this.checkIfIsLogged()
+            }
+        },
+        computed: {
+            auth () {
+                return this.$store.getters.ifAuthenticated
+            }
+        },
+        methods: {
+            onLogout() {
+                this.$store.dispatch('logout')
+            }
+        },
+        created () {
+            
+            this.$store.dispatch('AutoLogin')
+    
             M.AutoInit()
         },
         mounted() {

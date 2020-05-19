@@ -28,6 +28,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+import router from '../../../router.js'
     export default {
         data() {
             return {
@@ -37,7 +39,7 @@
         },
         created() {
             let uri = 'http://127.0.0.1:8000/api/getAllCat';
-            this.axios.get(uri).then(response => {
+            axios.get(uri).then(response => {
                 this.categories = response.data;
             })
             .catch(err => 
@@ -49,10 +51,10 @@
             {
                 this.saving = true
                 let uri = `http://127.0.0.1:8000/api/delCat/${id}`;
-                this.axios.delete(uri).then(response => {
+                axios.delete(uri).then(response => {
                     this.categories.splice(this.categories.findIndex(category => category.id === id), 1);
                 }).catch(err => {
-                    this.$router.push({ name: '404' });
+                    router.push({ name: '404' });
                 }).then(
                     this.saving = false
                 )

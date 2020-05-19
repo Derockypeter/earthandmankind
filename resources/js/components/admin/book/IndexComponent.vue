@@ -38,6 +38,7 @@
  
 </style>
 <script>
+import axios from 'axios'
     export default {
         data() {
             return {
@@ -48,7 +49,7 @@
         },
         created() {
             let uri = 'http://127.0.0.1:8000/api/books';
-            this.axios.get(uri).then(response => {
+            axios.get(uri).then(response => {
                 setTimeout(() => {
                     this.loaded = true;
                     this.books = response.data.data;
@@ -64,7 +65,7 @@
             {
                 this.saving = true
                 let uri = `http://127.0.0.1:8000/api/delBook/${id}`;
-                this.axios.delete(uri).then(response => {
+                axios.delete(uri).then(response => {
                     M.toast({html: 'Book deleted'})
                     this.books.splice(this.books.findIndex(book => book.id === id), 1);
                     this.saving = false

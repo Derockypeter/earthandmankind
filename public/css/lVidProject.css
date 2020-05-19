@@ -40,3 +40,11 @@ html, body {
     border: 1px solid darkRed;
     border-radius: 5px;
 }
+.lead{
+    font-size: 25px;
+    font-style: italic;
+    margin-top: 10px;
+}
+p.uppercase {
+    margin-top: 0;
+}

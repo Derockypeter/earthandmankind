@@ -56,6 +56,8 @@
    
 </style>
 <script>
+import axios from 'axios'
+
   export default {
     data() {
 		return {
@@ -73,27 +75,34 @@
     },
     created() {
       let uri = 'http://127.0.0.1:8000/api/getAllCat';
-      this.axios.get(uri).then(response => {
+      axios.get(uri).then(response => {
         this.options = response.data;
       });
     },
     methods: {
 		publishBook(evt) {
             evt.preventDefault();
-            this.message = false
-			const data = new FormData();
-			data.append('name', this.book.name)
-			data.append('description', this.book.description)
-			data.append('category_id', this.book.category_id)
-			data.append('image', this.book.image)
-			data.append('path', this.book.path)
-            let uri = 'http://127.0.0.1:8000/api/saveBook';
-            this.axios.post(uri, data).then((response) => {
-            	this.$router.push({name: 'admin'});
-            }).catch((e) => {
-                this.message = e.response.data.message || 'There was an issue creating the book.';
+            this.saving = true
+            if(this.book.name != '' && this.book.description != '' && this.book.category_id != ''){
+                const data = new FormData();
+                data.append('name', this.book.name)
+                data.append('description', this.book.description)
+                data.append('category_id', this.book.category_id)
+                data.append('image', this.book.image)
+                data.append('path', this.book.path)
+                let uri = 'http://127.0.0.1:8000/api/saveBook';
+                axios.post(uri, data).then((response) => {
+                    this.$router.push({name: 'admin'});
+                }).catch((e) => {
+                    this.message = e.response || 'There was an issue creating the book.';
+                    this.saving = false
+                })
+            }
+            else{
+                this.message = 'Invalid data, fill out all fields'
                 this.saving = false
-            })
+            }
+			
 		},
 		onImageChange(event) {
 			if(!event.target.files.length) return;

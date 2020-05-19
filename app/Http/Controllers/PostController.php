@@ -24,7 +24,7 @@ class PostController extends Controller
             $imageValidator = $request->file('imageName');
             $name = $imageValidator->getClientOriginalName();
             
-            \Image::make($request->file('imageName'))->resize(500, 400)->save(public_path('blogImages/').$name);
+            \Image::make($request->file('imageName'))->resize(400, 300)->save(public_path('blogImages/').$name);
             
             $post = new Post();
             $post->body = $request->body;
@@ -150,15 +150,15 @@ class PostController extends Controller
 		}
 
     }
-    // Getting posts by category
-    public function categorizedPost($category_id)
+    // Getting posts by title
+    public function byTitle($title)
     {
         $posts = Post::where([
-            ['posts.category_id', $category_id]
+            ['posts.title', $title]
         ])
         ->join('images', 'posts.id', '=', 'images.post_id')
         ->join('categories', 'posts.category_id', '=', 'categories.id')
-        ->select('title', 'body', 'imageName', 'categoryName', 'posts.created_at', 'category_id');
+        ->select('title', 'body', 'imageName', 'categoryName', 'posts.created_at');
 		if($posts){
             // dd($posts->created_at);
             // Carbon::parse($posts->created_at)->isoFormat('MMMM Do YYYY, h:mm:ss a');
@@ -196,7 +196,7 @@ class PostController extends Controller
             ->select('posts.id', 'title', 'body', 'imageName', 'categoryName', 'status')
             ->orderBy('posts.id');
 		if($posts){
-            $allPost = $posts->simplePaginate(20);
+            $allPost = $posts->simplePaginate(5);
 		    return response()->json($allPost);
 		}
 		else{

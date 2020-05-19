@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import axios from 'axios'
     export default {
         data() {
             return {
@@ -41,7 +42,7 @@
         },
         created() {
             let uri = 'http://127.0.0.1:8000/api/getAllVideos';
-            this.axios.get(uri).then(response => {
+            axios.get(uri).then(response => {
                 this.videos = response.data.data;
             })
             .catch(err => 
@@ -53,7 +54,7 @@
             {
                 this.saving = true
                 let uri = `http://127.0.0.1:8000/api/deleteVideo/${id}`;
-                this.axios.delete(uri).then(response => {
+                axios.delete(uri).then(response => {
                     console.log(response)
                     this.videos.splice(this.videos.findIndex(video => video.id === id), 1);
                     this.saving = false

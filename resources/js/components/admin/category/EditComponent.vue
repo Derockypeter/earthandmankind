@@ -22,6 +22,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+import router from '../../../router.js'
     export default {
         data() {
             return {
@@ -30,7 +32,7 @@
         },
         created() {
             let uri = `http://127.0.0.1:8000/api/editCat/${this.$route.params.id}`;
-            this.axios.get(uri).then((response) => {
+            axios.get(uri).then((response) => {
                 this.category = response.data;
             });
         },
@@ -38,8 +40,8 @@
             updateCategory(evt) {
                 evt.preventDefault();
                 let uri = `http://127.0.0.1:8000/api/editCat/${this.$route.params.id}`;
-                this.axios.put(uri, this.category).then((response) => {
-                    this.$router.push({name: 'admin'});
+                axios.put(uri, this.category).then((response) => {
+                    router.push({name: 'admin'});
                 }).catch(err => {
                     console.log(err.response.data)
                     console.log(err.response.header)

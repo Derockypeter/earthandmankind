@@ -44,6 +44,8 @@
     </div>
 </template>
 <script>
+import axios from 'axios'
+import router from '../../../router.js'
     export default {
         data() {
             return {
@@ -56,14 +58,14 @@
         },
         created() {
             let uri = `http://127.0.0.1:8000/api/editPost/${this.$route.params.id}`;
-            this.axios.get(uri).then((response) => {
+            axios.get(uri).then((response) => {
 				setTimeout(() => {
                     this.loaded = true;
                 	this.post = response.data;
                 }, 5000);
 			});
 			let uri2 = 'http://127.0.0.1:8000/api/getAllCat';
-			this.axios.get(uri2).then(response => {
+			axios.get(uri2).then(response => {
 				this.options = response.data;
 			});
         },
@@ -71,9 +73,9 @@
             updatePost() {
 				this.saving = true
 				let uri = `http://127.0.0.1:8000/api/post/${this.$route.params.id}`;
-				this.axios.put(uri, this.post).then((response) => {
+				axios.put(uri, this.post).then((response) => {
 					M.toast({html: 'Post updated'})
-					this.$router.push({name: 'admin'});
+					router.push({name: 'admin'});
 				}).catch(err => {
 					this.message = err.response.data
 				});

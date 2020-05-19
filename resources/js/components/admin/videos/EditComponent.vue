@@ -49,6 +49,7 @@
 </template>
 
 <script>
+import axios from 'axios'
     export default {
 
         data() {
@@ -62,7 +63,7 @@
         },
         created() {
             let uri = `http://127.0.0.1:8000/api/edit/${this.$route.params.id}`;
-            this.axios.get(uri).then((response) => {
+            axios.get(uri).then((response) => {
                 setTimeout(() => {
                     this.loaded = true
                     this.videos = response.data;
@@ -71,7 +72,7 @@
                 }, 5000);
             });
             let uri2 = 'http://127.0.0.1:8000/api/getAllCat';
-            this.axios.get(uri2).then(response => {
+            axios.get(uri2).then(response => {
                 this.options = response.data;
 
             });

@@ -25,24 +25,27 @@
             <h5>Select a Category</h5>
             <div class="rowed mrl-auto category">
                 <router-link :to="{name: 'bible-teachings' }"><div class="column cols cat-1">Bible Teachings</div></router-link>
-                 <router-link :to="{name: 'post', params: {categoryName: post.category_id} }"><div class="column cols cat-2">Godly Living</div></router-link>
-                 <router-link :to="{name: 'post', params: {categoryName: post.category_id} }"><div class="column cols cat-3">Spirit-Controlled Life</div></router-link>
-            
-                 <router-link :to="{name: 'post', params: {categoryName: post.category_id} }"><div class="column cols cat-4">In his Presence</div></router-link>
-                 <router-link :to="{name: 'post', params: {categoryName: post.category_id} }"><div class="column cols cat-5">Seeking Comfort</div></router-link>
-                 <router-link :to="{name: 'post', params: {categoryName: post.category_id} }"><div class="column cols cat-6">Breaking Habits</div></router-link>
+                <router-link :to="{name: 'post', params: {categoryName: post.category_id} }"><div class="column cols cat-2">Godly Living</div></router-link>
+                <router-link :to="{name: 'post', params: {categoryName: post.category_id} }"><div class="column cols cat-3">Spirit-Controlled Life</div></router-link>
+        
+                <router-link :to="{name: 'post', params: {categoryName: post.category_id} }"><div class="column cols cat-4">In his Presence</div></router-link>
+                <router-link :to="{name: 'post', params: {categoryName: post.category_id} }"><div class="column cols cat-5">Seeking Comfort</div></router-link>
+                <router-link :to="{name: 'post', params: {categoryName: post.category_id} }"><div class="column cols cat-6">Breaking Habits</div></router-link>
             </div>
-            <h5 class="inline-block">Videos</h5>
-            <router-link :to="{name: 'library'}" class="waves-effect waves-light btn-small"><i class="material-icons right">chevron_right</i>See all</router-link>
-            <div class="video">
-                <video width="800" height="400" class="responsive-video" controls>
-                    <source src="videos/1-Basic-Databinding.mp4" type="video/mp4">
-                    <source src="movie.ogg" type="video/ogg">
-                    Your browser does not support the video tag.
-                </video>
-                <p>Making the Best Life</p>
+            <div class="row video">
+                <h5 class="inline-block">Videos</h5>
+                <div class="col s12">
+                    <router-link :to="{name: 'library'}" class="waves-effect waves-light btn-small"><i class="material-icons sm right">chevron_right</i>See all</router-link>
+                    <div>
+                        <video width="800" height="400" class="responsive-video" controls>
+                            <source src="videos/1-Basic-Databinding.mp4" type="video/mp4">
+                            <source src="movie.ogg" type="video/ogg">
+                            Your browser does not support the video tag.
+                        </video>
+                        <p>Making the Best Life</p>
+                    </div>
+                </div>
             </div>
-            
         </div>
         <!-- <div >
             <a href=""><div class="col s6 m4 3 cat-7"></div></a>
@@ -66,9 +69,6 @@
     }
 </script>
 <style scoped>
-    .mrl-auto {
-        margin-left: 35px;
-    }
     .column {
         float: left;
         width: 33.33%;
@@ -168,10 +168,12 @@
     }
     .btn-small {
         float: right;
-        margin-top: 20px;
     }
     .video {
         padding-bottom: 50px;
+    }
+    i.right {
+        margin-left: 1px;
     }
 
 </style>

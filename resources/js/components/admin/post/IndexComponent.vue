@@ -30,6 +30,10 @@
                 </tr>
             </tbody>
         </table>
+        <pagination 
+            :meta_data="meta_data"
+            v-on:next="fetchPosts">
+        </pagination>
     </div>
 </template>
 <style scoped>
@@ -37,32 +41,54 @@
  
 </style>
 <script>
+    import Pagination from '../../reusable/Pagination'    
+    import axios from 'axios'
     export default {
+        components: {
+            Pagination
+        },
         data() {
             return {
                 saving: false,
                 loaded: false,
                 posts: [],
+                 meta_data: {
+                    last_page_url: null,
+                    current_page: 1,
+                    prev_page_url: null,
+                    next_page_url: null
+                }
             }
         },
         created() {
-            let uri = 'http://127.0.0.1:8000/api/posts';
-            this.axios.get(uri).then(response => {
-                setTimeout(() => {
-                    this.loaded = true;
-                    this.posts = response.data.data;
-                }, 5000);
-            })
-            .catch(err => 
-                console.error.response.data.data
-            )
+            this.fetchPosts()
         },
         methods: {
-            deletePost(id)
-            {
+            fetchPosts(page = 1) {
+                axios.get('http://127.0.0.1:8000/api/posts', {
+                    params: {
+                        page
+                    }
+                })
+                .then( res => {
+                   setTimeout(() => {
+                    this.loaded = true;
+                    this.posts = res.data.data;
+                    this.meta_data.last_page_url = res.data.last_page_url;
+                    this.meta_data.current_page = res.data.current_page;
+                    this.meta_data.prev_page_url = res.data.prev_page_url; 
+                    this.meta_data.next_page_url = res.data.next_page_url
+                }, 5000);
+                    
+                })
+                .catch(err => 
+                    console.error.res.data.data
+                );
+            },
+            deletePost(id){
                 this.saving = true
                 let uri = `http://127.0.0.1:8000/api/deletePost/${id}`;
-                this.axios.delete(uri).then(response => {
+                axios.delete(uri).then(response => {
                     console.log(response)
                     this.posts.splice(this.posts.findIndex(post => post.id === id), 1);
                     thsi.saving = false

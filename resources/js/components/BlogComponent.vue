@@ -7,15 +7,13 @@
                     Educate yourself with inspired writeups from great men of God</p>
                 
                 <div v-for="post in posts" :key="post.id"  class="row">
-                    <div class="col l3 s12">
-                        <div>
-                            <img :src="'/blogImages/'+post.imageName" class="responsive-image"/>
-                        </div>
+                    <div class="col l4 s12">
+                        <img :src="'/blogImages/'+post.imageName" class="responsive-img"/>
                     </div>
-                    <div class="col l4 offset-l2 s12 mb-5">
+                    <div class="col l5 offset-l3 s12">
                         <p class="uppercase">{{post.categoryName}}</p>
                         <p class="grey-text">
-                            <router-link :to="{name: 'post', params: {title: post.title}}">
+                            <router-link :to="{name: 'post-title', params: {title: post.title}}">
                                 {{post.title}}
                             </router-link>
                         </p>
@@ -45,47 +43,50 @@
     }
 </style>
 <script>
-import Pagination from './reusable/Pagination'
-export default {
-    props: [
+    import Pagination from './reusable/Pagination'
+    import axios from 'axios'
+    export default {
+        props: [
 
-    ],
-    components: {
-        Pagination
-    },
-    data() {
-        return {
-            posts: [],
-            meta_data: {
-                last_page: null,
-                current_page: 1,
-                prev_page_url: null
-            }
-        }
-    },
-    mounted() {
-        this.fetchPosts()
-    },
-    methods: {
-        fetchPosts(page = 1) {
-            this.axios.get('http://127.0.0.1:8000/api/posts', {
-                params: {
-                    page
-                }
-            })
-            .then( res => {
-                this.posts = res.data.data;
-                this.meta_data.last_page = res.data.last_page;
-                this.meta_data.current_page = res.data.current_page;
-                this.meta_data.prev_page_url = res.data.prev_page_url; 
-                console.log(res.data.data)
-                
-            })
-            .catch(err => 
-                console.error.response.data.data
-            )
+        ],
+        components: {
+            Pagination
         },
-        
-    },
-}
+        data() {
+            return {
+                posts: [],
+                meta_data: {
+                    last_page_url: null,
+                    current_page: 1,
+                    prev_page_url: null,
+                    next_page_url: null
+                }
+            }
+        },
+        mounted() {
+            this.fetchPosts()
+        },
+        methods: {
+            fetchPosts(page = 1) {
+                axios.get('http://127.0.0.1:8000/api/posts', {
+                    params: {
+                        page
+                    }
+                })
+                .then( res => {
+                    this.posts = res.data.data;
+                    this.meta_data.last_page_url = res.data.last_page_url;
+                    this.meta_data.current_page = res.data.current_page;
+                    this.meta_data.prev_page_url = res.data.prev_page_url; 
+                    this.meta_data.next_page_url = res.data.next_page_url
+                    console.log(res.data)
+                    
+                })
+                .catch(err => 
+                    console.error.response.data.data
+                )
+            },
+            
+        },
+    }
 </script>

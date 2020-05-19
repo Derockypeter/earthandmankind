@@ -34,7 +34,7 @@
                                             name="image" type="text" placeholder="Upload Image" v-model="post.imageName">
                                     </div>
                                 </div>
-                                <button  class="btn waves-effect" type="submit">{{ saving ? 'Creating...' : 'Create' }}</button>
+                                <button :disabled="saving" class="btn waves-effect" type="submit">{{ saving ? 'Creating...' : 'Create' }}</button>
                             </div>
                         </form>
                     </div>
@@ -45,6 +45,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+import router from '../../../router.js'
   export default {
     data() {
 		return {
@@ -61,7 +63,7 @@
     },
     created() {
 		let uri = 'http://127.0.0.1:8000/api/getAllCat';
-		this.axios.get(uri).then(response => {
+		axios.get(uri).then(response => {
             this.options = response.data;
 		});
     },
@@ -75,9 +77,9 @@
 			data.append('category_id', this.post.category_id)
 			data.append('imageName', this.post.imageName)
             let uri = 'http://127.0.0.1:8000/api/publishPost';
-			this.axios.post(uri, data)
+			axios.post(uri, data)
 				.then((response) => {
-					this.$router.push({name: 'admin'});
+					router.push({name: 'admin'});
 				})
 				.catch(err => {
                     this.message = err.response.data || 'Error while creating post'

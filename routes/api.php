@@ -42,7 +42,7 @@ Route::delete('/delCat/{category_id}', 'CategoryController@delete');
 Route::post('/saveVideo', 'VideoController@store');
 Route::get('/edit/{id}', 'VideoController@edit');
 Route::put('/updateVideo/{video_id}', 'VideoController@editVid');
-Route::get('/getAllVideos', 'VideoController@allVideos');
+Route::get('/getAllVideos', 'VideoController@allVideos')->middleware('auth:api');
 Route::get('/video/{video_id}', 'VideoController@video')->middleware('auth:api');
 Route::delete('/deleteVideo/{video_id}', 'VideoController@delete');
 
@@ -52,13 +52,13 @@ Route::post('/publishPost', 'PostController@publishPost');
 Route::get('/publishedPosts', 'PostController@getPosts');
 Route::get('/editPost/{id}', 'PostController@edit');
 Route::get('/posts', 'PostController@getAllPost');
-Route::get('/category/{category_id}', 'PostController@categorizedPosts');
+Route::get('/post/{title}', 'PostController@byTitle');
 
 Route::put('/disablePost/{post_id}', 'PostController@disablePost');
 Route::get('/disabledPosts', 'PostController@disabledPosts');
 Route::get('/post/{post_id}', 'PostController@getPost');
 Route::put('/post/{post_id}', 'PostController@editPost');
-Route::get('/post/bible-teachings/', 'PostController@bibleTeaching');
+Route::get('/post', 'PostController@bibleTeaching');
 Route::delete('/deletePost/{post_id}', 'PostController@deletePost');
 
 

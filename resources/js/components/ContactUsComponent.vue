@@ -3,13 +3,13 @@
        
         <div class="row main-container">
              <h1>Contact</h1>
-            <div class="col l6 s12">
+            <div class="col l5 s12">
                 <h5>Our Location</h5>
                 <p class="grey-text text-darken-4">
                     35 Seychelles Avenue off Capitol Oil Market
                 </p>
             </div>
-            <div class="col l4 offset-l2 s12">
+            <div class="col l5 offset-l1 s12">
                 <h5 class="grey-text">Send Us A Mail</h5>
                 <div class="row">
                     <form action="mailto:emailhere" class="col s12">
