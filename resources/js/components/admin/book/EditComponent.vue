@@ -55,8 +55,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-import router from '../../../router.js'
     export default {
         data() {
             return {
@@ -68,16 +66,16 @@ import router from '../../../router.js'
             }
         },
         created() {
-            let uri = `http://127.0.0.1:8000/api/book/${this.$route.params.id}`;
-            axios.get(uri).then((response) => {
+            let uri = `/api/book/${this.$route.params.id}`;
+            this.axios.get(uri).then((response) => {
                 setTimeout(() => {
                     this.loaded = true;
                     this.book = response.data;
                     console.log(response.data)
                 }, 5000);
 			});
-			let uri2 = 'http://127.0.0.1:8000/api/getAllCat';
-			axios.get(uri2).then(response => {
+			let uri2 = '/api/getAllCat';
+			this.axios.get(uri2).then(response => {
 				this.options = response.data;
 			});
         },
@@ -85,10 +83,10 @@ import router from '../../../router.js'
             updateBook(evt) {
                 evt.preventDefault();
                 this.saving = true
-                let uri = `http://127.0.0.1:8000/api/bookEdit/${this.$route.params.id}`;
-                axios.put(uri, this.book)
+                let uri = `/api/bookEdit/${this.$route.params.id}`;
+                this.axios.put(uri, this.book)
                     .then((response) => {
-                        router.push({name: 'admin'});
+                        this.$router.push({name: 'admin'});
                     })
                     .catch((e) => {
                         this.message = e.response.data || 'There was an issue updating the book.';

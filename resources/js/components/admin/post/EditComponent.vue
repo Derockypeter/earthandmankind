@@ -9,9 +9,14 @@
                     <form class="col s12" @submit.prevent="updatePost" enctype="multipart/form-data">
                         <div class="row">
                             <div class="input-field col s6">
-                                <input v-model="post.title" id="title" type="text" class="validate">
+                                <input v-model="post.title" id="title" type="text" class="validate" required>
                             </div>
                             <div class="input-field col s6">
+                                <input v-model="post.image.imagename" id="name" type="text" class="validate" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
                                 <textarea id="description" v-model="post.body" class="validate materialize-textarea"></textarea>
                             </div>
                         </div>
@@ -44,40 +49,43 @@
     </div>
 </template>
 <script>
-import axios from 'axios'
-import router from '../../../router.js'
     export default {
         data() {
             return {
+                imagename: '',
 				saving: false,
 				loaded: false,
 				message: false,
-                post: {},
+                post: {
+                    // image: {}
+                },
                 options: [],
             }
         },
         created() {
-            let uri = `http://127.0.0.1:8000/api/editPost/${this.$route.params.id}`;
-            axios.get(uri).then((response) => {
+            let uri = `/api/editPost/${this.$route.params.id}`;
+            this.axios.get(uri).then((response) => {
 				setTimeout(() => {
                     this.loaded = true;
-                	this.post = response.data;
+                    this.post = response.data;
+                    console.log(response.data)
                 }, 5000);
 			});
-			let uri2 = 'http://127.0.0.1:8000/api/getAllCat';
-			axios.get(uri2).then(response => {
+			let uri2 = '/api/getAllCat';
+			this.axios.get(uri2).then(response => {
 				this.options = response.data;
 			});
         },
         methods: {
             updatePost() {
 				this.saving = true
-				let uri = `http://127.0.0.1:8000/api/post/${this.$route.params.id}`;
-				axios.put(uri, this.post).then((response) => {
+                let uri = `/api/post/${this.$route.params.id}`;
+				this.axios.put(uri, this.post).then((response) => {
 					M.toast({html: 'Post updated'})
-					router.push({name: 'admin'});
+					this.$router.push({name: 'admin'});
 				}).catch(err => {
-					this.message = err.response.data
+                    this.message = err.response.data
+                    this.saving = false
 				});
             },
             // onImageChange(event) {

@@ -7,7 +7,7 @@
                     <form class="col s12" @submit="publishBook" enctype="multipart/form-data">
                         <div class="row">
                             <div class="input-field col s6">
-                                <input placeholder="Name" v-model="book.name" id="name" type="text" class="validate">
+                                <input placeholder="Book name" v-model="book.name" id="name" type="text" class="validate">
                             </div>
                             <div class="input-field col s6">
                                 <textarea id="description" placeholder="Description" v-model="book.description" class="validate materialize-textarea"></textarea>
@@ -56,7 +56,6 @@
    
 </style>
 <script>
-import axios from 'axios'
 
   export default {
     data() {
@@ -75,7 +74,7 @@ import axios from 'axios'
     },
     created() {
       let uri = 'http://127.0.0.1:8000/api/getAllCat';
-      axios.get(uri).then(response => {
+      this.axios.get(uri).then(response => {
         this.options = response.data;
       });
     },
@@ -91,7 +90,7 @@ import axios from 'axios'
                 data.append('image', this.book.image)
                 data.append('path', this.book.path)
                 let uri = 'http://127.0.0.1:8000/api/saveBook';
-                axios.post(uri, data).then((response) => {
+                this.axios.post(uri, data).then((response) => {
                     this.$router.push({name: 'admin'});
                 }).catch((e) => {
                     this.message = e.response || 'There was an issue creating the book.';

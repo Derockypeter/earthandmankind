@@ -21,16 +21,22 @@ class User extends Authenticatable
     protected $fillable = [
         'firstname', 'lastname', 'DOB',
         'gender' , 'phone', 'country', 'state',
-        'city', 'email', 'password', 'active', 'activation_token'
+        'city', 'email', 'password'
     ];
-
+     /**
+     * A user has many payment relationship
+     */
+    public function premiums()
+    {
+        return $this->hasMany(PremiumUser::class);
+    }
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'activation_token'
+        'password', 'remember_token'
     ];
 
     /**

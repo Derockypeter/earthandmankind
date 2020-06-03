@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Book;
 use Validator;
 
@@ -17,7 +18,7 @@ class BookController extends Controller
             'path' => 'required',
             'path.*' => 'file|mimes:ppt,pptx,doc,docx,pdf,xls,xlsx|max:20000',
             'image' => 'required',
-            'image.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+            'image.*' => 'mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
         if($validation->fails())
         {
@@ -26,10 +27,9 @@ class BookController extends Controller
         else{
             $input = $request->all();
             $input['path'] = $request->path->getClientOriginalName();
-            $input['image'] = $request->image->getClientOriginalName();
+            $input['image'] = Str::slug($request->name).'.'.$input['image']->getClientOriginalExtension() ;
 
             $request->path->move(public_path('books/path'), $input['path']);
-            // $request->image->move(public_path('books/images'), $input['image']);
             \Image::make($request->file('image'))->resize(100, 110)->save(public_path('books/images/').$input['image']);
 
             $book = Book::insert($input);
@@ -174,7 +174,7 @@ class BookController extends Controller
         $bookToUpdate->save();
         return response()->json($bookToUpdate);
     }
-    // Deleting a video
+    // Deleting a Book
     public function delete($id)
     {
         $book = Book::findOrFail($id);

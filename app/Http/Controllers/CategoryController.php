@@ -3,16 +3,31 @@
 namespace App\Http\Controllers;
 use App\Category;
 use Illuminate\Http\Request;
-
+use Validator;
+use Illuminate\Support\Str;
 class CategoryController extends Controller
 {
+    // Saves a category and its image
     public function store(Request $request)
     {
-        // $catToSave = $request->category;
-        $catStore = Category::firstOrNew(['categoryName' => $request->categoryName]);
-        $catStore->save();
+        $validation = Validator::make($request->all(), [
+            'catImage' => 'required',
+            'catImage.*' => 'mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'categoryName' => 'required'
+        ]);
+        if($validation->fails())
+        {
+            return response()->json(['error' => $validation->errors()->all(), ]);
+        }
+        else {
+            $input = $request->all();
+            $input['catImage'] = Str::slug($request->categoryName).'.'.$input['catImage']->getClientOriginalExtension() ;
 
-        return response()->json($catStore);
+            \Image::make($request->file('catImage'))->resize(400, 200)->save(public_path('category_img/').$input['catImage']);
+
+            $catStore = Category::firstOrCreate($input);
+            return response()->json(['message' => 'Category created Successfully', 'Created' => $catStore], 200);
+        }
     }
 
     // Reads all category
@@ -56,10 +71,15 @@ class CategoryController extends Controller
     // Deletes a Category
     public function delete($id)
     {
-        $catToDelete = Category::findOrFail($id);
+        $category = Category::findOrFail($id);
 
-        if($catToDelete){
-            $catToDelete->delete();
+        if($category){
+            $catToDelete = public_path("category_img/{$category->catImage}");
+            if ( file_exists($catToDelete))
+            {
+                unlink($catToDelete);
+            }
+            $category->delete();
 
             return response('Deleted Successfully', 204);
         }

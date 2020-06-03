@@ -5,11 +5,12 @@
             <div class="rowed featured">
                 <div class="column featured-1">
                    <router-link :to="{name: 'bible-teachings'}">
-                       <img src="\images\carousel-img\5_principles_of_the_faith-filled_life_159634769.jpg" style="width: 100%" alt="">
+                        <img src="\images\carousel-img\5_principles_of_the_faith-filled_life_159634769.jpg" style="width: 100%" alt="">
                     </router-link>
-                   <router-link :to="{name: 'bible-teachings'}">Studying the Word</router-link>
+                   <router-link :to="{name: 'bible-teachings'}">Drawing close to God</router-link>
                 </div>
                 <div class="column featured-2">
+
                     <router-link :to="{name: 'bible-teachings'}">
                         <img src="\images\carousel-img\images.jfif" style="width: 100%" alt="">
                     </router-link>
@@ -23,14 +24,18 @@
                 </div>
             </div>
             <h5>Select a Category</h5>
-            <div class="rowed mrl-auto category">
-                <router-link :to="{name: 'bible-teachings' }"><div class="column cols cat-1">Bible Teachings</div></router-link>
-                <router-link :to="{name: 'post', params: {categoryName: post.category_id} }"><div class="column cols cat-2">Godly Living</div></router-link>
-                <router-link :to="{name: 'post', params: {categoryName: post.category_id} }"><div class="column cols cat-3">Spirit-Controlled Life</div></router-link>
-        
-                <router-link :to="{name: 'post', params: {categoryName: post.category_id} }"><div class="column cols cat-4">In his Presence</div></router-link>
-                <router-link :to="{name: 'post', params: {categoryName: post.category_id} }"><div class="column cols cat-5">Seeking Comfort</div></router-link>
-                <router-link :to="{name: 'post', params: {categoryName: post.category_id} }"><div class="column cols cat-6">Breaking Habits</div></router-link>
+            <div class="category">
+
+                <div class="rowed mrl-auto">
+                    <router-link :to="{name: 'bible-teachings' }"><div class="column cols cat-1">Bible Teachings</div></router-link>
+                    <router-link :to="{name: 'post', params: {categoryName: post.category_id} }"><div class="column cols cat-2">Godly Living</div></router-link>
+                    <router-link :to="{name: 'post', params: {categoryName: post.category_id} }"><div class="column cols cat-3">Spirit-Controlled Life</div></router-link>
+                </div>
+                <div class="rowed">
+                    <router-link :to="{name: 'post', params: {categoryName: post.category_id} }"><div class="column cols  cat-4">In his Presence</div></router-link>
+                    <router-link :to="{name: 'post', params: {categoryName: post.category_id} }"><div class="column cols  cat-5">Seeking Comfort</div></router-link>
+                    <router-link :to="{name: 'post', params: {categoryName: post.category_id} }"><div class="column cols  cat-6">Breaking Habits</div></router-link>
+                </div>
             </div>
             <div class="row video">
                 <h5 class="inline-block">Videos</h5>
@@ -56,15 +61,19 @@
 </template>
 <script>
     export default {
+        props: {
+            featurePosts: Array
+        },
         data() {
             return {
-                post:[]
+                post:[],
             }
         },
         created() {
           
         },
         mounted() {
+            // console.log(this.featurePosts)
         },
     }
 </script>
@@ -76,7 +85,7 @@
     }
     .featured, .category {
         padding-bottom: 30px;
-        border-bottom: 0.4px solid;
+        border-bottom: 0.4px rgba(209, 204, 204, 0.933) solid;
         margin-bottom: 30px;
     }
     /* Clear floats after image containers */
@@ -91,8 +100,14 @@
         }
     }
     .cols {
-        margin-right: 15px;
+        margin-left: 1%;
         margin-bottom: 20px;
+        width: 32.35%;
+    }
+    @media screen and (max-width: 500px) {
+         .cols {
+            width: 100%;
+        }
     }
     .column:hover {
         text-decoration: underline;
@@ -105,7 +120,8 @@
         padding-top: 60px;
         font-size: 1.2em;
         font-weight: 500;
-        width: 280px;
+        /* width: 280px; */
+        margin-left: 0;
         height: 100px;
     }
     .cat-2 {
@@ -116,7 +132,7 @@
         padding-top: 60px;
         font-size: 1.2em;
         font-weight: 500;
-        width: 280px;
+        /* width: 280px; */
         height: 100px;
     }
     .cat-3 {
@@ -127,7 +143,7 @@
         padding-top: 60px;
         font-size: 1.2em;
         font-weight: 500;
-        width: 280px;
+        /* width: 280px; */
         height: 100px;
     }
     .cat-4 {
@@ -138,7 +154,7 @@
         padding-top: 60px;
         font-size: 1.2em;
         font-weight: 500;
-        width: 280px;
+        margin-left: 0;
         height: 100px;
     }
     .cat-5 {
@@ -149,7 +165,7 @@
         padding-top: 60px;
         font-size: 1.2em;
         font-weight: 500;
-        width: 280px;
+        /* width: 280px; */
         height: 100px;
     }
     .cat-6 {
@@ -160,7 +176,7 @@
         padding-top: 60px;
         font-size: 1.2em;
         font-weight: 500;
-        width: 280px;
+        /* width: 280px; */
         height: 100px;
     }
     .inline-block {
@@ -169,11 +185,20 @@
     .btn-small {
         float: right;
     }
+    div.row.video {
+        margin-bottom: 0px;
+    }
+    div.col.s12 {
+        padding: 0px;
+    }
     .video {
         padding-bottom: 50px;
     }
     i.right {
         margin-left: 1px;
+    }
+    a.waves-effect.waves-light.btn-small {
+        padding: 0 4px 1px 4px;
     }
 
 </style>

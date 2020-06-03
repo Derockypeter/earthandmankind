@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Image extends Model
 {
     protected $fillable = [
-        'imageName'
+        'imagename', 'image'
     ];
 
     // Relationship for post and image

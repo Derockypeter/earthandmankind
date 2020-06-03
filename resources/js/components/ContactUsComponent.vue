@@ -9,7 +9,7 @@
                     35 Seychelles Avenue off Capitol Oil Market
                 </p>
             </div>
-            <div class="col l5 offset-l1 s12">
+            <div class="col l5 offset-l1 s12"><!--TODO CREATE MAILABLE FOR CONTACT FORM-->
                 <h5 class="grey-text">Send Us A Mail</h5>
                 <div class="row">
                     <form action="mailto:emailhere" class="col s12">
@@ -22,11 +22,12 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="input-field col s6">
+                            <div class="input-field col s9">
                                 <textarea type="text" placeholder="Enter Subject" id="topic" class="validate materialize-textarea"></textarea>
                             </div>
+                            <button type="submit" class="waves-effect waves-light btn-small">Submit</button>
+
                         </div>
-                        <button type="submit" class="waves-effect waves-light btn-small">Submit</button>
                     </form>
 
                 </div>

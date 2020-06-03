@@ -60,6 +60,7 @@
   
 </style>
 <script>
+import axios from 'axios'
 export default {
     data() {
         return {
@@ -74,15 +75,44 @@ export default {
     methods: {
         loginUser(evt){
             evt.preventDefault()
-            const formData = {
-            email: this.user.email,
-            password: this.user.password,
+            if (this.user.password.length >= 6 ) {
+                let email = this.user.email
+                let password = this.user.password
+                this.saving = true
+                axios.post('api/login', {email, password})
+                .then(response => {
+                    console.log(response)
+                    if(response.data === ""){
+                        this.message = 'Invalid Credentials'
+                        this.saving = false
+                    }
+                    else{
+                         let user = response.data.user
+                        let is_admin = user.is_admin
+
+                        localStorage.setItem('manKind.user', JSON.stringify(user))
+                        localStorage.setItem('manKind.jwt', response.data.token)
+
+                        if (localStorage.getItem('manKind.jwt') != null) {
+                            this.$emit('loggedIn')
+                            if (this.$route.params.nextUrl != null) {
+                                this.$router.replace(this.$route.params.nextUrl)
+                            }
+                            else {
+                                this.$router.push((is_admin == 1 ? 'admin' : 'dashboard'))
+                            }
+                        } 
+                    }
+                   
+                }).catch(error => {
+                    this.message = error.response.data.message || 'Invalid details'
+                    this.saving = false
+                    console.log(error.response)
+                })
             }
-            console.log(formData)
-            this.saving = true
-            this.$store.dispatch('login', {email: formData.email, password: formData.password})
-            this.saving = false
-            
+            else {
+                this.message = "Enter a valid password"
+            }
            
         }
     }

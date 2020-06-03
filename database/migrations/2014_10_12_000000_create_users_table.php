@@ -23,8 +23,8 @@ class CreateUsersTable extends Migration
             $table->string('country');
             $table->string('state');
             $table->string('city');
-            $table->boolean('active')->default(false);
-            $table->string('activation_token')->nullable();
+            $table->boolean('is_admin')->default(false);
+            // $table->string('activation_token')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

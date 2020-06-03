@@ -4,6 +4,7 @@
             <div class="main-container">
                 <h2>Edit Category</h2>
                 <div class="row">
+                    <div v-if="success">{{success}}</div>
                     <form @submit="updateCategory" class="col s12">
                         <div class="row">
                              <div class="input-field col s6">
@@ -22,30 +23,29 @@
 </template>
 
 <script>
-import axios from 'axios'
-import router from '../../../router.js'
     export default {
         data() {
             return {
-                category: {}
+                category: {},
+                success: false,
             }
         },
         created() {
-            let uri = `http://127.0.0.1:8000/api/editCat/${this.$route.params.id}`;
-            axios.get(uri).then((response) => {
+            let uri = `/api/editCat/${this.$route.params.id}`;
+            this.axios.get(uri).then((response) => {
                 this.category = response.data;
             });
         },
         methods: {
             updateCategory(evt) {
                 evt.preventDefault();
-                let uri = `http://127.0.0.1:8000/api/editCat/${this.$route.params.id}`;
-                axios.put(uri, this.category).then((response) => {
-                    router.push({name: 'admin'});
-                }).catch(err => {
-                    console.log(err.response.data)
-                    console.log(err.response.header)
-                })
+                let uri = `/api/editCat/${this.$route.params.id}`;
+                this.axios.put(uri, this.category).then((response) => {
+                    setTimeout(() => {
+                        this.success = 'Updated succesfuly'
+                    }, 5000)
+                    this.$router.push({name: 'admin'});
+                }).catch(error => {console.log(error)});
             },
         }
     }

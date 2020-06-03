@@ -28,8 +28,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-import router from '../../../router.js'
   export default {
     data() {
 		return {
@@ -47,12 +45,13 @@ import router from '../../../router.js'
       	addCategory(evt) {
             evt.preventDefault();
             this.creating = true
-			let uri = 'http://127.0.0.1:8000/api/saveCat';
-			axios.post(uri, this.category).then((response) => {
-				router.push({name: 'admin'});
+			let uri = '/api/saveCat';
+			this.axios.post(uri, this.category).then((response) => {
+				this.$router.push({name: 'admin'});
 			})
 			.catch(err => {
                 this.message = err.response.data || 'Error encountered'
+                this.creating = false
 			})
 		},
     }

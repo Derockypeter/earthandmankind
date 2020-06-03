@@ -1,15 +1,29 @@
 <?php
 namespace App\Http\Controllers;
-
+use Auth;
 use Illuminate\Http\Request;
 use App\User;
+use Validator;
 
 class AuthController extends Controller
 {
+    public function login(Request $request)
+    {
+        $status = 401;
+        $response = ['error' => 'Unauthorised'];
+        if (Auth::attempt($request->only(['email', 'password']))) {
+            $status = 200;
+            $response = [
+                'user' => Auth::user(),
+                'token' => Auth::user()->createToken('manKind')->accessToken,
+            ];
+            return response()->json($response, $status);
+        }
+    }
     public function register(Request $request)
     {
         // User Data to validate
-        $data = $request->validate([
+        $validator = Validator::make($request->all(), [
             'firstname' => 'required',
             'lastname' => 'required',
             'DOB' => 'nullable|date' ,
@@ -21,23 +35,17 @@ class AuthController extends Controller
             'email' => 'email|required:unique:users',
             'password' => 'required|confirmed'
         ]);
-        $data['password'] = bcrypt($request->password);
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 401);
+        }
+        $data = $request->only(['firstname', 'lastname', 'DOB', 'gender', 'phone', 'country', 'state', 'city', 'email', 'password']);
+        $data['password'] = bcrypt($data['password']);
         $user = User::create($data);
-        $accessToken = $user->createToken('authToken')->accessToken;
-
-        return response(['user' => $user, 'accessToken' => $accessToken]);
-    }
-
-    public function login(Request $request)
-    {
-        $dataToCheck = $request->validate([
-            'email' => 'email|required',
-            'password' => 'required'
+        $user->is_admin = 0;
+        return response()->json([
+            'user' => $user,
+            'token' => $user->createToken('manKind')->accessToken
         ]);
-            if(!auth()->attempt($dataToCheck)){
-                return response(['message' => 'Invalid credentials']);
-            }
-            $accessToken = auth()->user()->createToken('authToken')->accessToken;
-            return response()->json(['user' => auth()->user(), 'accessToken' => $accessToken]);
     }
+   
 }

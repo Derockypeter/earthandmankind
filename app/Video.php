@@ -7,12 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 class Video extends Model
 {
     protected $fillable = [
-        'videoName', 'category_id', 'title'
+        'video', 'preview', 'name', 'section'
     ];
 
-    // Relationship for videos and category
+    /**
+     * Relationship for videos and category
+     */ 
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+    /**
+     * Video belongs to a course
+     */ 
+    public function course()
+    {
+        return $this->belongsTo(\App\Course::class);
     }
 }

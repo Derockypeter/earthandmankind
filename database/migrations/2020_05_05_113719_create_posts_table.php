@@ -17,7 +17,7 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->string('title');
             $table->text('body');
-            $table->enum('status', ['published', 'unpublished', 'disabled']);
+            $table->enum('status', ['published', 'disabled']);
             $table->unsignedBigInteger('category_id');
             $table->timestamps();
             

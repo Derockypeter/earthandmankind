@@ -9,4 +9,11 @@ class PremiumUser extends Model
     protected $fillable = [
         'user_id', 'amount', 'status'
     ];
+     /**
+     * A payment belongs to a user
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

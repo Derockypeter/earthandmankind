@@ -12,8 +12,12 @@ class Post extends Model
     protected $dates = ['created_at', 'updated_at'];
     
     // Relationship for post and image
-    public function images()
+    public function image()
     {
-        return $this->hasMany(Image::class);
+        return $this->hasOne(Image::class);
+    }
+    public function featured()
+    {
+        return $this->hasOne(\App\Featured::class);
     }
 }

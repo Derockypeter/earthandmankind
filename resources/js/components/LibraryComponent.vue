@@ -2,41 +2,45 @@
     <div class="container">
         <div class="articles">
             <div class="main-container">
-                <h1>Library</h1>
-                <p class="lead">
-                    Our Wealth of books and videos to feed your mind with daily motivation and guidance.
-
-                </p>
-                <div class="section videos">
+                <section class="library-banner">
+                    <h1>Library</h1>
+                    <p class="lead">
+                        Our Wealth of books and videos to feed your mind with daily motivation and guidance.
+                    </p>
+                </section>
+                <section class="videos">
                     <div>
-                        <h4>Videos</h4>
+                        <h2>Courses</h2>
                     </div>
-                    <video class="responsive-video" width="800" height="400" controls>
-                        <source src="videos/1-Basic-Databinding.mp4" type="video/mp4">
-                        <source src="movie.ogg" type="video/ogg">
-                        Your browser does not support the video tag.
-                    </video>
-                    <p>Making the Best Life</p>
-                    <div  v-for="video in videos" :key="video.id" class="row">
-                        <div class="col l6 s12">
-                            <div>
-                                <video class="responsive-video" controls>
-                                    <source :src="'/videos/'+video.videoName" type="video/mp4">
-                                    <source src="movie.ogg" type="video/ogg">
-                                    Your browser does not support the video tag.
-                                </video>
+                    <div class="course row">
+                        <div  v-for="video in videos" :key="video.id" class="col s12 m6 l4">
+                            <div class="card">
+                                <!-- TODO ON HOVER OVER IMAGE ADD VIDEO BUTTON AND BUY THIS COURSE?PREVIEW-->
+                                <router-link :to="{name: 'course', params: { coursename: video.coursename }}">
+                                    <div class="card-image">
+                                        <img :src="'/courseImages/'+video.image" alt="preview image" />
+                                        <span class="card-title"></span>
+                                    </div>
+                                </router-link>
+                                <div class="card-content">
+                                    <p class="coursename">{{video.coursename}}</p>
+                                    <p class="bold">
+                                        Created by Zurich <span class="right">{{video.category.categoryName}}</span>
+                                    </p>
+                                    <!-- <p>Category: </p> -->
+                                </div>
+                                <div class="card-action">
+                                    <span>{{video.videos.length}} videos</span>
+                                <router-link :to="{name: 'course', params: { coursename: video.coursename }}">
+                                    <span class="right"><i class="material-icons smaller">play_circle_outline</i> preview</span>
+                                </router-link>
+                                </div>
                             </div>
                         </div>
-                        <div class="col l4 offset-l2 s12">
-                            <p class="uppercase">{{video.categoryName}}</p>
-                            <h6 class="grey-text">
-                                {{video.title}}
-                            </h6>
-                        </div>
                     </div>
-                </div>
+                </section>
                 
-                <div class="section books">
+                <section class="books">
                     <div>
                         <h4>Books</h4>
                     </div>
@@ -58,15 +62,13 @@
                             </h6>
                         </div>
                     </div>
-                </div>
+                </section>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import axios from 'axios'
-import router from '../router.js'
     export default {
         data() {
             return {
@@ -75,17 +77,17 @@ import router from '../router.js'
             }
         },
         created() {
-            let video_uri = 'http://127.0.0.1:8000/api/getAllVideos';
-            axios.get(video_uri).then(response => {
-                this.videos = response.data.data;
-                console.log(response.data)
+            let video_uri = '/api/courses';
+            this.axios.get(video_uri).then(response => {
+                this.videos = response.data;
+                console.log(response)
             })
             .catch(err => 
-                console.error.response.data
+                console.log(error.response)
             )
             // For Books
-            let book_uri = 'http://127.0.0.1:8000/api/books';
-            axios.get(book_uri).then(response => {
+            let book_uri = '/api/books';
+            this.axios.get(book_uri).then(response => {
                 this.books = response.data.data;
                 console.log(response.data)
             })
@@ -101,4 +103,23 @@ import router from '../router.js'
     }
 </script>
 <style scoped>
+    .bold {
+        font-weight: bold;
+    }
+    .coursename {
+        font-size: 24px;
+        text-transform: capitalize;
+    }
+    .card .card-action span:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating){
+        margin-right: 24px;
+        transition: color .3s ease;
+        text-transform: uppercase;
+    }
+    a:hover {
+        color: darkgrey;
+        text-decoration: underline;
+    }
+    .material-icons {
+        font-size: 18px;
+    }
 </style>

@@ -21,13 +21,19 @@
         </div>
         <div class="footer-copyright grey darken-4">
             <div class="container">
-               Copywright © {{ new Date().getFullYear() }} Company Name Here
+                <center>
+                    <small>Copyright © {{ new Date().getFullYear() }} MK.ORG</small>
+                </center>
             </div>
         </div>
     </footer>
 </template>
 <style scoped>
-     footer {
+    footer {
         background-color: #f0f0f0;
+    }
+    .page-footer .footer-copyright {
+        min-height: 0px;
+        padding: 2px 2px;
     }
 </style>

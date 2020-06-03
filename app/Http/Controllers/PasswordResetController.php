@@ -7,6 +7,7 @@ use App\Notifications\PasswordResetRequest;
 use App\Notifications\PasswordResetSuccess;
 use App\User;
 use App\PasswordReset;
+use Illuminate\Support\Str;
 class PasswordResetController extends Controller
 {
     /**
@@ -29,7 +30,7 @@ class PasswordResetController extends Controller
             ['email' => $user->email],
             [
                 'email' => $user->email,
-                'token' => str_random(60)
+                'token' => Str::random(60)
              ]
         );
         if ($user && $passwordReset)
@@ -47,10 +48,12 @@ class PasswordResetController extends Controller
      * @return [string] message
      * @return [json] passwordReset object
      */
-    public function find($token)
+    public function find($token, Request $request)
     {
-        $passwordReset = PasswordReset::where('token', $token)
-            ->first();
+        $passwordReset = PasswordReset::where([
+            ['token', $request->token],
+            ['email', $request->email]
+            ])->first();
         if (!$passwordReset)
             return response()->json([
                 'message' => 'This password reset token is invalid.'
