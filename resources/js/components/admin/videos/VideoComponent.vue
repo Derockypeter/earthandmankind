@@ -31,7 +31,7 @@
                                 <th>ID</th>
                                 <th>Coursename</th>
                                 <th>Lectures</th>
-                                <th>Category</th>
+                                <th>Language</th>
                                 <th>Description</th>
                             </tr>
                         </thead>
@@ -40,7 +40,7 @@
                                 <td>{{ video.id }}</td>
                                 <td>{{ video.coursename }}</td>
                                 <td><router-link :to="{name: 'coursevid', params: { id: video.id }}">{{video.videos.length }} videos</router-link ></td>
-                                <td>{{ video.category.categoryName }}</td>
+                                <td>{{ video.language.language }}</td>
                                 <td>{{ video.description }}</td>
                                 <td><router-link :to="{name: 'edit-course', params: { id: video.id }}" class="btn cyan"><i class="material-icons">edit</i></router-link></td>
                                 <td><button class="btn red" :disabled="saving"  @click.prevent="deleteCourse(video.id)"><i class="material-icons">delete</i></button></td>

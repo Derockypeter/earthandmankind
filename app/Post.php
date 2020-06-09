@@ -7,17 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     protected $fillable = [
-        'body', 'title', 'status', 'category_id', 'image_id'
+        'body', 'title', 'status', 'language_id'
     ];
     protected $dates = ['created_at', 'updated_at'];
     
-    // Relationship for post and image
-    public function image()
+    // Relationship for post and comments
+    public function comments()
     {
-        return $this->hasOne(Image::class);
+        return $this->hasMany(\App\Comment::class);
     }
     public function featured()
     {
         return $this->hasOne(\App\Featured::class);
+    }
+
+    public function language()
+    {
+        return $this->belongsTo(\App\Language::class);
     }
 }

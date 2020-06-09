@@ -36,9 +36,9 @@
                             </div>
                             <div class="row">
                                 <div class="input-field col s7">
-                                    <select class="browser-default" v-model="book.category_id">
-                                        <option value="" disabled selected>Select Category</option>
-                                        <option v-for="option in options" :key="option.id" v-bind:value="option.id">{{ option.categoryName }}</option>
+                                    <select class="browser-default" v-model="book.language_id">
+                                        <option value="" disabled selected>Select language for this book</option>
+                                        <option v-for="option in options" :key="option.id" v-bind:value="option.id">{{ option.language }}</option>
                                     </select>
                                 </div>
                                 <div class="col s5">
@@ -66,14 +66,14 @@
 				name: '',
 				description: '',
 				image: null,
-                category_id: '',
+                language_id: '',
                 path: ''
 			},
 			options: [],
 		}
     },
     created() {
-      let uri = 'http://127.0.0.1:8000/api/getAllCat';
+      let uri = '/api/languages';
       this.axios.get(uri).then(response => {
         this.options = response.data;
       });
@@ -82,11 +82,11 @@
 		publishBook(evt) {
             evt.preventDefault();
             this.saving = true
-            if(this.book.name != '' && this.book.description != '' && this.book.category_id != ''){
+            if(this.book.name != '' && this.book.description != '' && this.book.language_id != ''){
                 const data = new FormData();
                 data.append('name', this.book.name)
                 data.append('description', this.book.description)
-                data.append('category_id', this.book.category_id)
+                data.append('language_id', this.book.language_id)
                 data.append('image', this.book.image)
                 data.append('path', this.book.path)
                 let uri = 'http://127.0.0.1:8000/api/saveBook';

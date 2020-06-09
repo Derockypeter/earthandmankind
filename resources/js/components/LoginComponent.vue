@@ -31,7 +31,7 @@
                                     <label for='password'>Enter your password</label>
                                 </div>
                                 <label style='float: right;'>
-                                    <a class='pink-text' href='#!'><b>Forgot Password?</b></a>
+                                    <a class='pink-text waves-effect waves-light modal-trigger' href='#modal1!' ><b>Forgot Password?</b></a>
                                 </label>
                             </div>
 
@@ -54,6 +54,28 @@
 
             </div>
         </div>
+
+        <!-- Modal Structure -->
+        <div id="modal1!" class="modal">
+            <div v-if="error" class="center">
+                <span  style="background-color: #eb7077; color: #ffff">{{error}}</span>
+            </div>
+            <div v-if="success" class="center">
+                <span  style="background-color: #42b983; color: #ffff">{{success}}</span>
+            </div>
+            <div class="modal-content">
+            <h4>Enter Your Email</h4>
+            <p>We'll send you an email with a link to reset your password</p>
+            <form>
+                <div class="input-field col s12">
+                    <input type="email" name="email" v-model="send.email" placeholder="janedoe@gmail.com">
+                </div>
+            </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="waves-effect waves-green btn-flat" @click="sendToken">Send</button>
+            </div>
+        </div>
     </div>
 </template>
 <style scoped>
@@ -64,6 +86,11 @@ import axios from 'axios'
 export default {
     data() {
         return {
+            error: false,
+            success: false,
+            send: {
+                email: ""
+            },
             saving: false,
             message: false,
             user: {
@@ -113,7 +140,26 @@ export default {
             else {
                 this.message = "Enter a valid password"
             }
-           
+        },
+
+        sendToken(evt){
+            evt.preventDefault()
+
+            let uri = "/api/password/create"
+            this.axios.post(uri, this.send)
+            .then((response) => {
+                setTimeout(() => {
+                    this.success = response.data.message || 'Invalid Email'
+                })
+                console.log(response)
+            })
+            .catch(error => {
+                this.error = error.response.data.message
+                setTimeout(() => {
+                    this.error = ""
+                }, 5000)
+                console.log(error.response)
+            })
         }
     }
 }

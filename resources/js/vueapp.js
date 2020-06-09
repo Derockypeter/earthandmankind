@@ -12,12 +12,10 @@ import M from 'materialize-css/dist/css/materialize.min.css'
 import 'materialize-css/dist/fonts/material-icons.css'
 Vue.use(M)
 import Dashboard from './components/user/Dashboard.vue'
-import BibleTeaching from './components/bible/BibleTeaching.vue'
 
 import Home from './components/HomeComponent.vue'
-import BibleTeachings from './components/BibleTeachingsComponent.vue'
 import Library from './components/LibraryComponent.vue'
-import Blog from './components/BlogComponent.vue'
+import Article from './components/BlogComponent.vue'
 import CategorySelect from './components/CategorySectionComponent.vue'
 import Contact from './components/ContactUsComponent.vue'
 import Footer from './components/FooterComponent.vue'
@@ -37,11 +35,10 @@ import EditPost from './components/admin/post/EditComponent.vue'
 import Admin from './components/admin/AdminComponent.vue'
 import IndexPost from './components/admin/post/PostComponent.vue'
 import Postbody from './components/PostBodyComponent.vue'
-import PostCategory from './components/PostCategory.vue'
 
-import EditCategory from './components/admin/category/EditComponent.vue'
-import CreateCategory from './components/admin/category/CreateComponent.vue'
-import IndexCategory from './components/admin/category/CategoryComponent.vue'
+import EditLanguage from './components/admin/language/EditComponent.vue'
+import CreateLanguage from './components/admin/language/CreateComponent.vue'
+import IndexLanguage from './components/admin/language/LanguageComponent.vue'
 
 import EditVideo from './components/admin/videos/EditComponent.vue'
 import CreateVideo from './components/admin/videos/CreateComponent.vue'
@@ -66,19 +63,6 @@ const router = new VueRouter ({
             }
         },
         {
-            path: '/bible-teachings',
-            name: 'bible-teachings',
-            component: BibleTeachings,
-            props: {
-                
-            }
-        },
-        {
-            path: '/bible-teach/all',
-            name: 'bible-teach_all',
-            component: BibleTeaching
-        },
-        {
             path: '/library',
             name: 'library',
             component: Library,
@@ -87,9 +71,9 @@ const router = new VueRouter ({
             },
         },
         {
-            path: '/blog',
-            name: 'blog',
-            component: Blog,
+            path: '/article',
+            name: 'article',
+            component: Article,
             props: {
                 
             }
@@ -157,16 +141,16 @@ const router = new VueRouter ({
         
         {
             path: '/admin/edit/:id',
-            name: 'edit-cat',
-            component: EditCategory,
+            name: 'edit-lang',
+            component: EditLanguage,
             props: {
                 
             }
         },
         {
-            path: '/admin/create-cat',
-            name: 'create-cat',
-            component: CreateCategory,
+            path: '/admin/create-lang',
+            name: 'create-lang',
+            component: CreateLanguage,
             props: {},
         },
         {
@@ -219,12 +203,6 @@ const router = new VueRouter ({
             path: '/post/:title',
             name: 'post-title',
             component: Postbody,
-            props: {}
-        },
-        {
-            path: '/posts/',
-            name: 'post',
-            component: PostCategory,
             props: {}
         },
         {
@@ -305,16 +283,3 @@ const app = new Vue({
 	components: { App },
 	router
 })
-// new Vue({
-//   el: '#app',
-//   router,
-//   store,
-//   render: h => h(App)
-// })
-
-// const app = new Vue({
-//     el: '#app',
-//     components: { App },
-//     router,
-//     store
-// })

@@ -20,7 +20,6 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('home-component', require('./components/HomeComponent.vue').default);
-Vue.component('bibleTeachings-component', require('./components/BibleTeachingsComponent.vue').default);
 Vue.component('blog-component', require('./components/BlogComponent.vue').default);
 Vue.component('library-component', require('./components/LibraryComponent.vue').default);
 

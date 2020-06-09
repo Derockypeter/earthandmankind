@@ -37,12 +37,9 @@ Route::get('/publishedPosts', 'PostController@getPosts');
 Route::get('/post_id/{id}', 'PostController@getPost');
 Route::get('/featuredPost', 'PostController@featuredPost');
 
-// BIBLE TEACHING 
-Route::get('/post', 'PostController@bibleTeaching');
-Route::get('/featured_BibleTeaching', 'PostController@featuredBibleTeaching');
-
-
-
+// CONTACT US
+Route::get('contact-us', 'ContactUsController@contactUS');
+Route::post('/contact-us', ['as'=>'contactus.store','uses'=>'ContactUsController@contactSaveData']);
 
 
 Route::group([    
@@ -68,24 +65,13 @@ Route::group(['middleware' => 'auth:api'], function(){
     
 });
 
-   
-
-
- // CATEGORY
- Route::post('/saveCat', 'CategoryController@store');
- Route::get('/getAllCat', 'CategoryController@getAllCategory');
- Route::get('/editCat/{id}', 'CategoryController@edit');
- Route::put('/editCat/{category_id}', 'CategoryController@updateCategory');
- Route::delete('/delCat/{category_id}', 'CategoryController@delete');
-
-
  // VIDEOS
- Route::post('/saveVideo', 'VideoController@store');
  Route::put('/updateVideo/{video_id}', 'VideoController@editVid');
  Route::get('/video/{video_id}', 'VideoController@video'); //Viewing a single video FOR SUBSCRIBED USER
  Route::delete('/deleteVideo/{video_id}', 'VideoController@delete');
 
  // COURSE
+ Route::post('/saveVideo', 'CourseController@store');
  Route::get('/editcourse/{id}', 'CourseController@editCourse');
  Route::put('/updatecourse/{id}', 'CourseController@updateCourse');
  Route::delete('/deletecourse/{id}', 'CourseController@deleteCourse');
@@ -102,3 +88,22 @@ Route::group(['middleware' => 'auth:api'], function(){
  Route::get('/book/{id}', 'BookController@edit');
  Route::put('/bookEdit/{id}', 'BookController@editBook');
  Route::delete('delBook/{id}', 'BookController@delete');
+
+//  COMMENTS
+Route::post('/saveComment/{id}', 'CommentController@storeComment');
+Route::get('/comments', 'CommentController@getAllComments');
+Route::get('/postComment', 'CommentController@getCommentsForAPost');
+ROute::get('/{user_id}/{post_id}/comment/', 'CommentController@getUserCommentInPost');
+Route::get('/edit/{id}', 'CommentController@edit');
+Route::put('/editComment/{id}', 'CommentController@editComment');
+Route::delete('/delComment', 'CommentController@deleteComment');
+
+// LANGUAGES
+Route::post('/language-save', 'LanguageController@store');
+Route::get('/languages', 'LanguageController@language');
+Route::get('/edit/{id}', 'LanguageController@edit');
+Route::put('/update/{id}', 'LanguageController@update');
+Route::delete('/delLang/{id}', 'LanguageController@delete');
+
+
+

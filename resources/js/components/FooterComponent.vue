@@ -9,9 +9,8 @@
                 <div class="col l4 offset-l2 s12">
                     <h5 class="grey-text">Explore Again</h5>
                     <ul style="text-decoration: underline">
-                        <li><router-link :to="{name: 'bible-teachings'}" class="blue-text text-darken-3">Bible Teachings</router-link></li>
                         <li><router-link :to="{name: 'library'}" class="blue-text text-darken-3">Videos</router-link></li>
-                        <li><router-link :to="{name: 'blog'}" class="blue-text text-darken-3">Blog</router-link></li>
+                        <li><router-link :to="{name: 'article'}" class="blue-text text-darken-3">Articles</router-link></li>
                         <li><router-link :to="{name: 'about'}" class="blue-text text-darken-3">About Us</router-link></li>
                         <li><router-link :to="{name: 'contact'}" class="blue-text text-darken-3">Contact Us</router-link></li>
                         <li><router-link :to="{ name:'login'}" class="blue-text text-darken-3">Login</router-link></li>
@@ -22,7 +21,7 @@
         <div class="footer-copyright grey darken-4">
             <div class="container">
                 <center>
-                    <small>Copyright © {{ new Date().getFullYear() }} MK.ORG</small>
+                    <small>Copyright © {{ new Date().getFullYear() }} EandMK.ORG</small>
                 </center>
             </div>
         </div>

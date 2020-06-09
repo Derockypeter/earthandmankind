@@ -30,7 +30,7 @@
                     <th>ID</th>
                     <th>Name</th>
                     <th>Description</th>
-                    <th>Category</th>
+                    <th>Language</th>
                     <th>Image</th>
                 </tr>
                 </thead>
@@ -39,7 +39,7 @@
                         <td>{{ book.id }}</td>
                         <td>{{ book.name }}</td>
                         <td>{{ book.description }}</td>
-                        <td>{{ book.categoryName }}</td>
+                        <td>{{ book.language }}</td>
                         <td><img :src="'/books/images/'+book.image"></td>
                         <td><router-link :to="{name: 'edit-book', params: { id: book.id }}" class="btn cyan pulse"><i class="material-icons">edit</i></router-link></td>
                         <td><button class="btn red" :disabled="saving" @click.prevent="deleteBook(book.id)"><i class="material-icons">delete</i></button></td>

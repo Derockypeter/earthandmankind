@@ -16,9 +16,9 @@
                         </div>
                         <div class="row">
                             <div class="input-field col s6">
-                                <select v-model="book.category_id" class="browser-default">
+                                <select v-model="book.language_id" class="browser-default">
                                     <option :value="null" disabled selected>Select Category</option>
-                                    <option v-for="option in options" :key="option.id" v-bind:value="option.id">{{ option.categoryName }}</option>
+                                    <option v-for="option in options" :key="option.id" v-bind:value="option.id">{{ option.language }}</option>
                                 </select>
                             </div>
                             <!-- <div class="file-field input-field col s4">
@@ -74,7 +74,7 @@
                     console.log(response.data)
                 }, 5000);
 			});
-			let uri2 = '/api/getAllCat';
+			let uri2 = '/api/languages';
 			this.axios.get(uri2).then(response => {
 				this.options = response.data;
 			});

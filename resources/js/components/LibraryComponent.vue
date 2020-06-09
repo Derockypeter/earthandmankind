@@ -10,7 +10,7 @@
                 </section>
                 <section class="videos">
                     <div>
-                        <h2>Courses</h2>
+                        <h4>Courses</h4>
                     </div>
                     <div class="course row">
                         <div  v-for="video in videos" :key="video.id" class="col s12 m6 l4">
@@ -25,7 +25,7 @@
                                 <div class="card-content">
                                     <p class="coursename">{{video.coursename}}</p>
                                     <p class="bold">
-                                        Created by Zurich <span class="right">{{video.category.categoryName}}</span>
+                                        Created by Zurich <span class="right">{{video.language.language}}</span>
                                     </p>
                                     <!-- <p>Category: </p> -->
                                 </div>
@@ -44,8 +44,23 @@
                     <div>
                         <h4>Books</h4>
                     </div>
-                    
-                    <div  v-for="book in books" :key="book.id" class="row">
+                     <div class="rowed">
+                        <div class="column3" v-for="book in books" :key="book.id">
+                            <img :src="'/books/images/'+book.image" width="100" class="responsive-image"/>
+                            <a :href="'books/path/'+book.path">
+                                <p>{{book.name}}</p>
+                            </a>
+                             <div class="col l4 s12">
+                            <p class="uppercase">Language: {{book.language.language}}</p>
+                            <h6 class="grey-text">
+                                {{book.description}}
+                            </h6>
+                        </div>
+                        </div>
+                       
+                        
+                    </div>
+                    <!-- <div  v-for="book in books" :key="book.id" class="row">
                         <div class="col l4 s12">
                             <a :href="'books/path/'+book.path">
                                 <div>
@@ -55,13 +70,8 @@
                                 <p>{{book.name}}</p>
                             </a>
                         </div>
-                        <div class="col l4 s12">
-                            <p class="uppercase">{{book.categoryName}}</p>
-                            <h6 class="grey-text">
-                                {{book.description}}
-                            </h6>
-                        </div>
-                    </div>
+                        
+                    </div> -->
                 </section>
             </div>
         </div>
@@ -121,5 +131,22 @@
     }
     .material-icons {
         font-size: 18px;
+    }
+    .rowed::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+    @media screen and (max-width: 500px) {
+        .column, .column3 {
+            width: 100%;
+        }
+    }
+    .column3 {
+        float: left;
+        width: 20%;
+        padding: 5px;
+        background-color: rgb(253, 253, 253);
+        margin-left: 1px;
     }
 </style>

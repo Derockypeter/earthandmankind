@@ -6,36 +6,21 @@
                     <h2>Create New Post</h2>
                     <div v-if="message" class="alert">{{ message }}</div>
                     <div class="row">
-                        <form class="col s12" @submit="publishPost" enctype="multipart/form-data">
+                        <form class="col s12" @submit="publishPost">
                             <div class="row">
                                 <div class="input-field col s6">
                                     <input v-model="post.title" name="title" required placeholder="Enter Title" type="text" class="validate">
                                 </div>
                                 <div class="input-field col s6">
-                                    <input v-model="post.imagename" name="imagename" required placeholder="Enter name for image" type="text" class="validate">
+                                    <select class="browser-default" v-model="post.language_id" required>
+                                        <option value="" disabled selected>Select language</option>
+                                        <option v-for="option in options" :key="option.id" :value="option.id" v-text="option.language"></option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <textarea id="body" class="materialize-textarea" v-model="post.body" placeholder="Type post"></textarea>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s6">
-                                    <select class="browser-default" v-model="post.category_id">
-                                        <option value="" disabled selected>Select Category</option>
-                                        <option v-for="option in options" :key="option.id" :value="option.id" v-text="option.categoryName"></option>
-                                    </select>
-                                </div>
-                                <div class="file-field input-field col s6">
-                                    <div class="btn">
-                                        <span>File</span>
-                                        <input type="file" v-on:change="onImageChange">
-                                    </div>
-                                    <div class="file-path-wrapper">
-                                        <input class="file-path validate" 
-                                            name="image" type="text" placeholder="Upload Image" v-model="post.image">
-                                    </div>
+                                    <textarea id="body" class="materialize-textarea" v-model="post.body" placeholder="Type post" required></textarea>
                                 </div>
                             </div>
                             <div class="row">
@@ -44,7 +29,7 @@
                                 </div>
                                 <p>
                                     <label>
-                                        <input id="indeterminate-checkbox" v-model="post.featured" value="1" type="checkbox" />
+                                        <input id="indeterminate-checkbox" v-model="post.featured" value='1' type="checkbox" />
                                         <span>Featured Post</span>
                                     </label>
                                 </p>
@@ -67,17 +52,14 @@
 			post: {
 				title: '',
 				body: '',
-				image: null,
-                category_id: '',
-                name: '',
-                imagename: '',
-                featured: ''
-			},
+                language_id: '',
+                featured: '',
+            },
 			options: [],
 		}
     },
     created() {
-		let uri = 'http://127.0.0.1:8000/api/getAllCat';
+		let uri = '/api/languages';
 		this.axios.get(uri).then(response => {
             this.options = response.data;
 		});
@@ -86,29 +68,62 @@
 		publishPost(evt) {
             evt.preventDefault();
             this.saving = true
-			const data = new FormData();
-			data.append('title', this.post.title)
-			data.append('body', this.post.body)
-			data.append('category_id', this.post.category_id)
-            data.append('image', this.post.image)
-			data.append('imagename', this.post.imagename)
-            data.append('featured', this.post.featured)
-            
             let uri = '/api/savePost';
-			this.axios.post(uri, data)
-				.then((response) => {
-                    console.log(response)
-					// this.$router.push({name: 'admin'});
-				})
-				.catch(err => {
+            if (this.post.title != "" && this.post.body != "" && this.post.language_id != "" && this.post.featured != "")
+            {
+                console.log(this.post)
+
+                const data = new FormData();
+                data.append('title', this.post.title)
+                data.append('body', this.post.body)
+                data.append('language_id', this.post.language_id)
+                data.append('featured', this.post.featured)
+            
+                this.axios.post(uri, data)
+                    .then((response) => {
+                        if (response.data.errors) {
+                            this.message = response.data.errors || 'Error while creating post'
+                            this.saving = false
+                        }
+                        else {
+                            M.toast({html: 'Post created'})
+                            this.$router.push({name: 'admin'});
+                        }
+                        console.log(response)
+                    })
+                    .catch(err => {
+                        this.message = err.response.data || 'Error while creating post'
+                        this.saving = false
+                    });
+            }
+            else if(this.post.title != "" && this.post.body != "" && this.post.language_id != "" && this.post.featured == "")
+            {
+                console.log(this.post)
+
+                const data = new FormData();
+                data.append('title', this.post.title)
+                data.append('body', this.post.body)
+                data.append('language_id', this.post.language_id)
+            
+                this.axios.post(uri, data)
+                .then((response) => {
+                    if (response.data.errors) {
+                            this.message = response.data.errors || 'Error while creating post'
+                            this.saving = false
+                        }
+                        else {
+                            M.toast({html: 'Post created'})
+                            this.$router.push({name: 'admin'});
+                        }
+                        console.log(response)
+                })
+                .catch(err => {
                     this.message = err.response.data || 'Error while creating post'
                     this.saving = false
                 });
-		},
-		onImageChange(event) {
-			if(!event.target.files.length) return;
-
-			this.post.image = event.target.files[0];
+    
+            }
+			
 		},
     }
   }

@@ -14,7 +14,7 @@ class BookController extends Controller
         $validation = Validator::make($request->all(), [
             'name' => 'required|unique:books',
             'description' => 'required|unique:books',
-            'category_id' => 'nullable',
+            'language_id' => 'required',
             'path' => 'required',
             'path.*' => 'file|mimes:ppt,pptx,doc,docx,pdf,xls,xlsx|max:20000',
             'image' => 'required',
@@ -22,7 +22,7 @@ class BookController extends Controller
         ]);
         if($validation->fails())
         {
-            return response()->json(['error'   => $validation->errors()->all(), ]);
+            return response()->json(['error' => $validation->errors()->all() ]);
         }
         else{
             $input = $request->all();
@@ -38,51 +38,27 @@ class BookController extends Controller
         }       
     }
 
-    // Reads all category
+    // Reads all books
     public function getAllBooks()
     {
-        $books = new Book();
+        $books = Book::with('language')->simplePaginate(5);
         if($books){
-            $getBooks = $books::join('categories', 'books.category_id', '=', 'categories.id')
-                ->select('books.id', 'description', 'categoryName', 'path', 'image', 'name');
-            return response()->json($getBooks->simplePaginate(5), 200);
+            return response()->json($books, 200);
         }
         else{
             return 0;
         }
-    }
-    // Getting only books with Bible Teachings
-    public function bibleTeaching()
-    {
-        $books = Category::where([
-            ['categoryName', 'bible-teachings']
-        ])
-        ->join('books', 'categories.id', '=', 'books.category_id')
-        ->select('name', 'description', 'categoryName', 'path');
-		if($books){
-			$book = $books->latest();
-
-			return response()->json($book);
-		}
-		else{
-			return 0;
-		}
     }
     // Fetches a single book by name
     public function book($book_name)
     {
-        $books = Book::where('name', $book_name)
-            ->join('categories', 'books.category_id', '=', 'categories.id')
-            ->select('name', 'description', 'categoryName', 'path', 'images');
+        $books = Book::where('name', $book_name)->get();
         if($books){
-            $book = $books->get();
-
-            return response()->json($book);
+            return response()->json($books);
         }
         else{
             return 0;
         }
-        // }
     }
     // Fetches book-fields for editing
     public function edit($id)
@@ -97,9 +73,11 @@ class BookController extends Controller
         $request->validate([
             'name' => 'required|unique:books',
             'description' => 'required|unique:books',
-            'category_id' => 'nullable',
+            'language' => 'required',
+            'path' => 'required',
             'path.*' => 'file|mimes:ppt,pptx,doc,docx,pdf,xls,xlsx|max:20000',
-            'image.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+            'image' => 'required',
+            'image.*' => 'mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
         $bookToUpdate = Book::where('id', $id)->first();
@@ -125,7 +103,7 @@ class BookController extends Controller
             }
             $bookToUpdate->path = $name;
             $bookToUpdate->image = $name2;
-            $bookToUpdate->category_id = $request->category_id;
+            $bookToUpdate->language = $request->language;
             $bookToUpdate->description = $request->description;
             $bookToUpdate->name = $request->name;
 
@@ -142,7 +120,7 @@ class BookController extends Controller
             }
 
             $bookToUpdate->path = $name;
-            $bookToUpdate->category_id = $request->category_id;
+            $bookToUpdate->language = $request->language;
             $bookToUpdate->description = $request->description;
             $bookToUpdate->name = $request->name;
 
@@ -159,13 +137,13 @@ class BookController extends Controller
             }
             
             $bookToUpdate->image = $name2;
-            $bookToUpdate->category_id = $request->category_id;
+            $bookToUpdate->language = $request->language;
             $bookToUpdate->description = $request->description;
             $bookToUpdate->name = $request->name;
 
         }
         else{
-            $bookToUpdate->category_id = $request->category_id;
+            $bookToUpdate->language = $request->language;
             $bookToUpdate->description = $request->description;
             $bookToUpdate->name = $request->name;
             // $bookToUpdate->save();

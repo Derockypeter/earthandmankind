@@ -52,7 +52,7 @@ class PasswordResetController extends Controller
     {
         $passwordReset = PasswordReset::where([
             ['token', $request->token],
-            ['email', $request->email]
+            // ['email', $request->email]
             ])->first();
         if (!$passwordReset)
             return response()->json([

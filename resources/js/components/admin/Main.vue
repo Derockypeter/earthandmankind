@@ -2,7 +2,7 @@
     <div class="container mb">
         <div class="row">
             <div class="col m3 product-box big-text">
-                <a href='/admin/categories'>Category<span class="badge"> ({{categories.length}})</span></a>
+                <a href='/admin/languages'>Languages<span class="badge"> ({{languages.length}})</span></a>
             </div>
             <div class="col m1">
             </div>
@@ -34,7 +34,7 @@
         data() {
             return {
                 user : null,
-                categories : [],
+                languages : [],
                 posts : [],
                 videos: [],
                 books: [],
@@ -44,7 +44,7 @@
         mounted() {
             this.axios.get('/api/users/').then(response => this.users = response.data)
             this.axios.get('/api/posts/').then(response => this.posts = response.data.data)
-            this.axios.get('/api/getAllCat/').then(response => this.categories = response.data)
+            this.axios.get('/api/languages/').then(response => this.languages = response.data)
             this.axios.get('/api/books/').then(response => this.books = response.data.data)
             this.axios.get('/api/getAllVideos/').then(response => this.videos = response.data)
         }

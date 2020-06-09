@@ -5,7 +5,7 @@
                 <div class="nav-wrapper">
                     <ul id="nav-mobile" class="center">
                         <li><a class="active" @click="setComponent('main')">Dashboard</a></li>
-                        <li><a @click="setComponent('categories')">Categories</a></li>
+                        <li><a @click="setComponent('languages')">languages</a></li>
                         <li><a @click="setComponent('posts')">Posts</a></li>
                         <li><a @click="setComponent('videos')">Videos</a></li>
                         <li><a @click="setComponent('books')">Books</a></li>
@@ -41,7 +41,7 @@
 import Main from '../admin/Main'
 import Users from '../admin/Users'
 import Posts from './post/PostComponent'
-import Categories from './category/CategoryComponent'
+import languages from './language/LanguageComponent'
 import Videos from './videos/VideoComponent'
 import Books from './book/BookComponent'
 import Axios from 'axios'
@@ -57,7 +57,7 @@ export default {
         Main,
         Users,
         Posts,
-        Categories,
+        languages,
         Videos,
         Books,
     },
@@ -78,9 +78,9 @@ export default {
                     this.activeComponent = Posts
                     this.$router.push({name: 'admin-pages', params: {page: 'posts'}})
                     break;
-                case "categories":
-                    this.activeComponent = Categories
-                    this.$router.push({name: 'admin-pages', params: {page: 'categories'}})
+                case "languages":
+                    this.activeComponent = languages
+                    this.$router.push({name: 'admin-pages', params: {page: 'languages'}})
                     break;
                 case "videos":
                     this.activeComponent = Videos

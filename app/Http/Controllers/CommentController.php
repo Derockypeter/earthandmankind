@@ -21,7 +21,7 @@ class CommentController extends Controller
         ]);
         if($data){
             $post->comments()->create($data);
-            return response()->json($post->comments->latest(), 200);
+            return response()->json($post->comments()->latest('created_at')->get(), 200);
         }
         else {
             return 0;

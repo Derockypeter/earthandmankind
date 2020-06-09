@@ -9,4 +9,9 @@ class Book extends Model
     protected $fillable = [
         'name', 'description', 'category_id', 'image', 'path'
     ];
+
+    public function language()
+    {
+        return $this->belongsTo(\App\Language::class);
+    }
 }

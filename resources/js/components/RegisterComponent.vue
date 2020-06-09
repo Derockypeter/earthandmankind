@@ -132,6 +132,7 @@ export default {
                 this.user.password = ""
                 this.user.password_confirmation = ""
                 return this.message = 'Passwords do not match'
+                this.saving = false
             }
             this.axios.post(uri, this.user)
                 .then((response) => {

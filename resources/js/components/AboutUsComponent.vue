@@ -3,7 +3,7 @@
         <div class="articles">
             <div class="main-container">
                 <h1>About Us</h1>
-                <p class="lead">About Us section goes here</p>
+                <p class="lead">Earth and Mankind is a .......</p>
             </div>
         </div>
     </div>

@@ -9,23 +9,29 @@
                     35 Seychelles Avenue off Capitol Oil Market
                 </p>
             </div>
-            <div class="col l5 offset-l1 s12"><!--TODO CREATE MAILABLE FOR CONTACT FORM-->
+            <div v-if="success" class="col l12  s12 success">
+                <p class="center">{{success}}</p>
+            </div>
+            <div v-else class="col l5  s12">
                 <h5 class="grey-text">Send Us A Mail</h5>
                 <div class="row">
-                    <form action="mailto:emailhere" class="col s12">
+                    <form class="col s12" :disabled="saving" @submit="sendMail">
                         <div class="row">
                             <div class="input-field col s6">
-                                <input type="text" placeholder="Enter Subject" id="subject" class="validate">
+                                <input type="email" v-model="mail.email" required name="email" placeholder="Your Email *" > 
                             </div>
                             <div class="input-field col s6">
-                                <input type="text" placeholder="Enter Name" id="name" class="validate">
+                                <input type="text" v-model="mail.name" required name="name" placeholder="Your Name *" >
                             </div>
                         </div>
                         <div class="row">
-                            <div class="input-field col s9">
-                                <textarea type="text" placeholder="Enter Subject" id="topic" class="validate materialize-textarea"></textarea>
+                            <div class="input-field col s12">
+                                <input type="text" v-model="mail.subject" required  placeholder="Enter Subject" id="subject" class="validate" >
                             </div>
-                            <button type="submit" class="waves-effect waves-light btn-small">Submit</button>
+                            <div class="input-field col s12">
+                                <textarea type="text" v-model="mail.message"  placeholder="Enter Message here *" id="message" class="validate materialize-textarea" style="width: 100%; height: 150px;" required></textarea>
+                            </div>
+                            <button type="submit" class="waves-effect waves-light btn-small" >Submit</button>
 
                         </div>
                     </form>
@@ -37,6 +43,45 @@
 </template>
 <script>
 export default {
-    
+    data() {
+        return {
+            success: false,
+            saving: false,
+            mail: {
+                email: '',
+                name: '',
+                message: '',
+                subject: ''
+            }
+            
+        }
+    },
+    created() {
+        
+    },
+    methods: {
+        sendMail(evt){
+            evt.preventDefault();
+            this.saving = true
+            this.axios.post('api/contact-us', this.mail)
+            .then(response => {
+                console.log(response);
+                this.success = response.data[0]
+                setTimeout(() => {
+                    this.$router.go()
+                }, 3000)
+            })
+            .catch(error => {
+                console.log(error);
+                this.saving = false
+            })
+        }
+    },
 }
 </script>
+<style scoped>
+ .success {
+  background-color: #6abc6e;
+  color: white;
+}
+</style>

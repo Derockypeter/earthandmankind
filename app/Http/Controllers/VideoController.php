@@ -10,69 +10,8 @@ use Validator;
 
 class VideoController extends Controller
 {
-    // Storing a video
-    public function store(Request $request)
-    {
-        $validation = Validator::make($request->all(), [
-            'video.*' => 'required|mimetypes:video/x-ms-asf,video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/quicktime,video/x-msvideo,video/x-ms-wmv,video/avi|max:200000',
-            'category_id' => 'required',
-            'coursename' => 'required',
-            'requirements' => 'required',
-            'about' => 'required',
-            'language' => 'required',
-            'to_learn' => 'required',
-            'preview' => 'nullable',
-            'description' => 'required',
-            'section' => 'required',
-            'name' => 'required',
-            'image' => 'required',
-            'image.*' => 'mimes:jpeg,png,jpg,gif,svg|max:2048'
-        ]);
-        if($validation->fails())
-        {
-            return response()->json(['error' => $validation->errors()->all(), ]);
-        }
-        else{ 
-            $imageValidator = $request->file('image');
-            $name = Str::slug($request->coursename).'.'.$imageValidator->getClientOriginalExtension() ;
-            
-            \Image::make($request->file('image'))->resize(400, 300)->save(public_path('courseImages/').$name);
-            $imageToSave = Str::slug($request->coursename).'.'.$imageValidator->getClientOriginalExtension();
-            
-            $inputVideo = $request->video->getClientOriginalName();
-            $request->video->move(public_path('videos'), $inputVideo);
-            
-            $video = Course::updateOrCreate([
-                'coursename' => $request->coursename,
-                'description' => $request->description,
-                'category_id' => $request->category_id,
-                'to_learn' => $request->to_learn,
-                'requirements' => $request->requirements,
-                'about' => $request->about,
-                'language' => $request->language,
-                'image' => $imageToSave
-            ])->videos()->updateOrCreate([
-                'preview' => $request->preview,
-                'video' => $inputVideo,
-                'name' => $request->name,
-                'section' => $request->section,
-            ]);
-            
-            return response()->json(['course' => $video]);
-        }       
-    }
-     // Fetch all Videos
-    public function allVideos()
-    {
-        $video = new Course();
-        if($video){
-            return response()->json($video->with(['videos', 'category'])->get());
-        }
-        else{
-            return 0;
-        }
-    }
-     // Fetch a single video
+   
+    // Fetch a single video
     public function video($id)
     {
         $video = Video::where('id', $id);
@@ -90,8 +29,7 @@ class VideoController extends Controller
         $video = Video::where('videos.id', $video_id);
         if($video){
             $videos = $video->join('course_titles', 'videos.course_title_id', '=', 'course_titles.id' )
-                ->join('categories', 'course_titles.category_id', '=', 'categories.id')
-                ->select('coursename', 'video', 'name', 'section', 'categoryName', 'preview');
+                ->select('coursename', 'video', 'name', 'section', 'preview');
             return response()->json($videos->get());
         }
         else {
@@ -104,7 +42,6 @@ class VideoController extends Controller
         $request->validate([
             'coursename' => 'required',
             'preview' => 'required',
-            'category_id' => 'required',
             'name' => 'required',
             'section' => 'required',
             'video.*' => 'nullable|mimetypes:video/avi,video/mpeg,video/quicktime|max:20000',
@@ -125,14 +62,12 @@ class VideoController extends Controller
             }
             $videoToUpdate->video = $name;
             $videoToUpdate->coursename = $request->coursename;
-            $videoToUpdate->category_id = $request->category_id;
             $videoToUpdate->name = $request->name;
             $videoToUpdate->section = $request->section;
         }
         elseif (!($request->hasFile('videoName'))) 
         {
             $videoToUpdate->coursename = $request->coursename;
-            $videoToUpdate->category_id = $request->category_id;
             $videoToUpdate->name = $request->name;
             $videoToUpdate->section = $request->section;
         }
@@ -143,7 +78,6 @@ class VideoController extends Controller
     public function delete($video_id)
     {
         $video = Video::findOrFail($video_id);
-        
         if ($video)
         {
             $videoToDelete = public_path("videos/{$video->videoName}");

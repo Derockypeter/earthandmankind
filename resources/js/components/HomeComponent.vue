@@ -6,13 +6,13 @@
                     <div style="max-width:250px; max-height:30px;">
                         <a class="leadP">Getting to know Jesus is one of the most important things</a>
                         <p class="lead">Getting to know Jesus is one of the most important things, use our Bible Teachings to improve your life</p>
-                        <router-link :to="{name: 'bible-teachings'}" class="btn">Learn More</router-link>
+                        <router-link :to="{name: 'article'}" class="btn">Learn More</router-link>
                     </div>
                     
                 </div>
             </div>
         </div>
-        <CategorySelection :featurePosts="featurePosts" :options="options" ></CategorySelection>
+        <CategorySelection :featurePosts="featurePosts" :books="books" ></CategorySelection>
     </main>
 </template>
 <style scoped>
@@ -43,31 +43,27 @@
         data() {
             return {
                 featurePosts: [],
-                options: []
+                books: []
             }
         },
         created() {
-            // let uri = '/api/featuredPost';
-            //     this.axios.get(uri).then(response => {
-            //         this.options = response.data;
-            //         // console.log(response.data)
-            //     });
-
-            // let post_uri = `/api/category/${this.$route.params.category_id}`;
-            // this.axios.get(post_uri).then(response => {
-            //     this.posts = response.data.data;
-            //     console.log(response.data)
-            // })
-            // .catch(err => 
-            //     console.error.response.data
-            // )
-            let featuredPost = `/api/featuredPost`;
-            this.axios.get(featuredPost).then(response => {
-                this.featurePosts = response.data.data;
-                // console.log(response.data)
+            // For Books
+            let book_uri = '/api/books';
+            this.axios.get(book_uri).then(response => {
+                this.books = response.data.data;
+                console.log(response.data)
             })
             .catch(err => 
                 console.error.response.data
+            )
+
+            let featuredPost = `/api/featuredPost`;
+            this.axios.get(featuredPost).then(response => {
+                this.featurePosts = response.data;
+                console.log(response.data)
+            })
+            .catch(err => 
+                console.log(err.response)
             )
         },
         components: {

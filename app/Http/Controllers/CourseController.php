@@ -8,6 +8,54 @@ use App\Video;
 
 class CourseController extends Controller
 {
+    // Storing a video
+    public function store(Request $request)
+    {
+        $validation = Validator::make($request->all(), [
+            'video.*' => 'required|mimetypes:video/x-ms-asf,video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/quicktime,video/x-msvideo,video/x-ms-wmv,video/avi|max:200000',
+            'coursename' => 'required',
+            'requirements' => 'required',
+            'about' => 'required',
+            'language' => 'required',
+            'to_learn' => 'required',
+            'preview' => 'nullable',
+            'description' => 'required',
+            'section' => 'required',
+            'name' => 'required',
+            'image' => 'required',
+            'image.*' => 'mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
+        if($validation->fails())
+        {
+            return response()->json(['error' => $validation->errors()->all(), ]);
+        }
+        else{ 
+            $imageValidator = $request->file('image');
+            $name = Str::slug($request->coursename).'.'.$imageValidator->getClientOriginalExtension() ;
+            
+            \Image::make($request->file('image'))->resize(400, 300)->save(public_path('courseImages/').$name);
+            $imageToSave = Str::slug($request->coursename).'.'.$imageValidator->getClientOriginalExtension();
+            
+            $inputVideo = $request->video->getClientOriginalName();
+            $request->video->move(public_path('videos'), $inputVideo);
+            
+            $video = Course::updateOrCreate([
+                'coursename' => $request->coursename,
+                'description' => $request->description,
+                'to_learn' => $request->to_learn,
+                'requirements' => $request->requirements,
+                'about' => $request->about,
+                'language' => $request->language,
+                'image' => $imageToSave
+            ])->videos()->updateOrCreate([
+                'preview' => $request->preview,
+                'video' => $inputVideo,
+                'name' => $request->name,
+                'section' => $request->section,
+            ]);
+            return response()->json(['course' => $video]);
+        }       
+    }
     // Gets a video by course name 
     public function course($title)
     {   
@@ -18,7 +66,7 @@ class CourseController extends Controller
         foreach ($course_id_decode as $key => $value) {
             $value->id;
         }
-        $course = $courses::where([['coursename', $title]])->with('category')->get();
+        $course = $courses::where([['coursename', $title]])->get();
         
         $vidpreview = $video->where([
             ['preview', 'true'],
@@ -38,7 +86,7 @@ class CourseController extends Controller
     // Gets all the courses and its videos
     public function allCourse()
     {
-        $courses = Course::with(['videos', 'category']);
+        $courses = Course::with(['videos']);
         return response()->json($courses->get());
     }
     // Getting all the video associated with a course
@@ -68,18 +116,18 @@ class CourseController extends Controller
     public function updateCourse(Request $request, $id)
     {
         $validation = Validator::make($request->all(), [
-            'category_id' => 'required',
             'coursename' => 'required',
             'description' => 'required',
             'name' => 'required',
-            'section' => 'required'
+            'section' => 'required',
+            'language' => 'required'
         ]);
         if($validation->fails())
         {
             return response()->json(['error' => $validation->errors()->all(), ]);
         }
         else {
-            $updateInput = $request->only(['category_id', 'coursename', 'description', 'name', 'section']);
+            $updateInput = $request->only(['language', 'coursename', 'description', 'name', 'section']);
             $course = Course::where('id', $id)->update($updateInput);
             return response()->json($course);
         }

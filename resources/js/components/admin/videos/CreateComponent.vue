@@ -18,9 +18,9 @@
                             </div>
                             <div class="row">
                                 <div class="input-field col s6">
-                                    <select v-model="video.category_id" required class="browser-default">
-                                        <option value="" disabled selected>Select Category</option>
-                                        <option disabled v-for="option in options" v-bind:value="option.id" :key="option.id" >{{option.categoryName}}</option>
+                                    <select v-model="video.language_id" required class="browser-default">
+                                        <option value="" disabled selected>Select language</option>
+                                        <option disabled v-for="option in options" v-bind:value="option.id" :key="option.id" >{{option.language}}</option>
                                     </select>
                                 </div>
                                 <div class="input-field col s6">
@@ -96,7 +96,7 @@
                 preview: '',
                 description: '',
                 video: null,
-				category_id: '',
+				language_id: '',
                 coursename: '',
                 name: '',
                 section: '',
@@ -107,7 +107,7 @@
 		}
     },
     created() {
-      let uri = '/api/getAllCat';
+      let uri = '/api/languages';
       this.axios.get(uri).then(response => {
 		this.options = response.data;
 		console.log(response.data)

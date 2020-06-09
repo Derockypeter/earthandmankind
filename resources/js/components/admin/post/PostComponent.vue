@@ -20,34 +20,20 @@
             <div class="row">
                 <div class="col m10"></div>
                 <div class="col m2">
-                    <router-link :to="{ name: 'create-post' }" class="btn grey">Create Post</router-link>
+                    <router-link :to="{ name: 'create-post' }" class="btn grey right">Create Post</router-link>
                 </div>
             </div><br />
-            <table class="striped highlight responsive-table">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Title</th>
-                    <th>Post</th>
-                    <th>Category</th>
-                    <th>Name</th>
-                    <th>Image</th>
-                </tr>
-                </thead>
-                <tbody>
-                
-                    <tr v-for="post in posts" :key="post.id">
-                        <td>{{ post.id }}</td>
-                        <td>{{ post.title }}</td>
-                        <td>{{ post.body }}</td>
-                        <td>{{ post.categoryName }}</td>
-                        <td>{{ post.imagename }}</td>
-                        <td><img :src="'/blogImages/'+post.image" class="circle responsive-img" height="100" width="100"></td>
-                        <td><router-link :to="{name: 'edit-post', params: { id: post.id }}" class="btn cyan pulse"><i class="material-icons">edit</i></router-link></td>
-                        <td><button class="btn red" :disabled="saving" @click.prevent="deletePost(post.id)"><i class="material-icons">delete</i></button></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="card blue-grey darken-1" v-for="post in posts" :key="post.id">
+                <div class="card-content white-text">
+                    <span class="card-title">{{ post.title }}</span>
+                    <span class="card-title">{{ post.language.language }}</span>
+                    <p >{{ post.body }}</p>
+                </div>
+                <div class="card-action">
+                    <router-link :to="{name: 'edit-post', params: { id: post.id }}" class="btn cyan pulse"><i class="material-icons">edit</i></router-link>
+                    <button class="btn red" :disabled="saving" @click.prevent="deletePost(post.id)"><i class="material-icons">delete</i></button>
+                </div>
+            </div>
             <pagination 
                 :meta_data="meta_data"
                 v-on:next="fetchPosts">
@@ -107,13 +93,13 @@
             deletePost(id){
                 this.saving = true
                 let uri = `/api/deletePost/${id}`;
-                this.axios.delete(uri).then(response => {
+                this.axios.delete(uri)
+                .then((response) => {
                     console.log(response)
                     this.posts.splice(this.posts.findIndex(post => post.id === id), 1);
-                    thsi.saving = false
-                }).catch(err => {
-                    console.error(err.response.data)
-                    // this.$router.push({ name: '404' });
+                    this.saving = false
+                }).catch( (err) => {
+                    console.error.err.response
                     this.saving = false
                 })
             }

@@ -1899,145 +1899,6 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BibleTeachingsComponent.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/BibleTeachingsComponent.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BlogComponent.vue?vue&type=script&lang=js&":
 /*!************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/BlogComponent.vue?vue&type=script&lang=js& ***!
@@ -2048,8 +1909,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _reusable_Pagination__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./reusable/Pagination */ "./resources/js/components/reusable/Pagination.vue");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 //
 //
 //
@@ -2103,7 +1962,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: [],
@@ -2129,7 +2011,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('http://127.0.0.1:8000/api/posts', {
+      this.axios.get('/api/posts', {
         params: {
           page: page
         }
@@ -2147,7 +2029,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {// WRITE FOR SUBSTR
     // truncate(){
-    //     return this.posts.bod;
+    //     return this.posts.body.s;
     // }
   }
 });
@@ -2221,12 +2103,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    featurePosts: Array
+    featurePosts: Array,
+    books: Array
   },
   data: function data() {
     return {
@@ -2234,8 +2114,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {},
-  mounted: function mounted() {// console.log(this.featurePosts)
-  }
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -2292,30 +2171,26 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       featurePosts: [],
-      options: []
+      books: []
     };
   },
   created: function created() {
     var _this = this;
 
-    // let uri = '/api/featuredPost';
-    //     this.axios.get(uri).then(response => {
-    //         this.options = response.data;
-    //         // console.log(response.data)
-    //     });
-    // let post_uri = `/api/category/${this.$route.params.category_id}`;
-    // this.axios.get(post_uri).then(response => {
-    //     this.posts = response.data.data;
-    //     console.log(response.data)
-    // })
-    // .catch(err => 
-    //     console.error.response.data
-    // )
-    var featuredPost = "/api/featuredPost";
-    this.axios.get(featuredPost).then(function (response) {
-      _this.featurePosts = response.data.data; // console.log(response.data)
+    // For Books
+    var book_uri = '/api/books';
+    this.axios.get(book_uri).then(function (response) {
+      _this.books = response.data.data;
+      console.log(response.data);
     })["catch"](function (err) {
       return console.error.response.data;
+    });
+    var featuredPost = "/api/featuredPost";
+    this.axios.get(featuredPost).then(function (response) {
+      _this.featurePosts = response.data;
+      console.log(response.data);
+    })["catch"](function (err) {
+      return console.log(err.response);
     });
   },
   components: {
@@ -2334,6 +2209,16 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -7007,25 +6892,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BibleTeachingsComponent.vue?vue&type=style&index=0&id=3e06e190&scoped=true&lang=css&":
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/BibleTeachingsComponent.vue?vue&type=style&index=0&id=3e06e190&scoped=true&lang=css& ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.featured[data-v-3e06e190], .articles[data-v-3e06e190], .head[data-v-3e06e190] {\n    border-bottom: 0.8px rgba(212, 210, 210, 0.933) solid;\n}\n.column[data-v-3e06e190] {\n    float: left;\n    width: 50%;\n    padding: 5px;\n}\n.catRow[data-v-3e06e190]::after {\n    content: \"\";\n    clear: both;\n    display: table;\n}\n@media screen and (max-width: 500px) {\n.column[data-v-3e06e190] {\n        width: 100%;\n}\n}\n@media screen and (max-width: 600px) {\n.column[data-v-3e06e190] {\n        width: 100%;\n}\n}\n@media screen and (max-width: 800px) {\n.column[data-v-3e06e190] {\n        width: 100%;\n}\n}\na[data-v-3e06e190] {\n    font-size: x-large;\n}\na[data-v-3e06e190]:hover {\n    text-decoration: underline;\n}\na[data-v-3e06e190]:visited {\n    color: rgb(113,101,149);\n}\n.rmMargin-top[data-v-3e06e190] {\n    margin-top: 5px;\n}\n.bold[data-v-3e06e190] {\n    margin-bottom: 5px;\n}\nimg[data-v-3e06e190] {\n    box-shadow: 5px 4px rgb(240, 240, 240);\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-
 /***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BlogComponent.vue?vue&type=style&index=0&id=66ef69a0&scoped=true&lang=css&":
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/BlogComponent.vue?vue&type=style&index=0&id=66ef69a0&scoped=true&lang=css& ***!
@@ -7038,7 +6904,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.uppercase[data-v-66ef69a0] {\n    text-transform: uppercase;\n    font-weight: 300;\n}\na[data-v-66ef69a0] {\n    text-transform: capitalize;\n    font-weight: 450;\n}\n.mb-5[data-v-66ef69a0] {\n    padding-bottom: 50px;\n}\n.link-size[data-v-66ef69a0] {\n    font-size: 1.3em;\n}\n", ""]);
+exports.push([module.i, "\n.uppercase[data-v-66ef69a0] {\n    text-transform: uppercase;\n    /* font-weight: ; */\n}\na[data-v-66ef69a0], .card-title[data-v-66ef69a0] {\n    text-transform: capitalize;\n    font-weight: 500;\n}\n.mb-5[data-v-66ef69a0] {\n    padding-bottom: 50px;\n}\n.link-size[data-v-66ef69a0] {\n    font-size: 1.3em;\n}\n.card[data-v-66ef69a0] {\n    background-image: url('/images/carousel-img/1011537_univ_pnr_lg.jpg');\n}\n", ""]);
 
 // exports
 
@@ -7057,7 +6923,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.column[data-v-4beab921] {\n    float: left;\n    width: 33.33%;\n    padding: 5px;\n}\n.featured[data-v-4beab921], .category[data-v-4beab921] {\n    padding-bottom: 30px;\n    border-bottom: 0.4px rgba(209, 204, 204, 0.933) solid;\n    margin-bottom: 30px;\n}\n/* Clear floats after image containers */\n.rowed[data-v-4beab921]::after {\n    content: \"\";\n    clear: both;\n    display: table;\n}\n@media screen and (max-width: 500px) {\n.column[data-v-4beab921] {\n        width: 100%;\n}\n}\n.cols[data-v-4beab921] {\n    margin-left: 1%;\n    margin-bottom: 20px;\n    width: 32.35%;\n}\n@media screen and (max-width: 500px) {\n.cols[data-v-4beab921] {\n        width: 100%;\n}\n}\n.column[data-v-4beab921]:hover {\n    text-decoration: underline;\n}\n.cat-1[data-v-4beab921] {\n    background-image: url(\"/images/article-img/502014315_univ_lss_lg.jpg\");\n    background-repeat: repeat-x;\n    background-position: center;\n    color: #ffffff;\n    padding-top: 60px;\n    font-size: 1.2em;\n    font-weight: 500;\n    /* width: 280px; */\n    margin-left: 0;\n    height: 100px;\n}\n.cat-2[data-v-4beab921] {\n    background-image: url(\"/images/article-img/501000004_univ_lss_lg.jpg\");\n    background-repeat: repeat-x;\n    background-position: center;\n    color: #ffffff;\n    padding-top: 60px;\n    font-size: 1.2em;\n    font-weight: 500;\n    /* width: 280px; */\n    height: 100px;\n}\n.cat-3[data-v-4beab921] {\n    background-image: url(\"/images/article-img/501100004_univ_lss_lg.jpg\");\n    background-repeat: repeat-x;\n    background-position: center;\n    color: #ffffff;\n    padding-top: 60px;\n    font-size: 1.2em;\n    font-weight: 500;\n    /* width: 280px; */\n    height: 100px;\n}\n.cat-4[data-v-4beab921] {\n    background-image: url(\"/images/article-img/501600101_univ_lss_lg.jpg\");\n    background-repeat: repeat-x;\n    background-position: center;\n    color: #ffffff;\n    padding-top: 60px;\n    font-size: 1.2em;\n    font-weight: 500;\n    margin-left: 0;\n    height: 100px;\n}\n.cat-5[data-v-4beab921] {\n    background-image: url(\"/images/article-img/502014311_univ_lss_lg.jpg\");\n    background-repeat: repeat-x;\n    background-position: center;\n    color: #ffffff;\n    padding-top: 60px;\n    font-size: 1.2em;\n    font-weight: 500;\n    /* width: 280px; */\n    height: 100px;\n}\n.cat-6[data-v-4beab921] {\n    background-image: url(\"/images/article-img/502014315_univ_lss_lg.jpg\");\n    background-repeat: repeat-x;\n    background-position: center;\n    color: #ffffff;\n    padding-top: 60px;\n    font-size: 1.2em;\n    font-weight: 500;\n    /* width: 280px; */\n    height: 100px;\n}\n.inline-block[data-v-4beab921] {\n    display: inline-block;\n}\n.btn-small[data-v-4beab921] {\n    float: right;\n}\ndiv.row.video[data-v-4beab921] {\n    margin-bottom: 0px;\n}\ndiv.col.s12[data-v-4beab921] {\n    padding: 0px;\n}\n.video[data-v-4beab921] {\n    padding-bottom: 50px;\n}\ni.right[data-v-4beab921] {\n    margin-left: 1px;\n}\na.waves-effect.waves-light.btn-small[data-v-4beab921] {\n    padding: 0 4px 1px 4px;\n}\n\n", ""]);
+exports.push([module.i, "\n.column[data-v-4beab921] {\n    float: left;\n    width: 33.33%;\n    padding: 5px;\n}\n.column3[data-v-4beab921] {\n    float: left;\n    width: 20%;\n    padding: 5px;\n}\n.featured[data-v-4beab921], .category[data-v-4beab921] {\n    padding-bottom: 30px;\n    border-bottom: 0.4px rgba(209, 204, 204, 0.933) solid;\n    margin-bottom: 30px;\n}\n/* Clear floats after image containers */\n.rowed[data-v-4beab921]::after {\n    content: \"\";\n    clear: both;\n    display: table;\n}\n@media screen and (max-width: 500px) {\n.column[data-v-4beab921] {\n        width: 100%;\n}\n.column3[data-v-4beab921] {\n        width: 50%;\n}\n}\n.inline-block[data-v-4beab921] {\n    display: inline-block;\n}\n.librarysect[data-v-4beab921] {\n    float: right;\n    margin: 3.9733333333rem 0 1.424rem 0\n}\ndiv.row.video[data-v-4beab921] {\n    margin-bottom: 0px;\n}\ndiv.col.s12[data-v-4beab921] {\n    padding: 0px;\n}\n.video[data-v-4beab921] {\n    padding-bottom: 50px;\n}\ni.right[data-v-4beab921] {\n    margin-left: 1px;\n}\na.waves-effect.waves-light.btn-small[data-v-4beab921] {\n    padding: 0 4px 1px 4px;\n}\n.bottomleft[data-v-4beab921] {\n    position: absolute;\n    bottom: 15px;\n    left: 16px;\n    color: #ffffff;\n    font-size: 1.2em;\n    font-weight: 500;\n}\n.bottomleft[data-v-4beab921]:hover {\n    text-decoration: underline;\n}\n", ""]);
 
 // exports
 
@@ -7095,7 +6961,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.bold[data-v-52debbed] {\n    font-weight: bold;\n}\n.coursename[data-v-52debbed] {\n    font-size: 24px;\n    text-transform: capitalize;\n}\n.card .card-action span[data-v-52debbed]:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating){\n    margin-right: 24px;\n    transition: color .3s ease;\n    text-transform: uppercase;\n}\na[data-v-52debbed]:hover {\n    color: darkgrey;\n    text-decoration: underline;\n}\n.material-icons[data-v-52debbed] {\n    font-size: 18px;\n}\n", ""]);
+exports.push([module.i, "\n.bold[data-v-52debbed] {\n    font-weight: bold;\n}\n.coursename[data-v-52debbed] {\n    font-size: 24px;\n    text-transform: capitalize;\n}\n.card .card-action span[data-v-52debbed]:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating){\n    margin-right: 24px;\n    transition: color .3s ease;\n    text-transform: uppercase;\n}\na[data-v-52debbed]:hover {\n    color: darkgrey;\n    text-decoration: underline;\n}\n.material-icons[data-v-52debbed] {\n    font-size: 18px;\n}\n.rowed[data-v-52debbed]::after {\n    content: \"\";\n    clear: both;\n    display: table;\n}\n@media screen and (max-width: 500px) {\n.column[data-v-52debbed], .column3[data-v-52debbed] {\n        width: 100%;\n}\n}\n.column3[data-v-52debbed] {\n    float: left;\n    width: 20%;\n    padding: 5px;\n    background-color: rgb(253, 253, 253);\n    margin-left: 1px;\n}\n", ""]);
 
 // exports
 
@@ -38212,36 +38078,6 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BibleTeachingsComponent.vue?vue&type=style&index=0&id=3e06e190&scoped=true&lang=css&":
-/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/BibleTeachingsComponent.vue?vue&type=style&index=0&id=3e06e190&scoped=true&lang=css& ***!
-  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./BibleTeachingsComponent.vue?vue&type=style&index=0&id=3e06e190&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BibleTeachingsComponent.vue?vue&type=style&index=0&id=3e06e190&scoped=true&lang=css&");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BlogComponent.vue?vue&type=style&index=0&id=66ef69a0&scoped=true&lang=css&":
 /*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/BlogComponent.vue?vue&type=style&index=0&id=66ef69a0&scoped=true&lang=css& ***!
@@ -38946,195 +38782,6 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BibleTeachingsComponent.vue?vue&type=template&id=3e06e190&scoped=true&":
-/*!**************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/BibleTeachingsComponent.vue?vue&type=template&id=3e06e190&scoped=true& ***!
-  \**************************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "articles" }, [
-      _c("div", { staticClass: "main-container" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "featured" },
-          [
-            _c("h2", [_vm._v("Featured")]),
-            _vm._v(" "),
-            _vm._m(1),
-            _vm._v(" "),
-            _c("p", { staticClass: "text-grey bold rmMargin-top" }, [
-              _vm._v("BIBLE QUESTIONS ANSWERED")
-            ]),
-            _vm._v(" "),
-            _c("router-link", { attrs: { to: { name: "featured-bible" } } }, [
-              _vm._v("Story of Joshua - The Courageous")
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "description rmMargin-top" }, [
-              _vm._v("Being courageous at all Times matters a lot")
-            ])
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "bibleCategories" }, [
-          _c(
-            "div",
-            { staticClass: "row" },
-            [
-              _c("h4", { staticStyle: { display: "inline-block" } }, [
-                _vm._v("See ways the Bible can help us")
-              ]),
-              _vm._v(" "),
-              _c(
-                "router-link",
-                {
-                  staticStyle: {
-                    float: "right",
-                    clear: "both",
-                    "padding-top": "25px"
-                  },
-                  attrs: { to: { name: "bible-teach_all" } }
-                },
-                [_vm._v("See All Bible Teachings")]
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "sinImg catRow" }, [
-            _c(
-              "div",
-              { staticClass: "column" },
-              [
-                _c("img", {
-                  attrs: {
-                    src: "\\images\\carousel-img\\images (1).jfif",
-                    alt: "The bible teaching on sin",
-                    width: "100%",
-                    height: "200vh"
-                  }
-                }),
-                _vm._v(" "),
-                _c("router-link", { attrs: { to: { name: "sin" } } }, [
-                  _vm._v("What the bible says about sin")
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "catDescription" }, [
-                  _vm._v(
-                    "\n                            What can separate us from the Love of God, is it sin, clothe, death, olo, in all these we have vicory in Christ Jesus\n                        "
-                  )
-                ])
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "loveBanner column" },
-              [
-                _c("img", {
-                  attrs: {
-                    src: "\\images\\carousel-img\\images (2).jfif",
-                    alt: "The bible teaching on Love",
-                    width: "100%",
-                    height: "200vh"
-                  }
-                }),
-                _vm._v(" "),
-                _c("router-link", { attrs: { to: { name: "love" } } }, [
-                  _vm._v("What the bible says about Love")
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "catDescription" }, [
-                  _vm._v(
-                    "\n                            For God so loved the world that He gave His only begotten son, whosoever beleives in Him shall not perish but have eternal life.\n                        "
-                  )
-                ])
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "givingImg column" },
-              [
-                _c("img", {
-                  attrs: {
-                    src: "\\images\\carousel-img\\images (3).jfif",
-                    alt: "The bible teaching on Giving",
-                    width: "100%",
-                    height: "200vh"
-                  }
-                }),
-                _vm._v(" "),
-                _c("router-link", { attrs: { to: { name: "giving" } } }, [
-                  _vm._v("What the bible says about Giving")
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "catDescription" }, [
-                  _vm._v(
-                    "\n                            Giving opens door of breakthrough, Name gave, and Angel Gabriel went with his son to pick a wife\n                        "
-                  )
-                ])
-              ],
-              1
-            )
-          ])
-        ])
-      ])
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "head" }, [
-      _c("h1", [_vm._v("Bible Teachings")]),
-      _vm._v(" "),
-      _c("p", { staticClass: "lead" }, [
-        _vm._v(
-          "The Bible is a holy book for inculcating moral values, gaining wisdom, knowlegde and\n                     understanding, learning things about how to make the best spiritual life possible. It can also be our reference\n                     point in our time of distress, pain or discomfort using the verses to present your challenge"
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "featured-img" }, [
-      _c("img", {
-        attrs: {
-          src: "\\images\\carousel-img\\images (3).jfif",
-          alt: "Featured bible",
-          width: "100%",
-          height: "350vh"
-        }
-      })
-    ])
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BlogComponent.vue?vue&type=template&id=66ef69a0&scoped=true&":
 /*!****************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/BlogComponent.vue?vue&type=template&id=66ef69a0&scoped=true& ***!
@@ -39156,11 +38803,13 @@ var render = function() {
         "div",
         { staticClass: "main-container" },
         [
-          _c("h1", [_vm._v("Blog")]),
+          _vm._m(0),
+          _vm._v(" "),
+          _c("h1", [_vm._v("Article")]),
           _vm._v(" "),
           _c("p", { staticClass: "lead mb-5" }, [
             _vm._v(
-              "Read our weekly blog digest for Inspiration, Spiritual lifestyle, Motivation, Success.\n                Educate yourself with inspired writeups from great men of God"
+              "Read my article digest for Inspiration, growth, success, and to maintain a healthy balance in Life."
             )
           ]),
           _vm._v(" "),
@@ -39172,77 +38821,30 @@ var render = function() {
                 "div",
                 { key: post.id, staticClass: "col s12 l4 m4 hoverable" },
                 [
-                  _c("div", { staticClass: "card small" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "card-image waves-effect waves-block waves-light"
-                      },
-                      [
-                        _c("img", {
-                          staticClass: "responsive-img",
-                          attrs: { src: "/blogImages/" + post.image }
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "card-content" }, [
-                      _vm._m(0, true),
-                      _vm._v(" "),
-                      _c(
-                        "p",
-                        { staticClass: "grey-text link-size" },
-                        [
-                          _c(
-                            "router-link",
-                            {
-                              attrs: {
-                                to: {
-                                  name: "post-title",
-                                  params: { title: post.title }
-                                }
-                              }
-                            },
-                            [
-                              _vm._v(
-                                "\n                                    " +
-                                  _vm._s(post.title) +
-                                  "\n                                "
-                              )
-                            ]
-                          )
-                        ],
-                        1
+                  _c("div", { staticClass: "card" }, [
+                    _c("div", { staticClass: "card-content white-text" }, [
+                      _c("span", { staticClass: "card-title" }, [
+                        _vm._v(
+                          "\n                                " +
+                            _vm._s(post.title) +
+                            "\n                            "
+                        )
+                      ]),
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(post.body.substr(0, 200)) +
+                          "....\n                        "
                       )
                     ]),
                     _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "card-reveal" },
+                      { staticClass: "card-action center" },
                       [
-                        _c(
-                          "span",
-                          {
-                            staticClass:
-                              "card-title grey-text text-darken-4 uppercase"
-                          },
-                          [
-                            _vm._v(_vm._s(post.categoryName)),
-                            _c("i", { staticClass: "material-icons right" }, [
-                              _vm._v("close")
-                            ])
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c("p", [
-                          _vm._v(_vm._s(post.body.substr(0, 100)) + "...")
-                        ]),
-                        _vm._v(" "),
                         _c(
                           "router-link",
                           {
-                            staticClass: "btn-small",
+                            staticClass: "btn-flat",
                             attrs: {
                               to: {
                                 name: "post-title",
@@ -39250,7 +38852,21 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("Read More →")]
+                          [
+                            _vm._v(
+                              "\n                                Read\n                            "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("i", { staticClass: "material-icons" }, [
+                          _vm._v("language")
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "span",
+                          { staticClass: "grey-text text-darken-4 uppercase" },
+                          [_vm._v(" " + _vm._s(post.language.language))]
                         )
                       ],
                       1
@@ -39277,11 +38893,19 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "span",
-      { staticClass: "card-title activator grey-text text-darken-4" },
-      [_c("i", { staticClass: "material-icons right" }, [_vm._v("more_vert")])]
-    )
+    return _c("div", { staticClass: "col s12 " }, [
+      _c("a", { staticClass: "breadcrumb ", attrs: { href: "#!" } }, [
+        _vm._v("Home")
+      ]),
+      _vm._v(" "),
+      _c("a", { staticClass: "breadcrumb ", attrs: { href: "#!" } }, [
+        _vm._v("Blog")
+      ]),
+      _vm._v(" "),
+      _c("a", { staticClass: "breadcrumb ", attrs: { href: "#!" } }, [
+        _vm._v("Post")
+      ])
+    ])
   }
 ]
 render._withStripped = true
@@ -39307,237 +38931,88 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "articles" }, [
     _c("div", { staticClass: "main-container" }, [
-      _c("h5", [_vm._v("Featured")]),
+      _c("h2", [_vm._v("Featured Articles")]),
       _vm._v(" "),
-      _c("div", { staticClass: "rowed featured" }, [
-        _c(
-          "div",
-          { staticClass: "column featured-1" },
-          [
-            _c("router-link", { attrs: { to: { name: "bible-teachings" } } }, [
-              _c("img", {
-                staticStyle: { width: "100%" },
-                attrs: {
-                  src:
-                    "\\images\\carousel-img\\5_principles_of_the_faith-filled_life_159634769.jpg",
-                  alt: ""
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("router-link", { attrs: { to: { name: "bible-teachings" } } }, [
-              _vm._v("Drawing close to God")
-            ])
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "column featured-2" },
-          [
-            _c("router-link", { attrs: { to: { name: "bible-teachings" } } }, [
-              _c("img", {
-                staticStyle: { width: "100%" },
-                attrs: { src: "\\images\\carousel-img\\images.jfif", alt: "" }
-              })
-            ]),
-            _vm._v(" "),
-            _c("router-link", { attrs: { to: { name: "post" } } }, [
-              _vm._v("Christianity and Technology")
-            ])
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "column featured-3" },
-          [
-            _c("router-link", { attrs: { to: { name: "bible-teachings" } } }, [
-              _c("img", {
-                staticStyle: { width: "100%" },
-                attrs: {
-                  src: "\\images\\carousel-img\\images (3).jfif",
-                  alt: ""
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("router-link", { attrs: { to: { name: "post" } } }, [
-              _vm._v("Understanding God's Creatures")
-            ])
-          ],
-          1
-        )
-      ]),
-      _vm._v(" "),
-      _c("h5", [_vm._v("Select a Category")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "category" }, [
-        _c(
-          "div",
-          { staticClass: "rowed mrl-auto" },
-          [
-            _c("router-link", { attrs: { to: { name: "bible-teachings" } } }, [
-              _c("div", { staticClass: "column cols cat-1" }, [
-                _vm._v("Bible Teachings")
-              ])
-            ]),
-            _vm._v(" "),
-            _c(
-              "router-link",
-              {
-                attrs: {
-                  to: {
-                    name: "post",
-                    params: { categoryName: _vm.post.category_id }
+      _c(
+        "div",
+        { staticClass: "rowed featured" },
+        _vm._l(_vm.featurePosts, function(featurePost) {
+          return _c(
+            "div",
+            { key: featurePost.id, staticClass: "column featured-1" },
+            [
+              _c("h5", [_vm._v(_vm._s(featurePost.post.title))]),
+              _vm._v(" "),
+              _c("p", { staticStyle: { width: "100%" } }, [
+                _vm._v(_vm._s(featurePost.post.body.substr(0, 200)) + "....")
+              ]),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                {
+                  staticClass: "waves-effect waves-light btn-small",
+                  attrs: {
+                    to: {
+                      name: "post-title",
+                      params: { title: featurePost.post.title }
+                    }
                   }
-                }
-              },
-              [
-                _c("div", { staticClass: "column cols cat-2" }, [
-                  _vm._v("Godly Living")
-                ])
-              ]
-            ),
-            _vm._v(" "),
+                },
+                [_vm._v("\n                    Read More\n                ")]
+              )
+            ],
+            1
+          )
+        }),
+        0
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "row book" },
+        [
+          _c("h2", { staticClass: "inline-block " }, [_vm._v("Library")]),
+          _vm._v(" "),
+          _c(
+            "router-link",
+            {
+              staticClass: "waves-effect waves-light btn-small librarysect",
+              attrs: { to: { name: "library" } }
+            },
+            [
+              _c("i", { staticClass: "material-icons sm right" }, [
+                _vm._v("chevron_right")
+              ]),
+              _vm._v("See all")
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "col s12" }, [
             _c(
-              "router-link",
-              {
-                attrs: {
-                  to: {
-                    name: "post",
-                    params: { categoryName: _vm.post.category_id }
-                  }
-                }
-              },
-              [
-                _c("div", { staticClass: "column cols cat-3" }, [
-                  _vm._v("Spirit-Controlled Life")
+              "div",
+              { staticClass: "rowed" },
+              _vm._l(_vm.books, function(book) {
+                return _c("div", { key: book.id, staticClass: "column3" }, [
+                  _c("img", {
+                    staticClass: "responsive-image",
+                    attrs: { src: "/books/images/" + book.image, width: "100" }
+                  }),
+                  _vm._v(" "),
+                  _c("a", { attrs: { href: "books/path/" + book.path } }, [
+                    _c("p", [_vm._v(_vm._s(book.name))])
+                  ])
                 ])
-              ]
+              }),
+              0
             )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "rowed" },
-          [
-            _c(
-              "router-link",
-              {
-                attrs: {
-                  to: {
-                    name: "post",
-                    params: { categoryName: _vm.post.category_id }
-                  }
-                }
-              },
-              [
-                _c("div", { staticClass: "column cols  cat-4" }, [
-                  _vm._v("In his Presence")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "router-link",
-              {
-                attrs: {
-                  to: {
-                    name: "post",
-                    params: { categoryName: _vm.post.category_id }
-                  }
-                }
-              },
-              [
-                _c("div", { staticClass: "column cols  cat-5" }, [
-                  _vm._v("Seeking Comfort")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "router-link",
-              {
-                attrs: {
-                  to: {
-                    name: "post",
-                    params: { categoryName: _vm.post.category_id }
-                  }
-                }
-              },
-              [
-                _c("div", { staticClass: "column cols  cat-6" }, [
-                  _vm._v("Breaking Habits")
-                ])
-              ]
-            )
-          ],
-          1
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row video" }, [
-        _c("h5", { staticClass: "inline-block" }, [_vm._v("Videos")]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "col s12" },
-          [
-            _c(
-              "router-link",
-              {
-                staticClass: "waves-effect waves-light btn-small",
-                attrs: { to: { name: "library" } }
-              },
-              [
-                _c("i", { staticClass: "material-icons sm right" }, [
-                  _vm._v("chevron_right")
-                ]),
-                _vm._v("See all")
-              ]
-            ),
-            _vm._v(" "),
-            _vm._m(0)
-          ],
-          1
-        )
-      ])
+          ])
+        ],
+        1
+      )
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c(
-        "video",
-        {
-          staticClass: "responsive-video",
-          attrs: { width: "800", height: "400", controls: "" }
-        },
-        [
-          _c("source", {
-            attrs: { src: "videos/1-Basic-Databinding.mp4", type: "video/mp4" }
-          }),
-          _vm._v(" "),
-          _c("source", { attrs: { src: "movie.ogg", type: "video/ogg" } }),
-          _vm._v(
-            "\n                        Your browser does not support the video tag.\n                    "
-          )
-        ]
-      ),
-      _vm._v(" "),
-      _c("p", [_vm._v("Making the Best Life")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -39597,7 +39072,7 @@ var render = function() {
                       "router-link",
                       {
                         staticClass: "btn",
-                        attrs: { to: { name: "bible-teachings" } }
+                        attrs: { to: { name: "article" } }
                       },
                       [_vm._v("Learn More")]
                     )
@@ -39611,7 +39086,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("CategorySelection", {
-        attrs: { featurePosts: _vm.featurePosts, options: _vm.options }
+        attrs: { featurePosts: _vm.featurePosts, books: _vm.books }
       })
     ],
     1
@@ -39693,7 +39168,7 @@ var render = function() {
                             "\n                                    Created by Zurich "
                           ),
                           _c("span", { staticClass: "right" }, [
-                            _vm._v(_vm._s(video.category.categoryName))
+                            _vm._v(_vm._s(video.language.language))
                           ])
                         ])
                       ]),
@@ -39740,30 +39215,26 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _c(
-          "section",
-          { staticClass: "books" },
-          [
-            _vm._m(2),
-            _vm._v(" "),
+        _c("section", { staticClass: "books" }, [
+          _vm._m(2),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "rowed" },
             _vm._l(_vm.books, function(book) {
-              return _c("div", { key: book.id, staticClass: "row" }, [
-                _c("div", { staticClass: "col l4 s12" }, [
-                  _c("a", { attrs: { href: "books/path/" + book.path } }, [
-                    _c("div", [
-                      _c("img", {
-                        staticClass: "responsive-image",
-                        attrs: { src: "/books/images/" + book.image }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("p", [_vm._v(_vm._s(book.name))])
-                  ])
+              return _c("div", { key: book.id, staticClass: "column3" }, [
+                _c("img", {
+                  staticClass: "responsive-image",
+                  attrs: { src: "/books/images/" + book.image, width: "100" }
+                }),
+                _vm._v(" "),
+                _c("a", { attrs: { href: "books/path/" + book.path } }, [
+                  _c("p", [_vm._v(_vm._s(book.name))])
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col l4 s12" }, [
                   _c("p", { staticClass: "uppercase" }, [
-                    _vm._v(_vm._s(book.categoryName))
+                    _vm._v("Language: " + _vm._s(book.language.language))
                   ]),
                   _vm._v(" "),
                   _c("h6", { staticClass: "grey-text" }, [
@@ -39775,10 +39246,10 @@ var render = function() {
                   ])
                 ])
               ])
-            })
-          ],
-          2
-        )
+            }),
+            0
+          )
+        ])
       ])
     ])
   ])
@@ -39802,7 +39273,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("h2", [_vm._v("Courses")])])
+    return _c("div", [_c("h4", [_vm._v("Courses")])])
   },
   function() {
     var _vm = this
@@ -52083,7 +51554,6 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('home-component', __webpack_require__(/*! ./components/HomeComponent.vue */ "./resources/js/components/HomeComponent.vue")["default"]);
-Vue.component('bibleTeachings-component', __webpack_require__(/*! ./components/BibleTeachingsComponent.vue */ "./resources/js/components/BibleTeachingsComponent.vue")["default"]);
 Vue.component('blog-component', __webpack_require__(/*! ./components/BlogComponent.vue */ "./resources/js/components/BlogComponent.vue")["default"]);
 Vue.component('library-component', __webpack_require__(/*! ./components/LibraryComponent.vue */ "./resources/js/components/LibraryComponent.vue")["default"]);
 /**
@@ -52140,93 +51610,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
-
-/***/ }),
-
-/***/ "./resources/js/components/BibleTeachingsComponent.vue":
-/*!*************************************************************!*\
-  !*** ./resources/js/components/BibleTeachingsComponent.vue ***!
-  \*************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _BibleTeachingsComponent_vue_vue_type_template_id_3e06e190_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BibleTeachingsComponent.vue?vue&type=template&id=3e06e190&scoped=true& */ "./resources/js/components/BibleTeachingsComponent.vue?vue&type=template&id=3e06e190&scoped=true&");
-/* harmony import */ var _BibleTeachingsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BibleTeachingsComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/BibleTeachingsComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _BibleTeachingsComponent_vue_vue_type_style_index_0_id_3e06e190_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./BibleTeachingsComponent.vue?vue&type=style&index=0&id=3e06e190&scoped=true&lang=css& */ "./resources/js/components/BibleTeachingsComponent.vue?vue&type=style&index=0&id=3e06e190&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _BibleTeachingsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _BibleTeachingsComponent_vue_vue_type_template_id_3e06e190_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _BibleTeachingsComponent_vue_vue_type_template_id_3e06e190_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  "3e06e190",
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/BibleTeachingsComponent.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/BibleTeachingsComponent.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************!*\
-  !*** ./resources/js/components/BibleTeachingsComponent.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BibleTeachingsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./BibleTeachingsComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BibleTeachingsComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BibleTeachingsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/BibleTeachingsComponent.vue?vue&type=style&index=0&id=3e06e190&scoped=true&lang=css&":
-/*!**********************************************************************************************************************!*\
-  !*** ./resources/js/components/BibleTeachingsComponent.vue?vue&type=style&index=0&id=3e06e190&scoped=true&lang=css& ***!
-  \**********************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BibleTeachingsComponent_vue_vue_type_style_index_0_id_3e06e190_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./BibleTeachingsComponent.vue?vue&type=style&index=0&id=3e06e190&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BibleTeachingsComponent.vue?vue&type=style&index=0&id=3e06e190&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BibleTeachingsComponent_vue_vue_type_style_index_0_id_3e06e190_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BibleTeachingsComponent_vue_vue_type_style_index_0_id_3e06e190_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BibleTeachingsComponent_vue_vue_type_style_index_0_id_3e06e190_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BibleTeachingsComponent_vue_vue_type_style_index_0_id_3e06e190_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BibleTeachingsComponent_vue_vue_type_style_index_0_id_3e06e190_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
-
-/***/ }),
-
-/***/ "./resources/js/components/BibleTeachingsComponent.vue?vue&type=template&id=3e06e190&scoped=true&":
-/*!********************************************************************************************************!*\
-  !*** ./resources/js/components/BibleTeachingsComponent.vue?vue&type=template&id=3e06e190&scoped=true& ***!
-  \********************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BibleTeachingsComponent_vue_vue_type_template_id_3e06e190_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./BibleTeachingsComponent.vue?vue&type=template&id=3e06e190&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BibleTeachingsComponent.vue?vue&type=template&id=3e06e190&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BibleTeachingsComponent_vue_vue_type_template_id_3e06e190_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BibleTeachingsComponent_vue_vue_type_template_id_3e06e190_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
 
 /***/ }),
 

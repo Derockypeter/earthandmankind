@@ -202,7 +202,7 @@ div.col.s12.m4.l4.preview {
 	float: right;
 	clear: right;
 }
-.language {
+.language, .price {
 	font-size: 18px;
 	color: rgb(155, 147, 147);
 }

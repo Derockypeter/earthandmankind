@@ -18,12 +18,12 @@
                             </div>
                             <div class="row">
                                 <div class="input-field col s6">
-                                    <select v-model="videos.category_id" required class="browser-default">
-                                        <!-- <option value="" disabled selected>Select Category</option> -->
-                                        <option disabled v-for="option in options" v-bind:value="option.id" :key="option.id" >{{option.categoryName}}</option>
+                                    <select v-model="videos.language_id" required class="browser-default">
+                                        <!-- <option value="" disabled selected>Select language</option> -->
+                                        <option disabled v-for="option in options" v-bind:value="option.id" :key="option.id" >{{option.language}}</option>
                                     </select>
                                 </div>
-                                <div class="input-field col s6">
+                                <div class="input-field col s6"><!--Work on this-->
                                     <select v-model="videos.section" required class="browser-default">
                                         <option value="" disabled selected>Which section will I attach this video</option>
                                         <option disabled v-for="section in sections" v-bind:value="section.id" :key="section.id" >{{section.text}}</option>
@@ -97,7 +97,7 @@
                     console.log(response)
                 }, 5000);
             });
-        let uri2 = '/api/getAllCat';
+        let uri2 = '/api/languages';
         this.axios.get(uri2).then(response => {
             this.options = response.data;
             console.log(response.data)
@@ -111,7 +111,7 @@
             
                 this.videos.preview = false
 				const data = new FormData();
-				data.append('category_id', this.videos.category_id)
+				data.append('language_id', this.videos.language_id)
 				data.append('video', this.videos.video)
 				data.append('coursename', this.videos.coursename)
                 data.append('description', this.videos.description)

@@ -2,19 +2,18 @@
     <div class="container mt-5">
         <div class="articles">
             <div class="main-container">
-                <div v-for="post in posts" :key="post.id" class="body row">
+                <div class="body row" id="body">
                     <div class="col s12 l9 m7">
-                        <img :src="'/blogImages/'+post.image" class="responsive-img" width="80%">
-                        <p>{{post.imagename}}</p>
-                        <h4>{{post.title}}</h4>
+                        <h1>{{posts.title}}</h1>
                         <p class="text-muted">Created on {{created}}.</p>
                         <div>
-                            {{post.body}}
+                            {{posts.body}}
                         </div>
                     </div>
+                    <!-- <p class="">See more here   {{window.location}}</p> -->
                 </div>
                 <div class="sharePrint">
-                    <button class="btn-small grey" style="margin-right: 40px" @click="print">Print<i class="small material-icons">print</i></button>
+                    <button class="btn-small grey" style="margin-right: 40px" @click="print('body')">Print<i class="small material-icons">print</i></button>
                     <button class="btn-small grey" @click="share">Share<i class="small material-icons">share</i></button>
                 </div>
             </div>
@@ -52,7 +51,7 @@ export default {
     data() {
         return {
             posts: [],
-            created: []
+            created: ''
         }
     },
     created() {
@@ -60,10 +59,9 @@ export default {
         this.axios.get(uri).then(response => {
             this.posts = response.data.post;
             this.created = response.data.created
-            console.log(this.posts)
         })
         .catch(err => 
-            console.error.response.data
+            console.log(response.data)
         )
         M.AutoInit()
     },
@@ -71,8 +69,14 @@ export default {
         M.AutoInit()
     },
     methods: {
-        print(){
-            window.print()
+        print(body){
+            let printContents = document.getElementById(body).innerHTML;
+            let originalContents = document.body.innerHTML
+            document.body.innerHTML = printContents;
+
+            window.print();
+
+            document.body.innerHTML = originalContents;
         },
         share(){
             console.log('shared')

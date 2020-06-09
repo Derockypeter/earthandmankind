@@ -37,12 +37,12 @@
                         </div>
                         <div class="row">
                             <div class="input-field col s6">
-                                <select v-model="videos.category_id" class="browser-default">
-                                    <option value="" disabled selected>Select Category</option>
-                                    <option v-for="option in options" :key="option.id" v-bind:value="option.id">{{ option.categoryName }}</option>
+                                <select v-model="videos.language_id" class="browser-default">
+                                    <option value="" disabled selected>Select Language</option>
+                                    <option v-for="option in options" :key="option.id" v-bind:value="option.id">{{ option.language }}</option>
                                 </select>
                             </div>
-                            <div class="input-field col s6">
+                            <div class="input-field col s6"><!--Work on this-->
                                 <select v-model="videos.section" required class="browser-default">
                                     <option value="" disabled selected>Which section will I attach this video</option>
                                     <option disabled v-for="section in sections" v-bind:value="section.id" :key="section.id" >{{section.text}}</option>
@@ -95,7 +95,7 @@
                     console.log(response.data)
                 }, 5000);
             });
-            let uri2 = '/api/getAllCat';
+            let uri2 = '/api/languages';
             this.axios.get(uri2).then(response => {
                 this.options = response.data;
 

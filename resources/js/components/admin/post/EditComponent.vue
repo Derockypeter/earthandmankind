@@ -11,8 +11,11 @@
                             <div class="input-field col s6">
                                 <input v-model="post.title" id="title" type="text" class="validate" required>
                             </div>
-                            <div class="input-field col s6">
-                                <input v-model="post.image.imagename" id="name" type="text" class="validate" required>
+                             <div class="input-field col s6">
+                                <select v-model="post.language_id" class="browser-default">
+                                    <option :value="null" disabled selected>Select Language</option>
+                                    <option v-for="option in options" :key="option.id" v-bind:value="option.id">{{ option.language }}</option>
+                                </select>
                             </div>
                         </div>
                         <div class="row">
@@ -21,12 +24,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="input-field col s6">
-                                <select v-model="post.category_id" class="browser-default">
-                                    <option :value="null" disabled selected>Select Category</option>
-                                    <option v-for="option in options" :key="option.id" v-bind:value="option.id">{{ option.categoryName }}</option>
-                                </select>
-                            </div>
+                           
                             <!-- <div class="file-field input-field col s4">
                                 <div class="btn">
                                     <span>File</span>
@@ -52,7 +50,6 @@
     export default {
         data() {
             return {
-                imagename: '',
 				saving: false,
 				loaded: false,
 				message: false,
@@ -71,7 +68,7 @@
                     console.log(response.data)
                 }, 5000);
 			});
-			let uri2 = '/api/getAllCat';
+			let uri2 = '/api/languages';
 			this.axios.get(uri2).then(response => {
 				this.options = response.data;
 			});
