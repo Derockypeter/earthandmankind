@@ -39,7 +39,7 @@
                         <td>{{ book.id }}</td>
                         <td>{{ book.name }}</td>
                         <td>{{ book.description }}</td>
-                        <td>{{ book.language }}</td>
+                        <td>{{ book.language.language }}</td>
                         <td><img :src="'/books/images/'+book.image"></td>
                         <td><router-link :to="{name: 'edit-book', params: { id: book.id }}" class="btn cyan pulse"><i class="material-icons">edit</i></router-link></td>
                         <td><button class="btn red" :disabled="saving" @click.prevent="deleteBook(book.id)"><i class="material-icons">delete</i></button></td>
@@ -69,7 +69,6 @@
                     this.loaded = true;
                     this.books = response.data.data;
                 }, 5000);
-                console.log(response.data.data)
             })
             .catch(err => 
                 console.error.response.data.data

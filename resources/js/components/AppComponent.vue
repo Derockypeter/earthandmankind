@@ -29,7 +29,7 @@
                 <li><router-link :to="{ name:'library'}">LIBRARY</router-link></li>
                 <li><router-link :to="{ name:'article'}">ARTICLES</router-link></li>
                 <li><router-link :to="{name: 'contact'}">CONTACT</router-link></li>
-                <li v-if='!isLoggedIn' class="green-text"><router-link :to="{ name:'login'}"><em>LOGIN</em></router-link></li>
+                <li v-if='!isLoggedIn' class="blue-text text-lighten-4"><router-link :to="{ name:'login'}"><em>LOGIN</em></router-link></li>
                 <li><a href="#" v-if="isLoggedIn" @click="logOut">LOGOUT</a></li>
                 <li v-if="isLoggedIn">
                     <router-link :to="{ name: 'dashboard' }" v-if="user_type == 0"> Hi, {{firstname}}</router-link>
@@ -40,8 +40,6 @@
             </ul>
         </header>
         <main>
-            
-    
             <router-view @loggedIn="change"></router-view>
             
             <Footer></Footer>

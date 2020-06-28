@@ -1986,6 +1986,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: [],
@@ -1994,6 +1997,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      loaded: false,
+      options: [],
       posts: {},
       meta_data: {
         last_page_url: null,
@@ -2003,34 +2008,56 @@ __webpack_require__.r(__webpack_exports__);
       }
     };
   },
+  created: function created() {
+    var _this = this;
+
+    var uri = '/api/languages';
+    this.axios.get(uri).then(function (response) {
+      _this.options = response.data;
+    });
+  },
   mounted: function mounted() {
     this.fetchPosts();
   },
   methods: {
     fetchPosts: function fetchPosts() {
-      var _this = this;
+      var _this2 = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      this.axios.get('/api/posts', {
+      this.axios.get('/api/getDefaultPosts', {
         params: {
           page: page
         }
       }).then(function (res) {
-        _this.posts = res.data.data;
-        _this.meta_data.last_page_url = res.data.last_page_url;
-        _this.meta_data.current_page = res.data.current_page;
-        _this.meta_data.prev_page_url = res.data.prev_page_url;
-        _this.meta_data.next_page_url = res.data.next_page_url;
-        console.log(res);
+        setTimeout(function () {
+          _this2.loaded = true;
+          _this2.posts = res.data.data;
+          _this2.meta_data.last_page_url = res.data.last_page_url;
+          _this2.meta_data.current_page = res.data.current_page;
+          _this2.meta_data.prev_page_url = res.data.prev_page_url;
+          _this2.meta_data.next_page_url = res.data.next_page_url;
+        }, 5000);
       })["catch"](function (err) {
         return console.error.response.data.post;
       });
+    },
+    changeLang: function changeLang() {
+      var _this3 = this;
+
+      var id = event.target.value;
+      var uri = "/api/getPostsByLanguage/".concat(id);
+
+      if (uri) {
+        this.axios.get(uri).then(function (res) {
+          _this3.posts = res.data;
+        });
+      }
+    },
+    synopsis: function synopsis(inputString) {
+      var div = document.createElement('div');
+      div.innerHTML = inputString;
+      return div.textContent.slice(0, 150);
     }
-  },
-  computed: {// WRITE FOR SUBSTR
-    // truncate(){
-    //     return this.posts.body.s;
-    // }
   }
 });
 
@@ -2103,6 +2130,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     featurePosts: Array,
@@ -2113,7 +2149,13 @@ __webpack_require__.r(__webpack_exports__);
       post: []
     };
   },
-  created: function created() {},
+  methods: {
+    synopsis: function synopsis(inputString) {
+      var div = document.createElement('div');
+      div.innerHTML = inputString;
+      return div.textContent.slice(0, 200);
+    }
+  },
   mounted: function mounted() {}
 });
 
@@ -2181,14 +2223,12 @@ __webpack_require__.r(__webpack_exports__);
     var book_uri = '/api/books';
     this.axios.get(book_uri).then(function (response) {
       _this.books = response.data.data;
-      console.log(response.data);
     })["catch"](function (err) {
       return console.error.response.data;
     });
     var featuredPost = "/api/featuredPost";
     this.axios.get(featuredPost).then(function (response) {
       _this.featurePosts = response.data;
-      console.log(response.data);
     })["catch"](function (err) {
       return console.log(err.response);
     });
@@ -2289,9 +2329,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      loaded: false,
       videos: [],
       books: []
     };
@@ -2301,8 +2359,11 @@ __webpack_require__.r(__webpack_exports__);
 
     var video_uri = '/api/courses';
     this.axios.get(video_uri).then(function (response) {
-      _this.videos = response.data;
-      console.log(response);
+      setTimeout(function () {
+        _this.loaded = true;
+        _this.videos = response.data;
+        console.log(response);
+      }, 5000);
     })["catch"](function (err) {
       return console.log(error.response);
     }); // For Books
@@ -2310,9 +2371,8 @@ __webpack_require__.r(__webpack_exports__);
     var book_uri = '/api/books';
     this.axios.get(book_uri).then(function (response) {
       _this.books = response.data.data;
-      console.log(response.data);
     })["catch"](function (err) {
-      return console.error.response.data;
+      return console.log(response.data);
     });
   },
   methods: {}
@@ -6923,7 +6983,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.column[data-v-4beab921] {\n    float: left;\n    width: 33.33%;\n    padding: 5px;\n}\n.column3[data-v-4beab921] {\n    float: left;\n    width: 20%;\n    padding: 5px;\n}\n.featured[data-v-4beab921], .category[data-v-4beab921] {\n    padding-bottom: 30px;\n    border-bottom: 0.4px rgba(209, 204, 204, 0.933) solid;\n    margin-bottom: 30px;\n}\n/* Clear floats after image containers */\n.rowed[data-v-4beab921]::after {\n    content: \"\";\n    clear: both;\n    display: table;\n}\n@media screen and (max-width: 500px) {\n.column[data-v-4beab921] {\n        width: 100%;\n}\n.column3[data-v-4beab921] {\n        width: 50%;\n}\n}\n.inline-block[data-v-4beab921] {\n    display: inline-block;\n}\n.librarysect[data-v-4beab921] {\n    float: right;\n    margin: 3.9733333333rem 0 1.424rem 0\n}\ndiv.row.video[data-v-4beab921] {\n    margin-bottom: 0px;\n}\ndiv.col.s12[data-v-4beab921] {\n    padding: 0px;\n}\n.video[data-v-4beab921] {\n    padding-bottom: 50px;\n}\ni.right[data-v-4beab921] {\n    margin-left: 1px;\n}\na.waves-effect.waves-light.btn-small[data-v-4beab921] {\n    padding: 0 4px 1px 4px;\n}\n.bottomleft[data-v-4beab921] {\n    position: absolute;\n    bottom: 15px;\n    left: 16px;\n    color: #ffffff;\n    font-size: 1.2em;\n    font-weight: 500;\n}\n.bottomleft[data-v-4beab921]:hover {\n    text-decoration: underline;\n}\n", ""]);
+exports.push([module.i, "\n.featured[data-v-4beab921], .category[data-v-4beab921] {\n    padding-bottom: 30px;\n    border-bottom: 0.4px rgba(209, 204, 204, 0.933) solid;\n    margin-bottom: 30px;\n}\n/* Clear floats after image containers */\n.inline-block[data-v-4beab921] {\n    display: inline-block;\n}\n.librarysect[data-v-4beab921] {\n    float: right;\n    margin: 3.9733333333rem 0 1.424rem 0\n}\ndiv.row.video[data-v-4beab921] {\n    margin-bottom: 0px;\n}\ndiv.col.s12[data-v-4beab921] {\n    padding: 0px;\n}\n.video[data-v-4beab921] {\n    padding-bottom: 50px;\n}\ni.right[data-v-4beab921] {\n    margin-left: 1px;\n}\na.waves-effect.waves-light.btn-small[data-v-4beab921] {\n    padding: 0 4px 1px 4px;\n}\n.cardBackground[data-v-4beab921] {\n    background-image: url('/images/carousel-img/1011537_univ_pnr_lg.jpg');\n}\n.card .card-title[data-v-4beab921] {\n    font-size: 20px;\n}\n.card .cardBody[data-v-4beab921] {\n    font-size: 13px;\n}\n", ""]);
 
 // exports
 
@@ -6961,7 +7021,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.bold[data-v-52debbed] {\n    font-weight: bold;\n}\n.coursename[data-v-52debbed] {\n    font-size: 24px;\n    text-transform: capitalize;\n}\n.card .card-action span[data-v-52debbed]:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating){\n    margin-right: 24px;\n    transition: color .3s ease;\n    text-transform: uppercase;\n}\na[data-v-52debbed]:hover {\n    color: darkgrey;\n    text-decoration: underline;\n}\n.material-icons[data-v-52debbed] {\n    font-size: 18px;\n}\n.rowed[data-v-52debbed]::after {\n    content: \"\";\n    clear: both;\n    display: table;\n}\n@media screen and (max-width: 500px) {\n.column[data-v-52debbed], .column3[data-v-52debbed] {\n        width: 100%;\n}\n}\n.column3[data-v-52debbed] {\n    float: left;\n    width: 20%;\n    padding: 5px;\n    background-color: rgb(253, 253, 253);\n    margin-left: 1px;\n}\n", ""]);
+exports.push([module.i, "\n.bold[data-v-52debbed] {\n    font-weight: bold;\n}\n.coursename[data-v-52debbed] {\n    font-size: 24px;\n    text-transform: capitalize;\n}\n.card .card-action span[data-v-52debbed]:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating){\n    margin-right: 24px;\n    transition: color .3s ease;\n    text-transform: uppercase;\n}\na[data-v-52debbed]:hover {\n    color: darkgrey;\n    text-decoration: underline;\n}\n.material-icons[data-v-52debbed] {\n    font-size: 18px;\n}\n.column3[data-v-52debbed] {\n    float: left;\n    width: 50%;\n    padding: 5px;\n    background-color: rgb(253, 253, 253);\n}\n@media screen and (max-width: 500px) {\n.column3[data-v-52debbed] {\n        width: 100%;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -38799,92 +38859,141 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "articles" }, [
-      _c(
-        "div",
-        { staticClass: "main-container" },
-        [
-          _vm._m(0),
-          _vm._v(" "),
-          _c("h1", [_vm._v("Article")]),
-          _vm._v(" "),
-          _c("p", { staticClass: "lead mb-5" }, [
-            _vm._v(
-              "Read my article digest for Inspiration, growth, success, and to maintain a healthy balance in Life."
+      _c("div", { staticClass: "main-container" }, [
+        !_vm.loaded
+          ? _c(
+              "div",
+              { staticClass: "center", staticStyle: { height: "500px" } },
+              [_vm._m(0)]
             )
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "row" },
-            _vm._l(_vm.posts, function(post) {
-              return _c(
-                "div",
-                { key: post.id, staticClass: "col s12 l4 m4 hoverable" },
-                [
-                  _c("div", { staticClass: "card" }, [
-                    _c("div", { staticClass: "card-content white-text" }, [
-                      _c("span", { staticClass: "card-title" }, [
-                        _vm._v(
-                          "\n                                " +
-                            _vm._s(post.title) +
-                            "\n                            "
+          : _c(
+              "div",
+              [
+                _c("div", { staticClass: "right col s6 l4" }, [
+                  _c(
+                    "select",
+                    {
+                      staticClass: "browser-default",
+                      on: { change: _vm.changeLang }
+                    },
+                    [
+                      _c(
+                        "option",
+                        { attrs: { value: "", disabled: "", selected: "" } },
+                        [_vm._v("Select language")]
+                      ),
+                      _vm._v(" "),
+                      _vm._l(_vm.options, function(option) {
+                        return _c(
+                          "option",
+                          { key: option.id, domProps: { value: option.id } },
+                          [_vm._v(_vm._s(option.language))]
                         )
-                      ]),
-                      _vm._v(
-                        "\n                            " +
-                          _vm._s(post.body.substr(0, 200)) +
-                          "....\n                        "
-                      )
-                    ]),
+                      })
+                    ],
+                    2
+                  )
+                ]),
+                _vm._v(" "),
+                _c("h1", [_vm._v("Article")]),
+                _vm._v(" "),
+                _c("p", { staticClass: "lead mb-5" }, [
+                  _vm._v(
+                    "Read my article digest for Inspiration, growth, success, and to maintain a healthy balance in Life."
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "rowed" },
+                  [
+                    _vm.posts.length == 0
+                      ? _c("div", [
+                          _c("h2", { staticClass: "grey-text" }, [
+                            _vm._v("No Post with Selected Language")
+                          ])
+                        ])
+                      : _vm._e(),
                     _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "card-action center" },
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "btn-flat",
-                            attrs: {
-                              to: {
-                                name: "post-title",
-                                params: { title: post.title }
-                              }
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\n                                Read\n                            "
+                    _vm._l(_vm.posts, function(post) {
+                      return _c(
+                        "div",
+                        { key: post.id, staticClass: "column hoverable" },
+                        [
+                          _c("div", { staticClass: "card" }, [
+                            _c(
+                              "div",
+                              { staticClass: "card-content white-text" },
+                              [
+                                _c("span", { staticClass: "card-title" }, [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(post.title.substr(0, 20)) +
+                                      "\n                                "
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("div", [
+                                  _vm._v(
+                                    _vm._s(_vm.synopsis(post.body)) + "...."
+                                  )
+                                ])
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "card-action center" },
+                              [
+                                _c(
+                                  "router-link",
+                                  {
+                                    staticClass: "btn-flat",
+                                    attrs: {
+                                      to: {
+                                        name: "post-title",
+                                        params: { title: post.title }
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                    Read\n                                "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c("i", { staticClass: "material-icons" }, [
+                                  _vm._v("language")
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "span",
+                                  {
+                                    staticClass:
+                                      "grey-text text-darken-4 uppercase"
+                                  },
+                                  [_vm._v(" " + _vm._s(post.language.language))]
+                                )
+                              ],
+                              1
                             )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c("i", { staticClass: "material-icons" }, [
-                          _vm._v("language")
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "span",
-                          { staticClass: "grey-text text-darken-4 uppercase" },
-                          [_vm._v(" " + _vm._s(post.language.language))]
-                        )
-                      ],
-                      1
-                    )
-                  ])
-                ]
-              )
-            }),
-            0
-          ),
-          _vm._v(" "),
-          _c("pagination", {
-            attrs: { meta_data: _vm.meta_data },
-            on: { next: _vm.fetchPosts }
-          })
-        ],
-        1
-      )
+                          ])
+                        ]
+                      )
+                    })
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _c("pagination", {
+                  attrs: { meta_data: _vm.meta_data },
+                  on: { next: _vm.fetchPosts }
+                })
+              ],
+              1
+            )
+      ])
     ])
   ])
 }
@@ -38893,19 +39002,28 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col s12 " }, [
-      _c("a", { staticClass: "breadcrumb ", attrs: { href: "#!" } }, [
-        _vm._v("Home")
-      ]),
-      _vm._v(" "),
-      _c("a", { staticClass: "breadcrumb ", attrs: { href: "#!" } }, [
-        _vm._v("Blog")
-      ]),
-      _vm._v(" "),
-      _c("a", { staticClass: "breadcrumb ", attrs: { href: "#!" } }, [
-        _vm._v("Post")
-      ])
-    ])
+    return _c(
+      "div",
+      {
+        staticClass: "preloader-wrapper small active",
+        staticStyle: { top: "250px" }
+      },
+      [
+        _c("div", { staticClass: "spinner-layer spinner-red-only" }, [
+          _c("div", { staticClass: "circle-clipper left" }, [
+            _c("div", { staticClass: "circle" })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "gap-patch" }, [
+            _c("div", { staticClass: "circle" })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "circle-clipper right" }, [
+            _c("div", { staticClass: "circle" })
+          ])
+        ])
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -38939,29 +39057,53 @@ var render = function() {
         _vm._l(_vm.featurePosts, function(featurePost) {
           return _c(
             "div",
-            { key: featurePost.id, staticClass: "column featured-1" },
+            { key: featurePost.id, staticClass: "column hoverable" },
             [
-              _c("h5", [_vm._v(_vm._s(featurePost.post.title))]),
-              _vm._v(" "),
-              _c("p", { staticStyle: { width: "100%" } }, [
-                _vm._v(_vm._s(featurePost.post.body.substr(0, 200)) + "....")
-              ]),
-              _vm._v(" "),
-              _c(
-                "router-link",
-                {
-                  staticClass: "waves-effect waves-light btn-small",
-                  attrs: {
-                    to: {
-                      name: "post-title",
-                      params: { title: featurePost.post.title }
-                    }
-                  }
-                },
-                [_vm._v("\n                    Read More\n                ")]
-              )
-            ],
-            1
+              _c("div", { staticClass: "card cardBackground" }, [
+                _c("div", { staticClass: "card-content white-text" }, [
+                  _c("span", { staticClass: "card-title" }, [
+                    _vm._v(
+                      "\n                                " +
+                        _vm._s(featurePost.post.title.substr(0, 30)) +
+                        "\n                            "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "cardBody" }, [
+                    _vm._v(
+                      "\n                                " +
+                        _vm._s(_vm.synopsis(featurePost.post.body)) +
+                        "....\n                            "
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "card-action center" },
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "btn-flat",
+                        attrs: {
+                          to: {
+                            name: "post-title",
+                            params: { title: featurePost.post.title }
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                                Read\n                            "
+                        )
+                      ]
+                    )
+                  ],
+                  1
+                )
+              ])
+            ]
           )
         }),
         0
@@ -38987,25 +39129,49 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
-          _c("div", { staticClass: "col s12" }, [
-            _c(
-              "div",
-              { staticClass: "rowed" },
-              _vm._l(_vm.books, function(book) {
-                return _c("div", { key: book.id, staticClass: "column3" }, [
-                  _c("img", {
-                    staticClass: "responsive-image",
-                    attrs: { src: "/books/images/" + book.image, width: "100" }
-                  }),
+          _c(
+            "div",
+            { staticClass: "rowed" },
+            _vm._l(_vm.books, function(book) {
+              return _c("div", { key: book.id, staticClass: "column" }, [
+                _c("div", { staticClass: "card" }, [
+                  _c("div", { staticClass: "card-image" }, [
+                    _c("img", {
+                      attrs: {
+                        src: "/books/images/" + book.image,
+                        width: "100"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "card-title" }, [
+                      _vm._v(
+                        "\n                                " +
+                          _vm._s(book.name) +
+                          "\n                            "
+                      )
+                    ])
+                  ]),
                   _vm._v(" "),
-                  _c("a", { attrs: { href: "books/path/" + book.path } }, [
-                    _c("p", [_vm._v(_vm._s(book.name))])
+                  _c("div", { staticClass: "card-content" }, [
+                    _c("p", [
+                      _vm._v(_vm._s(book.description.substr(0, 50)) + "...")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "card-action" }, [
+                    _c("a", { attrs: { href: "books/path/" + book.path } }, [
+                      _vm._v(
+                        "\n                                " +
+                          _vm._s(book.name) +
+                          "\n                            "
+                      )
+                    ])
                   ])
                 ])
-              }),
-              0
-            )
-          ])
+              ])
+            }),
+            0
+          )
         ],
         1
       )
@@ -39117,139 +39283,168 @@ var render = function() {
   return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "articles" }, [
       _c("div", { staticClass: "main-container" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("section", { staticClass: "videos" }, [
-          _vm._m(1),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "course row" },
-            _vm._l(_vm.videos, function(video) {
-              return _c(
-                "div",
-                { key: video.id, staticClass: "col s12 m6 l4" },
-                [
-                  _c(
-                    "div",
-                    { staticClass: "card" },
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          attrs: {
-                            to: {
-                              name: "course",
-                              params: { coursename: video.coursename }
-                            }
-                          }
-                        },
-                        [
-                          _c("div", { staticClass: "card-image" }, [
-                            _c("img", {
-                              attrs: {
-                                src: "/courseImages/" + video.image,
-                                alt: "preview image"
-                              }
-                            }),
+        !_vm.loaded
+          ? _c(
+              "div",
+              { staticClass: "center", staticStyle: { height: "500px" } },
+              [_vm._m(0)]
+            )
+          : _c("div", [
+              _vm._m(1),
+              _vm._v(" "),
+              _c("section", { staticClass: "videos" }, [
+                _vm._m(2),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "course row" },
+                  _vm._l(_vm.videos, function(video) {
+                    return _c(
+                      "div",
+                      { key: video.id, staticClass: "col s12 m6 l4" },
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "card" },
+                          [
+                            _c(
+                              "router-link",
+                              {
+                                attrs: {
+                                  to: {
+                                    name: "course",
+                                    params: { coursename: video.coursename }
+                                  }
+                                }
+                              },
+                              [
+                                _c("div", { staticClass: "card-image" }, [
+                                  _c("img", {
+                                    attrs: {
+                                      src: "/courseImages/" + video.image,
+                                      alt: "preview image"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", { staticClass: "card-title" })
+                                ])
+                              ]
+                            ),
                             _vm._v(" "),
-                            _c("span", { staticClass: "card-title" })
-                          ])
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "card-content" }, [
-                        _c("p", { staticClass: "coursename" }, [
-                          _vm._v(_vm._s(video.coursename))
+                            _c("div", { staticClass: "card-content" }, [
+                              _c("p", { staticClass: "coursename" }, [
+                                _vm._v(_vm._s(video.coursename))
+                              ]),
+                              _vm._v(" "),
+                              _c("p", { staticClass: "bold" }, [
+                                _vm._v(
+                                  "\n                                        Created by Zurich "
+                                ),
+                                _c("span", { staticClass: "right" }, [
+                                  _vm._v(_vm._s(video.language))
+                                ])
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "card-action" },
+                              [
+                                _c("span", [
+                                  _vm._v(
+                                    _vm._s(video.videos.length) + " videos"
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "router-link",
+                                  {
+                                    attrs: {
+                                      to: {
+                                        name: "course",
+                                        params: { coursename: video.coursename }
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("span", { staticClass: "right" }, [
+                                      _c(
+                                        "i",
+                                        {
+                                          staticClass: "material-icons smaller"
+                                        },
+                                        [_vm._v("play_circle_outline")]
+                                      ),
+                                      _vm._v(" preview")
+                                    ])
+                                  ]
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      ]
+                    )
+                  }),
+                  0
+                )
+              ]),
+              _vm._v(" "),
+              _c("section", { staticClass: "books" }, [
+                _vm._m(3),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "rowed" },
+                  _vm._l(_vm.books, function(book) {
+                    return _c("div", { key: book.id, staticClass: "column3" }, [
+                      _c("div", [
+                        _c("img", {
+                          staticClass: "responsive-image",
+                          attrs: {
+                            src: "/books/images/" + book.image,
+                            width: "100"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("p", [
+                          _c("em", [_vm._v("Name: " + _vm._s(book.name))])
                         ]),
                         _vm._v(" "),
-                        _c("p", { staticClass: "bold" }, [
-                          _vm._v(
-                            "\n                                    Created by Zurich "
-                          ),
-                          _c("span", { staticClass: "right" }, [
-                            _vm._v(_vm._s(video.language.language))
+                        _c(
+                          "a",
+                          {
+                            staticClass:
+                              "btn btn-small downloadBook waves waves-effect right grey darken-4",
+                            attrs: { href: "books/path/" + book.path }
+                          },
+                          [_vm._v("Download")]
+                        ),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "uppercase" }, [
+                          _c("em", [
+                            _vm._v(
+                              "Language: " + _vm._s(book.language.language)
+                            )
                           ])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "card-action" },
-                        [
-                          _c("span", [
-                            _vm._v(_vm._s(video.videos.length) + " videos")
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "router-link",
-                            {
-                              attrs: {
-                                to: {
-                                  name: "course",
-                                  params: { coursename: video.coursename }
-                                }
-                              }
-                            },
-                            [
-                              _c("span", { staticClass: "right" }, [
-                                _c(
-                                  "i",
-                                  { staticClass: "material-icons smaller" },
-                                  [_vm._v("play_circle_outline")]
-                                ),
-                                _vm._v(" preview")
-                              ])
-                            ]
+                        ]),
+                        _vm._v(" "),
+                        _c("h6", { staticClass: "grey-text" }, [
+                          _vm._v(
+                            "\n                                    " +
+                              _vm._s(book.description) +
+                              "\n                                "
                           )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ]
-              )
-            }),
-            0
-          )
-        ]),
-        _vm._v(" "),
-        _c("section", { staticClass: "books" }, [
-          _vm._m(2),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "rowed" },
-            _vm._l(_vm.books, function(book) {
-              return _c("div", { key: book.id, staticClass: "column3" }, [
-                _c("img", {
-                  staticClass: "responsive-image",
-                  attrs: { src: "/books/images/" + book.image, width: "100" }
-                }),
-                _vm._v(" "),
-                _c("a", { attrs: { href: "books/path/" + book.path } }, [
-                  _c("p", [_vm._v(_vm._s(book.name))])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col l4 s12" }, [
-                  _c("p", { staticClass: "uppercase" }, [
-                    _vm._v("Language: " + _vm._s(book.language.language))
-                  ]),
-                  _vm._v(" "),
-                  _c("h6", { staticClass: "grey-text" }, [
-                    _vm._v(
-                      "\n                            " +
-                        _vm._s(book.description) +
-                        "\n                        "
-                    )
-                  ])
-                ])
+                        ])
+                      ])
+                    ])
+                  }),
+                  0
+                )
               ])
-            }),
-            0
-          )
-        ])
+            ])
       ])
     ])
   ])
@@ -39259,12 +39454,39 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "preloader-wrapper small active",
+        staticStyle: { top: "250px" }
+      },
+      [
+        _c("div", { staticClass: "spinner-layer spinner-red-only" }, [
+          _c("div", { staticClass: "circle-clipper left" }, [
+            _c("div", { staticClass: "circle" })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "gap-patch" }, [
+            _c("div", { staticClass: "circle" })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "circle-clipper right" }, [
+            _c("div", { staticClass: "circle" })
+          ])
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("section", { staticClass: "library-banner" }, [
       _c("h1", [_vm._v("Library")]),
       _vm._v(" "),
       _c("p", { staticClass: "lead" }, [
         _vm._v(
-          "\n                    Our Wealth of books and videos to feed your mind with daily motivation and guidance.\n                "
+          "\n                        Our Wealth of books and videos to feed your mind with daily motivation and guidance.\n                    "
         )
       ])
     ])
@@ -39273,7 +39495,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("h4", [_vm._v("Courses")])])
+    return _c("div", [_c("h4", [_vm._v("Videos")])])
   },
   function() {
     var _vm = this

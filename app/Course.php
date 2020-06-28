@@ -8,7 +8,7 @@ class Course extends Model
 {
     protected $fillable = [
         'coursename', 'category_id', 'description', 'requirements',
-        'about', 'language', 'to_learn', 'image'
+         'language_id', 'to_learn', 'image'
     ];
     /**
      * A coursetitle have many videos
@@ -24,5 +24,9 @@ class Course extends Model
     public function category() 
     {
         return $this->belongsTo(\App\Category::class);
+    }
+    public function language() 
+    {
+        return $this->belongsTo(\App\Language::class);
     }
 }

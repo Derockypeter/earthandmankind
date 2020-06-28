@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Course;
 use App\Video;
+use Validator;
+use Str;
 
 class CourseController extends Controller
 {
@@ -16,7 +18,7 @@ class CourseController extends Controller
             'coursename' => 'required',
             'requirements' => 'required',
             'about' => 'required',
-            'language' => 'required',
+            'language_id' => 'required',
             'to_learn' => 'required',
             'preview' => 'nullable',
             'description' => 'required',
@@ -44,14 +46,14 @@ class CourseController extends Controller
                 'description' => $request->description,
                 'to_learn' => $request->to_learn,
                 'requirements' => $request->requirements,
-                'about' => $request->about,
-                'language' => $request->language,
+                'language_id' => $request->language_id,
                 'image' => $imageToSave
             ])->videos()->updateOrCreate([
                 'preview' => $request->preview,
                 'video' => $inputVideo,
                 'name' => $request->name,
                 'section' => $request->section,
+                'about' => $request->about,
             ]);
             return response()->json(['course' => $video]);
         }       
@@ -66,7 +68,7 @@ class CourseController extends Controller
         foreach ($course_id_decode as $key => $value) {
             $value->id;
         }
-        $course = $courses::where([['coursename', $title]])->get();
+        $course = $courses::where([['coursename', $title]])->with('language', 'videos')->get();
         
         $vidpreview = $video->where([
             ['preview', 'true'],

@@ -18,6 +18,7 @@ class CreateVideosTable extends Migration
             $table->string('video');
             $table->enum('preview',['true', 'false'])->default('false')->nullable();
             $table->string('section');
+            $table->string('about');
             $table->string('name');
             $table->unsignedBigInteger('course_id');
             $table->timestamps();

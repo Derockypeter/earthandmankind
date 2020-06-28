@@ -75,12 +75,36 @@ class PostController extends Controller
 			return 0;
 		}
     }
-    // Getting all the post
+    // Getting all the post for admin
     public function getAllPost()
     {
         $posts = Post::with('language');
         if($posts){
             $allPost = $posts->latest()->simplePaginate(10);
+		    return response()->json($allPost);
+		}
+		else{
+			return 0;
+		}
+    }
+    // Getting only default post for user view
+    public function getDefaultPosts()
+    {
+        $posts = Post::where('language_id', 1)->with('language');
+        if($posts){
+            $allPost = $posts->latest()->simplePaginate(9);
+		    return response()->json($allPost);
+		}
+		else{
+			return 0;
+		}
+    }
+    // Post By Language
+    public function getPostsByLanguage($language_id)
+    {
+        $posts = Post::where('language_id', $language_id)->with('language');
+        if($posts){
+            $allPost = $posts->latest()->get();
 		    return response()->json($allPost);
 		}
 		else{
@@ -186,5 +210,11 @@ class PostController extends Controller
 		else{
 			return 0;
 		}
-	}
+    }
+    
+    // Images folder here 
+    public function uploadImageForPost(Request $request)
+    {
+        print_r($request->all);
+    }
 }

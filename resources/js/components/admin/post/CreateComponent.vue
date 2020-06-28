@@ -5,6 +5,7 @@
                 <center>
                     <h2>Create New Post</h2>
                     <div v-if="message" class="alert">{{ message }}</div>
+                   
                     <div class="row">
                         <form class="col s12" @submit="publishPost">
                             <div class="row">
@@ -20,7 +21,12 @@
                             </div>
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <textarea id="body" class="materialize-textarea" v-model="post.body" placeholder="Type post" required></textarea>
+                                   <tinymce v-model="post.body"
+                                        :plugins="myPlugins" 
+                                        :toolbar ="myToolbar1"
+                                        :init="myInit"
+                                    >
+                                    </tinymce>   
                                 </div>
                             </div>
                             <div class="row">
@@ -44,6 +50,8 @@
 </template>
 
 <script>
+    import Editor from '@tinymce/tinymce-vue';
+    
   export default {
     data() {
 		return {
@@ -55,14 +63,59 @@
                 language_id: '',
                 featured: '',
             },
-			options: [],
+            options: [],
+            myToolbar1: 'undo redo | bold italic underline preview | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+            myPlugins: "link image code preview imagetools insertdatetime paste spellchecker autosave autoresize",
+            myInit: {
+                images_upload_url: '/api/upload-image',
+                // images_dataimg_filter: function(img) {
+                //     return false;
+                //     return img.hasAttribute('internal-blob');
+                // },
+                // convert_urls : false,
+                // height:500,
+                automatic_uploads: false, 
+                images_upload_base_path: '/../../',
+                // relative_urls : false, 
+                //     images_upload_handler: function (blobInfo, success, failure) {
+                //         var xhr, formData;
+                //         xhr = new XMLHttpRequest();
+                //         xhr.withCredentials = false;
+                //         xhr.open('POST', '/api/upload-image');
+                //         console.log('here')
+                //         var token = document.head.querySelector("[name=csrf-token]").content;
+                //         xhr.setRequestHeader("X-CSRF-Token", token);
+                //         xhr.onload = function() {
+                //         var json;
+
+                //         if (xhr.status != 200) {
+                //             failure('HTTP Error: ' + xhr.status);
+                //             return;
+                //         }
+                //         json = JSON.parse(xhr.responseText);
+
+                //         if (!json || typeof json.location != 'string') {
+                //             failure('Invalid JSON: ' + xhr.responseText);
+                //             return;
+                //         }
+                //         success(json.location);
+                //         };
+                //         formData = new FormData();
+                //         formData.append('file', blobInfo.blob(), blobInfo.filename());
+                //         xhr.send(formData);
+                //     }   
+            },
 		}
+    },
+    components: {
+         'tinymce': Editor // <- Important part
     },
     created() {
 		let uri = '/api/languages';
 		this.axios.get(uri).then(response => {
             this.options = response.data;
-		});
+        });
+
     },
     methods: {
 		publishPost(evt) {
@@ -124,7 +177,8 @@
     
             }
 			
-		},
+        },
+        
     }
   }
 </script>

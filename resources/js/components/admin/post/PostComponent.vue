@@ -23,17 +23,22 @@
                     <router-link :to="{ name: 'create-post' }" class="btn grey right">Create Post</router-link>
                 </div>
             </div><br />
-            <div class="card blue-grey darken-1" v-for="post in posts" :key="post.id">
-                <div class="card-content white-text">
-                    <span class="card-title">{{ post.title }}</span>
-                    <span class="card-title">{{ post.language.language }}</span>
-                    <p >{{ post.body }}</p>
-                </div>
-                <div class="card-action">
-                    <router-link :to="{name: 'edit-post', params: { id: post.id }}" class="btn cyan pulse"><i class="material-icons">edit</i></router-link>
-                    <button class="btn red" :disabled="saving" @click.prevent="deletePost(post.id)"><i class="material-icons">delete</i></button>
+            <div class="rowed">
+                <div class="column" v-for="post in posts" :key="post.id">
+                    <div class="card blue-grey darken-1" >
+                        <div class="card-content white-text">
+                            <span class="card-title">{{ post.title.substr(0, 10) }}</span>
+                            <span class="card-title">{{ post.language.language }}</span>
+                            <p>{{synopsis(post.body)}}</p>
+                        </div>
+                        <div class="card-action">
+                            <router-link :to="{name: 'edit-post', params: { id: post.id }}" class="btn cyan pulse"><i class="material-icons">edit</i></router-link>
+                            <button class="btn red" :disabled="saving" @click.prevent="deletePost(post.id)"><i class="material-icons">delete</i></button>
+                        </div>
+                    </div>
                 </div>
             </div>
+            
             <pagination 
                 :meta_data="meta_data"
                 v-on:next="fetchPosts">
@@ -42,7 +47,7 @@
     </div>
 </template>
 <style scoped>
- 
+       
  
 </style>
 <script>
@@ -102,7 +107,12 @@
                     console.error.err.response
                     this.saving = false
                 })
-            }
+            },
+            synopsis (inputString){
+                var div = document.createElement('div')
+                div.innerHTML = inputString
+                return div.textContent.slice(0, 250)
+            },
         },
 
     }

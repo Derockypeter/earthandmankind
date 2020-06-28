@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Video extends Model
 {
     protected $fillable = [
-        'video', 'preview', 'name', 'section'
+        'video', 'preview', 'name', 'section', 'about',
     ];
 
     /**

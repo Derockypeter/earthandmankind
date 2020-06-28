@@ -16,4 +16,8 @@ class Language extends Model
     {
         return $this->hasOne(\App\Book::class);
     }
+    public function course() 
+    {
+        return $this->hasOne(\App\Course::class);
+    }
 }

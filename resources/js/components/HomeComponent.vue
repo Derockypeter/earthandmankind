@@ -51,7 +51,6 @@
             let book_uri = '/api/books';
             this.axios.get(book_uri).then(response => {
                 this.books = response.data.data;
-                console.log(response.data)
             })
             .catch(err => 
                 console.error.response.data
@@ -60,7 +59,6 @@
             let featuredPost = `/api/featuredPost`;
             this.axios.get(featuredPost).then(response => {
                 this.featurePosts = response.data;
-                console.log(response.data)
             })
             .catch(err => 
                 console.log(err.response)

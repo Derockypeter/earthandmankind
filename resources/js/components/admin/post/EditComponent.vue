@@ -20,7 +20,12 @@
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
-                                <textarea id="description" v-model="post.body" class="validate materialize-textarea"></textarea>
+                                <tinymce v-model="post.body"
+                                    :plugins="myPlugins" 
+                                    :toolbar ="myToolbar1"
+                                    :init="myInit"
+                                >
+                                </tinymce> 
                             </div>
                         </div>
                         <div class="row">
@@ -47,6 +52,8 @@
     </div>
 </template>
 <script>
+    import Editor from '@tinymce/tinymce-vue';
+
     export default {
         data() {
             return {
@@ -57,7 +64,42 @@
                     // image: {}
                 },
                 options: [],
+                myToolbar1: 'undo redo | bold italic underline preview | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+                myPlugins: "link image code preview imagetools insertdatetime paste spellchecker autosave",
+                myInit: {
+                    automatic_uploads: false, 
+                    images_upload_url: '/api/upload-image',  
+                    // images_upload_handler: function (blobInfo, success, failure) {
+                    //     var xhr, formData;
+                    //     xhr = new XMLHttpRequest();
+                    //     xhr.withCredentials = false;
+                    //     xhr.open('POST', '/api/upload-image');
+                    //     var token = document.head.querySelector("[name=csrf-token]").content;
+                    //     xhr.setRequestHeader("X-CSRF-Token", token);
+                    //     xhr.onload = function() {
+                    //     var json;
+
+                    //     if (xhr.status != 200) {
+                    //         failure('HTTP Error: ' + xhr.status);
+                    //         return;
+                    //     }
+                    //     json = JSON.parse(xhr.responseText);
+
+                    //     if (!json || typeof json.location != 'string') {
+                    //         failure('Invalid JSON: ' + xhr.responseText);
+                    //         return;
+                    //     }
+                    //     success(json.location);
+                    //     };
+                    //     formData = new FormData();
+                    //     formData.append('file', blobInfo.blob(), blobInfo.filename());
+                    //     xhr.send(formData);
+                    // } 
+                },
             }
+        },
+        components: {
+            'tinymce': Editor // <- Important part
         },
         created() {
             let uri = `/api/editPost/${this.$route.params.id}`;

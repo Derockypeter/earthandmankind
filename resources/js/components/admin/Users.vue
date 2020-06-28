@@ -37,10 +37,5 @@
             this.axios.get('/api/users/').then(response => {this.users = response.data
             console.log(response.data)}) 
         },
-        computed: {
-          removeTime(){
-
-          }  
-        },
     }
     </script>

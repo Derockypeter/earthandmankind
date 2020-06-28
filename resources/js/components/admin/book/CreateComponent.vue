@@ -2,6 +2,7 @@
     <div class="container">
         <div class="articles">
             <div class="main-container">
+                <h1>Create A new Book</h1>
                 <div v-if="message" class="alert">{{ message }}</div>
                 <div class="row">
                     <form class="col s12" @submit="publishBook" enctype="multipart/form-data">

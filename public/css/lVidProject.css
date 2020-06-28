@@ -3,6 +3,7 @@ html, body {
     border: 0;
     background-color: #eeeeee;
 }
+
 #app {
     font-family: Roboto,segoe ui,Helvetica,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol;
     -webkit-font-smoothing: antialiased;
@@ -13,10 +14,38 @@ html, body {
     width: 95%;
     padding: 0;
 }
-
+.column {
+    float: left;
+    width: 33.33%;
+    padding: 5px;
+    /* height: 350px; */
+}
+.rowed::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+@media screen and (max-width: 500px) {
+    .column {
+        width: 100%;
+    }
+    .column3 {
+        width: 100%;
+    }
+}
 @media only screen and (min-width: 1200px) {
     html {
         font-size: 17px;
+    }
+}
+@media only screen and (min-width: 600px) {
+    .column {
+        width: 50%;
+    }
+}
+@media only screen and (min-width: 768px) {
+    .column {
+        width: 33.33%;
     }
 }
 @media only screen and (min-width: 993px){
@@ -43,6 +72,15 @@ html, body {
     margin-bottom: 1rem;
     /* width: 50%; */
     border: 1px solid darkRed;
+    border-radius: 5px;
+}
+.success {
+    background-color: #388e3c;
+    color: rgb(241, 237, 237);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    /* width: 50%; */
+    border: 1px solid rgb(48, 231, 57);
     border-radius: 5px;
 }
 .lead{

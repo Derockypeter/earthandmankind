@@ -9,10 +9,10 @@
 								<h1>{{video.coursename}}</h1>
 								<div class="about">{{video.about}}</div>
 								<span class="mr3">Created by Mankind</span>
-								<span class="mr3">20000 students enrolled</span>
-								<span class="mr3">Last Updated on 2/2020</span>
+								<!-- <span class="mr3">20000 students enrolled</span> -->
+								<span class="mr3">Last Updated on {{video.updated_at.substr(0,10)}}</span>
 								<span class="mr3">
-									<i class="material-icons language">language</i>English
+									<i class="material-icons language">language</i>{{video.language.language}}
 								</span>
 								
 							</div>
@@ -29,15 +29,13 @@
 										<div class="bottomleft">Preview this Course</div>
 									</div>
 									<div class="card-content">
-										<p class="price">3,500</p>
-
 										<p class="center">
-											<button class="btn-large red text-white">Buy this course</button>
+											<button class="btn-large red text-white">Watch this Video</button>
 										</p>
 									</div>
-									<div class="card-action">
+									<!-- <div class="card-action">
 									<a href="#">This is a link</a>
-									</div>
+									</div> -->
 								</div>
 							</div>
 						</div>
@@ -47,25 +45,8 @@
 					<div class="col s12 m7 to_learn">
 						<h6>By the end of this course, You will learn</h6>
 						<div class="col s12 m6 l6">
-							<p>
-								<i class="material-icons">check</i>Lorem ipsum
-							</p>
-							<p>
-								<i class="material-icons">check</i>Lorem ipsum
-							</p>
-							<p>
-								<i class="material-icons">check</i>Lorem ipsum
-							</p>
-						</div>
-						<div class="col s12 m6 l6">
-							<p>
-								<i class="material-icons">check</i>Lorem ipsum
-							</p>
-							<p>
-								<i class="material-icons">check</i>Lorem ipsum
-							</p>
-							<p>
-								<i class="material-icons">check</i>Lorem ipsum
+							<p v-for="to_learn in to_learns" :key="to_learn.index">
+								<i class="material-icons">check</i>{{to_learn}}
 							</p>
 						</div>
 					</div>
@@ -75,7 +56,7 @@
 							<accordion-item>
 								<!-- This slot will handle the title/header of the accordion and is the part you click on -->
 								<template slot="accordion-trigger">
-									<h6>Item 1</h6>
+									<h6>Section {{video.videos.section}}</h6>
 								</template>
 								<!-- This slot will handle all the content that is passed to the accordion -->
 								<template slot="accordion-content">
@@ -154,7 +135,8 @@ export default {
       videos: [],
       previews: [],
       allVideo: [],
-      isLoggedIn: localStorage.getItem("manKind.jwt")
+	  isLoggedIn: localStorage.getItem("manKind.jwt"),
+	  to_learns: [],
     };
   },
   components: {
@@ -166,10 +148,14 @@ export default {
     this.axios
       .get(video_uri)
       .then(response => {
+		let a = response.data.course[0].to_learn;
+		this.to_learns = a.replace(/([.?!])\s*(?=[A-Z])/g, "$1|").split("|");
+		console.log(response)
         this.videos = response.data.course;
         this.previews = response.data.preview[0].videoName;
-        this.allVideo = response.data.othervids;
-        console.log(response.data, this.previews);
+		this.allVideo = response.data.othervids;
+		
+        
       })
       .catch(err => console.log(err.response));
   },
@@ -179,7 +165,9 @@ export default {
   methods: {
    
   },
-  computed: {}
+  computed: {
+	  
+  }
 };
 </script>
 <style scoped>

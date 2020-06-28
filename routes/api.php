@@ -19,6 +19,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/register', 'AuthController@register');
 Route::post('/login', 'AuthController@login');
+Route::post('/adminRegister', 'AuthController@adminRegister');
+
+
+
+Route::get('/login/facebook', 'SocialController@redirectToProvider');
+Route::get('/auth/login/facebook/callback', 'SocialController@handleProviderCallback');
 
 // BOOKS
 Route::get('/books', 'BookController@getAllBooks');
@@ -36,10 +42,20 @@ Route::get('/post/{title}', 'PostController@byTitle');
 Route::get('/publishedPosts', 'PostController@getPosts');
 Route::get('/post_id/{id}', 'PostController@getPost');
 Route::get('/featuredPost', 'PostController@featuredPost');
+Route::get('/getPostsByLanguage/{language_id}', 'PostController@getPostsByLanguage');
+Route::get('/getDefaultPosts', 'PostController@getDefaultPosts');
+Route::post('/upload-image', 'PostController@uploadImageForPost');
+
+
+
+
 
 // CONTACT US
 Route::get('contact-us', 'ContactUsController@contactUS');
 Route::post('/contact-us', ['as'=>'contactus.store','uses'=>'ContactUsController@contactSaveData']);
+// LANGUAGE
+Route::get('/languages', 'LanguageController@language');
+
 
 
 Route::group([    
@@ -54,24 +70,19 @@ Route::group([
 
 Route::post('/savePost', 'PostController@savePost');
 
+Route::post('/saveVideo', 'CourseController@store');
 
 
 Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/users','UserController@index');
     Route::get('users/{user}','UserController@show');
 
-    
-   
-    
-});
-
- // VIDEOS
+     // VIDEOS
  Route::put('/updateVideo/{video_id}', 'VideoController@editVid');
  Route::get('/video/{video_id}', 'VideoController@video'); //Viewing a single video FOR SUBSCRIBED USER
  Route::delete('/deleteVideo/{video_id}', 'VideoController@delete');
 
  // COURSE
- Route::post('/saveVideo', 'CourseController@store');
  Route::get('/editcourse/{id}', 'CourseController@editCourse');
  Route::put('/updatecourse/{id}', 'CourseController@updateCourse');
  Route::delete('/deletecourse/{id}', 'CourseController@deleteCourse');
@@ -100,10 +111,14 @@ Route::delete('/delComment', 'CommentController@deleteComment');
 
 // LANGUAGES
 Route::post('/language-save', 'LanguageController@store');
-Route::get('/languages', 'LanguageController@language');
 Route::get('/edit/{id}', 'LanguageController@edit');
 Route::put('/update/{id}', 'LanguageController@update');
 Route::delete('/delLang/{id}', 'LanguageController@delete');
+
+   
+    
+});
+
 
 
 

@@ -2,17 +2,30 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueAxios from 'vue-axios'
 import axios from 'axios'
-Vue.use(VueAxios, axios)
-Vue.use(VueRouter)
 
-import App from './components/AppComponent.vue'
-
+import VueSocialSharing from 'vue-social-sharing'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import { faFacebook, faTwitter, faWhatsapp } from '@fortawesome/free-brands-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import 'materialize-css/dist/js/materialize.min'
 import M from 'materialize-css/dist/css/materialize.min.css'
 import 'materialize-css/dist/fonts/material-icons.css'
+
+library.add(faFacebook, faTwitter, faEnvelope, faWhatsapp)
+Vue.use(VueAxios, axios)
+Vue.use(VueRouter)
+Vue.use(VueSocialSharing);
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.use(M)
+
+Vue.config.productionTip = false
+
+import App from './components/AppComponent.vue'
+
 import Dashboard from './components/user/Dashboard.vue'
 
+import AdminRegister from './components/admin/RegisterComponent.vue'
 import Home from './components/HomeComponent.vue'
 import Library from './components/LibraryComponent.vue'
 import Article from './components/BlogComponent.vue'
@@ -23,6 +36,8 @@ import About from './components/AboutUsComponent.vue'
 import Login from './components/LoginComponent.vue'
 import Register from './components/RegisterComponent.vue'
 import Video from './components/Video.vue'
+import Password from './components/PasswordResetForm.vue'
+import FBCallback from './components/FBCallback.vue'
 
 // REUSABLE
 import NotFound from '../js/components/reusable/NotFound.vue'
@@ -86,6 +101,11 @@ const router = new VueRouter ({
                 requiresAuth: true,
                 is_user: true
             }
+        },
+        {
+            path: '/registerasAdminPortal',
+            name: 'adminRegex',
+            component: AdminRegister
         },
         {
             path: '/admin/:page',
@@ -235,6 +255,18 @@ const router = new VueRouter ({
             component: Register,
             props: {}
         },
+        {
+            path: '/password_reset/:token',
+            name: 'reset_password',
+            component: Password,
+            props: {}
+        },
+        {
+            path: '/api/auth/login/facebook/callback?code',
+            name: 'fbLogin',
+            component: FBCallback,
+            props: {}
+        },
         {   path: '/404',
             name: '404', 
             component: NotFound 
@@ -244,6 +276,7 @@ const router = new VueRouter ({
         },
 	],
 })
+
     router.beforeEach((to, from, next) => {
         // to and from are both route objects. must call `next`.
         if (to.matched.some(record => record.meta.requiresAuth)) {
@@ -277,7 +310,7 @@ const router = new VueRouter ({
         else {
             next()
         }
-	})
+    })
 const app = new Vue({
 	el: '#app',
 	components: { App },

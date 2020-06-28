@@ -17,7 +17,6 @@ class CreateCoursesTable extends Migration
             $table->id();
             $table->string('coursename');
             $table->string('requirements');
-            $table->string('about');
             $table->unsignedBigInteger('language_id');
             $table->text('to_learn');
             $table->text('description');

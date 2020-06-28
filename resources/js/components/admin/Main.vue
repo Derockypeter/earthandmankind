@@ -46,7 +46,7 @@
             this.axios.get('/api/posts/').then(response => this.posts = response.data.data)
             this.axios.get('/api/languages/').then(response => this.languages = response.data)
             this.axios.get('/api/books/').then(response => this.books = response.data.data)
-            this.axios.get('/api/getAllVideos/').then(response => this.videos = response.data)
+            this.axios.get('/api/courses/').then(response => this.videos = response.data)
         }
     }
     </script>

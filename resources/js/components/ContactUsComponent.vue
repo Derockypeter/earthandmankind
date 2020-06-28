@@ -17,10 +17,10 @@
                 <div class="row">
                     <form class="col s12" :disabled="saving" @submit="sendMail">
                         <div class="row">
-                            <div class="input-field col s6">
+                            <div class="input-field col s12">
                                 <input type="email" v-model="mail.email" required name="email" placeholder="Your Email *" > 
                             </div>
-                            <div class="input-field col s6">
+                            <div class="input-field col s12">
                                 <input type="text" v-model="mail.name" required name="name" placeholder="Your Name *" >
                             </div>
                         </div>
@@ -65,7 +65,6 @@ export default {
             this.saving = true
             this.axios.post('api/contact-us', this.mail)
             .then(response => {
-                console.log(response);
                 this.success = response.data[0]
                 setTimeout(() => {
                     this.$router.go()

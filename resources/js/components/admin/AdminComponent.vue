@@ -5,7 +5,7 @@
                 <div class="nav-wrapper">
                     <ul id="nav-mobile" class="center">
                         <li><a class="active" @click="setComponent('main')">Dashboard</a></li>
-                        <li><a @click="setComponent('languages')">languages</a></li>
+                        <li><a @click="setComponent('languages')">Languages</a></li>
                         <li><a @click="setComponent('posts')">Posts</a></li>
                         <li><a @click="setComponent('videos')">Videos</a></li>
                         <li><a @click="setComponent('books')">Books</a></li>
