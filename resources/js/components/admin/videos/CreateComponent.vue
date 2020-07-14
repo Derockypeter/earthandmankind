@@ -4,7 +4,7 @@
         <div class="articles">
             <div class="main-container">
                 <center>
-                    <h2>Create New Video</h2>
+                    <h2>Create New Course</h2>
                     <div v-if="message" class="alert">{{ message }}</div>
                     <div class="row">
                         <form class="col s12" @submit="createVideo" enctype="multipart/form-data" novalidate>
@@ -58,7 +58,7 @@
                                     <div class="input-field col s6">
                                         <select v-model="videos.section" required class="browser-default">
                                             <option value="" selected>Which section will I attach this video</option>
-                                            <option v-for="section in sections" v-bind:value="section.id" :key="section.id">{{section.text}}</option>
+                                            <option v-for="section in sections" v-bind:value="section.value" :key="section.id">{{section.text}}</option>
                                         </select>
                                     </div>
                                 </div>

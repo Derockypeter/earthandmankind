@@ -28,25 +28,22 @@
                                     name="coursename"
                                     required type="text" class="validate">
                             </div>
-                             <div class="input-field col s6">
-                                <input id="input-1"
-                                    v-model="videos.name"
-                                    name="coursename"
-                                    required type="text" class="validate">
-                            </div>
-                        </div>
-                        <div class="row">
                             <div class="input-field col s6">
                                 <select v-model="videos.language_id" class="browser-default">
                                     <option value="" disabled selected>Select Language</option>
                                     <option v-for="option in options" :key="option.id" v-bind:value="option.id">{{ option.language }}</option>
                                 </select>
                             </div>
-                            <div class="input-field col s6"><!--Work on this-->
-                                <select v-model="videos.section" required class="browser-default">
-                                    <option value="" disabled selected>Which section will I attach this video</option>
-                                    <option disabled v-for="section in sections" v-bind:value="section.id" :key="section.id" >{{section.text}}</option>
-                                </select>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="input-1"
+                                    v-model="videos.requirements"
+                                    name="coursename"
+                                    required type="text" class="validate">
+                            </div>
+                            <div class="input-field col s6">
+                                <textarea id="description" class="materialize-textarea" required placeholder="Please enter a description for the course" v-model="videos.to_learn" ></textarea>
                             </div>
                         </div>
                         <div class="row">
@@ -109,9 +106,7 @@
                 this.axios.put(uri, this.videos).then((response) => {
                     if(response.data === 1){
                         this.$router.push({name: 'admin'});
-                    }
-                    else {
-                        this.message = response.error
+                        M.toast({html: "Course Updated Successfuly"})
                     }
                 }).catch(error => {
                     this.message = error 

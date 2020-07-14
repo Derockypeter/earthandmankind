@@ -8,7 +8,7 @@
 							<div class="col s12 m7 l8 course">
 								<h1>{{video.coursename}}</h1>
 								<div class="about">{{video.about}}</div>
-								<span class="mr3">Created by Mankind</span>
+								<span class="mr3">Created by Admin</span>
 								<!-- <span class="mr3">20000 students enrolled</span> -->
 								<span class="mr3">Last Updated on {{video.updated_at.substr(0,10)}}</span>
 								<span class="mr3">
@@ -60,63 +60,22 @@
 								</template>
 								<!-- This slot will handle all the content that is passed to the accordion -->
 								<template slot="accordion-content">
-									<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
-									<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
-									<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
-									<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
-									<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
-									<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
-								</template>
-							</accordion-item>
-
-							<accordion-item>
-								<!-- This slot will handle the title/header of the accordion and is the part you click on -->
-								<template slot="accordion-trigger">
-									<h6>Item 2</h6>
-								</template>
-									<!-- This slot will handle all the content that is passed to the accordion -->
-								<template slot="accordion-content">
-									<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
-								</template>
-							</accordion-item>
-
-							<accordion-item>
-								<!-- This slot will handle the title/header of the accordion and is the part you click on -->
-								<template slot="accordion-trigger">
-									<h6>Item 3</h6>
-								</template>
-								<!-- This slot will handle all the content that is passed to the accordion -->
-								<template slot="accordion-content">
-									<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
+									<span v-for="video in  video.videos" :key="video.id">
+										{{video.video}}
+									</span>
 								</template>
 							</accordion-item>
 						</accordion>
 					</div>
 					<div class="col s12 m7 l7 requirement">
 						<h6>Requirements</h6>
-						<ul style="list-style-type: circle">
-							<li>Requirements</li>
-							<li>Requirements</li>
-							<li>Requirements</li>
+						<ul style="list-style-type: circle"  v-for="requirement in requirements" :key="requirement.id">
+							<li>{{requirement}}</li>
 						</ul>
 					</div>
 					<div class="col s12 m7 l7" id="more-info">
 						<h6>Description</h6>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita quia ad nulla ipsum culpa dolor soluta hic nobis explicabo aliquid sapiente nemo nesciunt cum, error aperiam accusantium quibusdam dolorum impedit.
-					</div>
-					<div class="col s12 m7 l7">
-						<h6>By the end of this course, You will learn</h6>
-						<p>
-							<i class="material-icons">check</i>Lorem ipsum
-						</p>
-						<p>
-							<i class="material-icons">check</i>Lorem ipsum
-						</p>
-						<p>
-							<i class="material-icons">check</i>Lorem ipsum
-						</p>
-						<a href="#">+ See more</a>
-
+						{{video.description}}
 					</div>
 				</div>
 		
@@ -137,6 +96,7 @@ export default {
       allVideo: [],
 	  isLoggedIn: localStorage.getItem("manKind.jwt"),
 	  to_learns: [],
+	  requirements: [],
     };
   },
   components: {
@@ -150,6 +110,8 @@ export default {
       .then(response => {
 		let a = response.data.course[0].to_learn;
 		this.to_learns = a.replace(/([.?!])\s*(?=[A-Z])/g, "$1|").split("|");
+		let b = response.data.course[0].requirements;
+		this.requirements = b.replace(/([.?!])\s*(?=[A-Z])/g, "$1|").split("|");
 		console.log(response)
         this.videos = response.data.course;
         this.previews = response.data.preview[0].videoName;

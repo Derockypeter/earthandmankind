@@ -80,6 +80,7 @@ Route::group(['middleware' => 'auth:api'], function(){
      // VIDEOS
  Route::put('/updateVideo/{video_id}', 'VideoController@editVid');
  Route::get('/video/{video_id}', 'VideoController@video'); //Viewing a single video FOR SUBSCRIBED USER
+ Route::post('/addVideo', 'VideoController@storeVideo');
  Route::delete('/deleteVideo/{video_id}', 'VideoController@delete');
 
  // COURSE

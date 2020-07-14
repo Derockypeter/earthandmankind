@@ -120,16 +120,16 @@ class CourseController extends Controller
         $validation = Validator::make($request->all(), [
             'coursename' => 'required',
             'description' => 'required',
-            'name' => 'required',
-            'section' => 'required',
-            'language' => 'required'
+            'to_learn' => 'required',
+            'requirements' => 'required',
+            'language_id' => 'required',
         ]);
         if($validation->fails())
         {
             return response()->json(['error' => $validation->errors()->all(), ]);
         }
         else {
-            $updateInput = $request->only(['language', 'coursename', 'description', 'name', 'section']);
+            $updateInput = $request->only(['language_id', 'coursename', 'description', 'requirements', 'to_learn']);
             $course = Course::where('id', $id)->update($updateInput);
             return response()->json($course);
         }

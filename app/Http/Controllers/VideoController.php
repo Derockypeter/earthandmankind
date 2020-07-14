@@ -10,7 +10,36 @@ use Validator;
 
 class VideoController extends Controller
 {
-   
+    // Stores a new video for a course
+    public function storeVideo(Request $request)
+    {
+        $validation = Validator::make($request->all(), [
+            'video.*' => 'required|mimetypes:video/x-ms-asf,video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/quicktime,video/x-msvideo,video/x-ms-wmv,video/avi|max:200000',
+            'about' => 'required',
+            'section' => 'required',
+            'name' => 'required',
+            'course_id' => 'required',
+            'preview' => 'required',
+        ]);
+        if($validation->fails())
+        {
+            return response()->json(['error' => $validation->errors()->all(), ]);
+        }
+        else{ 
+            $inputVideo = $request->video->getClientOriginalName();
+            $request->video->move(public_path('videos'), $inputVideo);
+            
+            $video = Video::updateOrCreate([
+                'preview' => $request->preview,
+                'video' => $inputVideo,
+                'name' => $request->name,
+                'section' => $request->section,
+                'about' => $request->about,
+                'course_id' => $request->course_id
+            ]);
+            return response()->json(['video' => $video]);
+        }  
+    }
     // Fetch a single video
     public function video($id)
     {

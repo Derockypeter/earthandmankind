@@ -17075,47 +17075,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -17126,7 +17085,8 @@ __webpack_require__.r(__webpack_exports__);
       previews: [],
       allVideo: [],
       isLoggedIn: localStorage.getItem("manKind.jwt"),
-      to_learns: []
+      to_learns: [],
+      requirements: []
     };
   },
   components: {
@@ -17140,6 +17100,8 @@ __webpack_require__.r(__webpack_exports__);
     this.axios.get(video_uri).then(function (response) {
       var a = response.data.course[0].to_learn;
       _this.to_learns = a.replace(/([.?!])\s*(?=[A-Z])/g, "$1|").split("|");
+      var b = response.data.course[0].requirements;
+      _this.requirements = b.replace(/([.?!])\s*(?=[A-Z])/g, "$1|").split("|");
       console.log(response);
       _this.videos = response.data.course;
       _this.previews = response.data.preview[0].videoName;
@@ -17353,7 +17315,7 @@ __webpack_require__.r(__webpack_exports__);
       user: null,
       languages: [],
       posts: [],
-      videos: [],
+      courses: [],
       books: [],
       users: []
     };
@@ -17374,7 +17336,7 @@ __webpack_require__.r(__webpack_exports__);
       return _this.books = response.data.data;
     });
     this.axios.get('/api/courses/').then(function (response) {
-      return _this.videos = response.data;
+      return _this.courses = response.data;
     });
   }
 });
@@ -18761,9 +18723,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      loaded: false,
       message: false,
       videos: {},
       sections: [{
@@ -18797,26 +18768,23 @@ __webpack_require__.r(__webpack_exports__);
         text: 'Section 10',
         value: '10'
       }],
-      options: [],
       saving: false
     };
   },
   created: function created() {
     var _this = this;
 
-    var uri = "/api/editcourse/".concat(this.$route.params.id);
-    this.axios.get(uri).then(function (response) {
-      setTimeout(function () {
-        _this.loaded = true;
-        _this.videos = response.data[0];
-        console.log(response);
-      }, 5000);
-    });
-    var uri2 = '/api/languages';
-    this.axios.get(uri2).then(function (response) {
-      _this.options = response.data;
-      console.log(response.data);
-    });
+    // let uri = `/api/editcourse/${this.$route.params.id}`;
+    //     this.axios.get(uri).then((response) => {
+    setTimeout(function () {
+      _this.loaded = true;
+    }, 5000); //     });
+    // let uri2 = '/api/languages';
+    // this.axios.get(uri2).then(response => {
+    //     this.options = response.data;
+    //     console.log(response.data)
+    // });
+
     M.AutoInit();
   },
   methods: {
@@ -18827,14 +18795,13 @@ __webpack_require__.r(__webpack_exports__);
       this.saving = true;
       this.videos.preview = false;
       var data = new FormData();
-      data.append('language_id', this.videos.language_id);
       data.append('video', this.videos.video);
-      data.append('coursename', this.videos.coursename);
-      data.append('description', this.videos.description);
       data.append('preview', this.videos.preview);
       data.append('section', this.videos.section);
+      data.append('about', this.videos.about);
       data.append('name', this.videos.name);
-      var uri = '/api/saveVideo';
+      data.append('course_id', this.$route.params.id);
+      var uri = '/api/addVideo';
       this.axios.post(uri, data).then(function (response) {
         M.toast({
           html: 'Video Added'
@@ -18845,10 +18812,14 @@ __webpack_require__.r(__webpack_exports__);
         });
       })["catch"](function (error) {
         _this2.message = error.response.data.message || 'Invalid';
+        _this2.saving = false;
       });
     },
     onVideoChange: function onVideoChange(event) {
       this.videos.video = event.target.files[0];
+    },
+    onImageChange: function onImageChange(event) {
+      this.videos.image = event.target.files[0];
     }
   }
 });
@@ -18925,7 +18896,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       saving: false,
       loaded: false,
-      videos: []
+      courses: []
     };
   },
   created: function created() {
@@ -18935,7 +18906,7 @@ __webpack_require__.r(__webpack_exports__);
     this.axios.get(uri).then(function (response) {
       setTimeout(function () {
         _this.loaded = true;
-        _this.videos = response.data;
+        _this.courses = response.data;
         console.log(response);
       }, 5000);
     })["catch"](function (err) {
@@ -18947,11 +18918,11 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       this.saving = true;
-      var uri = "/api/deleteVideo/".concat(id);
+      var uri = "/api/deleteCourse/".concat(id);
       this.axios["delete"](uri).then(function (response) {
         console.log(response);
 
-        _this2.videos.splice(_this2.videos.findIndex(function (video) {
+        _this2.courses.splice(_this2.courses.findIndex(function (video) {
           return video.id === id;
         }), 1);
 
@@ -19262,9 +19233,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -19334,8 +19302,10 @@ __webpack_require__.r(__webpack_exports__);
           _this2.$router.push({
             name: 'admin'
           });
-        } else {
-          _this2.message = response.error;
+
+          M.toast({
+            html: "Course Updated Successfuly"
+          });
         }
       })["catch"](function (error) {
         _this2.message = error;
@@ -24437,7 +24407,7 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("span", { staticClass: "mr3" }, [
-                    _vm._v("Created by Mankind")
+                    _vm._v("Created by Admin")
                   ]),
                   _vm._v(" "),
                   _c("span", { staticClass: "mr3" }, [
@@ -24524,79 +24494,20 @@ var render = function() {
                           ])
                         ]),
                         _vm._v(" "),
-                        _c("template", { slot: "accordion-content" }, [
-                          _c("span", [
-                            _vm._v(
-                              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("span", [
-                            _vm._v(
-                              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("span", [
-                            _vm._v(
-                              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("span", [
-                            _vm._v(
-                              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("span", [
-                            _vm._v(
-                              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("span", [
-                            _vm._v(
-                              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-                            )
-                          ])
-                        ])
-                      ],
-                      2
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "accordion-item",
-                      [
-                        _c("template", { slot: "accordion-trigger" }, [
-                          _c("h6", [_vm._v("Item 2")])
-                        ]),
-                        _vm._v(" "),
-                        _c("template", { slot: "accordion-content" }, [
-                          _c("span", [
-                            _vm._v(
-                              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-                            )
-                          ])
-                        ])
-                      ],
-                      2
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "accordion-item",
-                      [
-                        _c("template", { slot: "accordion-trigger" }, [
-                          _c("h6", [_vm._v("Item 3")])
-                        ]),
-                        _vm._v(" "),
-                        _c("template", { slot: "accordion-content" }, [
-                          _c("span", [
-                            _vm._v(
-                              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-                            )
-                          ])
-                        ])
+                        _c(
+                          "template",
+                          { slot: "accordion-content" },
+                          _vm._l(video.videos, function(video) {
+                            return _c("span", { key: video.id }, [
+                              _vm._v(
+                                "\n\t\t\t\t\t\t\t\t\t" +
+                                  _vm._s(video.video) +
+                                  "\n\t\t\t\t\t\t\t\t"
+                              )
+                            ])
+                          }),
+                          0
+                        )
                       ],
                       2
                     )
@@ -24607,11 +24518,36 @@ var render = function() {
               1
             ),
             _vm._v(" "),
-            _vm._m(2, true),
+            _c(
+              "div",
+              { staticClass: "col s12 m7 l7 requirement" },
+              [
+                _c("h6", [_vm._v("Requirements")]),
+                _vm._v(" "),
+                _vm._l(_vm.requirements, function(requirement) {
+                  return _c(
+                    "ul",
+                    {
+                      key: requirement.id,
+                      staticStyle: { "list-style-type": "circle" }
+                    },
+                    [_c("li", [_vm._v(_vm._s(requirement))])]
+                  )
+                })
+              ],
+              2
+            ),
             _vm._v(" "),
-            _vm._m(3, true),
-            _vm._v(" "),
-            _vm._m(4, true)
+            _c(
+              "div",
+              { staticClass: "col s12 m7 l7", attrs: { id: "more-info" } },
+              [
+                _c("h6", [_vm._v("Description")]),
+                _vm._v(
+                  "\n\t\t\t\t\t" + _vm._s(video.description) + "\n\t\t\t\t"
+                )
+              ]
+            )
           ])
         ])
       ])
@@ -24649,62 +24585,6 @@ var staticRenderFns = [
           _vm._v("Watch this Video")
         ])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col s12 m7 l7 requirement" }, [
-      _c("h6", [_vm._v("Requirements")]),
-      _vm._v(" "),
-      _c("ul", { staticStyle: { "list-style-type": "circle" } }, [
-        _c("li", [_vm._v("Requirements")]),
-        _vm._v(" "),
-        _c("li", [_vm._v("Requirements")]),
-        _vm._v(" "),
-        _c("li", [_vm._v("Requirements")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "col s12 m7 l7", attrs: { id: "more-info" } },
-      [
-        _c("h6", [_vm._v("Description")]),
-        _vm._v(
-          "\n\t\t\t\t\tLorem ipsum dolor sit amet consectetur adipisicing elit. Expedita quia ad nulla ipsum culpa dolor soluta hic nobis explicabo aliquid sapiente nemo nesciunt cum, error aperiam accusantium quibusdam dolorum impedit.\n\t\t\t\t"
-        )
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col s12 m7 l7" }, [
-      _c("h6", [_vm._v("By the end of this course, You will learn")]),
-      _vm._v(" "),
-      _c("p", [
-        _c("i", { staticClass: "material-icons" }, [_vm._v("check")]),
-        _vm._v("Lorem ipsum\n\t\t\t\t\t")
-      ]),
-      _vm._v(" "),
-      _c("p", [
-        _c("i", { staticClass: "material-icons" }, [_vm._v("check")]),
-        _vm._v("Lorem ipsum\n\t\t\t\t\t")
-      ]),
-      _vm._v(" "),
-      _c("p", [
-        _c("i", { staticClass: "material-icons" }, [_vm._v("check")]),
-        _vm._v("Lorem ipsum\n\t\t\t\t\t")
-      ]),
-      _vm._v(" "),
-      _c("a", { attrs: { href: "#" } }, [_vm._v("+ See more")])
     ])
   }
 ]
@@ -24896,9 +24776,9 @@ var render = function() {
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col m3 product-box big-text" }, [
         _c("a", { attrs: { href: "/admin/videos" } }, [
-          _vm._v("Videos"),
+          _vm._v("Courses"),
           _c("span", { staticClass: "badge" }, [
-            _vm._v(" (" + _vm._s(_vm.videos.length) + ")")
+            _vm._v(" (" + _vm._s(_vm.courses.length) + ")")
           ])
         ])
       ]),
@@ -27006,288 +26886,262 @@ var render = function() {
                 ])
               : _vm._e(),
             _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c(
-                "form",
-                {
-                  staticClass: "col s12",
-                  attrs: { enctype: "multipart/form-data" },
-                  on: { submit: _vm.addVideo }
-                },
-                [
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "input-field col s6" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.videos.coursename,
-                            expression: "videos.coursename"
-                          }
-                        ],
-                        staticClass: "validate",
-                        attrs: {
-                          disabled: "",
-                          name: "coursename",
-                          required: "",
-                          type: "text"
-                        },
-                        domProps: { value: _vm.videos.coursename },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.videos,
-                              "coursename",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "input-field col s6" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.videos.name,
-                            expression: "videos.name"
-                          }
-                        ],
-                        staticClass: "validate",
-                        attrs: {
-                          disabled: "",
-                          name: "name",
-                          required: "",
-                          type: "text"
-                        },
-                        domProps: { value: _vm.videos.name },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(_vm.videos, "name", $event.target.value)
-                          }
-                        }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "input-field col s6" }, [
-                      _c(
-                        "select",
-                        {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.videos.language_id,
-                              expression: "videos.language_id"
-                            }
-                          ],
-                          staticClass: "browser-default",
-                          attrs: { required: "" },
-                          on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.$set(
-                                _vm.videos,
-                                "language_id",
-                                $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
-                              )
-                            }
-                          }
-                        },
-                        _vm._l(_vm.options, function(option) {
-                          return _c(
-                            "option",
-                            {
-                              key: option.id,
-                              attrs: { disabled: "" },
-                              domProps: { value: option.id }
-                            },
-                            [_vm._v(_vm._s(option.language))]
-                          )
-                        }),
-                        0
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "input-field col s6" }, [
-                      _c(
-                        "select",
-                        {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.videos.section,
-                              expression: "videos.section"
-                            }
-                          ],
-                          staticClass: "browser-default",
-                          attrs: { required: "" },
-                          on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.$set(
-                                _vm.videos,
-                                "section",
-                                $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
-                              )
-                            }
-                          }
-                        },
-                        [
-                          _c(
-                            "option",
-                            {
-                              attrs: { value: "", disabled: "", selected: "" }
-                            },
-                            [_vm._v("Which section will I attach this video")]
-                          ),
-                          _vm._v(" "),
-                          _vm._l(_vm.sections, function(section) {
-                            return _c(
-                              "option",
-                              {
-                                key: section.id,
-                                attrs: { disabled: "" },
-                                domProps: { value: section.id }
-                              },
-                              [_vm._v(_vm._s(section.text))]
-                            )
-                          })
-                        ],
-                        2
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
+            !_vm.loaded
+              ? _c("div", { staticClass: "center" }, [
+                  _c("div", { staticClass: "preloader-wrapper small active" }, [
                     _c(
                       "div",
-                      { staticClass: "file-field input-field col s12" },
+                      { staticClass: "spinner-layer spinner-red-only" },
                       [
-                        _c("div", { staticClass: "btn" }, [
-                          _c("span", [_vm._v("File")]),
-                          _vm._v(" "),
-                          _c("input", {
-                            attrs: { type: "file" },
-                            on: { change: _vm.onVideoChange }
-                          })
+                        _c("div", { staticClass: "circle-clipper left" }, [
+                          _c("div", { staticClass: "circle" })
                         ]),
                         _vm._v(" "),
-                        _c("div", { staticClass: "file-path-wrapper" }, [
-                          _c("input", {
-                            staticClass: "file-path validate",
-                            attrs: {
-                              name: "videoName",
-                              placeholder:
-                                "Choose a video... One video per upload",
-                              required: ""
-                            }
-                          })
+                        _c("div", { staticClass: "gap-patch" }, [
+                          _c("div", { staticClass: "circle" })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "circle-clipper right" }, [
+                          _c("div", { staticClass: "circle" })
                         ])
                       ]
                     )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "input-field col s12" }, [
-                      _c("textarea", {
+                  ])
+                ])
+              : _c("div", { staticClass: "row" }, [
+                  _c(
+                    "form",
+                    {
+                      staticClass: "col s12",
+                      attrs: { enctype: "multipart/form-data" },
+                      on: { submit: _vm.addVideo }
+                    },
+                    [
+                      _c("div", { staticClass: "video" }, [
+                        _c("h6", [_vm._v("Video")]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "input-field col s6" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.videos.name,
+                                  expression: "videos.name"
+                                }
+                              ],
+                              staticClass: "validate",
+                              attrs: {
+                                name: "name",
+                                required: "",
+                                type: "text",
+                                placeholder: "Enter name of video"
+                              },
+                              domProps: { value: _vm.videos.name },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.videos,
+                                    "name",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "input-field col s6" }, [
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.videos.section,
+                                    expression: "videos.section"
+                                  }
+                                ],
+                                staticClass: "browser-default",
+                                attrs: { required: "" },
+                                on: {
+                                  change: function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.$set(
+                                      _vm.videos,
+                                      "section",
+                                      $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    )
+                                  }
+                                }
+                              },
+                              [
+                                _c(
+                                  "option",
+                                  { attrs: { value: "", selected: "" } },
+                                  [
+                                    _vm._v(
+                                      "Which section will I attach this video"
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _vm._l(_vm.sections, function(section) {
+                                  return _c(
+                                    "option",
+                                    {
+                                      key: section.id,
+                                      domProps: { value: section.value }
+                                    },
+                                    [_vm._v(_vm._s(section.text))]
+                                  )
+                                })
+                              ],
+                              2
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "input-field col s12" }, [
+                            _c("textarea", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.videos.about,
+                                  expression: "videos.about"
+                                }
+                              ],
+                              staticClass: "validate materialize-textarea",
+                              attrs: {
+                                name: "about",
+                                required: "",
+                                type: "text",
+                                placeholder: "About this video"
+                              },
+                              domProps: { value: _vm.videos.about },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.videos,
+                                    "about",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "row" }, [
+                          _c(
+                            "div",
+                            { staticClass: "file-field input-field col s12" },
+                            [
+                              _c("div", { staticClass: "btn" }, [
+                                _c("span", [_vm._v("File")]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  attrs: { type: "file" },
+                                  on: { change: _vm.onVideoChange }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "file-path-wrapper" }, [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.videos.video,
+                                      expression: "videos.video"
+                                    }
+                                  ],
+                                  staticClass: "file-path validate",
+                                  attrs: {
+                                    name: "videoName",
+                                    placeholder:
+                                      "Choose a video or drop it here... One video per upload",
+                                    required: ""
+                                  },
+                                  domProps: { value: _vm.videos.video },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.videos,
+                                        "video",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ])
+                            ]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col s4" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn waves-effect",
+                                attrs: { disabled: _vm.saving, type: "submit" }
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(_vm.saving ? "Creating..." : "Create")
+                                )
+                              ]
+                            )
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
                         directives: [
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.videos.description,
-                            expression: "videos.description"
+                            value: _vm.videos.preview,
+                            expression: "videos.preview"
                           }
                         ],
-                        staticClass: "materialize-textarea",
-                        attrs: {
-                          id: "description",
-                          disabled: "",
-                          required: "",
-                          placeholder:
-                            "Please enter a description for the course"
-                        },
-                        domProps: { value: _vm.videos.description },
+                        attrs: { type: "hidden", name: "preview" },
+                        domProps: { value: _vm.videos.preview },
                         on: {
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
-                            _vm.$set(
-                              _vm.videos,
-                              "description",
-                              $event.target.value
-                            )
+                            _vm.$set(_vm.videos, "preview", $event.target.value)
                           }
                         }
                       })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.videos.preview,
-                        expression: "videos.preview"
-                      }
-                    ],
-                    attrs: { type: "hidden", name: "preview" },
-                    domProps: { value: _vm.videos.preview },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.videos, "preview", $event.target.value)
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col s4" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn waves-effect",
-                        attrs: { disabled: _vm.saving, type: "submit" }
-                      },
-                      [_vm._v(_vm._s(_vm.saving ? "Creating..." : "Create"))]
-                    )
-                  ])
-                ]
-              )
-            ])
+                    ]
+                  )
+                ])
           ])
         ],
         1
@@ -27320,7 +27174,7 @@ var render = function() {
   return _c("div", { staticClass: "container dark" }, [
     _c("div", { staticClass: "articles" }, [
       _c("div", { staticClass: "main-container" }, [
-        _c("h4", [_vm._v("Videos")]),
+        _c("h4", [_vm._v("Courses")]),
         _vm._v(" "),
         !_vm.loaded
           ? _c("div", { staticClass: "center" }, [_vm._m(0)])
@@ -27335,20 +27189,20 @@ var render = function() {
                       _vm._v(" "),
                       _c(
                         "tbody",
-                        _vm._l(_vm.videos, function(video, index) {
+                        _vm._l(_vm.courses, function(course, index) {
                           return _c("tr", { key: index }, [
                             _c("td", [_vm._v(_vm._s(index + 1))]),
                             _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(video.videoName))]),
+                            _c("td", [_vm._v(_vm._s(course.videoName))]),
                             _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(video.preview))]),
+                            _c("td", [_vm._v(_vm._s(course.preview))]),
                             _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(video.section))]),
+                            _c("td", [_vm._v(_vm._s(course.section))]),
                             _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(video.name))]),
+                            _c("td", [_vm._v(_vm._s(course.name))]),
                             _vm._v(" "),
                             _c("td", [
-                              _vm._v(_vm._s(video.created_at.substr(0, 10)))
+                              _vm._v(_vm._s(course.created_at.substr(0, 10)))
                             ]),
                             _vm._v(" "),
                             _c("td", [
@@ -27360,7 +27214,7 @@ var render = function() {
                                   on: {
                                     click: function($event) {
                                       $event.preventDefault()
-                                      return _vm.deleteVideo(video.id)
+                                      return _vm.deleteVideo(course.id)
                                     }
                                   }
                                 },
@@ -27456,7 +27310,7 @@ var render = function() {
         { staticClass: "main-container" },
         [
           _c("center", [
-            _c("h2", [_vm._v("Create New Video")]),
+            _c("h2", [_vm._v("Create New Course")]),
             _vm._v(" "),
             _vm.message
               ? _c("div", { staticClass: "alert" }, [
@@ -27795,7 +27649,7 @@ var render = function() {
                                 "option",
                                 {
                                   key: section.id,
-                                  domProps: { value: section.id }
+                                  domProps: { value: section.value }
                                 },
                                 [_vm._v(_vm._s(section.text))]
                               )
@@ -28053,37 +27907,6 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "input-field col s6" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.videos.name,
-                            expression: "videos.name"
-                          }
-                        ],
-                        staticClass: "validate",
-                        attrs: {
-                          id: "input-1",
-                          name: "coursename",
-                          required: "",
-                          type: "text"
-                        },
-                        domProps: { value: _vm.videos.name },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(_vm.videos, "name", $event.target.value)
-                          }
-                        }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "input-field col s6" }, [
                       _c(
                         "select",
                         {
@@ -28138,65 +27961,74 @@ var render = function() {
                         ],
                         2
                       )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "input-field col s6" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.videos.requirements,
+                            expression: "videos.requirements"
+                          }
+                        ],
+                        staticClass: "validate",
+                        attrs: {
+                          id: "input-1",
+                          name: "coursename",
+                          required: "",
+                          type: "text"
+                        },
+                        domProps: { value: _vm.videos.requirements },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.videos,
+                              "requirements",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "input-field col s6" }, [
-                      _c(
-                        "select",
-                        {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.videos.section,
-                              expression: "videos.section"
-                            }
-                          ],
-                          staticClass: "browser-default",
-                          attrs: { required: "" },
-                          on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.$set(
-                                _vm.videos,
-                                "section",
-                                $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
-                              )
-                            }
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.videos.to_learn,
+                            expression: "videos.to_learn"
                           }
-                        },
-                        [
-                          _c(
-                            "option",
-                            {
-                              attrs: { value: "", disabled: "", selected: "" }
-                            },
-                            [_vm._v("Which section will I attach this video")]
-                          ),
-                          _vm._v(" "),
-                          _vm._l(_vm.sections, function(section) {
-                            return _c(
-                              "option",
-                              {
-                                key: section.id,
-                                attrs: { disabled: "" },
-                                domProps: { value: section.id }
-                              },
-                              [_vm._v(_vm._s(section.text))]
-                            )
-                          })
                         ],
-                        2
-                      )
+                        staticClass: "materialize-textarea",
+                        attrs: {
+                          id: "description",
+                          required: "",
+                          placeholder:
+                            "Please enter a description for the course"
+                        },
+                        domProps: { value: _vm.videos.to_learn },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.videos,
+                              "to_learn",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
                     ])
                   ]),
                   _vm._v(" "),

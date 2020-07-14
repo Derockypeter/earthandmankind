@@ -2,7 +2,7 @@
     <div class="container dark">
         <div class="articles">
             <div class="main-container">
-                <h4>Videos</h4>
+                <h4>Courses</h4>
                 <div class="center" v-if="!loaded">
                     <div class="preloader-wrapper small active">
                         <div class="spinner-layer spinner-red-only">
@@ -34,14 +34,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="(video,index) in videos" :key="index">
+                                    <tr v-for="(course,index) in courses" :key="index">
                                         <td>{{index+1}}</td>
-                                        <td>{{ video.videoName }}</td>
-                                        <td>{{ video.preview }}</td>
-                                        <td>{{video.section}}</td>
-                                        <td>{{video.name}}</td>
-                                        <td>{{ (video.created_at).substr(0, 10) }}</td> <!--MAke a computed func for substring-->
-                                        <td><button class="btn red" :disabled="saving"  @click.prevent="deleteVideo(video.id)"><i class="material-icons">delete</i></button></td>
+                                        <td>{{ course.videoName }}</td>
+                                        <td>{{ course.preview }}</td>
+                                        <td>{{course.section}}</td>
+                                        <td>{{course.name}}</td>
+                                        <td>{{ (course.created_at).substr(0, 10) }}</td> <!--MAke a computed func for substring-->
+                                        <td><button class="btn red" :disabled="saving"  @click.prevent="deleteVideo(course.id)"><i class="material-icons">delete</i></button></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -60,7 +60,7 @@
             return {
                 saving: false,
                 loaded: false,
-                videos: [],
+                courses: [],
             }
         },
         
@@ -69,7 +69,7 @@
             this.axios.get(uri).then(response => {
                 setTimeout(() => {
                     this.loaded = true;
-                    this.videos = response.data;
+                    this.courses = response.data;
                     console.log(response)
                 }, 5000);
             })
@@ -81,10 +81,10 @@
             deleteVideo(id)
             {
                 this.saving = true
-                let uri = `/api/deleteVideo/${id}`;
+                let uri = `/api/deleteCourse/${id}`;
                 this.axios.delete(uri).then(response => {
                     console.log(response)
-                    this.videos.splice(this.videos.findIndex(video => video.id === id), 1);
+                    this.courses.splice(this.courses.findIndex(video => video.id === id), 1);
                     this.saving = false
                 }).catch(err => {
                     console.log(err.response.header)
