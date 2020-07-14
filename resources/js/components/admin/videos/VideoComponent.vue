@@ -83,7 +83,7 @@
             deleteCourse(id)
             {
                 this.saving = true
-                let uri = `/api/deleteCourse/${id}`;
+                let uri = `/api/deletecourse/${id}`;
                 this.axios.delete(uri).then(response => {
                     console.log(response)
                     this.videos.splice(this.videos.findIndex(video => video.id === id), 1);

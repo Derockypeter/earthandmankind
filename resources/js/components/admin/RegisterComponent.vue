@@ -28,7 +28,7 @@
                                                 <input placeholder="Email" v-model="user.email" id="email" type="email" class="validate" required>
                                             </div>
                                             <div class="input-field col s12 l6">
-                                                <input placeholder="Birthdate" v-model="user.dob" id="DOB" type="text" @change="date()" class="datepicker validate">
+                                                <input placeholder="Birthdate" ref="date" v-model="user.dob" id="DOB" type="text" class="datepicker validate">
                                             </div>
                                         </div>
                                         <div class="row">
@@ -128,8 +128,8 @@ export default {
             if (this.user.password !== this.user.password_confirmation || this.user.password <= 0){
                 this.user.password = ""
                 this.user.password_confirmation = ""
-                return this.message = 'Passwords do not match'
                 this.saving = false
+                return this.message = 'Passwords do not match'
             }
             this.axios.post(uri, this.user)
             .then((response) => {
@@ -145,7 +145,7 @@ export default {
             .catch(err => {
                 if(err.response){
                     this.saving = false
-                    this.message = err.response.data.errors || 'Invalid';
+                    this.message = err.response.data.error || 'Invalid';
                     console.log(err.response.data)
                 }
             })

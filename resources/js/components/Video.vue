@@ -30,7 +30,7 @@
 									</div>
 									<div class="card-content">
 										<p class="center">
-											<button class="btn-large red text-white">Watch this Video</button>
+											<button class="btn-large red text-white">Take this Course</button>
 										</p>
 									</div>
 									<!-- <div class="card-action">
@@ -55,14 +55,15 @@
 						<accordion>
 							<accordion-item>
 								<!-- This slot will handle the title/header of the accordion and is the part you click on -->
-								<template slot="accordion-trigger">
-									<h6>Section {{video.videos.section}}</h6>
+								<template slot="accordion-trigger" >
+									<h6>Videos</h6>
 								</template>
 								<!-- This slot will handle all the content that is passed to the accordion -->
 								<template slot="accordion-content">
-									<span v-for="video in  video.videos" :key="video.id">
-										{{video.video}}
-									</span>
+									<li v-for="video in  video.videos" :key="video.id" class="underline">
+										<i class="material-icons smaller">play_arrow</i>{{video.video}}
+										<span v-if="video.preview = true" class="smallPreview right"><em>Preview</em></span>
+									</li>
 								</template>
 							</accordion-item>
 						</accordion>
@@ -233,5 +234,16 @@ h6 {
 	font-weight: 600;
 	font-size: 1.5rem;
 	margin-right: 200px;
+}
+.smaller {
+	font-size: 13px;
+	padding-right: 20px;
+}
+.underline {
+	border-bottom: 0.01px solid;
+}
+.smallPreview {
+	color: #1e5ebe;
+	font-size: 10px;
 }
 </style>

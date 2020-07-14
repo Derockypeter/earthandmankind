@@ -137,11 +137,10 @@ class CourseController extends Controller
     // Delete a course and its video
     public function deleteCourse($id)
     {
-        $courseToDel = CourseTitle::findOrFail($id);
+        $courseToDel = Course::findOrFail($id);
         if ($courseToDel){
             $courseToDel->delete();
-            return response()->json([$courseToDel, 204]);
+            return response()->json(['message' => 'Deleted'],204);
         }
     }
-
 }

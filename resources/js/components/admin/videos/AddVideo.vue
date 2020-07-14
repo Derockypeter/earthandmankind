@@ -55,14 +55,17 @@
                                         </div>
                                     </div>
                                 </div>
-                            
+                                <p class="green darken-1 text-darken"><i class="material-icons">check</i> &nbsp;Please check this box if you want the video previewed</p>
                                 <div class="row">
-                                    <div class="col s4">
+                                    <p class="col s6">
+                                        <input type="checkbox" class="matterialize-checkbox" name="preview" v-model="videos.preview">
+                                        <label>Preview</label>
+                                    </p>
+                                    <div class="col s3 offset-s3">
                                         <button :disabled="saving"  class="btn waves-effect" type="submit">{{ saving ? 'Creating...' : 'Create' }}</button>
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" name="preview" v-model="videos.preview">
                         </form>
                     </div>
                 </center>
@@ -114,8 +117,6 @@
       	addVideo(evt) {
             evt.preventDefault();
 				this.saving = true
-            
-                this.videos.preview = false
 				const data = new FormData();
 				data.append('video', this.videos.video)
                 data.append('preview', this.videos.preview) 

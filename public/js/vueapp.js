@@ -17075,6 +17075,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -17484,8 +17485,8 @@ __webpack_require__.r(__webpack_exports__);
       if (this.user.password !== this.user.password_confirmation || this.user.password <= 0) {
         this.user.password = "";
         this.user.password_confirmation = "";
-        return this.message = 'Passwords do not match';
         this.saving = false;
+        return this.message = 'Passwords do not match';
       }
 
       this.axios.post(uri, this.user).then(function (response) {
@@ -17503,7 +17504,7 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (err) {
         if (err.response) {
           _this.saving = false;
-          _this.message = err.response.data.errors || 'Invalid';
+          _this.message = err.response.data.error || 'Invalid';
           console.log(err.response.data);
         }
       });
@@ -18731,6 +18732,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -18793,7 +18797,6 @@ __webpack_require__.r(__webpack_exports__);
 
       evt.preventDefault();
       this.saving = true;
-      this.videos.preview = false;
       var data = new FormData();
       data.append('video', this.videos.video);
       data.append('preview', this.videos.preview);
@@ -19411,7 +19414,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       this.saving = true;
-      var uri = "/api/deleteCourse/".concat(id);
+      var uri = "/api/deletecourse/".concat(id);
       this.axios["delete"](uri).then(function (response) {
         console.log(response);
 
@@ -19828,7 +19831,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.coursevids[data-v-21c9d7a0] {\r\n\theight: 40vh;\r\n\tbackground-color: #485158;\r\n\tcolor: #f9fbfe;\n}\n.about[data-v-21c9d7a0] {\r\n\tmargin-bottom: 5px;\r\n\tfont-size: 20px;\r\n\tfont-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;\n}\n.mr3[data-v-21c9d7a0] {\r\n\tmargin-right: 15px;\r\n\tfont-size: 1em;\n}\ndiv.col.s12.m4.l4.preview[data-v-21c9d7a0] {\r\n\tmargin-top: 30px;\r\n\tfloat: right;\r\n\tclear: right;\n}\n.language[data-v-21c9d7a0], .price[data-v-21c9d7a0] {\r\n\tfont-size: 18px;\r\n\tcolor: rgb(155, 147, 147);\n}\n.main-container[data-v-21c9d7a0] {\r\n\twidth: 95%;\n}\n.card .card-image img[data-v-21c9d7a0] {\r\n\theight: 185px;\n}\n.card.small[data-v-21c9d7a0] {\r\n    height: 500px;\n}\n.card[data-v-21c9d7a0]{\r\n\tborder-radius: 10px;\n}\ndiv.card-image[data-v-21c9d7a0] {\r\n\tborder-radius: 5px;\r\n\tposition: relative;\n}\n.card.small .card-image[data-v-21c9d7a0], .card.medium .card-image[data-v-21c9d7a0], .card.large .card-image[data-v-21c9d7a0] {\r\n    max-height: 70%;\r\n    border: 4px solid;\n}\n.to_learn[data-v-21c9d7a0]{\r\n\tborder: 1px solid #0000;\r\n\tbackground-color: #dad6d662;\r\n\tmargin-bottom: 10px;\n}\n.pl[data-v-21c9d7a0] {\r\n\tpadding-left: 12px;\n}\n.accordion[data-v-21c9d7a0], .accordion-item[data-v-21c9d7a0] {\r\n\tbackground: whitesmoke;\r\n\tmargin-bottom: 10px;\n}\n.image[data-v-21c9d7a0] {\r\n\twidth: 100%;\n}\n.icon[data-v-21c9d7a0] {\r\n  color: white;\r\n  font-size: 100px;\r\n  position: absolute;\r\n  border-radius: 50px;\r\n  top: 50%;\r\n  left: 50%;\r\n  transform: translate(-50%, -50%);\r\n  -ms-transform: translate(-50%, -50%);\r\n  text-align: center;\n}\ni.large[data-v-21c9d7a0] {\r\n    font-size: 5rem;\n}\n.play_arrow[data-v-21c9d7a0]:hover, .card-image[data-v-21c9d7a0]:hover {\r\n\tfont-size: 5.5rem;\r\n  \tcursor: pointer;\n}\n.icons[data-v-21c9d7a0] {\r\n\theight: 100px;\r\n\twidth: 100px;\r\n\tline-height: 100px;\r\n\tbackground-color: rgba(145, 145, 141, 0.438);\n}\n.bottomleft[data-v-21c9d7a0] {\r\n\tposition: absolute;\r\n\tbottom: 8px;\r\n\ttop: 85%;\r\n\tleft: 50%;\r\n\tfont-size: 15px;\r\n\tfont-weight: 600;\r\n\ttransform: translate(-50%, -50%);\n}\nh6[data-v-21c9d7a0] {\r\n\tfont-weight: 700;\n}\n.paragraph-course-content[data-v-21c9d7a0] {\r\n\tdisplay: inline-block;\r\n\tfont-weight: 600;\r\n\tfont-size: 1.5rem;\r\n\tmargin-right: 200px;\n}\r\n", ""]);
+exports.push([module.i, "\n.coursevids[data-v-21c9d7a0] {\r\n\theight: 40vh;\r\n\tbackground-color: #485158;\r\n\tcolor: #f9fbfe;\n}\n.about[data-v-21c9d7a0] {\r\n\tmargin-bottom: 5px;\r\n\tfont-size: 20px;\r\n\tfont-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;\n}\n.mr3[data-v-21c9d7a0] {\r\n\tmargin-right: 15px;\r\n\tfont-size: 1em;\n}\ndiv.col.s12.m4.l4.preview[data-v-21c9d7a0] {\r\n\tmargin-top: 30px;\r\n\tfloat: right;\r\n\tclear: right;\n}\n.language[data-v-21c9d7a0], .price[data-v-21c9d7a0] {\r\n\tfont-size: 18px;\r\n\tcolor: rgb(155, 147, 147);\n}\n.main-container[data-v-21c9d7a0] {\r\n\twidth: 95%;\n}\n.card .card-image img[data-v-21c9d7a0] {\r\n\theight: 185px;\n}\n.card.small[data-v-21c9d7a0] {\r\n    height: 500px;\n}\n.card[data-v-21c9d7a0]{\r\n\tborder-radius: 10px;\n}\ndiv.card-image[data-v-21c9d7a0] {\r\n\tborder-radius: 5px;\r\n\tposition: relative;\n}\n.card.small .card-image[data-v-21c9d7a0], .card.medium .card-image[data-v-21c9d7a0], .card.large .card-image[data-v-21c9d7a0] {\r\n    max-height: 70%;\r\n    border: 4px solid;\n}\n.to_learn[data-v-21c9d7a0]{\r\n\tborder: 1px solid #0000;\r\n\tbackground-color: #dad6d662;\r\n\tmargin-bottom: 10px;\n}\n.pl[data-v-21c9d7a0] {\r\n\tpadding-left: 12px;\n}\n.accordion[data-v-21c9d7a0], .accordion-item[data-v-21c9d7a0] {\r\n\tbackground: whitesmoke;\r\n\tmargin-bottom: 10px;\n}\n.image[data-v-21c9d7a0] {\r\n\twidth: 100%;\n}\n.icon[data-v-21c9d7a0] {\r\n  color: white;\r\n  font-size: 100px;\r\n  position: absolute;\r\n  border-radius: 50px;\r\n  top: 50%;\r\n  left: 50%;\r\n  transform: translate(-50%, -50%);\r\n  -ms-transform: translate(-50%, -50%);\r\n  text-align: center;\n}\ni.large[data-v-21c9d7a0] {\r\n    font-size: 5rem;\n}\n.play_arrow[data-v-21c9d7a0]:hover, .card-image[data-v-21c9d7a0]:hover {\r\n\tfont-size: 5.5rem;\r\n  \tcursor: pointer;\n}\n.icons[data-v-21c9d7a0] {\r\n\theight: 100px;\r\n\twidth: 100px;\r\n\tline-height: 100px;\r\n\tbackground-color: rgba(145, 145, 141, 0.438);\n}\n.bottomleft[data-v-21c9d7a0] {\r\n\tposition: absolute;\r\n\tbottom: 8px;\r\n\ttop: 85%;\r\n\tleft: 50%;\r\n\tfont-size: 15px;\r\n\tfont-weight: 600;\r\n\ttransform: translate(-50%, -50%);\n}\nh6[data-v-21c9d7a0] {\r\n\tfont-weight: 700;\n}\n.paragraph-course-content[data-v-21c9d7a0] {\r\n\tdisplay: inline-block;\r\n\tfont-weight: 600;\r\n\tfont-size: 1.5rem;\r\n\tmargin-right: 200px;\n}\n.smaller[data-v-21c9d7a0] {\r\n\tfont-size: 13px;\r\n\tpadding-right: 20px;\n}\n.underline[data-v-21c9d7a0] {\r\n\tborder-bottom: 0.01px solid;\n}\n.smallPreview[data-v-21c9d7a0] {\r\n\tcolor: #1e5ebe;\r\n\tfont-size: 10px;\n}\r\n", ""]);
 
 // exports
 
@@ -24489,22 +24492,34 @@ var render = function() {
                       "accordion-item",
                       [
                         _c("template", { slot: "accordion-trigger" }, [
-                          _c("h6", [
-                            _vm._v("Section " + _vm._s(video.videos.section))
-                          ])
+                          _c("h6", [_vm._v("Videos")])
                         ]),
                         _vm._v(" "),
                         _c(
                           "template",
                           { slot: "accordion-content" },
                           _vm._l(video.videos, function(video) {
-                            return _c("span", { key: video.id }, [
-                              _vm._v(
-                                "\n\t\t\t\t\t\t\t\t\t" +
-                                  _vm._s(video.video) +
-                                  "\n\t\t\t\t\t\t\t\t"
-                              )
-                            ])
+                            return _c(
+                              "li",
+                              { key: video.id, staticClass: "underline" },
+                              [
+                                _c(
+                                  "i",
+                                  { staticClass: "material-icons smaller" },
+                                  [_vm._v("play_arrow")]
+                                ),
+                                _vm._v(
+                                  _vm._s(video.video) + "\n\t\t\t\t\t\t\t\t\t"
+                                ),
+                                (video.preview = true)
+                                  ? _c(
+                                      "span",
+                                      { staticClass: "smallPreview right" },
+                                      [_c("em", [_vm._v("Preview")])]
+                                    )
+                                  : _vm._e()
+                              ]
+                            )
                           }),
                           0
                         )
@@ -24582,7 +24597,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "card-content" }, [
       _c("p", { staticClass: "center" }, [
         _c("button", { staticClass: "btn-large red text-white" }, [
-          _vm._v("Watch this Video")
+          _vm._v("Take this Course")
         ])
       ])
     ])
@@ -24986,6 +25001,7 @@ var render = function() {
                                         expression: "user.dob"
                                       }
                                     ],
+                                    ref: "date",
                                     staticClass: "datepicker validate",
                                     attrs: {
                                       placeholder: "Birthdate",
@@ -24994,9 +25010,6 @@ var render = function() {
                                     },
                                     domProps: { value: _vm.user.dob },
                                     on: {
-                                      change: function($event) {
-                                        return _vm.date()
-                                      },
                                       input: function($event) {
                                         if ($event.target.composing) {
                                           return
@@ -27101,8 +27114,69 @@ var render = function() {
                           )
                         ]),
                         _vm._v(" "),
+                        _c("p", { staticClass: "green darken-1 text-darken" }, [
+                          _c("i", { staticClass: "material-icons" }, [
+                            _vm._v("check")
+                          ]),
+                          _vm._v(
+                            "  Please check this box if you want the video previewed"
+                          )
+                        ]),
+                        _vm._v(" "),
                         _c("div", { staticClass: "row" }, [
-                          _c("div", { staticClass: "col s4" }, [
+                          _c("p", { staticClass: "col s6" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.videos.preview,
+                                  expression: "videos.preview"
+                                }
+                              ],
+                              staticClass: "matterialize-checkbox",
+                              attrs: { type: "checkbox", name: "preview" },
+                              domProps: {
+                                checked: Array.isArray(_vm.videos.preview)
+                                  ? _vm._i(_vm.videos.preview, null) > -1
+                                  : _vm.videos.preview
+                              },
+                              on: {
+                                change: function($event) {
+                                  var $$a = _vm.videos.preview,
+                                    $$el = $event.target,
+                                    $$c = $$el.checked ? true : false
+                                  if (Array.isArray($$a)) {
+                                    var $$v = null,
+                                      $$i = _vm._i($$a, $$v)
+                                    if ($$el.checked) {
+                                      $$i < 0 &&
+                                        _vm.$set(
+                                          _vm.videos,
+                                          "preview",
+                                          $$a.concat([$$v])
+                                        )
+                                    } else {
+                                      $$i > -1 &&
+                                        _vm.$set(
+                                          _vm.videos,
+                                          "preview",
+                                          $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1))
+                                        )
+                                    }
+                                  } else {
+                                    _vm.$set(_vm.videos, "preview", $$c)
+                                  }
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("label", [_vm._v("Preview")])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col s3 offset-s3" }, [
                             _c(
                               "button",
                               {
@@ -27117,28 +27191,7 @@ var render = function() {
                             )
                           ])
                         ])
-                      ]),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.videos.preview,
-                            expression: "videos.preview"
-                          }
-                        ],
-                        attrs: { type: "hidden", name: "preview" },
-                        domProps: { value: _vm.videos.preview },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(_vm.videos, "preview", $event.target.value)
-                          }
-                        }
-                      })
+                      ])
                     ]
                   )
                 ])
@@ -46749,7 +46802,7 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /mnt/c/laravel/lvidproject/resources/js/vueapp.js */"./resources/js/vueapp.js");
+module.exports = __webpack_require__(/*! C:\laravel\lVidProject\resources\js\vueapp.js */"./resources/js/vueapp.js");
 
 
 /***/ })
