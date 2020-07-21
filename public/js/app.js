@@ -2207,6 +2207,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: [],
@@ -2220,7 +2231,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     // For Books
-    var book_uri = '/api/books';
+    var book_uri = "/api/books";
     this.axios.get(book_uri).then(function (response) {
       _this.books = response.data.data;
     })["catch"](function (err) {
@@ -7002,7 +7013,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.banner[data-v-782dcf83] {\n    background-image: url('/images/carousel-img/pexels-photo-scaled.jpeg');\n    background-position: center;\n    color: #ffff;\n    height: 350px;\n    margin-top: 1vh;\n}\n.leadP[data-v-782dcf83] {\n    font-size: 15px;\n    color: #ffff;\n    cursor: pointer;\n}\n.leadP[data-v-782dcf83]:hover {\n    color: #ffff;\n    text-decoration: underline;\n}\n\n", ""]);
+exports.push([module.i, "\n.banner[data-v-782dcf83] {\n    background-image: url(\"/images/carousel-img/pexels-photo-scaled.jpeg\");\n    background-position: center;\n    color: #ffff;\n    height: 350px;\n    margin-top: 1vh;\n}\n", ""]);
 
 // exports
 
@@ -39204,52 +39215,7 @@ var render = function() {
     "main",
     { staticClass: "container" },
     [
-      _c("div", { staticClass: "banner" }, [
-        _c(
-          "div",
-          { staticClass: "row", staticStyle: { "padding-left": "50px" } },
-          [
-            _c(
-              "div",
-              {
-                staticClass: "col l6 s12 m6",
-                staticStyle: { "padding-top": "30px" }
-              },
-              [
-                _c(
-                  "div",
-                  {
-                    staticStyle: { "max-width": "250px", "max-height": "30px" }
-                  },
-                  [
-                    _c("a", { staticClass: "leadP" }, [
-                      _vm._v(
-                        "Getting to know Jesus is one of the most important things"
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "lead" }, [
-                      _vm._v(
-                        "Getting to know Jesus is one of the most important things, use our Bible Teachings to improve your life"
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "btn",
-                        attrs: { to: { name: "article" } }
-                      },
-                      [_vm._v("Learn More")]
-                    )
-                  ],
-                  1
-                )
-              ]
-            )
-          ]
-        )
-      ]),
+      _vm._m(0),
       _vm._v(" "),
       _c("CategorySelection", {
         attrs: { featurePosts: _vm.featurePosts, books: _vm.books }
@@ -39258,7 +39224,49 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "banner" }, [
+      _c(
+        "div",
+        { staticClass: "row", staticStyle: { "padding-left": "50px" } },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "col l8 s12 m6",
+              staticStyle: { "padding-top": "30px" }
+            },
+            [
+              _c("div", { staticStyle: { "min-height": "30px" } }, [
+                _c("p", { staticClass: "lead" }, [
+                  _vm._v(
+                    "\n                        God is the term given to lightest state of being,\n                        with its consciousness. While death is the term\n                        given to the hardest state of being with no\n                        consciousness. Life is the term given to the product\n                        of God and a being, through which the extent of\n                        their difference can be determined. \n                    "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "lead" }, [
+                  _vm._v(
+                    "Our life, began\n                        when the consciousness of God was inserted into the\n                        unconscious death. This action, gave birth to life\n                        and the first living beings. It is as a result of\n                        the successful evolution and integration in life ,\n                        that a lighter state of being termed earth was\n                        achieved, from which mankind the culminated specie\n                        or kind of being from the product of God and earth\n                        was made, to further the ultimate purpose of life.\n                        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "lead waves-effect " }, [
+                  _vm._v(
+                    "\n                        Welcome, as we embark on the journey of discovering\n                        more about life.\n                    "
+                  )
+                ])
+              ])
+            ]
+          )
+        ]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 

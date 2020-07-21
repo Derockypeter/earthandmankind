@@ -4,7 +4,7 @@
             <nav style="background-color: #424242;">
                 <div class="container">
                     <div class="nav-wrapper">
-                        <a href="#!" class="brand-logo logo-pr-6">E<em>and</em>MK.ORG</a>
+                        <a href="#!" class="brand-logo logo-pr-6">EARTHANDMANKIND.ORG</a>
                         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                         <ul class="right hide-on-med-and-down pr-6">
                             <li><router-link :to="{ name:'home'}">HOME</router-link></li>
@@ -54,7 +54,7 @@
         background-color: black;
     }
     .pr-6 {
-        padding-right: 100px;
+        padding-right: 50px;
     }
 </style>
 <script>

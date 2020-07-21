@@ -20,16 +20,5 @@
             <app></app>
         </div>
         <script src="{{ mix('js/vueapp.js') }}" type="text/javascript"></script>
-        <script> 
-                
-                // let elems = document.querySelectorAll('.datepicker') => ({
-                //     selectMonths: true, // Creates a dropdown to control month
-                //     selectYears: 1, // Creates a dropdown of 15 years to control year
-                //     format: "yyyy-mm-dd ",
-                //     setDefaultDate: true
-                // })
-               
-
-        </script>
     </body>
 </html>
