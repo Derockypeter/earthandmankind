@@ -1989,6 +1989,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: [],
@@ -2013,6 +2023,7 @@ __webpack_require__.r(__webpack_exports__);
 
     var uri = '/api/languages';
     this.axios.get(uri).then(function (response) {
+      console.log(response);
       _this.options = response.data;
     });
   },
@@ -2213,6 +2224,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: [],
@@ -2352,12 +2378,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       loaded: false,
       videos: [],
-      books: []
+      books: [],
+      showVids: true,
+      showBooks: false
     };
   },
   created: function created() {
@@ -2381,7 +2423,16 @@ __webpack_require__.r(__webpack_exports__);
       return console.log(response.data);
     });
   },
-  methods: {}
+  methods: {
+    showVideosTab: function showVideosTab() {
+      this.showVids = true;
+      this.showBooks = false;
+    },
+    showBooksTab: function showBooksTab() {
+      this.showVids = false;
+      this.showBooks = true;
+    }
+  }
 });
 
 /***/ }),
@@ -6970,7 +7021,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.uppercase[data-v-66ef69a0] {\n    text-transform: uppercase;\n    /* font-weight: ; */\n}\na[data-v-66ef69a0], .card-title[data-v-66ef69a0] {\n    text-transform: capitalize;\n    font-weight: 500;\n}\n.mb-5[data-v-66ef69a0] {\n    padding-bottom: 50px;\n}\n.link-size[data-v-66ef69a0] {\n    font-size: 1.3em;\n}\n.card[data-v-66ef69a0] {\n    background-image: url('/images/carousel-img/1011537_univ_pnr_lg.jpg');\n}\n", ""]);
+exports.push([module.i, "\n.articles[data-v-66ef69a0]{\n    margin-top: 2vh;\n    box-shadow: 13px 13px 20px grey;\n}\n.article-banner h1[data-v-66ef69a0] {\n    margin: 1.5rem 0rem;\n}\n.uppercase[data-v-66ef69a0] {\n    text-transform: uppercase;\n    /* font-weight: ; */\n}\na[data-v-66ef69a0], .card-title[data-v-66ef69a0] {\n    text-transform: capitalize;\n    font-weight: 500;\n}\n.mb-5[data-v-66ef69a0] {\n    padding-bottom: 50px;\n}\n.link-size[data-v-66ef69a0] {\n    font-size: 1.3em;\n}\n.card[data-v-66ef69a0] {\n    background-image: url('/images/carousel-img/1011537_univ_pnr_lg.jpg');\n}\n", ""]);
 
 // exports
 
@@ -7008,7 +7059,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.banner[data-v-782dcf83] {\n   margin-top: 1vh;\n}\n", ""]);
+exports.push([module.i, "\n.banner.hide-on-med-and-down img[data-v-782dcf83] {\r\n   /* margin-top: 1vh; */\r\n   width: 100%;\r\n   height: 480px;\n}\r\n", ""]);
 
 // exports
 
@@ -7027,7 +7078,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.bold[data-v-52debbed] {\n    font-weight: bold;\n}\n.coursename[data-v-52debbed] {\n    font-size: 24px;\n    text-transform: capitalize;\n}\n.card .card-action span[data-v-52debbed]:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating){\n    margin-right: 24px;\n    transition: color .3s ease;\n    text-transform: uppercase;\n}\na[data-v-52debbed]:hover {\n    color: darkgrey;\n    text-decoration: underline;\n}\n.material-icons[data-v-52debbed] {\n    font-size: 18px;\n}\n.column3[data-v-52debbed] {\n    float: left;\n    width: 50%;\n    padding: 5px;\n    background-color: rgb(253, 253, 253);\n}\n@media screen and (max-width: 500px) {\n.column3[data-v-52debbed] {\n        width: 100%;\n}\n}\n\n", ""]);
+exports.push([module.i, "\n.articles[data-v-52debbed]{\n    margin-top: 2vh;\n    box-shadow: 13px 13px 20px grey;\n}\n.library-banner h1[data-v-52debbed] {\n    margin: 1.5rem 0rem;\n}\n.tabs .tab a[data-v-52debbed], .tabs .tab a[data-v-52debbed]:hover, .tabs .tab a.active[data-v-52debbed] {\n    background-color: grey;\n    color: #f1e8e8;\n}\n.tabsCol[data-v-52debbed] {\n    padding: 0px;\n}\n.bold[data-v-52debbed] {\n    font-weight: bold;\n}\n.coursename[data-v-52debbed] {\n    font-size: 24px;\n    text-transform: capitalize;\n}\n.card .card-action span[data-v-52debbed]:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating){\n    margin-right: 24px;\n    transition: color .3s ease;\n    text-transform: uppercase;\n}\na[data-v-52debbed]:hover {\n    color: darkgrey;\n    text-decoration: underline;\n}\n.material-icons[data-v-52debbed] {\n    font-size: 18px;\n}\n.column3[data-v-52debbed] {\n    float: left;\n    width: 50%;\n    padding: 5px;\n    background-color: rgb(253, 253, 253);\n}\n@media screen and (max-width: 500px) {\n.column3[data-v-52debbed] {\n        width: 100%;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -18026,7 +18077,7 @@ return jQuery;
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.17.15';
+  var VERSION = '4.17.19';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
@@ -21733,8 +21784,21 @@ return jQuery;
      * @returns {Array} Returns the new sorted array.
      */
     function baseOrderBy(collection, iteratees, orders) {
+      if (iteratees.length) {
+        iteratees = arrayMap(iteratees, function(iteratee) {
+          if (isArray(iteratee)) {
+            return function(value) {
+              return baseGet(value, iteratee.length === 1 ? iteratee[0] : iteratee);
+            }
+          }
+          return iteratee;
+        });
+      } else {
+        iteratees = [identity];
+      }
+
       var index = -1;
-      iteratees = arrayMap(iteratees.length ? iteratees : [identity], baseUnary(getIteratee()));
+      iteratees = arrayMap(iteratees, baseUnary(getIteratee()));
 
       var result = baseMap(collection, function(value, key, collection) {
         var criteria = arrayMap(iteratees, function(iteratee) {
@@ -21991,6 +22055,10 @@ return jQuery;
         var key = toKey(path[index]),
             newValue = value;
 
+        if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
+          return object;
+        }
+
         if (index != lastIndex) {
           var objValue = nested[key];
           newValue = customizer ? customizer(objValue, key, nested) : undefined;
@@ -22143,11 +22211,14 @@ return jQuery;
      *  into `array`.
      */
     function baseSortedIndexBy(array, value, iteratee, retHighest) {
-      value = iteratee(value);
-
       var low = 0,
-          high = array == null ? 0 : array.length,
-          valIsNaN = value !== value,
+          high = array == null ? 0 : array.length;
+      if (high === 0) {
+        return 0;
+      }
+
+      value = iteratee(value);
+      var valIsNaN = value !== value,
           valIsNull = value === null,
           valIsSymbol = isSymbol(value),
           valIsUndefined = value === undefined;
@@ -23632,10 +23703,11 @@ return jQuery;
       if (arrLength != othLength && !(isPartial && othLength > arrLength)) {
         return false;
       }
-      // Assume cyclic values are equal.
-      var stacked = stack.get(array);
-      if (stacked && stack.get(other)) {
-        return stacked == other;
+      // Check that cyclic values are equal.
+      var arrStacked = stack.get(array);
+      var othStacked = stack.get(other);
+      if (arrStacked && othStacked) {
+        return arrStacked == other && othStacked == array;
       }
       var index = -1,
           result = true,
@@ -23797,10 +23869,11 @@ return jQuery;
           return false;
         }
       }
-      // Assume cyclic values are equal.
-      var stacked = stack.get(object);
-      if (stacked && stack.get(other)) {
-        return stacked == other;
+      // Check that cyclic values are equal.
+      var objStacked = stack.get(object);
+      var othStacked = stack.get(other);
+      if (objStacked && othStacked) {
+        return objStacked == other && othStacked == object;
       }
       var result = true;
       stack.set(object, other);
@@ -27181,6 +27254,10 @@ return jQuery;
      * // The `_.property` iteratee shorthand.
      * _.filter(users, 'active');
      * // => objects for ['barney']
+     *
+     * // Combining several predicates using `_.overEvery` or `_.overSome`.
+     * _.filter(users, _.overSome([{ 'age': 36 }, ['age', 40]]));
+     * // => objects for ['fred', 'barney']
      */
     function filter(collection, predicate) {
       var func = isArray(collection) ? arrayFilter : baseFilter;
@@ -27930,15 +28007,15 @@ return jQuery;
      * var users = [
      *   { 'user': 'fred',   'age': 48 },
      *   { 'user': 'barney', 'age': 36 },
-     *   { 'user': 'fred',   'age': 40 },
+     *   { 'user': 'fred',   'age': 30 },
      *   { 'user': 'barney', 'age': 34 }
      * ];
      *
      * _.sortBy(users, [function(o) { return o.user; }]);
-     * // => objects for [['barney', 36], ['barney', 34], ['fred', 48], ['fred', 40]]
+     * // => objects for [['barney', 36], ['barney', 34], ['fred', 48], ['fred', 30]]
      *
      * _.sortBy(users, ['user', 'age']);
-     * // => objects for [['barney', 34], ['barney', 36], ['fred', 40], ['fred', 48]]
+     * // => objects for [['barney', 34], ['barney', 36], ['fred', 30], ['fred', 48]]
      */
     var sortBy = baseRest(function(collection, iteratees) {
       if (collection == null) {
@@ -32813,11 +32890,11 @@ return jQuery;
 
       // Use a sourceURL for easier debugging.
       // The sourceURL gets injected into the source that's eval-ed, so be careful
-      // with lookup (in case of e.g. prototype pollution), and strip newlines if any.
-      // A newline wouldn't be a valid sourceURL anyway, and it'd enable code injection.
+      // to normalize all kinds of whitespace, so e.g. newlines (and unicode versions of it) can't sneak in
+      // and escape the comment, thus injecting code that gets evaled.
       var sourceURL = '//# sourceURL=' +
         (hasOwnProperty.call(options, 'sourceURL')
-          ? (options.sourceURL + '').replace(/[\r\n]/g, ' ')
+          ? (options.sourceURL + '').replace(/\s/g, ' ')
           : ('lodash.templateSources[' + (++templateCounter) + ']')
         ) + '\n';
 
@@ -32850,8 +32927,6 @@ return jQuery;
 
       // If `variable` is not specified wrap a with-statement around the generated
       // code to add the data object to the top of the scope chain.
-      // Like with sourceURL, we take care to not check the option's prototype,
-      // as this configuration is a code injection vector.
       var variable = hasOwnProperty.call(options, 'variable') && options.variable;
       if (!variable) {
         source = 'with (obj) {\n' + source + '\n}\n';
@@ -33558,6 +33633,9 @@ return jQuery;
      * values against any array or object value, respectively. See `_.isEqual`
      * for a list of supported value comparisons.
      *
+     * **Note:** Multiple values can be checked by combining several matchers
+     * using `_.overSome`
+     *
      * @static
      * @memberOf _
      * @since 3.0.0
@@ -33573,6 +33651,10 @@ return jQuery;
      *
      * _.filter(objects, _.matches({ 'a': 4, 'c': 6 }));
      * // => [{ 'a': 4, 'b': 5, 'c': 6 }]
+     *
+     * // Checking for several possible values
+     * _.filter(users, _.overSome([_.matches({ 'a': 1 }), _.matches({ 'a': 4 })]));
+     * // => [{ 'a': 1, 'b': 2, 'c': 3 }, { 'a': 4, 'b': 5, 'c': 6 }]
      */
     function matches(source) {
       return baseMatches(baseClone(source, CLONE_DEEP_FLAG));
@@ -33586,6 +33668,9 @@ return jQuery;
      * **Note:** Partial comparisons will match empty array and empty object
      * `srcValue` values against any array or object value, respectively. See
      * `_.isEqual` for a list of supported value comparisons.
+     *
+     * **Note:** Multiple values can be checked by combining several matchers
+     * using `_.overSome`
      *
      * @static
      * @memberOf _
@@ -33603,6 +33688,10 @@ return jQuery;
      *
      * _.find(objects, _.matchesProperty('a', 4));
      * // => { 'a': 4, 'b': 5, 'c': 6 }
+     *
+     * // Checking for several possible values
+     * _.filter(users, _.overSome([_.matchesProperty('a', 1), _.matchesProperty('a', 4)]));
+     * // => [{ 'a': 1, 'b': 2, 'c': 3 }, { 'a': 4, 'b': 5, 'c': 6 }]
      */
     function matchesProperty(path, srcValue) {
       return baseMatchesProperty(path, baseClone(srcValue, CLONE_DEEP_FLAG));
@@ -33826,6 +33915,10 @@ return jQuery;
      * Creates a function that checks if **all** of the `predicates` return
      * truthy when invoked with the arguments it receives.
      *
+     * Following shorthands are possible for providing predicates.
+     * Pass an `Object` and it will be used as an parameter for `_.matches` to create the predicate.
+     * Pass an `Array` of parameters for `_.matchesProperty` and the predicate will be created using them.
+     *
      * @static
      * @memberOf _
      * @since 4.0.0
@@ -33852,6 +33945,10 @@ return jQuery;
      * Creates a function that checks if **any** of the `predicates` return
      * truthy when invoked with the arguments it receives.
      *
+     * Following shorthands are possible for providing predicates.
+     * Pass an `Object` and it will be used as an parameter for `_.matches` to create the predicate.
+     * Pass an `Array` of parameters for `_.matchesProperty` and the predicate will be created using them.
+     *
      * @static
      * @memberOf _
      * @since 4.0.0
@@ -33871,6 +33968,9 @@ return jQuery;
      *
      * func(NaN);
      * // => false
+     *
+     * var matchesFunc = _.overSome([{ 'a': 1 }, { 'a': 2 }])
+     * var matchesPropertyFunc = _.overSome([['a', 1], ['a', 2]])
      */
     var overSome = createOver(arraySome);
 
@@ -38875,38 +38975,40 @@ var render = function() {
           : _c(
               "div",
               [
-                _c("div", { staticClass: "right col s6 l4" }, [
-                  _c(
-                    "select",
-                    {
-                      staticClass: "browser-default",
-                      on: { change: _vm.changeLang }
-                    },
-                    [
-                      _c(
-                        "option",
-                        { attrs: { value: "", disabled: "", selected: "" } },
-                        [_vm._v("Select language")]
-                      ),
-                      _vm._v(" "),
-                      _vm._l(_vm.options, function(option) {
-                        return _c(
+                _c("div", { staticClass: "article-banner" }, [
+                  _c("div", { staticClass: "right col s6 l4" }, [
+                    _c(
+                      "select",
+                      {
+                        staticClass: "browser-default",
+                        on: { change: _vm.changeLang }
+                      },
+                      [
+                        _c(
                           "option",
-                          { key: option.id, domProps: { value: option.id } },
-                          [_vm._v(_vm._s(option.language))]
-                        )
-                      })
-                    ],
-                    2
-                  )
-                ]),
-                _vm._v(" "),
-                _c("h1", [_vm._v("Article")]),
-                _vm._v(" "),
-                _c("p", { staticClass: "lead mb-5" }, [
-                  _vm._v(
-                    "Read my article digest for Inspiration, growth, success, and to maintain a healthy balance in Life."
-                  )
+                          { attrs: { value: "", disabled: "", selected: "" } },
+                          [_vm._v("Select language")]
+                        ),
+                        _vm._v(" "),
+                        _vm._l(_vm.options, function(option) {
+                          return _c(
+                            "option",
+                            { key: option.id, domProps: { value: option.id } },
+                            [_vm._v(_vm._s(option.language))]
+                          )
+                        })
+                      ],
+                      2
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("h1", [_vm._v("Article")]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "lead mb-5" }, [
+                    _vm._v(
+                      "Read my article digest for Inspiration, growth, success, and to maintain a healthy balance in Life."
+                    )
+                  ])
                 ]),
                 _vm._v(" "),
                 _c(
@@ -38915,7 +39017,7 @@ var render = function() {
                   [
                     _vm.posts.length == 0
                       ? _c("div", [
-                          _c("h2", { staticClass: "grey-text" }, [
+                          _c("h5", { staticClass: "grey-text" }, [
                             _vm._v("No Post with Selected Language")
                           ])
                         ])
@@ -39213,44 +39315,63 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("main", { staticClass: "container" }, [
-      _c("div", { staticClass: "banner" }, [
-        _c("img", {
-          staticClass: "img-responsive",
-          attrs: {
-            src: "/images/background-logo/background_logo.jpg",
-            alt: "site logo",
-            srcset: "",
-            width: "100%",
-            height: "490px"
-          }
-        })
+    return _c("main", [
+      _c("div", { staticClass: "hide-on-large-only" }, [
+        _c("div", { staticClass: "banner" }, [
+          _c("img", {
+            staticClass: "responsive-img",
+            attrs: {
+              src: "/images/background-logo/background_logo.jpg",
+              alt: "site logo",
+              width: "100%",
+              height: "490px"
+            }
+          })
+        ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c(
-          "div",
-          { staticClass: "col s12", staticStyle: { "padding-top": "30px" } },
-          [
-            _c("p", { staticClass: "lead" }, [
-              _vm._v(
-                "\n                God is the term given to lightest state of being,\n                with its consciousness. While death is the term\n                given to the hardest state of being with no\n                consciousness. Life is the term given to the product\n                of God and a being, through which the extent of\n                their difference can be determined. \n            "
-              )
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "lead" }, [
-              _vm._v(
-                "Our life, began\n                when the consciousness of God was inserted into the\n                unconscious death. This action, gave birth to life\n                and the first living beings. It is as a result of\n                the successful evolution and integration in life ,\n                that a lighter state of being termed earth was\n                achieved, from which mankind the culminated specie\n                or kind of being from the product of God and earth\n                was made, to further the ultimate purpose of life.\n                "
-              )
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "lead blue-text text-darken-2" }, [
-              _vm._v(
-                "\n                Welcome, as we embark on the journey of discovering\n                more about life.\n            "
-              )
-            ])
-          ]
-        )
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "banner hide-on-med-and-down" }, [
+          _c("img", {
+            staticClass: "responsive-img",
+            attrs: {
+              src: "/images/background-logo/background_logo.jpg",
+              alt: "site logo"
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c(
+            "div",
+            { staticClass: "col s12", staticStyle: { "padding-top": "30px" } },
+            [
+              _c("p", { staticClass: "lead" }, [
+                _vm._v(
+                  "\n                    God is the term given to lightest and brightest state of being\n                    with its consciousness, while death is the term\n                    given to the hardest and hardest state of being with no\n                    consciousness. \n                "
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(
+                  "\n                    Life is the term given to the product\n                    of God and death through which the extent of\n                    their difference can be determined. \n                "
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "lead" }, [
+                _vm._v(
+                  "\n                    Our life, began\n                    when the consciousness of God was inserted into the\n                    unconscious death and this action gave birth to life\n                    and the first living beings. It is as a result of\n                    the successful evolution and integration in life from death\n                    that a lighter state of being termed earth was\n                    achieved from which mankind; the culminated specie\n                    or kind of being from the product of God and earth\n                    was made, to further the ultimate purpose of life.\n                "
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "lead blue-text text-darken-2" }, [
+                _vm._v(
+                  "\n                    Welcome, as we embark on the journey of discovering\n                    more about life.\n                "
+                )
+              ])
+            ]
+          )
+        ])
       ])
     ])
   }
@@ -39288,157 +39409,240 @@ var render = function() {
           : _c("div", [
               _vm._m(1),
               _vm._v(" "),
-              _c("section", { staticClass: "videos" }, [
-                _vm._m(2),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col s12 tabsCol" }, [
+                  _c("ul", { staticClass: "tabs" }, [
+                    _c("li", { staticClass: "tab col s6" }, [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: { click: _vm.showVideosTab }
+                        },
+                        [_vm._v("Videos")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "tab col s6" }, [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: { click: _vm.showBooksTab }
+                        },
+                        [_vm._v("Books")]
+                      )
+                    ])
+                  ])
+                ]),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "course row" },
-                  _vm._l(_vm.videos, function(video) {
-                    return _c(
+                _vm.showVids
+                  ? _c(
                       "div",
-                      { key: video.id, staticClass: "col s12 m6 l4" },
+                      { staticClass: "col s12", attrs: { id: "vidoes" } },
                       [
-                        _c(
-                          "div",
-                          { staticClass: "card" },
-                          [
-                            _c(
-                              "router-link",
-                              {
-                                attrs: {
-                                  to: {
-                                    name: "course",
-                                    params: { coursename: video.coursename }
-                                  }
-                                }
-                              },
-                              [
-                                _c("div", { staticClass: "card-image" }, [
-                                  _c("img", {
-                                    attrs: {
-                                      src: "/courseImages/" + video.image,
-                                      alt: "preview image"
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("span", { staticClass: "card-title" })
-                                ])
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "card-content" }, [
-                              _c("p", { staticClass: "coursename" }, [
-                                _vm._v(_vm._s(video.coursename))
-                              ]),
-                              _vm._v(" "),
-                              _c("p", { staticClass: "bold" }, [
-                                _vm._v(
-                                  "\n                                        Created by Zurich "
-                                ),
-                                _c("span", { staticClass: "right" }, [
-                                  _vm._v(_vm._s(video.language))
-                                ])
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              { staticClass: "card-action" },
-                              [
-                                _c("span", [
-                                  _vm._v(
-                                    _vm._s(video.videos.length) + " videos"
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "router-link",
-                                  {
-                                    attrs: {
-                                      to: {
-                                        name: "course",
-                                        params: { coursename: video.coursename }
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c("span", { staticClass: "right" }, [
+                        _c("section", { staticClass: "videos" }, [
+                          _vm._m(2),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "course row" },
+                            _vm._l(_vm.videos, function(video) {
+                              return _c(
+                                "div",
+                                { key: video.id, staticClass: "col s12 m6 l4" },
+                                [
+                                  _c(
+                                    "div",
+                                    { staticClass: "card" },
+                                    [
                                       _c(
-                                        "i",
+                                        "router-link",
                                         {
-                                          staticClass: "material-icons smaller"
+                                          attrs: {
+                                            to: {
+                                              name: "course",
+                                              params: {
+                                                coursename: video.coursename
+                                              }
+                                            }
+                                          }
                                         },
-                                        [_vm._v("play_circle_outline")]
+                                        [
+                                          _c(
+                                            "div",
+                                            { staticClass: "card-image" },
+                                            [
+                                              _c("img", {
+                                                attrs: {
+                                                  src:
+                                                    "/courseImages/" +
+                                                    video.image,
+                                                  alt: "preview image"
+                                                }
+                                              }),
+                                              _vm._v(" "),
+                                              _c("span", {
+                                                staticClass: "card-title"
+                                              })
+                                            ]
+                                          )
+                                        ]
                                       ),
-                                      _vm._v(" preview")
-                                    ])
-                                  ]
-                                )
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        )
-                      ]
-                    )
-                  }),
-                  0
-                )
-              ]),
-              _vm._v(" "),
-              _c("section", { staticClass: "books" }, [
-                _vm._m(3),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "rowed" },
-                  _vm._l(_vm.books, function(book) {
-                    return _c("div", { key: book.id, staticClass: "column3" }, [
-                      _c("div", [
-                        _c("img", {
-                          staticClass: "responsive-image",
-                          attrs: {
-                            src: "/books/images/" + book.image,
-                            width: "100"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("p", [
-                          _c("em", [_vm._v("Name: " + _vm._s(book.name))])
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass:
-                              "btn btn-small downloadBook waves waves-effect right grey darken-4",
-                            attrs: { href: "books/path/" + book.path }
-                          },
-                          [_vm._v("Download")]
-                        ),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "uppercase" }, [
-                          _c("em", [
-                            _vm._v(
-                              "Language: " + _vm._s(book.language.language)
-                            )
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("h6", { staticClass: "grey-text" }, [
-                          _vm._v(
-                            "\n                                    " +
-                              _vm._s(book.description) +
-                              "\n                                "
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        { staticClass: "card-content" },
+                                        [
+                                          _c(
+                                            "p",
+                                            { staticClass: "coursename" },
+                                            [_vm._v(_vm._s(video.coursename))]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("p", { staticClass: "bold" }, [
+                                            _vm._v(
+                                              "\n                                                Created by Zurich "
+                                            ),
+                                            _c(
+                                              "span",
+                                              { staticClass: "right" },
+                                              [_vm._v(_vm._s(video.language))]
+                                            )
+                                          ])
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        { staticClass: "card-action" },
+                                        [
+                                          _c("span", [
+                                            _vm._v(
+                                              _vm._s(video.videos.length) +
+                                                " videos"
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c(
+                                            "router-link",
+                                            {
+                                              attrs: {
+                                                to: {
+                                                  name: "course",
+                                                  params: {
+                                                    coursename: video.coursename
+                                                  }
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "span",
+                                                { staticClass: "right" },
+                                                [
+                                                  _c(
+                                                    "i",
+                                                    {
+                                                      staticClass:
+                                                        "material-icons smaller"
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "play_circle_outline"
+                                                      )
+                                                    ]
+                                                  ),
+                                                  _vm._v(" preview")
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ]
+                              )
+                            }),
+                            0
                           )
                         ])
-                      ])
-                    ])
-                  }),
-                  0
-                )
+                      ]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.showBooks
+                  ? _c(
+                      "div",
+                      { staticClass: "col s12", attrs: { id: "books" } },
+                      [
+                        _c("section", { staticClass: "books" }, [
+                          _vm._m(3),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "rowed" },
+                            _vm._l(_vm.books, function(book) {
+                              return _c(
+                                "div",
+                                { key: book.id, staticClass: "column3" },
+                                [
+                                  _c("div", [
+                                    _c("img", {
+                                      staticClass: "responsive-image",
+                                      attrs: {
+                                        src: "/books/images/" + book.image,
+                                        width: "100"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("p", [
+                                      _c("em", [
+                                        _vm._v("Name: " + _vm._s(book.name))
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass:
+                                          "btn btn-small downloadBook waves waves-effect right grey darken-4",
+                                        attrs: {
+                                          href: "books/path/" + book.path
+                                        }
+                                      },
+                                      [_vm._v("Download")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("p", { staticClass: "uppercase" }, [
+                                      _c("em", [
+                                        _vm._v(
+                                          "Language: " +
+                                            _vm._s(book.language.language)
+                                        )
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("h6", { staticClass: "grey-text" }, [
+                                      _vm._v(
+                                        "\n                                            " +
+                                          _vm._s(book.description) +
+                                          "\n                                        "
+                                      )
+                                    ])
+                                  ])
+                                ]
+                              )
+                            }),
+                            0
+                          )
+                        ])
+                      ]
+                    )
+                  : _vm._e()
               ])
             ])
       ])
@@ -52266,8 +52470,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\laravel\lVidProject\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\laravel\lVidProject\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\laragon\www\lVidProject\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\laragon\www\lVidProject\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

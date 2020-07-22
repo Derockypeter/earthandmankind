@@ -10,8 +10,9 @@
                             <li><router-link :to="{ name:'home'}">HOME</router-link></li>
                             <li><router-link :to="{ name:'library'}">LIBRARY</router-link></li>
                             <li><router-link :to="{ name:'article'}">ARTICLES</router-link></li>
-                            <li><router-link :to="{name: 'contact'}">CONTACT</router-link></li>
                             <li><router-link :to="{name: 'dictionary'}">DICTIONARY</router-link></li>
+                            <li><router-link :to="{name: 'contact'}">CONTACT</router-link></li>
+                            
 
                             <li v-if='!isLoggedIn' class="green-text"><router-link :to="{ name:'login'}"><em>LOGIN</em></router-link></li>
                             
@@ -31,8 +32,9 @@
                 <li><router-link :to="{ name:'home'}">HOME</router-link></li>
                 <li><router-link :to="{ name:'library'}">LIBRARY</router-link></li>
                 <li><router-link :to="{ name:'article'}">ARTICLES</router-link></li>
-                <li><router-link :to="{name: 'contact'}">CONTACT</router-link></li>
                 <li><router-link :to="{name: 'dictionary'}">DICTIONARY</router-link></li>
+                <li><router-link :to="{name: 'contact'}">CONTACT</router-link></li>
+                
 
                 <li v-if='!isLoggedIn' class="green-text"><router-link :to="{ name:'login'}"><em>LOGIN</em></router-link></li>
                 
@@ -55,6 +57,9 @@
 <style scoped>
     nav ul a:hover {
         background-color: black;
+    }
+    nav .brand-logo {
+        font-size: 1.5rem;
     }
 </style>
 <script>

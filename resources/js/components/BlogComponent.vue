@@ -18,17 +18,20 @@
                     </div>
                 </div>
                 <div v-else>
-                    <div class="right col s6 l4">
-                        <select class="browser-default" @change="changeLang">
-                            <option value="" disabled selected>Select language</option>
-                            <option  v-for="option in options" :key="option.id" :value="option.id">{{option.language}}</option>
-                        </select>
+                    <div class="article-banner">
+                        <div class="right col s6 l4">
+                            <select class="browser-default" @change="changeLang">
+                                <option value="" disabled selected>Select language</option>
+                                <option  v-for="option in options" :key="option.id" :value="option.id">{{option.language}}</option>
+                            </select>
+                        </div>
+                        <h1>Article</h1>
+                        <p class="lead mb-5">Read my article digest for Inspiration, growth, success, and to maintain a healthy balance in Life.</p>
+                        
                     </div>
-                    <h1>Article</h1>
-                    <p class="lead mb-5">Read my article digest for Inspiration, growth, success, and to maintain a healthy balance in Life.</p>
                     <div class="rowed">
                         <div v-if="posts.length == 0">
-                                <h2 class="grey-text">No Post with Selected Language</h2>
+                                <h5 class="grey-text">No Post with Selected Language</h5>
                         </div>
                         <div v-for="post in posts" :key="post.id" class="column hoverable">
                             <div class="card">
@@ -60,6 +63,13 @@
     </div>
 </template>
 <style scoped>
+    .articles{
+        margin-top: 2vh;
+        box-shadow: 13px 13px 20px grey;
+    }
+    .article-banner h1 {
+        margin: 1.5rem 0rem;
+    }
     .uppercase {
         text-transform: uppercase;
         /* font-weight: ; */
@@ -103,6 +113,7 @@
         created() {
             let uri = '/api/languages';
             this.axios.get(uri).then(response => {
+                console.log(response);
                 this.options = response.data;
             });
         },

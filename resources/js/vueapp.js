@@ -94,7 +94,7 @@ const router = new VueRouter ({
             },
             meta: {
                 auth: false,
-                title: 'Library'
+                title: 'Earth and Mankind - Library'
             }
         },
         {
@@ -106,7 +106,7 @@ const router = new VueRouter ({
             },
             meta: {
                 auth: false,
-                title: 'Article'
+                title: 'Earth and Mankind - Article'
             }
         },
         {
@@ -116,7 +116,7 @@ const router = new VueRouter ({
             meta: {
                 requiresAuth: true,
                 is_user: true,
-                title: 'Dashboard'
+                title: 'Earth and Mankind - Dashboard'
             },
         },
         {
@@ -125,7 +125,7 @@ const router = new VueRouter ({
             component: Dictionary,
             meta: {
                 auth: false,
-                title: 'Dictionary'
+                title: 'Earth and Mankind - Dictionary'
             }
         },
         {
@@ -134,7 +134,7 @@ const router = new VueRouter ({
             component: AdminRegister,
             meta: {
                 auth: true,
-                title: 'Register'
+                title: 'Earth and Mankind - Register'
             }
         },
         {
@@ -144,7 +144,7 @@ const router = new VueRouter ({
             meta: {
                 requiresAuth: true,
                 is_admin: true,
-                title: 'Admin'
+                title: 'Earth and Mankind - Admin'
 
             }
         },
@@ -155,7 +155,7 @@ const router = new VueRouter ({
             meta: {
                 requiresAuth: true,
                 is_admin: true,
-                title: 'Admin'
+                title: 'Earth and Mankind - Admin'
             }
         },
         {
@@ -166,7 +166,7 @@ const router = new VueRouter ({
 
             },
             meta: {
-                title: 'Create Post'
+                title: 'Earth and Mankind - Create Post'
             }
         },
         {
@@ -177,7 +177,7 @@ const router = new VueRouter ({
 
             },
             meta: {
-                title: 'Add Video'
+                title: 'Earth and Mankind - Add Video'
               }
         },
         {
@@ -188,7 +188,7 @@ const router = new VueRouter ({
                 
             },
             meta: {
-                title: 'Course'
+                title: 'Earth and Mankind - Course'
             }
         },
         {
@@ -199,7 +199,7 @@ const router = new VueRouter ({
                 
             },
             meta: {
-                title: 'Add Video'
+                title: 'Earth and Mankind - Add Video'
             }
         },
         
@@ -212,7 +212,7 @@ const router = new VueRouter ({
                 
             },
             meta: {
-                title: 'Edit Language'
+                title: 'Earth and Mankind - Edit Language'
             }
         },
         {
@@ -221,7 +221,7 @@ const router = new VueRouter ({
             component: CreateLanguage,
             props: {},
             meta: {
-                title: "Create Language"
+                title: "Earth and Mankind - Create Language"
             }
         },
         {
@@ -232,7 +232,7 @@ const router = new VueRouter ({
                 
             },
             meta: {
-                title: "Video"
+                title: "Earth and Mankind - Video"
             }
         },
         {
@@ -243,7 +243,7 @@ const router = new VueRouter ({
                 
             },
             meta: {
-                title: "Edit Books"
+                title: "Earth and Mankind - Edit Books"
             }
         },
         {
@@ -252,7 +252,7 @@ const router = new VueRouter ({
             component: CreateVideo,
             props: {},
             meta: {
-                title: "Create Video"
+                title: "Earth and Mankind - Create Video"
             }
         },
         {
@@ -263,7 +263,7 @@ const router = new VueRouter ({
 
             },
             meta: {
-                title: "Create Books"
+                title: "Earth and Mankind - Create Books"
             }
         },
         {
@@ -274,7 +274,7 @@ const router = new VueRouter ({
                 
             },
             meta: {
-                title: "Edit Books"
+                title: "Earth and Mankind - Edit Books"
             }
         },
         {
@@ -285,7 +285,7 @@ const router = new VueRouter ({
                 
             },
             meta: {
-                title: "Books"
+                title: "Earth and Mankind - Books"
             }
         },
         {
@@ -296,7 +296,7 @@ const router = new VueRouter ({
 
             },
             meta: {
-                title: "Create Dictionary"
+                title: "Earth and Mankind - Create Dictionary"
             }
         },
         {
@@ -307,7 +307,7 @@ const router = new VueRouter ({
                 
             },
             meta: {
-                title: "Edit Dictionary"
+                title: "Earth and Mankind - Edit Dictionary"
             }
         },
         {
@@ -318,7 +318,7 @@ const router = new VueRouter ({
                 
             },
             meta: {
-                title: "Dictionary"
+                title: "Earth and Mankind - Dictionary"
             }
         },
         {
@@ -333,7 +333,7 @@ const router = new VueRouter ({
             component: Video,
             props: {},
             meta: {
-                title: "Videos"
+                title: "Earth and Mankind - Videos"
             }
         },
         {
@@ -342,7 +342,7 @@ const router = new VueRouter ({
             component: Contact,
             props: {},
             meta: {
-                title: 'Contact'
+                title: 'Earth and Mankind - Contact'
             }
         },
         {
@@ -351,7 +351,7 @@ const router = new VueRouter ({
             component: Login,
             props: {},
             meta: {
-                title: 'Login'
+                title: 'Earth and Mankind - Login'
             }
         },
         {
@@ -360,7 +360,7 @@ const router = new VueRouter ({
             component: Register,
             props: {},
             meta: {
-                title: "Register"
+                title: "Earth and Mankind - Register"
             }
         },
         {
@@ -369,7 +369,7 @@ const router = new VueRouter ({
             component: Password,
             props: {},
             meta: {
-                title: "Password Reset"
+                title: "Earth and Mankind - Password Reset"
             }
         },
         {
@@ -382,7 +382,7 @@ const router = new VueRouter ({
             name: '404', 
             component: NotFound,
             meta: {
-                title: '404'
+                title: 'Earth and Mankind - 404'
             }
         },
         {   path: '*', 

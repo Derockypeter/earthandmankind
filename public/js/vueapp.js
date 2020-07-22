@@ -15564,6 +15564,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -15697,6 +15702,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: [],
@@ -15721,6 +15736,7 @@ __webpack_require__.r(__webpack_exports__);
 
     var uri = '/api/languages';
     this.axios.get(uri).then(function (response) {
+      console.log(response);
       _this.options = response.data;
     });
   },
@@ -16010,6 +16026,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -16126,6 +16155,21 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _CategorySectionComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CategorySectionComponent */ "./resources/js/components/CategorySectionComponent.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -16307,12 +16351,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       loaded: false,
       videos: [],
-      books: []
+      books: [],
+      showVids: true,
+      showBooks: false
     };
   },
   created: function created() {
@@ -16336,7 +16396,16 @@ __webpack_require__.r(__webpack_exports__);
       return console.log(response.data);
     });
   },
-  methods: {}
+  methods: {
+    showVideosTab: function showVideosTab() {
+      this.showVids = true;
+      this.showBooks = false;
+    },
+    showBooksTab: function showBooksTab() {
+      this.showVids = false;
+      this.showBooks = true;
+    }
+  }
 });
 
 /***/ }),
@@ -20085,7 +20154,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nnav ul a[data-v-cd268472]:hover {\n    background-color: black;\n}\n", ""]);
+exports.push([module.i, "\nnav ul a[data-v-cd268472]:hover {\n    background-color: black;\n}\nnav .brand-logo[data-v-cd268472] {\n    font-size: 1.5rem;\n}\n", ""]);
 
 // exports
 
@@ -20104,7 +20173,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.uppercase[data-v-66ef69a0] {\n    text-transform: uppercase;\n    /* font-weight: ; */\n}\na[data-v-66ef69a0], .card-title[data-v-66ef69a0] {\n    text-transform: capitalize;\n    font-weight: 500;\n}\n.mb-5[data-v-66ef69a0] {\n    padding-bottom: 50px;\n}\n.link-size[data-v-66ef69a0] {\n    font-size: 1.3em;\n}\n.card[data-v-66ef69a0] {\n    background-image: url('/images/carousel-img/1011537_univ_pnr_lg.jpg');\n}\n", ""]);
+exports.push([module.i, "\n.articles[data-v-66ef69a0]{\n    margin-top: 2vh;\n    box-shadow: 13px 13px 20px grey;\n}\n.article-banner h1[data-v-66ef69a0] {\n    margin: 1.5rem 0rem;\n}\n.uppercase[data-v-66ef69a0] {\n    text-transform: uppercase;\n    /* font-weight: ; */\n}\na[data-v-66ef69a0], .card-title[data-v-66ef69a0] {\n    text-transform: capitalize;\n    font-weight: 500;\n}\n.mb-5[data-v-66ef69a0] {\n    padding-bottom: 50px;\n}\n.link-size[data-v-66ef69a0] {\n    font-size: 1.3em;\n}\n.card[data-v-66ef69a0] {\n    background-image: url('/images/carousel-img/1011537_univ_pnr_lg.jpg');\n}\n", ""]);
 
 // exports
 
@@ -20142,7 +20211,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.success[data-v-ee753c2c] {\n  background-color: #6abc6e;\n  color: white;\n}\n", ""]);
+exports.push([module.i, "\n.articles[data-v-ee753c2c]{\r\n        margin-top: 2vh;\r\n        box-shadow: 13px 13px 20px grey;\n}\nh1[data-v-ee753c2c] {\r\n        margin: 1.5rem 0rem;\n}\n.success[data-v-ee753c2c] {\r\n  background-color: #6abc6e;\r\n  color: white;\n}\r\n", ""]);
 
 // exports
 
@@ -20161,7 +20230,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.nav-wrapper[data-v-6562976c]{\n    width: 500px;\n    float: right;\n    border: thin solid;\n    border-radius: 20px;\n}\n.chip[data-v-6562976c]:hover {\n    cursor: pointer;\n}\n", ""]);
+exports.push([module.i, "\n.articles[data-v-6562976c]{\n    margin-top: 2vh;\n    box-shadow: 13px 13px 20px grey;\n}\n/* .nav-wrapper{\n    width: 500px;\n    float: right;\n    border: thin solid;\n    border-radius: 20px;\n} */\n.chip[data-v-6562976c]:hover {\n    cursor: pointer;\n}\n.dictHeader h1[data-v-6562976c] {\n    margin-top: 0px;\n}\n", ""]);
 
 // exports
 
@@ -20180,7 +20249,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nfooter[data-v-abfbddf2] {\n    background-color: #f0f0f0;\n}\n.page-footer .footer-copyright[data-v-abfbddf2] {\n    min-height: 0px;\n    padding: 2px 2px;\n}\n", ""]);
+exports.push([module.i, "\nfooter[data-v-abfbddf2] {\n    background-color: #f0f0f0;\n}\n.page-footer .footer-copyright[data-v-abfbddf2] {\n    min-height: 0px;\n    padding: 2px 2px;\n}\n.page-footer[data-v-abfbddf2] {\n    position: relative;\n    top: 50px;\n}\n", ""]);
 
 // exports
 
@@ -20199,7 +20268,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.banner[data-v-782dcf83] {\n   margin-top: 1vh;\n}\n", ""]);
+exports.push([module.i, "\n.banner.hide-on-med-and-down img[data-v-782dcf83] {\r\n   /* margin-top: 1vh; */\r\n   width: 100%;\r\n   height: 480px;\n}\r\n", ""]);
 
 // exports
 
@@ -20218,7 +20287,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.bold[data-v-52debbed] {\n    font-weight: bold;\n}\n.coursename[data-v-52debbed] {\n    font-size: 24px;\n    text-transform: capitalize;\n}\n.card .card-action span[data-v-52debbed]:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating){\n    margin-right: 24px;\n    transition: color .3s ease;\n    text-transform: uppercase;\n}\na[data-v-52debbed]:hover {\n    color: darkgrey;\n    text-decoration: underline;\n}\n.material-icons[data-v-52debbed] {\n    font-size: 18px;\n}\n.column3[data-v-52debbed] {\n    float: left;\n    width: 50%;\n    padding: 5px;\n    background-color: rgb(253, 253, 253);\n}\n@media screen and (max-width: 500px) {\n.column3[data-v-52debbed] {\n        width: 100%;\n}\n}\n\n", ""]);
+exports.push([module.i, "\n.articles[data-v-52debbed]{\n    margin-top: 2vh;\n    box-shadow: 13px 13px 20px grey;\n}\n.library-banner h1[data-v-52debbed] {\n    margin: 1.5rem 0rem;\n}\n.tabs .tab a[data-v-52debbed], .tabs .tab a[data-v-52debbed]:hover, .tabs .tab a.active[data-v-52debbed] {\n    background-color: grey;\n    color: #f1e8e8;\n}\n.tabsCol[data-v-52debbed] {\n    padding: 0px;\n}\n.bold[data-v-52debbed] {\n    font-weight: bold;\n}\n.coursename[data-v-52debbed] {\n    font-size: 24px;\n    text-transform: capitalize;\n}\n.card .card-action span[data-v-52debbed]:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating){\n    margin-right: 24px;\n    transition: color .3s ease;\n    text-transform: uppercase;\n}\na[data-v-52debbed]:hover {\n    color: darkgrey;\n    text-decoration: underline;\n}\n.material-icons[data-v-52debbed] {\n    font-size: 18px;\n}\n.column3[data-v-52debbed] {\n    float: left;\n    width: 50%;\n    padding: 5px;\n    background-color: rgb(253, 253, 253);\n}\n@media screen and (max-width: 500px) {\n.column3[data-v-52debbed] {\n        width: 100%;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -22156,8 +22225,8 @@ var render = function() {
               _c(
                 "li",
                 [
-                  _c("router-link", { attrs: { to: { name: "contact" } } }, [
-                    _vm._v("CONTACT")
+                  _c("router-link", { attrs: { to: { name: "dictionary" } } }, [
+                    _vm._v("DICTIONARY")
                   ])
                 ],
                 1
@@ -22166,8 +22235,8 @@ var render = function() {
               _c(
                 "li",
                 [
-                  _c("router-link", { attrs: { to: { name: "dictionary" } } }, [
-                    _vm._v("DICTIONARY")
+                  _c("router-link", { attrs: { to: { name: "contact" } } }, [
+                    _vm._v("CONTACT")
                   ])
                 ],
                 1
@@ -22271,8 +22340,8 @@ var render = function() {
         _c(
           "li",
           [
-            _c("router-link", { attrs: { to: { name: "contact" } } }, [
-              _vm._v("CONTACT")
+            _c("router-link", { attrs: { to: { name: "dictionary" } } }, [
+              _vm._v("DICTIONARY")
             ])
           ],
           1
@@ -22281,8 +22350,8 @@ var render = function() {
         _c(
           "li",
           [
-            _c("router-link", { attrs: { to: { name: "dictionary" } } }, [
-              _vm._v("DICTIONARY")
+            _c("router-link", { attrs: { to: { name: "contact" } } }, [
+              _vm._v("CONTACT")
             ])
           ],
           1
@@ -22405,38 +22474,40 @@ var render = function() {
           : _c(
               "div",
               [
-                _c("div", { staticClass: "right col s6 l4" }, [
-                  _c(
-                    "select",
-                    {
-                      staticClass: "browser-default",
-                      on: { change: _vm.changeLang }
-                    },
-                    [
-                      _c(
-                        "option",
-                        { attrs: { value: "", disabled: "", selected: "" } },
-                        [_vm._v("Select language")]
-                      ),
-                      _vm._v(" "),
-                      _vm._l(_vm.options, function(option) {
-                        return _c(
+                _c("div", { staticClass: "article-banner" }, [
+                  _c("div", { staticClass: "right col s6 l4" }, [
+                    _c(
+                      "select",
+                      {
+                        staticClass: "browser-default",
+                        on: { change: _vm.changeLang }
+                      },
+                      [
+                        _c(
                           "option",
-                          { key: option.id, domProps: { value: option.id } },
-                          [_vm._v(_vm._s(option.language))]
-                        )
-                      })
-                    ],
-                    2
-                  )
-                ]),
-                _vm._v(" "),
-                _c("h1", [_vm._v("Article")]),
-                _vm._v(" "),
-                _c("p", { staticClass: "lead mb-5" }, [
-                  _vm._v(
-                    "Read my article digest for Inspiration, growth, success, and to maintain a healthy balance in Life."
-                  )
+                          { attrs: { value: "", disabled: "", selected: "" } },
+                          [_vm._v("Select language")]
+                        ),
+                        _vm._v(" "),
+                        _vm._l(_vm.options, function(option) {
+                          return _c(
+                            "option",
+                            { key: option.id, domProps: { value: option.id } },
+                            [_vm._v(_vm._s(option.language))]
+                          )
+                        })
+                      ],
+                      2
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("h1", [_vm._v("Article")]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "lead mb-5" }, [
+                    _vm._v(
+                      "Read my article digest for Inspiration, growth, success, and to maintain a healthy balance in Life."
+                    )
+                  ])
                 ]),
                 _vm._v(" "),
                 _c(
@@ -22445,7 +22516,7 @@ var render = function() {
                   [
                     _vm.posts.length == 0
                       ? _c("div", [
-                          _c("h2", { staticClass: "grey-text" }, [
+                          _c("h5", { staticClass: "grey-text" }, [
                             _vm._v("No Post with Selected Language")
                           ])
                         ])
@@ -22931,38 +23002,40 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container articles" }, [
     _c("div", { staticClass: "main-container" }, [
-      _c("div", { staticClass: "nav-wrapper" }, [
-        _c("form", [
-          _c("div", { staticClass: "input-field" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.search,
-                  expression: "search"
-                }
-              ],
-              attrs: { id: "search", type: "search", required: "" },
-              domProps: { value: _vm.search },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+      _c("div", { staticClass: "row dictHeader" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "col s12 l4" }, [
+          _c("form", [
+            _c("div", { staticClass: "input-field" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.search,
+                    expression: "search"
                   }
-                  _vm.search = $event.target.value
+                ],
+                attrs: { id: "search", type: "search", required: "" },
+                domProps: { value: _vm.search },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.search = $event.target.value
+                  }
                 }
-              }
-            }),
-            _vm._v(" "),
-            _vm._m(0),
-            _vm._v(" "),
-            _c("i", { staticClass: "material-icons" }, [_vm._v("close")])
+              }),
+              _vm._v(" "),
+              _vm._m(1),
+              _vm._v(" "),
+              _c("i", { staticClass: "material-icons" }, [_vm._v("close")])
+            ])
           ])
         ])
       ]),
-      _vm._v(" "),
-      _c("h1", [_vm._v("Dictionary")]),
       _vm._v(" "),
       _c(
         "div",
@@ -23003,7 +23076,7 @@ var render = function() {
             },
             [
               _c("div", { staticClass: "card-content" }, [
-                _vm._m(1),
+                _vm._m(2),
                 _vm._v(" "),
                 _c("span", { staticClass: "card-title" }, [
                   _vm._v(_vm._s(_vm.word))
@@ -23021,6 +23094,14 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col s12 l8" }, [
+      _c("h1", [_vm._v("Dictionary")])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -23167,9 +23248,9 @@ var render = function() {
                   "router-link",
                   {
                     staticClass: "blue-text text-darken-3",
-                    attrs: { to: { name: "library" } }
+                    attrs: { to: { name: "dictionary" } }
                   },
-                  [_vm._v("Videos")]
+                  [_vm._v("Dictionary")]
                 )
               ],
               1
@@ -23197,39 +23278,9 @@ var render = function() {
                   "router-link",
                   {
                     staticClass: "blue-text text-darken-3",
-                    attrs: { to: { name: "contact" } }
+                    attrs: { to: { name: "library" } }
                   },
-                  [_vm._v("Contact Us")]
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "li",
-              [
-                _c(
-                  "router-link",
-                  {
-                    staticClass: "blue-text text-darken-3",
-                    attrs: { to: { name: "login" } }
-                  },
-                  [_vm._v("Login")]
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "li",
-              [
-                _c(
-                  "router-link",
-                  {
-                    staticClass: "blue-text text-darken-3",
-                    attrs: { to: { name: "dictionary" } }
-                  },
-                  [_vm._v("Dictionary")]
+                  [_vm._v("Videos")]
                 )
               ],
               1
@@ -23266,11 +23317,26 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col l6 s12" }, [
       _c("h5", { staticClass: "grey-text text-darken-3" }, [
-        _vm._v("CONTACT US ")
+        _vm._v("For Reactions: ")
       ]),
       _vm._v(" "),
       _c("p", { staticClass: "grey-text text-darken-4" }, [
-        _vm._v("Send us a mail")
+        _c("b", [_vm._v("Send us a mail:")]),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" theearthandmankind@gmail.com, "),
+        _c("br"),
+        _vm._v("infor@earthandmankind.org")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "grey-text text-darken-4" }, [
+        _c("b", [_vm._v("Social media:")]),
+        _vm._v(" "),
+        _c("a", { staticClass: "mdi mdi-facebook" }),
+        _vm._v(" "),
+        _c("a", { staticClass: "mdi mdi-twitter" }),
+        _vm._v(" "),
+        _c("a", { staticClass: "mdi mdi-whatsapp" })
       ])
     ])
   }
@@ -23303,44 +23369,63 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("main", { staticClass: "container" }, [
-      _c("div", { staticClass: "banner" }, [
-        _c("img", {
-          staticClass: "img-responsive",
-          attrs: {
-            src: "/images/background-logo/background_logo.jpg",
-            alt: "site logo",
-            srcset: "",
-            width: "100%",
-            height: "490px"
-          }
-        })
+    return _c("main", [
+      _c("div", { staticClass: "hide-on-large-only" }, [
+        _c("div", { staticClass: "banner" }, [
+          _c("img", {
+            staticClass: "responsive-img",
+            attrs: {
+              src: "/images/background-logo/background_logo.jpg",
+              alt: "site logo",
+              width: "100%",
+              height: "490px"
+            }
+          })
+        ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c(
-          "div",
-          { staticClass: "col s12", staticStyle: { "padding-top": "30px" } },
-          [
-            _c("p", { staticClass: "lead" }, [
-              _vm._v(
-                "\n                God is the term given to lightest state of being,\n                with its consciousness. While death is the term\n                given to the hardest state of being with no\n                consciousness. Life is the term given to the product\n                of God and a being, through which the extent of\n                their difference can be determined. \n            "
-              )
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "lead" }, [
-              _vm._v(
-                "Our life, began\n                when the consciousness of God was inserted into the\n                unconscious death. This action, gave birth to life\n                and the first living beings. It is as a result of\n                the successful evolution and integration in life ,\n                that a lighter state of being termed earth was\n                achieved, from which mankind the culminated specie\n                or kind of being from the product of God and earth\n                was made, to further the ultimate purpose of life.\n                "
-              )
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "lead blue-text text-darken-2" }, [
-              _vm._v(
-                "\n                Welcome, as we embark on the journey of discovering\n                more about life.\n            "
-              )
-            ])
-          ]
-        )
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "banner hide-on-med-and-down" }, [
+          _c("img", {
+            staticClass: "responsive-img",
+            attrs: {
+              src: "/images/background-logo/background_logo.jpg",
+              alt: "site logo"
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c(
+            "div",
+            { staticClass: "col s12", staticStyle: { "padding-top": "30px" } },
+            [
+              _c("p", { staticClass: "lead" }, [
+                _vm._v(
+                  "\n                    God is the term given to lightest and brightest state of being\n                    with its consciousness, while death is the term\n                    given to the hardest and hardest state of being with no\n                    consciousness. \n                "
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(
+                  "\n                    Life is the term given to the product\n                    of God and death through which the extent of\n                    their difference can be determined. \n                "
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "lead" }, [
+                _vm._v(
+                  "\n                    Our life, began\n                    when the consciousness of God was inserted into the\n                    unconscious death and this action gave birth to life\n                    and the first living beings. It is as a result of\n                    the successful evolution and integration in life from death\n                    that a lighter state of being termed earth was\n                    achieved from which mankind; the culminated specie\n                    or kind of being from the product of God and earth\n                    was made, to further the ultimate purpose of life.\n                "
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "lead blue-text text-darken-2" }, [
+                _vm._v(
+                  "\n                    Welcome, as we embark on the journey of discovering\n                    more about life.\n                "
+                )
+              ])
+            ]
+          )
+        ])
       ])
     ])
   }
@@ -23378,157 +23463,240 @@ var render = function() {
           : _c("div", [
               _vm._m(1),
               _vm._v(" "),
-              _c("section", { staticClass: "videos" }, [
-                _vm._m(2),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col s12 tabsCol" }, [
+                  _c("ul", { staticClass: "tabs" }, [
+                    _c("li", { staticClass: "tab col s6" }, [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: { click: _vm.showVideosTab }
+                        },
+                        [_vm._v("Videos")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "tab col s6" }, [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: { click: _vm.showBooksTab }
+                        },
+                        [_vm._v("Books")]
+                      )
+                    ])
+                  ])
+                ]),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "course row" },
-                  _vm._l(_vm.videos, function(video) {
-                    return _c(
+                _vm.showVids
+                  ? _c(
                       "div",
-                      { key: video.id, staticClass: "col s12 m6 l4" },
+                      { staticClass: "col s12", attrs: { id: "vidoes" } },
                       [
-                        _c(
-                          "div",
-                          { staticClass: "card" },
-                          [
-                            _c(
-                              "router-link",
-                              {
-                                attrs: {
-                                  to: {
-                                    name: "course",
-                                    params: { coursename: video.coursename }
-                                  }
-                                }
-                              },
-                              [
-                                _c("div", { staticClass: "card-image" }, [
-                                  _c("img", {
-                                    attrs: {
-                                      src: "/courseImages/" + video.image,
-                                      alt: "preview image"
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("span", { staticClass: "card-title" })
-                                ])
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "card-content" }, [
-                              _c("p", { staticClass: "coursename" }, [
-                                _vm._v(_vm._s(video.coursename))
-                              ]),
-                              _vm._v(" "),
-                              _c("p", { staticClass: "bold" }, [
-                                _vm._v(
-                                  "\n                                        Created by Zurich "
-                                ),
-                                _c("span", { staticClass: "right" }, [
-                                  _vm._v(_vm._s(video.language))
-                                ])
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              { staticClass: "card-action" },
-                              [
-                                _c("span", [
-                                  _vm._v(
-                                    _vm._s(video.videos.length) + " videos"
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "router-link",
-                                  {
-                                    attrs: {
-                                      to: {
-                                        name: "course",
-                                        params: { coursename: video.coursename }
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c("span", { staticClass: "right" }, [
+                        _c("section", { staticClass: "videos" }, [
+                          _vm._m(2),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "course row" },
+                            _vm._l(_vm.videos, function(video) {
+                              return _c(
+                                "div",
+                                { key: video.id, staticClass: "col s12 m6 l4" },
+                                [
+                                  _c(
+                                    "div",
+                                    { staticClass: "card" },
+                                    [
                                       _c(
-                                        "i",
+                                        "router-link",
                                         {
-                                          staticClass: "material-icons smaller"
+                                          attrs: {
+                                            to: {
+                                              name: "course",
+                                              params: {
+                                                coursename: video.coursename
+                                              }
+                                            }
+                                          }
                                         },
-                                        [_vm._v("play_circle_outline")]
+                                        [
+                                          _c(
+                                            "div",
+                                            { staticClass: "card-image" },
+                                            [
+                                              _c("img", {
+                                                attrs: {
+                                                  src:
+                                                    "/courseImages/" +
+                                                    video.image,
+                                                  alt: "preview image"
+                                                }
+                                              }),
+                                              _vm._v(" "),
+                                              _c("span", {
+                                                staticClass: "card-title"
+                                              })
+                                            ]
+                                          )
+                                        ]
                                       ),
-                                      _vm._v(" preview")
-                                    ])
-                                  ]
-                                )
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        )
-                      ]
-                    )
-                  }),
-                  0
-                )
-              ]),
-              _vm._v(" "),
-              _c("section", { staticClass: "books" }, [
-                _vm._m(3),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "rowed" },
-                  _vm._l(_vm.books, function(book) {
-                    return _c("div", { key: book.id, staticClass: "column3" }, [
-                      _c("div", [
-                        _c("img", {
-                          staticClass: "responsive-image",
-                          attrs: {
-                            src: "/books/images/" + book.image,
-                            width: "100"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("p", [
-                          _c("em", [_vm._v("Name: " + _vm._s(book.name))])
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass:
-                              "btn btn-small downloadBook waves waves-effect right grey darken-4",
-                            attrs: { href: "books/path/" + book.path }
-                          },
-                          [_vm._v("Download")]
-                        ),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "uppercase" }, [
-                          _c("em", [
-                            _vm._v(
-                              "Language: " + _vm._s(book.language.language)
-                            )
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("h6", { staticClass: "grey-text" }, [
-                          _vm._v(
-                            "\n                                    " +
-                              _vm._s(book.description) +
-                              "\n                                "
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        { staticClass: "card-content" },
+                                        [
+                                          _c(
+                                            "p",
+                                            { staticClass: "coursename" },
+                                            [_vm._v(_vm._s(video.coursename))]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("p", { staticClass: "bold" }, [
+                                            _vm._v(
+                                              "\n                                                Created by Zurich "
+                                            ),
+                                            _c(
+                                              "span",
+                                              { staticClass: "right" },
+                                              [_vm._v(_vm._s(video.language))]
+                                            )
+                                          ])
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        { staticClass: "card-action" },
+                                        [
+                                          _c("span", [
+                                            _vm._v(
+                                              _vm._s(video.videos.length) +
+                                                " videos"
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c(
+                                            "router-link",
+                                            {
+                                              attrs: {
+                                                to: {
+                                                  name: "course",
+                                                  params: {
+                                                    coursename: video.coursename
+                                                  }
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "span",
+                                                { staticClass: "right" },
+                                                [
+                                                  _c(
+                                                    "i",
+                                                    {
+                                                      staticClass:
+                                                        "material-icons smaller"
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "play_circle_outline"
+                                                      )
+                                                    ]
+                                                  ),
+                                                  _vm._v(" preview")
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ]
+                              )
+                            }),
+                            0
                           )
                         ])
-                      ])
-                    ])
-                  }),
-                  0
-                )
+                      ]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.showBooks
+                  ? _c(
+                      "div",
+                      { staticClass: "col s12", attrs: { id: "books" } },
+                      [
+                        _c("section", { staticClass: "books" }, [
+                          _vm._m(3),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "rowed" },
+                            _vm._l(_vm.books, function(book) {
+                              return _c(
+                                "div",
+                                { key: book.id, staticClass: "column3" },
+                                [
+                                  _c("div", [
+                                    _c("img", {
+                                      staticClass: "responsive-image",
+                                      attrs: {
+                                        src: "/books/images/" + book.image,
+                                        width: "100"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("p", [
+                                      _c("em", [
+                                        _vm._v("Name: " + _vm._s(book.name))
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass:
+                                          "btn btn-small downloadBook waves waves-effect right grey darken-4",
+                                        attrs: {
+                                          href: "books/path/" + book.path
+                                        }
+                                      },
+                                      [_vm._v("Download")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("p", { staticClass: "uppercase" }, [
+                                      _c("em", [
+                                        _vm._v(
+                                          "Language: " +
+                                            _vm._s(book.language.language)
+                                        )
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("h6", { staticClass: "grey-text" }, [
+                                      _vm._v(
+                                        "\n                                            " +
+                                          _vm._s(book.description) +
+                                          "\n                                        "
+                                      )
+                                    ])
+                                  ])
+                                ]
+                              )
+                            }),
+                            0
+                          )
+                        ])
+                      ]
+                    )
+                  : _vm._e()
               ])
             ])
       ])
@@ -47836,7 +48004,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     props: {},
     meta: {
       auth: false,
-      title: 'Library'
+      title: 'Earth and Mankind - Library'
     }
   }, {
     path: '/article',
@@ -47845,7 +48013,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     props: {},
     meta: {
       auth: false,
-      title: 'Article'
+      title: 'Earth and Mankind - Article'
     }
   }, {
     path: '/dashboard',
@@ -47854,7 +48022,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     meta: {
       requiresAuth: true,
       is_user: true,
-      title: 'Dashboard'
+      title: 'Earth and Mankind - Dashboard'
     }
   }, {
     path: '/dictionary',
@@ -47862,7 +48030,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     component: _components_DictionaryComponent_vue__WEBPACK_IMPORTED_MODULE_26__["default"],
     meta: {
       auth: false,
-      title: 'Dictionary'
+      title: 'Earth and Mankind - Dictionary'
     }
   }, {
     path: '/registerasAdminPortal',
@@ -47870,7 +48038,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     component: _components_admin_RegisterComponent_vue__WEBPACK_IMPORTED_MODULE_14__["default"],
     meta: {
       auth: true,
-      title: 'Register'
+      title: 'Earth and Mankind - Register'
     }
   }, {
     path: '/admin/:page',
@@ -47879,7 +48047,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     meta: {
       requiresAuth: true,
       is_admin: true,
-      title: 'Admin'
+      title: 'Earth and Mankind - Admin'
     }
   }, {
     path: '/admin',
@@ -47888,7 +48056,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     meta: {
       requiresAuth: true,
       is_admin: true,
-      title: 'Admin'
+      title: 'Earth and Mankind - Admin'
     }
   }, {
     path: '/admin/create-post',
@@ -47896,7 +48064,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     component: _components_admin_post_CreateComponent_vue__WEBPACK_IMPORTED_MODULE_29__["default"],
     props: {},
     meta: {
-      title: 'Create Post'
+      title: 'Earth and Mankind - Create Post'
     }
   }, {
     path: '/admin/addvid/:id',
@@ -47904,7 +48072,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     component: _components_admin_videos_Addvideo_vue__WEBPACK_IMPORTED_MODULE_40__["default"],
     props: {},
     meta: {
-      title: 'Add Video'
+      title: 'Earth and Mankind - Add Video'
     }
   }, {
     path: '/admin/course/:id',
@@ -47912,7 +48080,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     component: _components_admin_videos_CourseVideos_vue__WEBPACK_IMPORTED_MODULE_41__["default"],
     props: {},
     meta: {
-      title: 'Course'
+      title: 'Earth and Mankind - Course'
     }
   }, {
     path: '/admin/edit-post/:id',
@@ -47920,7 +48088,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     component: _components_admin_post_EditComponent_vue__WEBPACK_IMPORTED_MODULE_30__["default"],
     props: {},
     meta: {
-      title: 'Add Video'
+      title: 'Earth and Mankind - Add Video'
     }
   }, {
     path: '/admin/edit/:id',
@@ -47928,45 +48096,63 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     component: _components_admin_language_EditComponent_vue__WEBPACK_IMPORTED_MODULE_34__["default"],
     props: {},
     meta: {
-      title: 'Edit Language'
+      title: 'Earth and Mankind - Edit Language'
     }
   }, {
     path: '/admin/create-lang',
     name: 'create-lang',
     component: _components_admin_language_CreateComponent_vue__WEBPACK_IMPORTED_MODULE_35__["default"],
-    props: {}
+    props: {},
+    meta: {
+      title: "Earth and Mankind - Create Language"
+    }
   }, {
     path: '/admin/video/index',
     name: 'index-video',
     component: _components_admin_videos_VideoComponent_vue__WEBPACK_IMPORTED_MODULE_39__["default"],
-    props: {}
+    props: {},
+    meta: {
+      title: "Earth and Mankind - Video"
+    }
   }, {
     path: '/admin/edit-course/:id',
     name: 'edit-course',
     component: _components_admin_videos_EditComponent_vue__WEBPACK_IMPORTED_MODULE_37__["default"],
-    props: {}
+    props: {},
+    meta: {
+      title: "Earth and Mankind - Edit Books"
+    }
   }, {
     path: '/admin/create-vid',
     name: 'create-vid',
     component: _components_admin_videos_CreateComponent_vue__WEBPACK_IMPORTED_MODULE_38__["default"],
-    props: {}
+    props: {},
+    meta: {
+      title: "Earth and Mankind - Create Video"
+    }
   }, {
     path: '/admin/create-book',
     name: 'create-book',
     component: _components_admin_book_CreateComponent_vue__WEBPACK_IMPORTED_MODULE_43__["default"],
-    props: {}
+    props: {},
+    meta: {
+      title: "Earth and Mankind - Create Books"
+    }
   }, {
     path: '/admin/edit-book/:id',
     name: 'edit-book',
     component: _components_admin_book_EditComponent_vue__WEBPACK_IMPORTED_MODULE_42__["default"],
-    props: {}
+    props: {},
+    meta: {
+      title: "Earth and Mankind - Edit Books"
+    }
   }, {
     path: '/admin/index',
     name: 'index-book',
     component: _components_admin_book_BookComponent_vue__WEBPACK_IMPORTED_MODULE_44__["default"],
     props: {},
     meta: {
-      title: "Books"
+      title: "Earth and Mankind - Books"
     }
   }, {
     path: '/admin/create-dictionary',
@@ -47974,7 +48160,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     component: _components_admin_dictionary_CreateComponent_vue__WEBPACK_IMPORTED_MODULE_46__["default"],
     props: {},
     meta: {
-      title: "Create Dictionary"
+      title: "Earth and Mankind - Create Dictionary"
     }
   }, {
     path: '/admin/edit-dictionary/:id',
@@ -47982,7 +48168,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     component: _components_admin_dictionary_EditComponent_vue__WEBPACK_IMPORTED_MODULE_45__["default"],
     props: {},
     meta: {
-      title: "Edit Dictionary"
+      title: "Earth and Mankind - Edit Dictionary"
     }
   }, {
     path: '/admin/index',
@@ -47990,7 +48176,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     component: _components_admin_dictionary_DictionaryComponent_vue__WEBPACK_IMPORTED_MODULE_47__["default"],
     props: {},
     meta: {
-      title: "Dictionary"
+      title: "Earth and Mankind - Dictionary"
     }
   }, {
     path: '/post/:title',
@@ -48003,7 +48189,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     component: _components_Video_vue__WEBPACK_IMPORTED_MODULE_23__["default"],
     props: {},
     meta: {
-      title: "Videos"
+      title: "Earth and Mankind - Videos"
     }
   }, {
     path: '/contact',
@@ -48011,7 +48197,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     component: _components_ContactUsComponent_vue__WEBPACK_IMPORTED_MODULE_19__["default"],
     props: {},
     meta: {
-      title: 'Contact'
+      title: 'Earth and Mankind - Contact'
     }
   }, {
     path: '/login',
@@ -48019,7 +48205,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     component: _components_LoginComponent_vue__WEBPACK_IMPORTED_MODULE_21__["default"],
     props: {},
     meta: {
-      title: 'Login'
+      title: 'Earth and Mankind - Login'
     }
   }, {
     path: '/register',
@@ -48027,7 +48213,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     component: _components_RegisterComponent_vue__WEBPACK_IMPORTED_MODULE_22__["default"],
     props: {},
     meta: {
-      title: "Register"
+      title: "Earth and Mankind - Register"
     }
   }, {
     path: '/password_reset/:token',
@@ -48035,7 +48221,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     component: _components_PasswordResetForm_vue__WEBPACK_IMPORTED_MODULE_24__["default"],
     props: {},
     meta: {
-      title: "Password Reset"
+      title: "Earth and Mankind - Password Reset"
     }
   }, {
     path: '/api/auth/login/facebook/callback?code',
@@ -48047,7 +48233,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     name: '404',
     component: _js_components_reusable_NotFound_vue__WEBPACK_IMPORTED_MODULE_27__["default"],
     meta: {
-      title: '404'
+      title: 'Earth and Mankind - 404'
     }
   }, {
     path: '*',
@@ -48122,7 +48308,7 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\laravel\lVidProject\resources\js\vueapp.js */"./resources/js/vueapp.js");
+module.exports = __webpack_require__(/*! C:\laragon\www\lVidProject\resources\js\vueapp.js */"./resources/js/vueapp.js");
 
 
 /***/ })

@@ -1,16 +1,22 @@
 <template>
     <div class="container articles">
         <div class="main-container">
-            <div class="nav-wrapper">
-                <form>
-                    <div class="input-field">
-                    <input id="search" type="search" required v-model="search">
-                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                    <i class="material-icons">close</i>
-                    </div>
-                </form>
+            <div class="row dictHeader">
+                <div class="col s12 l8">
+                    <h1>Dictionary</h1>
+                </div>
+                <div class="col s12 l4">
+                    <form>
+                        <div class="input-field">
+                        <input id="search" type="search" required v-model="search">
+                        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                        <i class="material-icons">close</i>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <h1>Dictionary</h1>
+            
+            
             <div>
                 <div class="chip waves-effect waves-light btn modal-trigger" href="#modal1" v-for="diction in filteredList" :key="diction.id" @click="getMeaning(diction.id, diction.meanings, diction.word)">
                     {{diction.word}}
@@ -34,14 +40,21 @@
     </div>
 </template>
 <style scoped>
-    .nav-wrapper{
+    .articles{
+        margin-top: 2vh;
+        box-shadow: 13px 13px 20px grey;
+    }
+    /* .nav-wrapper{
         width: 500px;
         float: right;
         border: thin solid;
         border-radius: 20px;
-    }
+    } */
     .chip:hover {
         cursor: pointer;
+    }
+    .dictHeader h1 {
+        margin-top: 0px;
     }
 </style>
 <script>

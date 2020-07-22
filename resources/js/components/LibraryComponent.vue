@@ -24,71 +24,85 @@
                             Our Wealth of books and videos to feed your mind with daily motivation and guidance.
                         </p>
                     </section>
-                    <section class="videos">
-                        <div>
-                            <h4>Videos</h4>
+                    <div class="row">
+                        <div class="col s12 tabsCol">
+                            <ul class="tabs">
+                                <li class="tab col s6"><a @click="showVideosTab" href="#">Videos</a></li>
+                                <li class="tab col s6"><a @click="showBooksTab" href="#">Books</a></li>
+                            </ul>
                         </div>
-                        <div class="course row">
-                            <div  v-for="video in videos" :key="video.id" class="col s12 m6 l4">
-                                <div class="card">
-                                    <!-- TODO ON HOVER OVER IMAGE ADD VIDEO BUTTON AND BUY THIS COURSE?PREVIEW-->
-                                    <router-link :to="{name: 'course', params: { coursename: video.coursename }}">
-                                        <div class="card-image">
-                                            <img :src="'/courseImages/'+video.image" alt="preview image" />
-                                            <span class="card-title"></span>
-                                        </div>
-                                    </router-link>
-                                    <div class="card-content">
-                                        <p class="coursename">{{video.coursename}}</p>
-                                        <p class="bold">
-                                            Created by Zurich <span class="right">{{video.language}}</span>
-                                        </p>
-                                        <!-- <p>Category: </p> -->
-                                    </div>
-                                    <div class="card-action">
-                                        <span>{{video.videos.length}} videos</span>
-                                    <router-link :to="{name: 'course', params: { coursename: video.coursename }}">
-                                        <span class="right"><i class="material-icons smaller">play_circle_outline</i> preview</span>
-                                    </router-link>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    
-                    <section class="books">
-                        <div>
-                            <h4>Books</h4>
-                        </div>
-                        <div class="rowed">
-                            <div class="column3" v-for="book in books" :key="book.id">
+                        <div id="vidoes" v-if="showVids" class="col s12">
+                            <section class="videos">
                                 <div>
-                                    <img :src="'/books/images/'+book.image" width="100" class="responsive-image"/>
-                                    <p><em>Name: {{book.name}}</em></p>
-                                    <a class="btn btn-small downloadBook waves waves-effect right grey darken-4" :href="'books/path/'+book.path" >Download</a>
-                                    <p class="uppercase"><em>Language: {{book.language.language}}</em></p>
-                                    <h6 class="grey-text">
-                                        {{book.description}}
-                                    </h6>
+                                    <h4>Videos</h4>
                                 </div>
-                            </div>
-                            
-                        
-                            
-                        </div>
-                        <!-- <div  v-for="book in books" :key="book.id" class="row">
-                            <div class="col l4 s12">
-                                <a :href="'books/path/'+book.path">
-                                    <div>
-                                        <img :src="'/books/images/'+book.image" class="responsive-image"/>
+                                <div class="course row">
+                                    <div  v-for="video in videos" :key="video.id" class="col s12 m6 l4">
+                                        <div class="card">
+                                            <!-- TODO ON HOVER OVER IMAGE ADD VIDEO BUTTON AND BUY THIS COURSE?PREVIEW-->
+                                            <router-link :to="{name: 'course', params: { coursename: video.coursename }}">
+                                                <div class="card-image">
+                                                    <img :src="'/courseImages/'+video.image" alt="preview image" />
+                                                    <span class="card-title"></span>
+                                                </div>
+                                            </router-link>
+                                            <div class="card-content">
+                                                <p class="coursename">{{video.coursename}}</p>
+                                                <p class="bold">
+                                                    Created by Zurich <span class="right">{{video.language}}</span>
+                                                </p>
+                                                <!-- <p>Category: </p> -->
+                                            </div>
+                                            <div class="card-action">
+                                                <span>{{video.videos.length}} videos</span>
+                                            <router-link :to="{name: 'course', params: { coursename: video.coursename }}">
+                                                <span class="right"><i class="material-icons smaller">play_circle_outline</i> preview</span>
+                                            </router-link>
+                                            </div>
+                                        </div>
                                     </div>
+                                </div>
+                            </section>
+                        </div>
+                        <div id="books" v-if="showBooks" class="col s12">
+                            <section class="books">
+                                <div>
+                                    <h4>Books</h4>
+                                </div>
+                                <div class="rowed">
+                                    <div class="column3" v-for="book in books" :key="book.id">
+                                        <div>
+                                            <img :src="'/books/images/'+book.image" width="100" class="responsive-image"/>
+                                            <p><em>Name: {{book.name}}</em></p>
+                                            <a class="btn btn-small downloadBook waves waves-effect right grey darken-4" :href="'books/path/'+book.path" >Download</a>
+                                            <p class="uppercase"><em>Language: {{book.language.language}}</em></p>
+                                            <h6 class="grey-text">
+                                                {{book.description}}
+                                            </h6>
+                                        </div>
+                                    </div>
+                                    
                                 
-                                    <p>{{book.name}}</p>
-                                </a>
-                            </div>
-                            
-                        </div> -->
-                    </section>
+                                    
+                                </div>
+                                <!-- <div  v-for="book in books" :key="book.id" class="row">
+                                    <div class="col l4 s12">
+                                        <a :href="'books/path/'+book.path">
+                                            <div>
+                                                <img :src="'/books/images/'+book.image" class="responsive-image"/>
+                                            </div>
+                                        
+                                            <p>{{book.name}}</p>
+                                        </a>
+                                    </div>
+                                    
+                                </div> -->
+                            </section>
+                        </div>
+                    </div>
+                    
+                    
+                    
                 </div>
             </div>
         </div>
@@ -102,6 +116,8 @@
                 loaded: false,
                 videos: [],
                 books: [],
+                showVids: true,
+                showBooks: false
             }
         },
         created() {
@@ -127,12 +143,32 @@
             
         },
         methods: {
-            
+            showVideosTab(){
+                this.showVids = true;
+                this.showBooks = false;
+            },
+            showBooksTab(){
+                this.showVids = false;
+                this.showBooks = true;
+            }
         },
-
     }
 </script>
 <style scoped>
+    .articles{
+        margin-top: 2vh;
+        box-shadow: 13px 13px 20px grey;
+    }
+    .library-banner h1 {
+        margin: 1.5rem 0rem;
+    }
+    .tabs .tab a, .tabs .tab a:hover, .tabs .tab a.active {
+        background-color: grey;
+        color: #f1e8e8;
+    }
+    .tabsCol {
+        padding: 0px;
+    }
     .bold {
         font-weight: bold;
     }

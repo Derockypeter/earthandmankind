@@ -76,6 +76,13 @@ export default {
 }
 </script>
 <style scoped>
+.articles{
+        margin-top: 2vh;
+        box-shadow: 13px 13px 20px grey;
+    }
+    h1 {
+        margin: 1.5rem 0rem;
+    }
  .success {
   background-color: #6abc6e;
   color: white;
