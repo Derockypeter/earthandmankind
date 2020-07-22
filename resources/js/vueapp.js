@@ -67,7 +67,7 @@ import IndexBook from './components/admin//book/BookComponent.vue'
 
 import EditDictionary from './components/admin/dictionary/EditComponent.vue'
 import CreateDictionary from './components/admin/dictionary/CreateComponent.vue'
-import IndexDictionary from './components/admin//dictionary/BookComponent.vue'
+import IndexDictionary from './components/admin//dictionary/DictionaryComponent.vue'
 
 const router = new VueRouter ({
   mode: 'history',

@@ -47408,7 +47408,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_admin_book_BookComponent_vue__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./components/admin//book/BookComponent.vue */ "./resources/js/components/admin/book/BookComponent.vue");
 /* harmony import */ var _components_admin_dictionary_EditComponent_vue__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./components/admin/dictionary/EditComponent.vue */ "./resources/js/components/admin/dictionary/EditComponent.vue");
 /* harmony import */ var _components_admin_dictionary_CreateComponent_vue__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./components/admin/dictionary/CreateComponent.vue */ "./resources/js/components/admin/dictionary/CreateComponent.vue");
-!(function webpackMissingModule() { var e = new Error("Cannot find module './components/admin//dictionary/BookComponent.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var _components_admin_dictionary_DictionaryComponent_vue__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./components/admin//dictionary/DictionaryComponent.vue */ "./resources/js/components/admin/dictionary/DictionaryComponent.vue");
 
 
 
@@ -47584,7 +47584,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   }, {
     path: '/admin/index',
     name: 'index-dictionary',
-    component: !(function webpackMissingModule() { var e = new Error("Cannot find module './components/admin//dictionary/BookComponent.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()),
+    component: _components_admin_dictionary_DictionaryComponent_vue__WEBPACK_IMPORTED_MODULE_47__["default"],
     props: {}
   }, {
     path: '/post/:title',
