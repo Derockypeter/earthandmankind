@@ -56,9 +56,6 @@ export default {
             
         }
     },
-    created() {
-        
-    },
     methods: {
         sendMail(evt){
             evt.preventDefault();

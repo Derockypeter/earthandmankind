@@ -4,22 +4,24 @@
             <nav style="background-color: #424242;">
                 <div class="container">
                     <div class="nav-wrapper">
-                        <a href="#!" class="brand-logo logo-pr-6">EARTHANDMANKIND.ORG</a>
+                        <a href="/" class="brand-logo logo-pr-6">EARTHANDMANKIND</a>
                         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                         <ul class="right hide-on-med-and-down pr-6">
                             <li><router-link :to="{ name:'home'}">HOME</router-link></li>
-                            <li><router-link :to="{name: 'about'}">ABOUT</router-link></li>
                             <li><router-link :to="{ name:'library'}">LIBRARY</router-link></li>
                             <li><router-link :to="{ name:'article'}">ARTICLES</router-link></li>
                             <li><router-link :to="{name: 'contact'}">CONTACT</router-link></li>
                             <li><router-link :to="{name: 'dictionary'}">DICTIONARY</router-link></li>
 
                             <li v-if='!isLoggedIn' class="green-text"><router-link :to="{ name:'login'}"><em>LOGIN</em></router-link></li>
-                            <!-- <li><a href="#" v-if="isLoggedIn" @click="logOut">LOGOUT</a></li> -->
+                            
                             <li v-if="isLoggedIn">
-                                <router-link :to="{ name: 'dashboard' }" v-if="user_type == 0"> Hi, {{firstname}}</router-link>
+                                <router-link :to="{ name: 'dashboard' }" v-if="user_type == 0" class='dropdown-trigger btn' href='#' data-target='dropdown1'> Hi, {{firstname}}</router-link>
                                 <router-link :to="{ name: 'admin' }" v-if="user_type == 1"> Hi, {{firstname}}</router-link>
                             </li>
+                        </ul>
+                        <ul id='dropdown1' class='dropdown-content'>
+                            <li><a href="#" v-if="isLoggedIn" @click="logOut">LOGOUT</a></li>
                         </ul>
                     </div>
                 </div>
@@ -27,17 +29,19 @@
                 
             <ul class="sidenav" id="mobile-demo">
                 <li><router-link :to="{ name:'home'}">HOME</router-link></li>
-                <li><router-link :to="{name: 'about'}">ABOUT</router-link></li>
                 <li><router-link :to="{ name:'library'}">LIBRARY</router-link></li>
                 <li><router-link :to="{ name:'article'}">ARTICLES</router-link></li>
                 <li><router-link :to="{name: 'contact'}">CONTACT</router-link></li>
                 <li><router-link :to="{name: 'dictionary'}">DICTIONARY</router-link></li>
-                <li v-if='!isLoggedIn' class="blue-text text-lighten-4"><router-link :to="{ name:'login'}"><em>LOGIN</em></router-link></li>
-                <li><a href="#" v-if="isLoggedIn" @click="logOut">LOGOUT</a></li>
+
+                <li v-if='!isLoggedIn' class="green-text"><router-link :to="{ name:'login'}"><em>LOGIN</em></router-link></li>
+                
                 <li v-if="isLoggedIn">
-                    <router-link :to="{ name: 'dashboard' }" v-if="user_type == 0"> Hi, {{firstname}}</router-link>
+                    <router-link :to="{ name: 'dashboard' }" v-if="user_type == 0" class='dropdown-trigger btn' href='#' data-target='dropdown1'> Hi, {{firstname}}</router-link>
                     <router-link :to="{ name: 'admin' }" v-if="user_type == 1"> Hi, {{firstname}}</router-link>
                 </li>
+            </ul>
+            <ul id='dropdown1' class='dropdown-content'>
                 <li><a href="#" v-if="isLoggedIn" @click="logOut">LOGOUT</a></li>
             </ul>
         </header>

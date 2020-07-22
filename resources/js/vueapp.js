@@ -32,7 +32,6 @@ import Article from './components/BlogComponent.vue'
 import CategorySelect from './components/CategorySectionComponent.vue'
 import Contact from './components/ContactUsComponent.vue'
 import Footer from './components/FooterComponent.vue'
-import About from './components/AboutUsComponent.vue'
 import Login from './components/LoginComponent.vue'
 import Register from './components/RegisterComponent.vue'
 import Video from './components/Video.vue'
@@ -79,7 +78,12 @@ const router = new VueRouter ({
             component: Home,
             props: {
 
+            },
+            meta: {
+                auth: false,
+                title: 'Earth and mankind'
             }
+
         },
         {
             path: '/library',
@@ -88,6 +92,10 @@ const router = new VueRouter ({
             props: {
                 
             },
+            meta: {
+                auth: false,
+                title: 'Library'
+            }
         },
         {
             path: '/article',
@@ -95,6 +103,10 @@ const router = new VueRouter ({
             component: Article,
             props: {
                 
+            },
+            meta: {
+                auth: false,
+                title: 'Article'
             }
         },
         {
@@ -103,18 +115,27 @@ const router = new VueRouter ({
             component: Dashboard,
             meta: {
                 requiresAuth: true,
-                is_user: true
-            }
+                is_user: true,
+                title: 'Dashboard'
+            },
         },
         {
             path: '/dictionary',
             name: 'dictionary',
             component: Dictionary,
+            meta: {
+                auth: false,
+                title: 'Dictionary'
+            }
         },
         {
             path: '/registerasAdminPortal',
             name: 'adminRegex',
-            component: AdminRegister
+            component: AdminRegister,
+            meta: {
+                auth: true,
+                title: 'Register'
+            }
         },
         {
             path: '/admin/:page',
@@ -122,7 +143,9 @@ const router = new VueRouter ({
             component: Admin,
             meta: {
                 requiresAuth: true,
-                is_admin: true
+                is_admin: true,
+                title: 'Admin'
+
             }
         },
         {
@@ -131,7 +154,8 @@ const router = new VueRouter ({
             component: Admin,
             meta: {
                 requiresAuth: true,
-                is_admin: true
+                is_admin: true,
+                title: 'Admin'
             }
         },
         {
@@ -140,6 +164,9 @@ const router = new VueRouter ({
             component: CreatePost,
             props: {
 
+            },
+            meta: {
+                title: 'Create Post'
             }
         },
         {
@@ -148,7 +175,10 @@ const router = new VueRouter ({
             component: Addvideo,
             props: {
 
-            }
+            },
+            meta: {
+                title: 'Add Video'
+              }
         },
         {
             path: '/admin/course/:id',
@@ -156,6 +186,9 @@ const router = new VueRouter ({
             component: CourseVid,
             props: {
                 
+            },
+            meta: {
+                title: 'Course'
             }
         },
         {
@@ -164,6 +197,9 @@ const router = new VueRouter ({
             component: EditPost,
             props: {
                 
+            },
+            meta: {
+                title: 'Add Video'
             }
         },
         
@@ -174,6 +210,9 @@ const router = new VueRouter ({
             component: EditLanguage,
             props: {
                 
+            },
+            meta: {
+                title: 'Edit Language'
             }
         },
         {
@@ -226,6 +265,9 @@ const router = new VueRouter ({
             component: IndexBook,
             props: {
                 
+            },
+            meta: {
+                title: "Books"
             }
         },
         {
@@ -234,6 +276,9 @@ const router = new VueRouter ({
             component: CreateDictionary,
             props: {
 
+            },
+            meta: {
+                title: "Create Dictionary"
             }
         },
         {
@@ -242,6 +287,9 @@ const router = new VueRouter ({
             component: EditDictionary,
             props: {
                 
+            },
+            meta: {
+                title: "Edit Dictionary"
             }
         },
         {
@@ -250,6 +298,9 @@ const router = new VueRouter ({
             component: IndexDictionary,
             props: {
                 
+            },
+            meta: {
+                title: "Dictionary"
             }
         },
         {
@@ -262,47 +313,59 @@ const router = new VueRouter ({
             path: '/library/:coursename',
             name: 'course',
             component: Video,
-            props: {}
+            props: {},
+            meta: {
+                title: "Videos"
+            }
         },
         {
             path: '/contact',
             name: 'contact',
             component: Contact,
-            props: {}
-        },
-        {
-            path: '/about',
-            name: 'about',
-            component: About,
-            props: {}
+            props: {},
+            meta: {
+                title: 'Contact'
+            }
         },
         {
             path: '/login',
             name: 'login',
             component: Login,
-            props: {}
+            props: {},
+            meta: {
+                title: 'Login'
+            }
         },
         {
             path: '/register',
             name: 'register',
             component: Register,
-            props: {}
+            props: {},
+            meta: {
+                title: "Register"
+            }
         },
         {
             path: '/password_reset/:token',
             name: 'reset_password',
             component: Password,
-            props: {}
+            props: {},
+            meta: {
+                title: "Password Reset"
+            }
         },
         {
             path: '/api/auth/login/facebook/callback?code',
             name: 'fbLogin',
             component: FBCallback,
-            props: {}
+            props: {},
         },
         {   path: '/404',
             name: '404', 
-            component: NotFound 
+            component: NotFound,
+            meta: {
+                title: '404'
+            }
         },
         {   path: '*', 
             redirect: '/404' 
@@ -344,8 +407,17 @@ const router = new VueRouter ({
             next()
         }
     })
+   
 const app = new Vue({
 	el: '#app',
-	components: { App },
+    components: { App },
+    watch: {
+        '$route':{
+            handler: (to, from) => {
+            document.title = to.meta.title || 'Your Website'
+            },
+            immediate: true
+        }
+    },
 	router
 })

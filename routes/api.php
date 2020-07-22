@@ -71,6 +71,7 @@ Route::group([
 Route::post('/savePost', 'PostController@savePost');
 
 Route::post('/saveVideo', 'CourseController@store');
+Route::apiResource('dictionary', 'DictionaryController'); //Dictionary
 
 
 Route::group(['middleware' => 'auth:api'], function(){
@@ -121,6 +122,5 @@ Route::delete('/delLang/{id}', 'LanguageController@delete');
 });
 
 
-Route::apiResource('dictionary', 'DictionaryController');
 
 

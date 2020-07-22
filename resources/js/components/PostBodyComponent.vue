@@ -118,6 +118,7 @@ export default {
         }
     },
     created() {
+        document.title = this.$route.params.title;
         let uri = `/api/post/${this.$route.params.title}`;
         this.axios.get(uri).then(response => {
             setTimeout(() => {
