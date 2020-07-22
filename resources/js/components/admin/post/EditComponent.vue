@@ -4,8 +4,8 @@
             <div class="main-container">
 				<h1>Edit Post</h1>
                 <div v-if="message" class="alert">{{ message }}</div>
-                <div v-if="! loaded">Loading...</div>
-                <div class="row">
+                <div v-if="!loaded">Loading...</div>
+                <div class="row" v-else>
                     <form class="col s12" @submit.prevent="updatePost" enctype="multipart/form-data">
                         <div class="row">
                             <div class="input-field col s6">

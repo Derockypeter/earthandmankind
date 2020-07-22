@@ -65,6 +65,9 @@ import EditBook from './components/admin/book/EditComponent.vue'
 import CreateBook from './components/admin/book/CreateComponent.vue'
 import IndexBook from './components/admin//book/BookComponent.vue'
 
+import EditDictionary from './components/admin/dictionary/EditComponent.vue'
+import CreateDictionary from './components/admin/dictionary/CreateComponent.vue'
+import IndexDictionary from './components/admin//dictionary/BookComponent.vue'
 
 const router = new VueRouter ({
   mode: 'history',
@@ -215,6 +218,30 @@ const router = new VueRouter ({
             path: '/admin/index',
             name: 'index-book',
             component: IndexBook,
+            props: {
+                
+            }
+        },
+        {
+            path: '/admin/create-dictionary',
+            name: 'create-dictionary',
+            component: CreateDictionary,
+            props: {
+
+            }
+        },
+        {
+            path: '/admin/edit-dictionary/:id',
+            name: 'edit-dictionary',
+            component: EditDictionary,
+            props: {
+                
+            }
+        },
+        {
+            path: '/admin/index',
+            name: 'index-dictionary',
+            component: IndexDictionary,
             props: {
                 
             }

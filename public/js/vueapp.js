@@ -16079,11 +16079,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: [],
@@ -19766,7 +19761,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.banner[data-v-782dcf83] {\n    background-image: url(\"/images/carousel-img/pexels-photo-scaled.jpeg\");\n    background-position: center;\n    color: #ffff;\n    height: 350px;\n    margin-top: 1vh;\n}\n", ""]);
+exports.push([module.i, "\n.banner[data-v-782dcf83] {\n   margin-top: 1vh;\n}\n", ""]);
 
 // exports
 
@@ -22689,13 +22684,11 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col l6 s12" }, [
       _c("h5", { staticClass: "grey-text text-darken-3" }, [
-        _vm._v("We are glad you are here: ")
+        _vm._v("CONTACT US ")
       ]),
       _vm._v(" "),
       _c("p", { staticClass: "grey-text text-darken-4" }, [
-        _vm._v(
-          "We hope you find Our contents to be exciting, contact us for support"
-        )
+        _vm._v("Send us a mail")
       ])
     ])
   }
@@ -22721,59 +22714,52 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "main",
-    { staticClass: "container" },
-    [
-      _vm._m(0),
-      _vm._v(" "),
-      _c("CategorySelection", {
-        attrs: { featurePosts: _vm.featurePosts, books: _vm.books }
-      })
-    ],
-    1
-  )
+  return _vm._m(0)
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "banner" }, [
-      _c(
-        "div",
-        { staticClass: "row", staticStyle: { "padding-left": "50px" } },
-        [
-          _c(
-            "div",
-            {
-              staticClass: "col l8 s12 m6",
-              staticStyle: { "padding-top": "30px" }
-            },
-            [
-              _c("div", { staticStyle: { "min-height": "30px" } }, [
-                _c("p", { staticClass: "lead" }, [
-                  _vm._v(
-                    "\n                        God is the term given to lightest state of being,\n                        with its consciousness. While death is the term\n                        given to the hardest state of being with no\n                        consciousness. Life is the term given to the product\n                        of God and a being, through which the extent of\n                        their difference can be determined. \n                    "
-                  )
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "lead" }, [
-                  _vm._v(
-                    "Our life, began\n                        when the consciousness of God was inserted into the\n                        unconscious death. This action, gave birth to life\n                        and the first living beings. It is as a result of\n                        the successful evolution and integration in life ,\n                        that a lighter state of being termed earth was\n                        achieved, from which mankind the culminated specie\n                        or kind of being from the product of God and earth\n                        was made, to further the ultimate purpose of life.\n                        "
-                  )
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "lead waves-effect " }, [
-                  _vm._v(
-                    "\n                        Welcome, as we embark on the journey of discovering\n                        more about life.\n                    "
-                  )
-                ])
-              ])
-            ]
-          )
-        ]
-      )
+    return _c("main", { staticClass: "container" }, [
+      _c("div", { staticClass: "banner" }, [
+        _c("img", {
+          staticClass: "img-responsive",
+          attrs: {
+            src: "/images/background-logo/background_logo.jpg",
+            alt: "site logo",
+            srcset: "",
+            width: "100%",
+            height: "490px"
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          { staticClass: "col s12", staticStyle: { "padding-top": "30px" } },
+          [
+            _c("p", { staticClass: "lead" }, [
+              _vm._v(
+                "\n                God is the term given to lightest state of being,\n                with its consciousness. While death is the term\n                given to the hardest state of being with no\n                consciousness. Life is the term given to the product\n                of God and a being, through which the extent of\n                their difference can be determined. \n            "
+              )
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "lead" }, [
+              _vm._v(
+                "Our life, began\n                when the consciousness of God was inserted into the\n                unconscious death. This action, gave birth to life\n                and the first living beings. It is as a result of\n                the successful evolution and integration in life ,\n                that a lighter state of being termed earth was\n                achieved, from which mankind the culminated specie\n                or kind of being from the product of God and earth\n                was made, to further the ultimate purpose of life.\n                "
+              )
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "lead blue-text text-darken-2" }, [
+              _vm._v(
+                "\n                Welcome, as we embark on the journey of discovering\n                more about life.\n            "
+              )
+            ])
+          ]
+        )
+      ])
     ])
   }
 ]

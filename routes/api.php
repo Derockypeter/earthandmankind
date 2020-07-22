@@ -121,5 +121,6 @@ Route::delete('/delLang/{id}', 'LanguageController@delete');
 });
 
 
+Route::apiResource('dictionary', 'DictionaryController');
 
 

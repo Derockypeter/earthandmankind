@@ -3,8 +3,8 @@
         <div class="container">
             <div class="row">
                 <div class="col l6 s12">
-                    <h5 class="grey-text text-darken-3">We are glad you are here: </h5>
-                    <p class="grey-text text-darken-4">We hope you find Our contents to be exciting, contact us for support</p>
+                    <h5 class="grey-text text-darken-3">CONTACT US </h5>
+                    <p class="grey-text text-darken-4">Send us a mail</p>
                 </div>
                 <div class="col l4 offset-l2 s12">
                     <h5 class="grey-text">Explore Again</h5>

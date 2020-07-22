@@ -10,6 +10,7 @@
                         <li><a @click="setComponent('videos')">Videos</a></li>
                         <li><a @click="setComponent('books')">Books</a></li>
                         <li><a @click="setComponent('users')">Users</a></li>
+                        <li><a @click="setComponent('dictionary')">Users</a></li>
                     </ul>
                 </div>
             </nav>
@@ -44,6 +45,7 @@ import Posts from './post/PostComponent'
 import languages from './language/LanguageComponent'
 import Videos from './videos/VideoComponent'
 import Books from './book/BookComponent'
+import Dictionary from './dictionary/DictionaryComponent'
 import Axios from 'axios'
 
 export default {
@@ -60,6 +62,7 @@ export default {
         languages,
         Videos,
         Books,
+        Dictionary,
     },
     beforeMount() {
         this.setComponent(this.$route.params.page)
@@ -89,6 +92,10 @@ export default {
                 case "books":
                     this.activeComponent = Books
                     this.$router.push({name: 'admin-pages', params: {page: 'books'}})
+                    break;
+                case "dictionary":
+                    this.activeComponent = Dictionary
+                    this.$router.push({name: 'admin-pages', params: {page: 'dictionary'}})
                     break;
                 default:
                     this.activeComponent = Main
