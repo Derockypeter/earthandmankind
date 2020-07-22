@@ -15,7 +15,7 @@ class DictionaryController extends Controller
      */
     public function index()
     {
-        $dictionary = Dictionary::all();
+        $dictionary = Dictionary::all()->sortBy('word');
         return response(['dictionary' => new DictionaryResource($dictionary), 'message' => 'Retrieved Success'], 200);
     }
 
