@@ -220,6 +220,9 @@ const router = new VueRouter ({
             name: 'create-lang',
             component: CreateLanguage,
             props: {},
+            meta: {
+                title: "Create Language"
+            }
         },
         {
             path: '/admin/video/index',
@@ -227,6 +230,9 @@ const router = new VueRouter ({
             component: IndexVideo,
             props: {
                 
+            },
+            meta: {
+                title: "Video"
             }
         },
         {
@@ -235,6 +241,9 @@ const router = new VueRouter ({
             component: EditVideo,
             props: {
                 
+            },
+            meta: {
+                title: "Edit Books"
             }
         },
         {
@@ -242,6 +251,9 @@ const router = new VueRouter ({
             name: 'create-vid',
             component: CreateVideo,
             props: {},
+            meta: {
+                title: "Create Video"
+            }
         },
         {
             path: '/admin/create-book',
@@ -249,6 +261,9 @@ const router = new VueRouter ({
             component: CreateBook,
             props: {
 
+            },
+            meta: {
+                title: "Create Books"
             }
         },
         {
@@ -257,6 +272,9 @@ const router = new VueRouter ({
             component: EditBook,
             props: {
                 
+            },
+            meta: {
+                title: "Edit Books"
             }
         },
         {
