@@ -17330,6 +17330,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -17338,7 +17343,8 @@ __webpack_require__.r(__webpack_exports__);
       posts: [],
       courses: [],
       books: [],
-      users: []
+      users: [],
+      dictionary: []
     };
   },
   mounted: function mounted() {
@@ -17358,6 +17364,9 @@ __webpack_require__.r(__webpack_exports__);
     });
     this.axios.get('/api/courses/').then(function (response) {
       return _this.courses = response.data;
+    });
+    this.axios.get('/api/dictionary/').then(function (response) {
+      return _this.dictionary = response.data.dictionary;
     });
   }
 });
@@ -17989,6 +17998,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -18008,7 +18021,7 @@ __webpack_require__.r(__webpack_exports__);
 
   },
   methods: {
-    dictionary: function dictionary(evt) {
+    createDictionary: function createDictionary(evt) {
       var _this = this;
 
       evt.preventDefault();
@@ -18110,11 +18123,11 @@ __webpack_require__.r(__webpack_exports__);
     this.axios.get(uri).then(function (response) {
       setTimeout(function () {
         _this.loaded = true;
-        _this.dictionary = response.data;
+        _this.dictionary = response.data.dictionary;
         console.log(response);
       }, 5000);
     })["catch"](function (err) {
-      return console.error.response.data.data;
+      return console.log(err.response.data);
     });
   },
   methods: {
@@ -18185,10 +18198,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      loaded: false,
       saving: false,
       message: false,
       dictionary: {},
@@ -18207,7 +18227,7 @@ __webpack_require__.r(__webpack_exports__);
     this.axios.get(uri).then(function (response) {
       setTimeout(function () {
         _this.loaded = true;
-        _this.dictionary = response.data;
+        _this.dictionary = response.data.dictionary;
         console.log(response.data);
       }, 5000);
     });
@@ -25021,7 +25041,7 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v("Users")]
+                [_vm._v("Dictionary")]
               )
             ])
           ])
@@ -25116,6 +25136,17 @@ var render = function() {
           _vm._v("Books"),
           _c("span", { staticClass: "badge" }, [
             _vm._v(" (" + _vm._s(_vm.books.length) + ")")
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col m1" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "col m3 product-box big-text" }, [
+        _c("a", { attrs: { href: "/admin/dictionary" } }, [
+          _vm._v("Dictionary"),
+          _c("span", { staticClass: "badge" }, [
+            _vm._v(" (" + _vm._s(_vm.dictionary.length) + ")")
           ])
         ])
       ])
@@ -26340,7 +26371,7 @@ var render = function() {
             {
               staticClass: "col s12",
               attrs: { enctype: "multipart/form-data" },
-              on: { submit: _vm.dictionary }
+              on: { submit: _vm.createDictionary }
             },
             [
               _c("div", { staticClass: "row" }, [
@@ -26381,8 +26412,7 @@ var render = function() {
                     _c("tinymce", {
                       attrs: {
                         plugins: _vm.myPlugins,
-                        toolbar: _vm.myToolbar1,
-                        init: _vm.myInit
+                        toolbar: _vm.myToolbar1
                       },
                       model: {
                         value: _vm.dictionary.meanings,
@@ -26395,7 +26425,9 @@ var render = function() {
                   ],
                   1
                 )
-              ])
+              ]),
+              _vm._v(" "),
+              _vm._m(0)
             ]
           )
         ])
@@ -26403,7 +26435,20 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col s12" }, [
+        _c("button", { staticClass: "btn waves waves-effect grey" }, [
+          _vm._v("Create Dictionary")
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -26444,7 +26489,7 @@ var render = function() {
                     staticClass: "btn grey",
                     attrs: { to: { name: "create-dictionary" } }
                   },
-                  [_vm._v("Create Dictionary")]
+                  [_vm._v("New")]
                 )
               ],
               1
@@ -26577,84 +26622,104 @@ var render = function() {
   return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "articles" }, [
       _c("div", { staticClass: "main-container" }, [
-        _c("h1", [_vm._v("Create Word")]),
+        _c("h1", [_vm._v("Edit Dictionary")]),
         _vm._v(" "),
         _vm.message
           ? _c("div", { staticClass: "alert" }, [_vm._v(_vm._s(_vm.message))])
           : _vm._e(),
         _vm._v(" "),
-        !_vm.loaded ? _c("div", [_vm._v("Loading...")]) : _vm._e(),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c(
-            "form",
-            {
-              staticClass: "col s12",
-              attrs: { enctype: "multipart/form-data" },
-              on: { submit: _vm.updateDictionary }
-            },
-            [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "input-field col s12" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.dictionary.word,
-                        expression: "dictionary.word"
-                      }
-                    ],
-                    staticClass: "validate",
-                    attrs: {
-                      placeholder: "Enter Word",
-                      id: "word",
-                      type: "text"
-                    },
-                    domProps: { value: _vm.dictionary.word },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.dictionary, "word", $event.target.value)
-                      }
-                    }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _c(
-                  "div",
-                  { staticClass: "input-field col s12" },
-                  [
-                    _c("tinymce", {
-                      attrs: {
-                        plugins: _vm.myPlugins,
-                        toolbar: _vm.myToolbar1,
-                        init: _vm.myInit
-                      },
-                      model: {
-                        value: _vm.dictionary.meanings,
-                        callback: function($$v) {
-                          _vm.$set(_vm.dictionary, "meanings", $$v)
+        !_vm.loaded
+          ? _c("div", { staticClass: "progress" }, [
+              _c("div", { staticClass: "indeterminate" })
+            ])
+          : _c("div", { staticClass: "row" }, [
+              _c(
+                "form",
+                {
+                  staticClass: "col s12",
+                  attrs: { enctype: "multipart/form-data" },
+                  on: { submit: _vm.updateDictionary }
+                },
+                [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "input-field col s12" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.dictionary.word,
+                            expression: "dictionary.word"
+                          }
+                        ],
+                        staticClass: "validate",
+                        attrs: {
+                          placeholder: "Enter Word",
+                          id: "word",
+                          type: "text"
                         },
-                        expression: "dictionary.meanings"
-                      }
-                    })
-                  ],
-                  1
-                )
-              ])
-            ]
-          )
-        ])
+                        domProps: { value: _vm.dictionary.word },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.dictionary,
+                              "word",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c(
+                      "div",
+                      { staticClass: "input-field col s12" },
+                      [
+                        _c("tinymce", {
+                          attrs: {
+                            plugins: _vm.myPlugins,
+                            toolbar: _vm.myToolbar1
+                          },
+                          model: {
+                            value: _vm.dictionary.meanings,
+                            callback: function($$v) {
+                              _vm.$set(_vm.dictionary, "meanings", $$v)
+                            },
+                            expression: "dictionary.meanings"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(0)
+                ]
+              )
+            ])
       ])
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col s12" }, [
+        _c("button", { staticClass: "btn waves waves-effect grey" }, [
+          _vm._v("Edit")
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 

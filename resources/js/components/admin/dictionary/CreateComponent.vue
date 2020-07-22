@@ -5,22 +5,26 @@
                 <h1>Create Word</h1>
                 <div v-if="message" class="alert">{{ message }}</div>
                 <div class="row">
-                    <form class="col s12" @submit="dictionary" enctype="multipart/form-data">
+                    <form class="col s12" @submit="createDictionary" enctype="multipart/form-data">
                         <div class="row">
                             <div class="input-field col s12">
                                 <input placeholder="Enter Word" v-model="dictionary.word" id="word" type="text" class="validate">
                             </div>
                         </div>
-                         <div class="row">
-                                <div class="input-field col s12">
-                                   <tinymce v-model="dictionary.meanings"
-                                        :plugins="myPlugins" 
-                                        :toolbar ="myToolbar1"
-                                        :init="myInit"
-                                    >
-                                    </tinymce>   
-                                </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <tinymce v-model="dictionary.meanings"
+                                    :plugins="myPlugins" 
+                                    :toolbar ="myToolbar1"
+                                >
+                                </tinymce>   
                             </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12">
+                                <button class="btn waves waves-effect grey">Create Dictionary</button>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -50,7 +54,7 @@ import Editor from '@tinymce/tinymce-vue';
          'tinymce': Editor // <- Important part
     },
     methods: {
-		dictionary(evt) {
+		createDictionary(evt) {
             evt.preventDefault();
             this.saving = true
             if(this.dictionary.word != '' && this.dictionary.meanings != ''){

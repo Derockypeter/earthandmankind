@@ -58,7 +58,7 @@ class DictionaryController extends Controller
      */
     public function show(Dictionary $dictionary)
     {
-        return response(['credit' => new DictionaryResource($dictionary), 'message' => 'Retrieved Success'], 200);
+        return response(['dictionary' => new DictionaryResource($dictionary), 'message' => 'Retrieved Success'], 200);
     }
 
     /**

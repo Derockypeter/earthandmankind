@@ -20,7 +20,7 @@
             <div class="row">
                 <div class="col m10"></div>
                 <div class="col m2">
-                    <router-link :to="{ name: 'create-dictionary' }" class="btn grey">Create Dictionary</router-link>
+                    <router-link :to="{ name: 'create-dictionary' }" class="btn grey">New</router-link>
                 </div>
             </div><br />
 
@@ -63,12 +63,12 @@
             this.axios.get(uri).then(response => {
                 setTimeout(() => {
                     this.loaded = true;
-                    this.dictionary = response.data;
+                    this.dictionary = response.data.dictionary;
                     console.log(response)
                 }, 5000);
             })
             .catch(err => 
-                console.error.response.data.data
+                console.log(err.response.data)
             )
         },
         methods: {

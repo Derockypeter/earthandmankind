@@ -10,7 +10,7 @@
                         <li><a @click="setComponent('videos')">Videos</a></li>
                         <li><a @click="setComponent('books')">Books</a></li>
                         <li><a @click="setComponent('users')">Users</a></li>
-                        <li><a @click="setComponent('dictionary')">Users</a></li>
+                        <li><a @click="setComponent('dictionary')">Dictionary</a></li>
                     </ul>
                 </div>
             </nav>

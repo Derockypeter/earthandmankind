@@ -24,12 +24,17 @@
             <div class="col m3 product-box big-text">
                 <a href='/admin/books'>Books<span class="badge"> ({{books.length}})</span></a>
             </div>
+             <div class="col m1">
+            </div>
+            <div class="col m3 product-box big-text">
+                <a href='/admin/dictionary'>Dictionary<span class="badge"> ({{dictionary.length}})</span></a>
+            </div>
         </div>
     </div>
         
 </template>
 
-    <script>
+<script>
     export default {
         data() {
             return {
@@ -38,7 +43,8 @@
                 posts : [],
                 courses: [],
                 books: [],
-                users : []
+                users : [],
+                dictionary: [],
             }
         },
         mounted() {
@@ -47,14 +53,15 @@
             this.axios.get('/api/languages/').then(response => this.languages = response.data)
             this.axios.get('/api/books/').then(response => this.books = response.data.data)
             this.axios.get('/api/courses/').then(response => this.courses = response.data)
+            this.axios.get('/api/dictionary/').then(response => this.dictionary = response.data.dictionary)
         }
     }
-    </script>
+</script>
 
-    <style scoped>
+<style scoped>
     .mb {
         padding-bottom: 30px;
     }
     .big-text { font-size: 4vh; }
     .product-box { border: 1px solid #cccccc; padding: 10px 15px; height: 10vh }
-    </style>
+</style>

@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-
+         <script src="https://cdn.tiny.cloud/1/6zjol00y8s1o0g0xqwi9t0ahjscqrdzxflgmh4dod1tbc261/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
         
         <title>Laravel</title>
 
