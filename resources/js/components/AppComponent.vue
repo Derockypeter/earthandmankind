@@ -12,8 +12,10 @@
                             <li><router-link :to="{ name:'library'}">LIBRARY</router-link></li>
                             <li><router-link :to="{ name:'article'}">ARTICLES</router-link></li>
                             <li><router-link :to="{name: 'contact'}">CONTACT</router-link></li>
+                            <li><router-link :to="{name: 'dictionary'}">DICTIONARY</router-link></li>
+
                             <li v-if='!isLoggedIn' class="green-text"><router-link :to="{ name:'login'}"><em>LOGIN</em></router-link></li>
-                            <li><a href="#" v-if="isLoggedIn" @click="logOut">LOGOUT</a></li>
+                            <!-- <li><a href="#" v-if="isLoggedIn" @click="logOut">LOGOUT</a></li> -->
                             <li v-if="isLoggedIn">
                                 <router-link :to="{ name: 'dashboard' }" v-if="user_type == 0"> Hi, {{firstname}}</router-link>
                                 <router-link :to="{ name: 'admin' }" v-if="user_type == 1"> Hi, {{firstname}}</router-link>
@@ -29,12 +31,12 @@
                 <li><router-link :to="{ name:'library'}">LIBRARY</router-link></li>
                 <li><router-link :to="{ name:'article'}">ARTICLES</router-link></li>
                 <li><router-link :to="{name: 'contact'}">CONTACT</router-link></li>
+                <li><router-link :to="{name: 'dictionary'}">DICTIONARY</router-link></li>
                 <li v-if='!isLoggedIn' class="blue-text text-lighten-4"><router-link :to="{ name:'login'}"><em>LOGIN</em></router-link></li>
                 <li><a href="#" v-if="isLoggedIn" @click="logOut">LOGOUT</a></li>
                 <li v-if="isLoggedIn">
                     <router-link :to="{ name: 'dashboard' }" v-if="user_type == 0"> Hi, {{firstname}}</router-link>
                     <router-link :to="{ name: 'admin' }" v-if="user_type == 1"> Hi, {{firstname}}</router-link>
-
                 </li>
                 <li><a href="#" v-if="isLoggedIn" @click="logOut">LOGOUT</a></li>
             </ul>
@@ -47,14 +49,8 @@
     </div>
 </template>
 <style scoped>
-    nav .brand-logo {
-        padding-left: 100px;
-    }
     nav ul a:hover {
         background-color: black;
-    }
-    .pr-6 {
-        padding-right: 50px;
     }
 </style>
 <script>

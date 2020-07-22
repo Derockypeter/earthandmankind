@@ -1,7 +1,7 @@
 <template>
-    <footer class="page-footer darken-4 container">
+    <footer class="page-footer darken-4">
         <div class="container">
-            <div class="row">
+            <div class="row container">
                 <div class="col l6 s12">
                     <h5 class="grey-text text-darken-3">CONTACT US </h5>
                     <p class="grey-text text-darken-4">Send us a mail</p>
@@ -14,6 +14,7 @@
                         <li><router-link :to="{name: 'about'}" class="blue-text text-darken-3">About Us</router-link></li>
                         <li><router-link :to="{name: 'contact'}" class="blue-text text-darken-3">Contact Us</router-link></li>
                         <li><router-link :to="{ name:'login'}" class="blue-text text-darken-3">Login</router-link></li>
+                        <li><router-link :to="{name: 'dictionary'}" class="blue-text text-darken-3">Dictionary</router-link></li>
                     </ul>
                 </div>
             </div>

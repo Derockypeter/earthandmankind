@@ -2,7 +2,7 @@
     <div class="container articles">
        
         <div class="row main-container">
-             <h1>Contact</h1>
+            <h1>Contact</h1>
             <div class="col l5 s12">
                 <h5>Our Location</h5>
                 <p class="grey-text text-darken-4">

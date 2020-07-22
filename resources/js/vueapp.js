@@ -38,6 +38,7 @@ import Register from './components/RegisterComponent.vue'
 import Video from './components/Video.vue'
 import Password from './components/PasswordResetForm.vue'
 import FBCallback from './components/FBCallback.vue'
+import Dictionary from './components/DictionaryComponent.vue'
 
 // REUSABLE
 import NotFound from '../js/components/reusable/NotFound.vue'
@@ -104,6 +105,11 @@ const router = new VueRouter ({
                 requiresAuth: true,
                 is_user: true
             }
+        },
+        {
+            path: '/dictionary',
+            name: 'dictionary',
+            component: Dictionary,
         },
         {
             path: '/registerasAdminPortal',
