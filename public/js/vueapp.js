@@ -23154,7 +23154,28 @@ var render = function() {
   return _c("footer", { staticClass: "page-footer darken-4" }, [
     _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "row container" }, [
-        _vm._m(0),
+        _c("div", { staticClass: "col l6 s12" }, [
+          _c("h5", { staticClass: "grey-text text-darken-3" }, [
+            _vm._v("CONTACT US ")
+          ]),
+          _vm._v(" "),
+          _c(
+            "p",
+            { staticClass: "grey-text text-darken-4" },
+            [
+              _vm._v("Send us a mail "),
+              _c(
+                "router-link",
+                {
+                  staticClass: "blue-text text-darken-3",
+                  attrs: { to: { name: "contact" } }
+                },
+                [_vm._v("@theearthandmankind.gmail.com")]
+              )
+            ],
+            1
+          )
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "col l4 offset-l2 s12" }, [
           _c("h5", { staticClass: "grey-text" }, [_vm._v("Explore Again")]),
@@ -23259,22 +23280,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col l6 s12" }, [
-      _c("h5", { staticClass: "grey-text text-darken-3" }, [
-        _vm._v("CONTACT US ")
-      ]),
-      _vm._v(" "),
-      _c("p", { staticClass: "grey-text text-darken-4" }, [
-        _vm._v("Send us a mail")
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -47934,32 +47940,50 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     path: '/admin/create-lang',
     name: 'create-lang',
     component: _components_admin_language_CreateComponent_vue__WEBPACK_IMPORTED_MODULE_35__["default"],
-    props: {}
+    props: {},
+    meta: {
+      title: "Create Language"
+    }
   }, {
     path: '/admin/video/index',
     name: 'index-video',
     component: _components_admin_videos_VideoComponent_vue__WEBPACK_IMPORTED_MODULE_39__["default"],
-    props: {}
+    props: {},
+    meta: {
+      title: "Video"
+    }
   }, {
     path: '/admin/edit-course/:id',
     name: 'edit-course',
     component: _components_admin_videos_EditComponent_vue__WEBPACK_IMPORTED_MODULE_37__["default"],
-    props: {}
+    props: {},
+    meta: {
+      title: "Edit Books"
+    }
   }, {
     path: '/admin/create-vid',
     name: 'create-vid',
     component: _components_admin_videos_CreateComponent_vue__WEBPACK_IMPORTED_MODULE_38__["default"],
-    props: {}
+    props: {},
+    meta: {
+      title: "Create Video"
+    }
   }, {
     path: '/admin/create-book',
     name: 'create-book',
     component: _components_admin_book_CreateComponent_vue__WEBPACK_IMPORTED_MODULE_43__["default"],
-    props: {}
+    props: {},
+    meta: {
+      title: "Create Books"
+    }
   }, {
     path: '/admin/edit-book/:id',
     name: 'edit-book',
     component: _components_admin_book_EditComponent_vue__WEBPACK_IMPORTED_MODULE_42__["default"],
-    props: {}
+    props: {},
+    meta: {
+      title: "Edit Books"
+    }
   }, {
     path: '/admin/index',
     name: 'index-book',

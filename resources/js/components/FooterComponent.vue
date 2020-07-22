@@ -4,7 +4,7 @@
             <div class="row container">
                 <div class="col l6 s12">
                     <h5 class="grey-text text-darken-3">CONTACT US </h5>
-                    <p class="grey-text text-darken-4">Send us a mail</p>
+                    <p class="grey-text text-darken-4">Send us a mail <router-link :to="{name: 'contact'}" class="blue-text text-darken-3">@theearthandmankind.gmail.com</router-link></p>
                 </div>
                 <div class="col l4 offset-l2 s12">
                     <h5 class="grey-text">Explore Again</h5>
