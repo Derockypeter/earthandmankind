@@ -23280,7 +23280,7 @@ var render = function() {
                     staticClass: "blue-text text-darken-3",
                     attrs: { to: { name: "library" } }
                   },
-                  [_vm._v("Videos")]
+                  [_vm._v("Library")]
                 )
               ],
               1
