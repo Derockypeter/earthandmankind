@@ -23402,7 +23402,7 @@ var staticRenderFns = [
             [
               _c("p", { staticClass: "lead" }, [
                 _vm._v(
-                  "\n                    God is the term given to lightest and brightest state of being\n                    with its consciousness, while death is the term\n                    given to the hardest and hardest state of being with no\n                    consciousness. \n                "
+                  "\n                    God is the term given to lightest and brightest state of being\n                    with its consciousness, while death is the term\n                    given to the hardest and darkest state of being with no\n                    consciousness. \n                "
                 )
               ]),
               _vm._v(" "),
