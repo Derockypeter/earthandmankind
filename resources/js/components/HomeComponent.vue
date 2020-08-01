@@ -15,7 +15,7 @@
                     <p class="lead">
                         God is the term given to lightest and brightest state of being
                         with its consciousness, while death is the term
-                        given to the hardest and hardest state of being with no
+                        given to the hardest and darkest state of being with no
                         consciousness. 
                     </p>
                     <p>

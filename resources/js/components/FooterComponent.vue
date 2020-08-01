@@ -13,7 +13,7 @@
                         <li><router-link :to="{name: 'dictionary'}" class="blue-text text-darken-3">Dictionary</router-link></li>
                         
                         <li><router-link :to="{name: 'article'}" class="blue-text text-darken-3">Articles</router-link></li>
-                        <li><router-link :to="{name: 'library'}" class="blue-text text-darken-3">Videos</router-link></li>
+                        <li><router-link :to="{name: 'library'}" class="blue-text text-darken-3">Library</router-link></li>
                         
                     </ul>
                 </div>
