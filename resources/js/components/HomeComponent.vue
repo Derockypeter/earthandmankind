@@ -52,7 +52,7 @@
 .banner.hide-on-med-and-down img {
    /* margin-top: 1vh; */
    width: 100%;
-   height: 480px;
+   height: 500px;
 }
 </style>
 <script>
