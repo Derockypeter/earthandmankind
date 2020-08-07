@@ -35,7 +35,7 @@
                         </div>
                         <div v-for="post in posts" :key="post.id" class="column hoverable">
                             <div class="card">
-                                <div class="card-content white-text">
+                                <div class="card-content">
                                     <span class="card-title">
                                         {{post.title.substr(0, 20)}}
                                     </span>
