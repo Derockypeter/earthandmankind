@@ -4,9 +4,11 @@
         <div class="row main-container">
             <h1>Contact</h1>
             <div class="col l5 s12">
-                <h5>Our Location</h5>
+                <h5>Contact:</h5>
                 <p class="grey-text text-darken-4">
-                    35 Seychelles Avenue off Capitol Oil Market
+                    <b>Email:</b> theearthandmankind@gmail.com,<br>
+                    <b>Facebook:</b> earthandmankind,<br>
+                    <b>Twitter:</b> @earthandmankind<br>
                 </p>
             </div>
             <div v-if="success" class="col l12  s12 success">

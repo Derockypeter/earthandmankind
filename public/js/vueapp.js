@@ -15938,6 +15938,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -22655,12 +22657,20 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col l5 s12" }, [
-      _c("h5", [_vm._v("Our Location")]),
+      _c("h5", [_vm._v("Contact:")]),
       _vm._v(" "),
       _c("p", { staticClass: "grey-text text-darken-4" }, [
-        _vm._v(
-          "\n                35 Seychelles Avenue off Capitol Oil Market\n            "
-        )
+        _c("b", [_vm._v("Email:")]),
+        _vm._v(" theearthandmankind@gmail.com,"),
+        _c("br"),
+        _vm._v(" "),
+        _c("b", [_vm._v("Facebook:")]),
+        _vm._v(" earthandmankind,"),
+        _c("br"),
+        _vm._v(" "),
+        _c("b", [_vm._v("Twitter:")]),
+        _vm._v(" @earthandmankind"),
+        _c("br")
       ])
     ])
   }
