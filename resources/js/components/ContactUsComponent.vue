@@ -31,7 +31,7 @@
                             <div class="input-field col s12">
                                 <textarea type="text" v-model="mail.message"  placeholder="Enter Message here *" id="message" class="validate materialize-textarea" style="width: 100%; height: 150px;" required></textarea>
                             </div>
-                            <button type="submit" class="waves-effect waves-light btn-small" >Submit</button>
+                            <button type="submit" class="waves-effect waves-light btn-small" :disabled="saving" >Submit</button>
 
                         </div>
                     </form>
@@ -68,7 +68,7 @@ export default {
                 }, 3000)
             })
             .catch(error => {
-                console.log(error);
+                // console.log(error);
                 this.saving = false
             })
         }

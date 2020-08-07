@@ -33,9 +33,9 @@ import CategorySelect from './components/CategorySectionComponent.vue'
 import Contact from './components/ContactUsComponent.vue'
 import Footer from './components/FooterComponent.vue'
 import Login from './components/LoginComponent.vue'
-import Register from './components/RegisterComponent.vue'
+// import Register from './components/RegisterComponent.vue'
 import Video from './components/Video.vue'
-import Password from './components/PasswordResetForm.vue'
+// import Password from './components/PasswordResetForm.vue'
 import FBCallback from './components/FBCallback.vue'
 import Dictionary from './components/DictionaryComponent.vue'
 
@@ -134,7 +134,7 @@ const router = new VueRouter ({
             component: AdminRegister,
             meta: {
                 auth: true,
-                title: 'Earth and Mankind - Register'
+                title: 'Earth and Mankind - Admin Register'
             }
         },
         {
@@ -354,24 +354,24 @@ const router = new VueRouter ({
                 title: 'Earth and Mankind - Login'
             }
         },
-        {
-            path: '/register',
-            name: 'register',
-            component: Register,
-            props: {},
-            meta: {
-                title: "Earth and Mankind - Register"
-            }
-        },
-        {
-            path: '/password_reset/:token',
-            name: 'reset_password',
-            component: Password,
-            props: {},
-            meta: {
-                title: "Earth and Mankind - Password Reset"
-            }
-        },
+        // {
+        //     path: '/register',
+        //     name: 'register',
+        //     component: Register,
+        //     props: {},
+        //     meta: {
+        //         title: "Earth and Mankind - Register"
+        //     }
+        // },
+        // {
+        //     path: '/password_reset/:token',
+        //     name: 'reset_password',
+        //     component: Password,
+        //     props: {},
+        //     meta: {
+        //         title: "Earth and Mankind - Password Reset"
+        //     }
+        // },
         {
             path: '/api/auth/login/facebook/callback?code',
             name: 'fbLogin',

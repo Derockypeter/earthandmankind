@@ -25,10 +25,8 @@
                             <div v-html="posts.body">
                             </div>
                         </div>
-                        <!-- <p class="">See more here   {{window.location}}</p> -->
                     </div>
                     <div class="sharePrint">
-                        <button class="btn-small email" @click="print('body')"><i class="small material-icons">print</i>Print</button>
                         <ShareNetwork
                             network="twitter"
                             :url="url"
@@ -53,7 +51,7 @@
                         >
                         <button class="btn email btn-small"><font-awesome-icon :icon="['fas', 'envelope']" size="lg"  />Email</button>
                         </ShareNetwork>
-                        <ShareNetwork
+                        <ShareNetwork class="whatsapp"
                             network="Whatsapp"
                             :url="url"
                             :title="posts.title"
@@ -61,6 +59,7 @@
                         >
                         <button class="btn whatsapp btn-small"><font-awesome-icon :icon="['fab', 'whatsapp']" size="lg"  />Whatsapp</button>
                         </ShareNetwork>
+                        <button class="btn-small email" @click="print('body')"><i class="small material-icons">print</i>Print</button>
                     </div>
                 </div>
             </div>
@@ -69,6 +68,11 @@
     </div>
 </template>
 <style scoped>
+    @media only screen and (min-width: 768px) {
+        .whatsapp {
+            display: none;
+        }
+    }
     .uppercase {
         text-transform: uppercase;
         font-weight: 300;

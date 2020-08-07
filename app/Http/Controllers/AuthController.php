@@ -25,33 +25,33 @@ class AuthController extends Controller
             } 
         }
     }
-    public function register(Request $request)
-    {
-        // User Data to validate
-        $validator = Validator::make($request->all(), [
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'DOB' => 'nullable|date' ,
-            'gender' => 'nullable',
-            'phone' => 'required',
-            'country' => 'required',
-            'state' => 'required',
-            'city' => 'required',
-            'email' => 'email|required:unique:users',
-            'password' => 'required|confirmed|min:8'
-        ]);
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 401);
-        }
-        $data = $request->only(['firstname', 'lastname', 'DOB', 'gender', 'phone', 'country', 'state', 'city', 'email', 'password']);
-        $data['password'] = bcrypt($data['password']);
-        $user = User::create($data);
-        $user->is_admin = 0;
-        return response()->json([
-            'user' => $user,
-            'token' => $user->createToken('manKind')->accessToken
-        ]);
-    }
+    // public function register(Request $request)
+    // {
+    //     // User Data to validate
+    //     $validator = Validator::make($request->all(), [
+    //         'firstname' => 'required',
+    //         'lastname' => 'required',
+    //         'DOB' => 'nullable|date' ,
+    //         'gender' => 'nullable',
+    //         'phone' => 'required',
+    //         'country' => 'required',
+    //         'state' => 'required',
+    //         'city' => 'required',
+    //         'email' => 'email|required:unique:users',
+    //         'password' => 'required|confirmed|min:8'
+    //     ]);
+    //     if ($validator->fails()) {
+    //         return response()->json(['error' => $validator->errors()], 401);
+    //     }
+    //     $data = $request->only(['firstname', 'lastname', 'DOB', 'gender', 'phone', 'country', 'state', 'city', 'email', 'password']);
+    //     $data['password'] = bcrypt($data['password']);
+    //     $data['is_admin'] = false;
+    //     $user = User::create($data);
+    //     return response()->json([
+    //         'user' => $user,
+    //         'token' => $user->createToken('manKind')->accessToken
+    //     ]);
+    // }
     public function adminRegister(Request $request)
     {
         // User Data to validate
@@ -72,8 +72,8 @@ class AuthController extends Controller
         }
         $data = $request->only(['firstname', 'lastname', 'DOB', 'gender', 'phone', 'country', 'state', 'city', 'email', 'password']);
         $data['password'] = bcrypt($data['password']);
+        $data['is_admin'] = true;
         $user = User::create($data);
-        $user->is_admin = 1;
         return response()->json([
             'user' => $user,
             'token' => $user->createToken('manKind')->accessToken

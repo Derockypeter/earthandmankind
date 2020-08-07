@@ -85,7 +85,8 @@
         font-size: 1.3em;
     }
     .card {
-        background-image: url('/images/carousel-img/1011537_univ_pnr_lg.jpg');
+        background-image: url('/images/1011537_univ_pnr_md.jpg');
+        background-position: top left;
     }
 </style>
 <script>

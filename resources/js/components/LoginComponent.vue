@@ -30,9 +30,9 @@
                                         <input class='validate' v-model="user.password" type='password' name='password' id='password' required />
                                         <label for='password'>Enter your password</label>
                                     </div>
-                                    <label style='float: right;'>
+                                    <!-- <label style='float: right;'>
                                         <a class='pink-text waves-effect waves-light modal-trigger' href='#modal1!' ><b>Forgot Password?</b></a>
-                                    </label>
+                                    </label> -->
                                 </div>
 
                                 <br />
@@ -49,7 +49,7 @@
                             <a class="waves-effect waves-light btn btn-large loginBtn loginBtn--facebook"  href="api/login/facebook">
                                 Login with Facebook
                             </a>
-                            <router-link :to="{name: 'register'}" class="ml3">Create account</router-link>
+                            <!-- <router-link :to="{name: 'register'}" class="ml3">Create account</router-link> -->
                         </div>
                     </div>
                     

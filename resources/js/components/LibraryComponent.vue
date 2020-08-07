@@ -31,7 +31,7 @@
                                 <li class="tab col s6"><a @click="showBooksTab" href="#">Books</a></li>
                             </ul>
                         </div>
-                        <div id="vidoes" v-if="showVids" class="col s12">
+                        <!-- <div id="vidoes" v-if="showVids" class="col s12">
                             <section class="videos">
                                 <div>
                                     <h4>Videos</h4>
@@ -39,7 +39,6 @@
                                 <div class="course row">
                                     <div  v-for="video in videos" :key="video.id" class="col s12 m6 l4">
                                         <div class="card">
-                                            <!-- TODO ON HOVER OVER IMAGE ADD VIDEO BUTTON AND BUY THIS COURSE?PREVIEW-->
                                             <router-link :to="{name: 'course', params: { coursename: video.coursename }}">
                                                 <div class="card-image">
                                                     <img :src="'/courseImages/'+video.image" alt="preview image" />
@@ -51,7 +50,6 @@
                                                 <p class="bold">
                                                     Created by Zurich <span class="right">{{video.language}}</span>
                                                 </p>
-                                                <!-- <p>Category: </p> -->
                                             </div>
                                             <div class="card-action">
                                                 <span>{{video.videos.length}} videos</span>
@@ -63,7 +61,8 @@
                                     </div>
                                 </div>
                             </section>
-                        </div>
+                        </div> -->
+                        <div id="vidoes" v-if="showVids" style="color: grey; font-size: 30px; text-align: center;" class="col s12"><marquee>VIDEOS ARE COMING SOON</marquee></div>
                         <div id="books" v-if="showBooks" class="col s12">
                             <section class="books">
                                 <div>
