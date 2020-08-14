@@ -21,7 +21,7 @@
                     <section class="library-banner">
                         <h1>Library</h1>
                         <p class="lead">
-                            Our Wealth of books and videos to feed your mind with daily motivation and guidance.
+                            <!-- Our Wealth of books and videos to feed your mind with daily motivation and guidance. -->
                         </p>
                     </section>
                     <div class="row">
@@ -31,7 +31,7 @@
                                 <li class="tab col s6"><a @click="showBooksTab" href="#">Books</a></li>
                             </ul>
                         </div>
-                        <!-- <div id="vidoes" v-if="showVids" class="col s12">
+                        <div id="vidoes" v-if="showVids" class="col s12">
                             <section class="videos">
                                 <div>
                                     <h4>Videos</h4>
@@ -48,7 +48,7 @@
                                             <div class="card-content">
                                                 <p class="coursename">{{video.coursename}}</p>
                                                 <p class="bold">
-                                                    Created by Zurich <span class="right">{{video.language}}</span>
+                                                    Created by EarthandMankind <span class="right">{{video.language}}</span>
                                                 </p>
                                             </div>
                                             <div class="card-action">
@@ -59,10 +59,13 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div v-if="videos.length == 0" style="color: grey; font-size: 30px; text-align: center;">
+                                        <marquee>VIDEOS ARE COMING SOON</marquee>
+                                    </div>
+
                                 </div>
                             </section>
-                        </div> -->
-                        <div id="vidoes" v-if="showVids" style="color: grey; font-size: 30px; text-align: center;" class="col s12"><marquee>VIDEOS ARE COMING SOON</marquee></div>
+                        </div>
                         <div id="books" v-if="showBooks" class="col s12">
                             <section class="books">
                                 <div>
@@ -79,8 +82,9 @@
                                                 {{book.description}}
                                             </h6>
                                         </div>
+                                        
                                     </div>
-                                    
+                                    <div v-if="books.length == 0" style="color: grey; font-size: 30px; text-align: center;"><marquee>Books Are on The Way</marquee></div>
                                 
                                     
                                 </div>
@@ -125,19 +129,19 @@
                 setTimeout(() => {
                     this.loaded = true;
                     this.videos = response.data;
-                    console.log(response)
+                    // console.log(response)
                 }, 5000);
             })
-            .catch(err => 
-                console.log(error.response)
+            .catch(err => {}
+                // console.log(error.response)
             )
             // For Books
             let book_uri = '/api/books';
             this.axios.get(book_uri).then(response => {
                 this.books = response.data.data;
             })
-            .catch(err => 
-                console.log(response.data)
+            .catch(err => {}
+                // console.log(response.data)
             )
             
         },

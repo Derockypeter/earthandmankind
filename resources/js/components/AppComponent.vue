@@ -17,11 +17,11 @@
                             <li v-if='!isLoggedIn' class="green-text"><router-link :to="{ name:'login'}"><em>LOGIN</em></router-link></li>
                             
                             <li v-if="isLoggedIn">
-                                <router-link :to="{ name: 'dashboard' }" v-if="user_type == 0" class='dropdown-trigger btn' href='#' data-target='dropdown1'> Hi, {{firstname}}</router-link>
-                                <router-link :to="{ name: 'admin' }" v-if="user_type == 1"> Hi, {{firstname}}</router-link>
+                                <router-link :to="{ name: 'dashboard' }" v-if="user_type == 0" class='dropdown-trigger btn' href='#' data-target='dropdown2'> Hi, {{firstname}}</router-link>
+                                <router-link :to="{ name: 'admin' }" v-if="user_type == 1" class='dropdown-trigger btn' href='#' data-target='dropdown2'> Hi, {{firstname}}</router-link>
                             </li>
                         </ul>
-                        <ul id='dropdown1' class='dropdown-content'>
+                        <ul id='dropdown2' class='dropdown-content'>
                             <li><a href="#" v-if="isLoggedIn" @click="logOut">LOGOUT</a></li>
                         </ul>
                     </div>

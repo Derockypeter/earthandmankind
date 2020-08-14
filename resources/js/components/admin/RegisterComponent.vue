@@ -27,11 +27,6 @@
                                             <div class="input-field col s12 l6">
                                                 <input placeholder="Email" v-model="user.email" id="email" type="email" class="validate" required>
                                             </div>
-                                            <div class="input-field col s12 l6">
-                                                <input placeholder="Birthdate" ref="date" v-model="user.dob" id="DOB" type="text" class="datepicker validate">
-                                            </div>
-                                        </div>
-                                        <div class="row">
                                             <div class="col s12 l6">
                                                 <p>Gender</p>
                                                 <p class="col s12 l6">
@@ -47,7 +42,13 @@
                                                     </label>
                                                 </p>
                                             </div>
+                                            <!-- <div class="input-field col s12 l6">
+                                                <input placeholder="Birthdate" ref="date" v-model="user.dob" id="DOB" type="text" class="datepicker validate">
+                                            </div> -->
                                         </div>
+                                        <!-- <div class="row">
+                                           
+                                        </div> -->
                                         <div class="row">
                                             <div class="input-field col s12 l6">
                                                 <input placeholder="Country" v-model="user.country" id="country" type="text" class="validate" required>
@@ -84,8 +85,8 @@
                                 </div>
                             </div>
                         </div>
-                        <h6>Or</h6>
-                        <router-link :to="{name: 'login'}">Login</router-link>
+                        <!-- <h6>Or</h6>
+                        <router-link :to="{name: 'login'}">Login</router-link> -->
                     </center>
 
                     <div class="section"></div>

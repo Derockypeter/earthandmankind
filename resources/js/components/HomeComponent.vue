@@ -73,7 +73,7 @@ export default {
             .then(response => {
                 this.books = response.data.data;
             })
-            .catch(err => console.error.response.data);
+            .catch(err => {});
 
         let featuredPost = `/api/featuredPost`;
         this.axios
@@ -81,7 +81,7 @@ export default {
             .then(response => {
                 this.featurePosts = response.data;
             })
-            .catch(err => console.log(err.response));
+            .catch(err => {});
     },
     components: {
         CategorySelection

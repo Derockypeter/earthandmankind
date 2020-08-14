@@ -131,8 +131,8 @@ export default {
                 this.created = response.data.created
             }, 5000);
         })
-        .catch(err => 
-            console.log(error.response)
+        .catch(err => {}
+            // console.log(error.response)
         )
         M.AutoInit()
 

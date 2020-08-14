@@ -26,7 +26,7 @@
                             </select>
                         </div>
                         <h1>Article</h1>
-                        <p class="lead mb-5">Read my article digest for Inspiration, growth, success, and to maintain a healthy balance in Life.</p>
+                        <p class="lead mb-5">Reading the articles in sequence will make much understanding.</p>
                         
                     </div>
                     <div class="rowed">
@@ -114,7 +114,7 @@
         created() {
             let uri = '/api/languages';
             this.axios.get(uri).then(response => {
-                console.log(response);
+                // console.log(response);
                 this.options = response.data;
             });
         },
@@ -138,8 +138,8 @@
                     this.meta_data.next_page_url = res.data.next_page_url  
                 }, 5000);
                 })
-                .catch(err => 
-                    console.error.response.data.post
+                .catch(err => {} 
+                    // console.error.response.data.post
                 )
             },
             changeLang()

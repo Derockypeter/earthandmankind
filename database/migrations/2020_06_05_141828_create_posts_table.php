@@ -16,7 +16,7 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('body');
+            $table->longText('body');
             $table->unsignedBigInteger('language_id');
             $table->enum('status',['published', 'disabled'])->default('published');
             $table->timestamps();

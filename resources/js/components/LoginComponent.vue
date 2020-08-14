@@ -30,9 +30,9 @@
                                         <input class='validate' v-model="user.password" type='password' name='password' id='password' required />
                                         <label for='password'>Enter your password</label>
                                     </div>
-                                    <!-- <label style='float: right;'>
+                                    <label style='float: right;'>
                                         <a class='pink-text waves-effect waves-light modal-trigger' href='#modal1!' ><b>Forgot Password?</b></a>
-                                    </label> -->
+                                    </label>
                                 </div>
 
                                 <br />
@@ -235,10 +235,10 @@
                     withCredentials: true,
                     })
                 .then( response => {
-                    console.log(response);
+                    // console.log(response);
                 })
                 .catch(error => {
-                    console.log(error)
+                    // console.log(error)
                 })
             }
         }

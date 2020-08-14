@@ -57,7 +57,7 @@ export default {
     created() {
         this.axios.get(`/api/auth/login/facebook/callback?${this.$route.params.code}`)
         .then( response => {
-            console.log(response)
+            // console.log(response)
         })
     }
 }
