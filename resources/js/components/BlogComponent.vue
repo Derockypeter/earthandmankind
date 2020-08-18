@@ -167,7 +167,11 @@
                     res.data.data.forEach(element => {
                         var m, rex = /<img.*?src="(.*?)"[^\>]+>/g;
                         m = rex.exec( element.body ) 
-                        src.push({imageSrc: m[1], content: element}) ;
+                        if(m){
+                            src.push({imageSrc: m[1], content: element}) ;
+                        }else{
+                            src.push({content: element})
+                        }
                     });
                         this.posts = src
 
