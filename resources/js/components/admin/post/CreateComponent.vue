@@ -30,7 +30,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="info">
+                                <!-- <div class="info">
                                     <p><strong>Info!</strong> Please check this box if you want to make the post to be featured.</p>
                                 </div>
                                 <p>
@@ -38,7 +38,7 @@
                                         <input id="indeterminate-checkbox" v-model="post.featured" value='1' type="checkbox" />
                                         <span>Featured Post</span>
                                     </label>
-                                </p>
+                                </p> -->
                                 <button :disabled="saving" class="btn waves-effect" type="submit">{{ saving ? 'Creating...' : 'Create' }}</button>
                             </div>
                         </form>

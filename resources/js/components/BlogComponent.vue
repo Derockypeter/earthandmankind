@@ -34,12 +34,33 @@
                                 <h5 class="grey-text">No Post with Selected Language</h5>
                         </div>
                         <div v-for="post in posts" :key="post.id" class="column hoverable">
+                            <!-- <div class="col s12 m7"> -->
+                                <div class="card">
+                                    <div class="card-image">
+                                        <img :src="post.imageSrc" width="200" height="200">
+                                        <span class="card-title dark-text">{{post.content.title.substr(0, 20)}}</span>
+                                    </div>
+                                    <div class="card-content dark-text">
+                                    <p>{{synopsis(post.content.body)}}....</p>
+                                    </div>
+                                    <div class="card-action center">
+                                        <router-link :to="{name: 'post-title', params: {title: post.content.title}}" class="btn-flat">
+                                            Read
+                                        </router-link>
+                                        <i class="material-icons">language</i>
+                                        <span class="grey-text text-darken-4 uppercase"> {{post.content.language.language}}</span>
+
+                                    </div>
+                                </div>
+                            <!-- </div> -->
+                        </div>
+                        <!-- <div >
                             <div class="card">
                                 <div class="card-content white-text">
                                     <span class="card-title">
-                                        {{post.title.substr(0, 20)}}
+                                       
                                     </span>
-                                    <div>{{synopsis(post.body)}}....</div>
+                                    <div></div>
                                 </div>
                                 <div class="card-action center">
                                     <router-link :to="{name: 'post-title', params: {title: post.title}}" class="btn-flat">
@@ -50,7 +71,7 @@
 
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <pagination 
                         :meta_data="meta_data"
@@ -74,6 +95,9 @@
         text-transform: uppercase;
         /* font-weight: ; */
     }
+    .card .card-image .card-title {
+        color: black;
+    }
     a, .card-title {
         text-transform: capitalize;
         font-weight: 500;
@@ -85,7 +109,7 @@
         font-size: 1.3em;
     }
     .card {
-        background-image: url('/images/1011537_univ_pnr_md.jpg');
+        /* background-image: url('/images/1011537_univ_pnr_md.jpg'); */
         background-position: top left;
     }
 </style>
@@ -135,8 +159,21 @@
                     this.meta_data.last_page_url = res.data.last_page_url;
                     this.meta_data.current_page = res.data.current_page;
                     this.meta_data.prev_page_url = res.data.prev_page_url; 
-                    this.meta_data.next_page_url = res.data.next_page_url  
+                    this.meta_data.next_page_url = res.data.next_page_url 
+                     
+                       var src = []
+                        
+                        
+                    res.data.data.forEach(element => {
+                        var m, rex = /<img.*?src="(.*?)"[^\>]+>/g;
+                        m = rex.exec( element.body ) 
+                        src.push({imageSrc: m[1], content: element}) ;
+                    });
+                        this.posts = src
+
+                    
                 }, 5000);
+                ; 
                 })
                 .catch(err => {} 
                     // console.error.response.data.post
