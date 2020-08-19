@@ -43,7 +43,7 @@
         ), function($message) use ($request)
     {
        $message->from($request->get('email'));
-       $message->to('amaizupeter1@gmail.com', 'Admin')->subject($request->get('subject'));
+       $message->to('theearthandmankind@gmail.com', 'Admin')->subject($request->get('subject'));
     });
   
      return response()->json(['Thanks for contacting us!, We\'ll get back to you soon']); 

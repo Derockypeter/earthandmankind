@@ -34,44 +34,24 @@
                                 <h5 class="grey-text">No Post with Selected Language</h5>
                         </div>
                         <div v-for="post in posts" :key="post.id" class="column hoverable">
-                            <!-- <div class="col s12 m7"> -->
-                                <div class="card">
-                                    <div class="card-image">
-                                        <img :src="post.imageSrc" width="200" height="200">
-                                        <span class="card-title dark-text">{{post.content.title.substr(0, 20)}}</span>
-                                    </div>
-                                    <div class="card-content dark-text">
-                                    <p>{{synopsis(post.content.body)}}....</p>
-                                    </div>
-                                    <div class="card-action center">
-                                        <router-link :to="{name: 'post-title', params: {title: post.content.title}}" class="btn-flat">
-                                            Read
-                                        </router-link>
-                                        <i class="material-icons">language</i>
-                                        <span class="grey-text text-darken-4 uppercase"> {{post.content.language.language}}</span>
-
-                                    </div>
-                                </div>
-                            <!-- </div> -->
-                        </div>
-                        <!-- <div >
                             <div class="card">
-                                <div class="card-content white-text">
-                                    <span class="card-title">
-                                       
-                                    </span>
-                                    <div></div>
+                                <div class="card-image">
+                                    <img :src="post.imageSrc" width="200" height="200">
+                                    <span class="card-title dark-text">{{post.content.title.substr(0, 20)}}</span>
+                                </div>
+                                <div class="card-content dark-text">
+                                <p>{{synopsis(post.content.body)}}....</p>
                                 </div>
                                 <div class="card-action center">
-                                    <router-link :to="{name: 'post-title', params: {title: post.title}}" class="btn-flat">
+                                    <router-link :to="{name: 'post-title', params: {title: post.content.title}}" class="btn-flat">
                                         Read
                                     </router-link>
                                     <i class="material-icons">language</i>
-                                    <span class="grey-text text-darken-4 uppercase"> {{post.language.language}}</span>
+                                    <span class="grey-text text-darken-4 uppercase"> {{post.content.language.language}}</span>
 
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
                     </div>
                     <pagination 
                         :meta_data="meta_data"
