@@ -1,10 +1,10 @@
 {
-    "name": "laravel/laravel",
+    "name": "Earth and Mankind",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "Know all there is about Earth and Mankind",
     "keywords": [
-        "framework",
-        "laravel"
+        "Earth",
+        "Mankind"
     ],
     "license": "MIT",
     "require": {

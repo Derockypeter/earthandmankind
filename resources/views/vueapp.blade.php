@@ -6,7 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <link href="https://cdn.materialdesignicons.com/4.5.95/css/materialdesignicons.min.css" rel="stylesheet">
         
-        <title>{{ config('app.name', 'Earth and Mankind') }}</title>
+        <title>Earth and Mankind</title>
 
 
         <!-- Fonts -->
