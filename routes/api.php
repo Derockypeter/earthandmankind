@@ -69,6 +69,9 @@ Route::group([
 });
 
 Route::post('/savePost', 'PostController@savePost');
+Route::post('/postImageUploader', 'ImageController@postImageUploader');
+
+
 
 Route::post('/saveVideo', 'CourseController@store');
 Route::apiResource('dictionary', 'DictionaryController'); //Dictionary

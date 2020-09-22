@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueAxios from 'vue-axios'
 import axios from 'axios'
+import VueHead from 'vue-head'
 
 import VueSocialSharing from 'vue-social-sharing'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -14,6 +15,7 @@ import 'materialize-css/dist/fonts/material-icons.css'
 
 library.add(faFacebook, faTwitter, faEnvelope, faWhatsapp)
 Vue.use(VueAxios, axios)
+Vue.use(VueHead)
 Vue.use(VueRouter)
 Vue.use(VueSocialSharing);
 Vue.component('font-awesome-icon', FontAwesomeIcon)
@@ -26,9 +28,10 @@ import App from './components/AppComponent.vue'
 import Dashboard from './components/user/Dashboard.vue'
 
 import AdminRegister from './components/admin/RegisterComponent.vue'
-import Home from './components/HomeComponent.vue'
-import Library from './components/LibraryComponent.vue'
+
+import Home from './components/HomeComponent'
 import Article from './components/BlogComponent.vue'
+import Library from './components/LibraryComponent.vue'
 import CategorySelect from './components/CategorySectionComponent.vue'
 import Contact from './components/ContactUsComponent.vue'
 import Footer from './components/FooterComponent.vue'
@@ -49,7 +52,6 @@ import CreatePost from './components/admin/post/CreateComponent.vue'
 import EditPost from './components/admin/post/EditComponent.vue'
 import Admin from './components/admin/AdminComponent.vue'
 import IndexPost from './components/admin/post/PostComponent.vue'
-import Postbody from './components/PostBodyComponent.vue'
 
 import EditLanguage from './components/admin/language/EditComponent.vue'
 import CreateLanguage from './components/admin/language/CreateComponent.vue'
@@ -106,7 +108,7 @@ const router = new VueRouter ({
             },
             meta: {
                 auth: false,
-                title: 'Earth and Mankind - Article'
+                title: 'Earth and Mankind - Article',
             }
         },
         {
@@ -322,12 +324,6 @@ const router = new VueRouter ({
             }
         },
         {
-            path: '/post/:title',
-            name: 'post-title',
-            component: Postbody,
-            props: {}
-        },
-        {
             path: '/library/:coursename',
             name: 'course',
             component: Video,
@@ -428,11 +424,12 @@ const router = new VueRouter ({
    
 const app = new Vue({
 	el: '#app',
+    // el: '#app',
     components: { App },
     watch: {
         '$route':{
             handler: (to, from) => {
-            document.title = to.meta.title || 'Your Website'
+                document.title = to.meta.title || 'Your Website'
             },
             immediate: true
         }

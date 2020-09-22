@@ -43,9 +43,10 @@
                                 <p>{{synopsis(post.content.body)}}....</p>
                                 </div>
                                 <div class="card-action center">
-                                    <router-link :to="{name: 'post-title', params: {title: post.content.title}}" class="btn-flat">
+                                    <!-- <router-link :to="{name: 'post-title', params: {title: post.content.title}}" class="btn-flat">
                                         Read
-                                    </router-link>
+                                    </router-link> -->
+                                    <a :href="'post/'+post.content.title" class="btn-flat">Read</a>
                                     <i class="material-icons">language</i>
                                     <span class="grey-text text-darken-4 uppercase"> {{post.content.language.language}}</span>
 
@@ -53,9 +54,13 @@
                             </div>
                         </div>
                     </div>
-                    <pagination 
+                    <pagination v-if="!fetched"
                         :meta_data="meta_data"
                         v-on:next="fetchPosts">
+                    </pagination>
+                    <pagination v-if="fetched"
+                        :meta_data="meta_data"
+                        v-on:next="changeLang">
                     </pagination>
                 </div>
 
@@ -89,12 +94,12 @@
         font-size: 1.3em;
     }
     .card {
-        /* background-image: url('/images/1011537_univ_pnr_md.jpg'); */
         background-position: top left;
     }
 </style>
 <script>
     import Pagination from './reusable/Pagination'
+    import axios from 'axios'
     export default {
         props: [
 
@@ -104,6 +109,7 @@
         },
         data() {
             return {
+                fetched: false,
                 loaded: false,
                 options: [],
                 posts: {},
@@ -117,17 +123,18 @@
         },
         created() {
             let uri = '/api/languages';
-            this.axios.get(uri).then(response => {
-                // console.log(response);
+            axios.get(uri).then(response => {
                 this.options = response.data;
             });
         },
         mounted() {
-            this.fetchPosts()
+            this.fetchPosts();
+            this.changeLang();
         },
         methods: {
             fetchPosts(page = 1) {
-                this.axios.get('/api/getDefaultPosts', {
+                this.fetched = false
+                axios.get('/api/getDefaultPosts', {
                     params: {
                         page
                     }
@@ -165,14 +172,45 @@
             },
             changeLang()
             {
-                let id = event.target.value;
-                let uri = `/api/getPostsByLanguage/${id}`
-                if (uri) {
-                    this.axios.get(uri)
+                try {
+                    let id = event.target.value;
+                    let uri = `/api/getPostsByLanguage/${id}`
+
+                    if (uri) {
+                    axios.get(uri, {
+                    })
                     .then( res => {
-                        this.posts = res.data;
+                        // setTimeout(() => {
+                        //     this.fetched = true;
+                        //     this.loaded = true;
+                        //     this.meta_data.last_page_url = res.data.last_page_url;
+                        //     this.meta_data.current_page = res.data.current_page;
+                        //     this.meta_data.prev_page_url = res.data.prev_page_url; 
+                        //     this.meta_data.next_page_url = res.data.next_page_url 
+                            
+                            var src = []
+                                
+                                
+                            res.data.data.forEach(element => {
+                                var m, rex = /<img.*?src="(.*?)"[^\>]+>/g;
+                                m = rex.exec( element.body ) 
+                                if(m){
+                                    src.push({imageSrc: m[1], content: element}) ;
+                                }else{
+                                    src.push({content: element})
+                                }
+                            });
+                            this.posts = src
+
+                            
+                        // }, 5000);
                     })
                 }
+                } catch (error) {
+                    // console.log(error);
+                }
+               
+                
             },
             synopsis (inputString){
                 var div = document.createElement('div')

@@ -51,6 +51,7 @@
 
 <script>
     import Editor from '@tinymce/tinymce-vue';
+    import axios from 'axios'
     
   export default {
     data() {
@@ -64,46 +65,69 @@
                 featured: '',
             },
             options: [],
-            myToolbar1: 'undo redo | bold italic underline preview | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-            myPlugins: "link image code preview imagetools insertdatetime paste spellchecker autosave autoresize",
-            myInit: {
-                images_upload_url: '/api/upload-image',
-                images_dataimg_filter: function(img) {
-                    return false;
-                    return img.hasAttribute('internal-blob');
-                },
-                convert_urls : false,
-                height:500,
-                automatic_uploads: false, 
-                images_upload_base_path: '',
-                relative_urls : false, 
-                    images_upload_handler: function (blobInfo, success, failure) {
-                        var xhr, formData;
-                        xhr = new XMLHttpRequest();
-                        xhr.withCredentials = false;
-                        xhr.open('POST', '/api/upload-image');
-                        console.log('here')
-                        var token = document.head.querySelector("[name=csrf-token]").content;
-                        xhr.setRequestHeader("X-CSRF-Token", token);
-                        xhr.onload = function() {
-                        var json;
+            myToolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+            myPlugins:   "advlist autolink lists link image charmap print preview anchor searchreplace visualblocks code fullscreen, insertdatetime media table paste imagetools",
+            file_picker_types: 'image',
+           myInit: {
+                images_upload_url: '/api/postImageUploader',
+                // images_dataimg_filter: function(img) {
+                //     return false;
+                //     return img.hasAttribute('internal-blob');
+                // },
+                // convert_urls : false,
+                height:1000,
+                // automatic_uploads: true, 
+    //             images_upload_handler: function (blobInfo, success, failure) {
+    //                 let data = new FormData();
+    //                 data.append('image', blobInfo.blob(), blobInfo.filename());
+    //                 axios.post('/api/postImageUploader', data)
+    //                     .then(function (res) {
+    //                         success(res.data.location);
+    //                     })
+    //                     .catch(function (err) {
+    //                         failure('HTTP Error: ' + err.message);
+    //             });
+    // }
+                // images_upload_base_path: '',
+                // relative_urls : false, 
+              image_title: true,
+            automatic_uploads: true,
+            images_upload_url: '/api/postImageUploader',
+            file_picker_types: 'image',
+           
+                images_upload_handler: function (blobInfo, success, failure, progress) {
+                    var xhr, formData;
+                    xhr = new XMLHttpRequest();
+                    xhr.withCredentials = false;
+                    xhr.open('POST', '/api/postImageUploader');
+                    xhr.upload.onprogress = function (e) {
+                        progress(e.loaded / e.total * 100);
+                    };
 
-                        if (xhr.status != 200) {
-                            failure('HTTP Error: ' + xhr.status);
-                            return;
-                        }
-                        json = JSON.parse(xhr.responseText);
+                    var token = document.head.querySelector("[name=csrf-token]").content;
+                    xhr.setRequestHeader("X-CSRF-Token", token);
+                    xhr.onload = function() {
+                    var json;
 
-                        if (!json || typeof json.location != 'string') {
-                            failure('Invalid JSON: ' + xhr.responseText);
-                            return;
-                        }
-                        success(json.location);
-                        };
-                        formData = new FormData();
-                        formData.append('file', blobInfo.blob(), blobInfo.filename());
-                        xhr.send(formData);
-                    }   
+                    if (xhr.status != 200 || xhr.status >= 300) {
+                        failure('HTTP Error: ' + xhr.status);
+                        return;
+                    }
+                    json = JSON.parse(xhr.responseText);
+
+                    if (!json || typeof json.location != 'string') {
+                        failure('Invalid JSON: ' + xhr.responseText);
+                        return;
+                    }
+                    success(json.location);
+                    };
+                    xhr.onerror = function () {
+                        failure('Image upload failed due to a XHR Transport error. Code: ' + xhr.status);
+                    };
+                    formData = new FormData();
+                    formData.append('image', blobInfo.blob(), blobInfo.filename());
+                    xhr.send(formData);
+                }   
             },
 		}
     },

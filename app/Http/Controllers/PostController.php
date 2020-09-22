@@ -61,19 +61,38 @@ class PostController extends Controller
 			return 0;
         }
     }
+    public function base64_to_jpeg($base64_string, $output_file) {
+        // open the output file for writing
+        // $output_file = tmpfile();
+        $ifp = fopen( $output_file, 'wb' ); 
+    
+        // split the string on commas
+        // $data[ 0 ] == "data:image/png;base64"
+        // $data[ 1 ] == <actual base64 string>
+        $data = explode( ',', $base64_string );
+    
+        // we could add validation here with ensuring count( $data ) > 1
+        fwrite( $ifp, base64_decode( $data[ 1 ] ) );
+    
+        // clean up the file resource
+        fclose( $ifp ); 
+        // dd(filemtime($output_file));
+        return $output_file; 
+    }
     // Getting posts by title
     public function byTitle($title)
     {
         $posts = new Post();
-        $post = Post::where('title', $title);
-		if($post){
-            $created_at = $post->first();
-            $create = Carbon::parse($created_at['created_at'])->isoFormat('MMMM Do YYYY');
-			return response()->json(['post' => $post->first(), 'created' => $create]);
-		}
-		else{
-			return 0;
-		}
+        $post = $posts->where('title', $title)->firstOrFail();
+        $doc = new \DOMDocument();
+        $doc->loadHtml($post->body);
+        $img = $doc->getElementsByTagName('img');
+        foreach ($img as $key) {
+            $final = $key->getAttribute('src');
+            $path = storage_path('app/public/') . 'tmp.jpg';
+            $imgSrc =  $this->base64_to_jpeg($final, $path);
+        }
+        return view('postbody', compact('post', 'imgSrc'));
     }
     // Getting all the post for admin
     public function getAllPost()
@@ -104,7 +123,7 @@ class PostController extends Controller
     {
         $posts = Post::where('language_id', $language_id)->with('language');
         if($posts){
-            $allPost = $posts->latest()->get();
+            $allPost = $posts->latest()->simplePaginate(9);
 		    return response()->json($allPost);
 		}
 		else{

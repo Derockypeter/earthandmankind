@@ -13,12 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-// Route::get('/nav', function () {
-//     return view('nav');
-// });
+
+// For single post !!Did this for Facebook and single post ssr!!
+Route::get('post/{title}', 'PostController@byTitle');
+
 Route::get('/{any}', function () {
-    return view('vueapp');
+    return view('layouts.app');
 })->where('any', '.*'); //For SPA vue
+

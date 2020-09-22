@@ -66,6 +66,7 @@ export default {
         };
     },
     created() {
+        M.AutoInit();
         // For Books
         let book_uri = "/api/books";
         this.axios

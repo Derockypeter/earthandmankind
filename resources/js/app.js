@@ -18,10 +18,17 @@ window.Vue = require('vue');
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+// import 'materialize-css/dist/js/materialize.min'
+// import M from 'materialize-css/dist/css/materialize.min.css'
+// import 'materialize-css/dist/fonts/material-icons.css'
+// import axios from 'axios'
 
-Vue.component('home-component', require('./components/HomeComponent.vue').default);
-Vue.component('blog-component', require('./components/BlogComponent.vue').default);
-Vue.component('library-component', require('./components/LibraryComponent.vue').default);
+// Vue.use(axios)
+// Vue.component('home-component', require('./components/HomeComponent.vue').default);
+// Vue.component('article-component', require('./components/BlogComponent.vue').default);
+// Vue.component('library-component', require('./components/LibraryComponent.vue').default);
+// Vue.component('postbody-component', require('./components/PostBodyComponent.vue').default);
+
 
 
 /**
