@@ -21,7 +21,7 @@ Vue.use(VueSocialSharing);
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.use(M)
 
-Vue.config.productionTip = false
+Vue.config.productionTip = true
 
 import App from './components/AppComponent.vue'
 
