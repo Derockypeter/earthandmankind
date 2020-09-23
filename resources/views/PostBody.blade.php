@@ -62,7 +62,7 @@
 </head>
 <body>
     <div id="app">
-        @include('includes.nav')
+        @include('includes.Nav')
         <div class="container mt-5">
             <div class="articles">
                 <div class="main-container">
@@ -98,7 +98,7 @@
                 </div>
             </div>
         </div>
-        @include('includes.footer')
+        @include('includes.Footer')
     </div>
     
     <script src="{{ asset('js/jquery-3.4.1.min.js') }}" ></script>

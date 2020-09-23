@@ -89,7 +89,7 @@ class PostController extends Controller
         $img = $doc->getElementsByTagName('img');
         foreach ($img as $key) {
             $final = $key->getAttribute('src');
-            $path = storage_path('app/public/') . 'tmp.jpg';
+            $path = realpath('images/tmp.jpg');
             $imgSrc =  $this->base64_to_jpeg($final, $path);
         }
         return view('PostBody', compact('post', 'imgSrc'));
