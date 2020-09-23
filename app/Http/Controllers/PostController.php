@@ -92,7 +92,7 @@ class PostController extends Controller
             $path = storage_path('app/public/') . 'tmp.jpg';
             $imgSrc =  $this->base64_to_jpeg($final, $path);
         }
-        return view('postbody', compact('post', 'imgSrc'));
+        return view('PostBody', compact('post', 'imgSrc'));
     }
     // Getting all the post for admin
     public function getAllPost()

@@ -54,13 +54,9 @@
                             </div>
                         </div>
                     </div>
-                    <pagination v-if="!fetched"
+                    <pagination
                         :meta_data="meta_data"
                         v-on:next="fetchPosts">
-                    </pagination>
-                    <pagination v-if="fetched"
-                        :meta_data="meta_data"
-                        v-on:next="changeLang">
                     </pagination>
                 </div>
 
@@ -109,7 +105,6 @@
         },
         data() {
             return {
-                fetched: false,
                 loaded: false,
                 options: [],
                 posts: {},
@@ -133,7 +128,6 @@
         },
         methods: {
             fetchPosts(page = 1) {
-                this.fetched = false
                 axios.get('/api/getDefaultPosts', {
                     params: {
                         page

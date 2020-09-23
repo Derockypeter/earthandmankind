@@ -17,7 +17,6 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     <link href="{{ asset('css/materialize.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/lVidProject.css') }}" rel="stylesheet">
-    {{-- <link href="{{ asset('css/app.css') }}" type="text/css" rel="stylesheet"/> --}}
     <link href="https://cdn.materialdesignicons.com/4.5.95/css/materialdesignicons.min.css" rel="stylesheet">
         
     <!-- Fonts -->
@@ -35,6 +34,29 @@
             text-decoration: darkgray;
             font-weight: 500;
             font-style: oblique;
+        }
+        /* Nav */
+        nav ul a:hover {
+            background-color: black !important;
+            color: #fff ;
+        }
+        nav .brand-logo {
+            font-size: 1.5rem !important;
+        }
+        a {
+            text-decoration: none !important;
+        }
+        /* Footer */
+        footer {
+            background-color: #f0f0f0 !important;
+        }
+        .page-footer .footer-copyright {
+            min-height: 0px !important;
+            padding: 2px 2px !important;
+        }
+        .page-footer {
+            position: relative;
+            top: 50px;
         }
     </style>
 </head>

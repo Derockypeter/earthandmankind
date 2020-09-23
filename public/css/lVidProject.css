@@ -11,7 +11,7 @@ html, body {
     color: #2c3e50;
 }
 .container {
-    width: 95%;
+    width: 95% !important;
     padding: 0;
 }
 .column {
@@ -35,7 +35,7 @@ html, body {
 }
 @media only screen and (min-width: 1200px) {
     html {
-        font-size: 17px !important;
+        font-size: 17px;
     }
 }
 @media only screen and (min-width: 600px) {
@@ -45,7 +45,7 @@ html, body {
 }
 @media only screen and (min-width: 768px) {
     .column {
-        width: 33.33% !important;
+        width: 33.33%;
     }
 }
 @media only screen and (min-width: 993px){
@@ -90,27 +90,4 @@ html, body {
 }
 p.uppercase {
     margin-top: 0;
-}
-/* Nav */
-nav ul a:hover {
-    background-color: black !important;
-    color: #fff ;
-}
-nav .brand-logo {
-    font-size: 1.5rem !important;
-}
-a {
-    text-decoration: none !important;
-}
-/* Footer */
-footer {
-    background-color: #f0f0f0 !important;
-}
-.page-footer .footer-copyright {
-    min-height: 0px !important;
-    padding: 2px 2px !important;
-}
-.page-footer {
-    position: relative;
-    top: 50px;
 }
