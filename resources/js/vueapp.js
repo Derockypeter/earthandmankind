@@ -4,7 +4,7 @@ import VueAxios from 'vue-axios'
 import axios from 'axios'
 import VueHead from 'vue-head'
 
-import VueSocialSharing from 'vue-social-sharing'
+// import VueSocialSharing from 'vue-social-sharing'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { faFacebook, faTwitter, faWhatsapp } from '@fortawesome/free-brands-svg-icons'
@@ -17,7 +17,7 @@ library.add(faFacebook, faTwitter, faEnvelope, faWhatsapp)
 Vue.use(VueAxios, axios)
 Vue.use(VueHead)
 Vue.use(VueRouter)
-Vue.use(VueSocialSharing);
+// Vue.use(VueSocialSharing);
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.use(M)
 
@@ -41,6 +41,8 @@ import Video from './components/Video.vue'
 // import Password from './components/PasswordResetForm.vue'
 import FBCallback from './components/FBCallback.vue'
 import Dictionary from './components/DictionaryComponent.vue'
+import SingleBook from './components/SingleBookComponent.vue'
+
 
 // REUSABLE
 import NotFound from '../js/components/reusable/NotFound.vue'
@@ -321,6 +323,15 @@ const router = new VueRouter ({
             },
             meta: {
                 title: "Earth and Mankind - Dictionary"
+            }
+        },
+        {
+            path: '/books/:bookname',
+            name: 'mybook',
+            component: SingleBook,
+            props: {},
+            meta: {
+                title: "Earth and Mankind - Book"
             }
         },
         {

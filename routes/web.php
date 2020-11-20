@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 // For single post !!Did this for Facebook and single post ssr!!
 Route::get('post/{title}', 'PostController@byTitle');
-
+Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay');
+Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
 Route::get('/{any}', function () {
     return view('layouts.app');
 })->where('any', '.*'); //For SPA vue

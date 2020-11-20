@@ -29,6 +29,9 @@ Route::get('/auth/login/facebook/callback', 'SocialController@handleProviderCall
 // BOOKS
 Route::get('/books', 'BookController@getAllBooks');
 Route::get('/books/{book_name}', 'BookController@book');
+Route::post('/bookrequest', 'BookController@getUserData');
+Route::get('/mybook/{id}', 'BookController@download');
+
 
 // VIDEOS
 Route::get('/getAllVideos', 'VideoController@allVideos');
@@ -45,7 +48,6 @@ Route::get('/featuredPost', 'PostController@featuredPost');
 Route::get('/getPostsByLanguage/{language_id}', 'PostController@getPostsByLanguage');
 Route::get('/getDefaultPosts', 'PostController@getDefaultPosts');
 Route::post('/upload-image', 'PostController@uploadImageForPost');
-
 
 
 

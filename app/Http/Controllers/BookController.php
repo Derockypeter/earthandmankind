@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Book;
 use Validator;
+use Storage;
 
 class BookController extends Controller
 {
@@ -16,8 +17,10 @@ class BookController extends Controller
             'description' => 'required|unique:books',
             'language_id' => 'required',
             'path' => 'required',
-            'path.*' => 'file|mimes:ppt,pptx,doc,docx,pdf,xls,xlsx|max:20000',
+            'path.*' => 'file|mimes:ppt,pptx,doc,docx,pdf,xls,xlsx|max:50000',
             'image' => 'required',
+            'amount' => 'nullable',
+            'preview' => 'nullable',
             'image.*' => 'mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
         if($validation->fails())
@@ -27,10 +30,13 @@ class BookController extends Controller
         else{
             $input = $request->all();
             $input['path'] = $request->path->getClientOriginalName();
+            $input['preview'] = $request->preview->getClientOriginalName();
             $input['image'] = Str::slug($request->name).'.'.$input['image']->getClientOriginalExtension() ;
 
             $request->path->move(public_path('books/path'), $input['path']);
-            \Image::make($request->file('image'))->resize(100, 110)->save(public_path('books/images/').$input['image']);
+            $request->preview->move(public_path('books/preview'), $input['preview']);
+            ini_set('memory_limit','256M');
+            \Image::make($request->file('image'))->resize(500, 590)->save(public_path('books/images/').$input['image']);
 
             $book = Book::insert($input);
             
@@ -41,7 +47,7 @@ class BookController extends Controller
     // Reads all books
     public function getAllBooks()
     {
-        $books = Book::with('language')->simplePaginate(5);
+        $books = Book::with('language')->get();
         if($books){
             return response()->json($books, 200);
         }
@@ -52,9 +58,10 @@ class BookController extends Controller
     // Fetches a single book by name
     public function book($book_name)
     {
-        $books = Book::where('name', $book_name)->get();
-        if($books){
-            return response()->json($books);
+        $books = new Book();
+        $book = $books->where('name', $book_name)->first();
+        if($book->count()){
+            return response()->json(['book' => $book], 200);
         }
         else{
             return 0;
@@ -76,20 +83,25 @@ class BookController extends Controller
             'language' => 'required',
             'path' => 'required',
             'path.*' => 'file|mimes:ppt,pptx,doc,docx,pdf,xls,xlsx|max:20000',
+            'preview' => 'nullable', 'file|mimes:ppt,pptx,doc,docx,pdf,xls,xlsx|max:20000',
+            'amount' => 'nullable',
             'image' => 'required',
             'image.*' => 'mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
         $bookToUpdate = Book::where('id', $id)->first();
 
-        if($request->hasFile('path' && 'image'))
+        if($request->hasFile('path' && 'image' && 'preview'))
         {
             $file = $request->file('path');
+            $file1 = $request->file('preview');
             $file2 = $request->file('image');
             $name = $file->getClientOriginalName();
-            $name2 = $file->getClientOriginalName();
+            $name1 = $file1->getClientOriginalName();
+            $name2 = $file2->getClientOriginalName();
             $file->move(public_path('books/path'), $name);
             $file2->move(public_path('books/images'), $name2);
+            $file1->move(public_path('books/preview'), $name1);
 
             $pathToDelete = public_path("books/path/{$book->path}");
             if (Book::exists($pathToDelete))
@@ -176,5 +188,45 @@ class BookController extends Controller
             return 0;
         }
     }
-   
+
+    // Download the book
+    public function download($id){
+        $book = Book::whereId($id)->first();
+        // $pathToFile = 'public/books/path';
+        $name = $book->path;
+        $pathToFile = Storage::disk('public')->path($name);
+        return response()->download($pathToFile, $name);
+    }
+
+    // Makes an api call to paystack to verify payment
+    public function getUserData(Request $request){
+        $curl = curl_init();
+  
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.paystack.co/transaction/verify/$request->reference",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+            "Authorization: Bearer sk_test_2e657f3fd3251c47ca1b8780247383d53c6795d2",
+            "Cache-Control: no-cache",
+            ),
+        ));
+    
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+        curl_close($curl);
+        
+        if ($err) {
+            dd( "cURL Error #:" . $err);
+        } else {
+            // echo $response;
+            return response()->json(200);
+        }
+    }
+        
+    
 }
