@@ -20,7 +20,7 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "nesbot/carbon": "^2.35",
-        "unicodeveloper/laravel-paystack": "^1.0"
+        "scrivo/highlight.php": "v9.18.1.4"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

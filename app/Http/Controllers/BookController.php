@@ -29,12 +29,15 @@ class BookController extends Controller
         }
         else{
             $input = $request->all();
+            if($request->hasFile('preview')){
+                $input['preview'] = $request->preview->getClientOriginalName();
+                $request->preview->move(public_path('books/preview'), $input['preview']);
+            }
             $input['path'] = $request->path->getClientOriginalName();
-            $input['preview'] = $request->preview->getClientOriginalName();
             $input['image'] = Str::slug($request->name).'.'.$input['image']->getClientOriginalExtension() ;
 
             $request->path->move(public_path('books/path'), $input['path']);
-            $request->preview->move(public_path('books/preview'), $input['preview']);
+            
             ini_set('memory_limit','256M');
             \Image::make($request->file('image'))->resize(500, 590)->save(public_path('books/images/').$input['image']);
 
@@ -61,7 +64,14 @@ class BookController extends Controller
         $books = new Book();
         $book = $books->where('name', $book_name)->first();
         if($book->count()){
-            return response()->json(['book' => $book], 200);
+            return [
+                'amount' => $book->amount,
+                'id' => $book->id,
+                'description' => $book->description,
+                'image' => $book->image,
+                'name' => $book->name,
+            ];
+            // return response()->json(['book' => $book], 200);
         }
         else{
             return 0;
@@ -192,16 +202,14 @@ class BookController extends Controller
     // Download the book
     public function download($id){
         $book = Book::whereId($id)->first();
-        // $pathToFile = 'public/books/path';
-        $name = $book->path;
-        $pathToFile = Storage::disk('public')->path($name);
+        $pathToFile = public_path('books/path/').$book->path;
+        $name = $book->name;
         return response()->download($pathToFile, $name);
     }
 
     // Makes an api call to paystack to verify payment
     public function getUserData(Request $request){
         $curl = curl_init();
-  
         curl_setopt_array($curl, array(
             CURLOPT_URL => "https://api.paystack.co/transaction/verify/$request->reference",
             CURLOPT_RETURNTRANSFER => true,
@@ -211,7 +219,7 @@ class BookController extends Controller
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => array(
-            "Authorization: Bearer sk_test_2e657f3fd3251c47ca1b8780247383d53c6795d2",
+            "Authorization: Bearer ".\Config::get('paystack.secretKey'),
             "Cache-Control: no-cache",
             ),
         ));
@@ -223,8 +231,8 @@ class BookController extends Controller
         if ($err) {
             dd( "cURL Error #:" . $err);
         } else {
-            // echo $response;
-            return response()->json(200);
+            echo $response;
+            // return response()->json($response);
         }
     }
         

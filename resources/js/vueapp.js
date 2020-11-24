@@ -42,6 +42,10 @@ import Video from './components/Video.vue'
 import FBCallback from './components/FBCallback.vue'
 import Dictionary from './components/DictionaryComponent.vue'
 import SingleBook from './components/SingleBookComponent.vue'
+import Videos from './components/VideosComponent.vue'
+import Audios from './components/AudioComponent.vue'
+
+
 
 
 // REUSABLE
@@ -67,11 +71,16 @@ import CourseVid from './components/admin/videos/CourseVideos.vue'
 
 import EditBook from './components/admin/book/EditComponent.vue'
 import CreateBook from './components/admin/book/CreateComponent.vue'
-import IndexBook from './components/admin//book/BookComponent.vue'
+import IndexBook from './components/admin/book/BookComponent.vue'
 
 import EditDictionary from './components/admin/dictionary/EditComponent.vue'
 import CreateDictionary from './components/admin/dictionary/CreateComponent.vue'
-import IndexDictionary from './components/admin//dictionary/DictionaryComponent.vue'
+import IndexDictionary from './components/admin/dictionary/DictionaryComponent.vue'
+
+
+import EditAudio from './components/admin/audio/EditComponent.vue'
+import CreateAudio from './components/admin/audio/CreateComponent.vue'
+import IndexAudio from './components/admin/audio/AudioComponent.vue'
 
 const router = new VueRouter ({
   mode: 'history',
@@ -326,6 +335,39 @@ const router = new VueRouter ({
             }
         },
         {
+            path: '/admin/create-audio',
+            name: 'create-audio',
+            component: CreateAudio,
+            props: {
+
+            },
+            meta: {
+                title: "Earth and Mankind - Create Audio"
+            }
+        },
+        {
+            path: '/admin/edit-audio/:id',
+            name: 'edit-audio',
+            component: EditAudio,
+            props: {
+                
+            },
+            meta: {
+                title: "Earth and Mankind - Edit Audio"
+            }
+        },
+        {
+            path: '/admin/index',
+            name: 'index-audio',
+            component: IndexAudio,
+            props: {
+                
+            },
+            meta: {
+                title: "Earth and Mankind - Audio"
+            }
+        },
+        {
             path: '/books/:bookname',
             name: 'mybook',
             component: SingleBook,
@@ -341,6 +383,24 @@ const router = new VueRouter ({
             props: {},
             meta: {
                 title: "Earth and Mankind - Videos"
+            }
+        },
+        {
+            path: '/mankindvideos',
+            name: 'videos',
+            component: Videos,
+            props: {},
+            meta: {
+                title: "Earth and Mankind - Videos"
+            }
+        },
+        {
+            path: '/mankind-audio',
+            name: 'audio',
+            component: Audios,
+            props: {},
+            meta: {
+                title: "Earth and Mankind - Audio"
             }
         },
         {

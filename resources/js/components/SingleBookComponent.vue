@@ -25,6 +25,7 @@
                         :src="'/books/images/' + book.image"
                         alt=""
                         srcset=""
+                        height="300"
                     />
                     <p></p>
                     <p>{{ book.description }}</p>
@@ -40,19 +41,38 @@
                         >
                             Buy Now
                         </a>
-                        <a
+                        <a v-else
+                            class="btn btn-small downloadBook waves waves-effect grey darken-4"
+                            @click.prevent="download(book.id)"
+                            :disabled="downloading"
+                            >{{ downloading ? 'Downloading...' : 'Download' }}</a
+                        >
+                        
+                        <!-- <a
+                        :href="'path/' + book.path"
+                            :download="book.name"
                             v-if="!payed"
                             class="btn btn-small downloadBook waves waves-effect grey darken-4"
                             :href="'preview/' + book.preview"
                             >Preview</a
-                        >
+                        > -->
+
                         <a
-                            v-else
-                            class="btn btn-small downloadBook waves waves-effect grey darken-4"
-                            
-                            :href="'path/' + book.path" :download="book.name"
-                            >Download</a
+                            class="preloader-wrapper active"
+                            v-if="verifypayment"
                         >
+                            <div class="spinner-layer spinner-red-only">
+                                <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
+                            </div>
+                        </a>
                     </p>
                 </div>
             </div>
@@ -144,8 +164,10 @@ export default {
     data() {
         return {
             book: [],
+            downloading: false,
             loaded: false,
             payed: false,
+            verifypayment: false,
             form: {
                 names: "",
                 email: "",
@@ -177,7 +199,7 @@ export default {
             .then(response => {
                 setTimeout(() => {
                     this.loaded = true;
-                    this.book = response.data.book;
+                    this.book = response.data;
                     this.form.amount = this.book.amount;
                 }, 1000);
             })
@@ -187,7 +209,12 @@ export default {
     },
     methods: {
         processPayment(response) {
-            window.alert("Payment recieved");
+            this.verifypayment = true;
+            document.addEventListener("DOMContentLoaded", function() {
+                var elems = document.querySelectorAll(".modal");
+                var instances = M.Modal.init(elems, options);
+                instances.close();
+            });
             fetch("/api/bookrequest", {
                 method: "post",
                 body: JSON.stringify(response),
@@ -198,7 +225,8 @@ export default {
                 .then(res => res.json())
                 .then(json => {
                     // console.log(json)
-                    if (json == 200) {
+                    if (json.data.status == "success") {
+                        this.verifypayment = false;
                         this.payed = true;
                     }
                 })
@@ -207,13 +235,27 @@ export default {
         close: () => {
             console.log("You closed checkout page");
         },
-        // download(id){
-        //     this.axios.get(`/api/mybook/${id}`)
-        //     .then(response => {
-        //         console.log(response)
-        //     })
-        // }
-    },
-    
+        download(id) {
+            this.downloading = true;
+            this.axios({
+                url: `/api/downloadbook/${id}`,
+                method: "GET",
+                responseType: "blob" // important
+            }).then(response => {
+                const url = window.URL.createObjectURL(
+                    new Blob([response.data])
+                );
+                const link = document.createElement("a");
+                link.href = url;
+                link.setAttribute("download", `${this.book.name}.pdf`);
+                document.body.appendChild(link);
+                link.click();
+                setTimeout(() => {
+                    this.downloading = false;
+                }, 3000)
+            });
+            
+        }
+    }
 };
 </script>

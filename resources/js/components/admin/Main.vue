@@ -30,6 +30,11 @@
                 <a href='/admin/dictionary'>Dictionary<span class="badge"> ({{dictionary.length}})</span></a>
             </div>
         </div>
+        <div class="row">
+            <div class="col m3 product-box big-text">
+                <a href='/admin/audio'>Audio<span class="badge"> ({{audio.length}})</span></a>
+            </div>
+        </div>
     </div>
         
 </template>
@@ -44,6 +49,7 @@
                 courses: [],
                 books: [],
                 users : [],
+                audio: [],
                 dictionary: [],
             }
         },
@@ -51,9 +57,10 @@
             this.axios.get('/api/users/').then(response => this.users = response.data)
             this.axios.get('/api/posts/').then(response => this.posts = response.data.data)
             this.axios.get('/api/languages/').then(response => this.languages = response.data)
-            this.axios.get('/api/books/').then(response => this.books = response.data.data)
+            this.axios.get('/api/books/').then(response => this.books = response.data)
             this.axios.get('/api/courses/').then(response => this.courses = response.data)
             this.axios.get('/api/dictionary/').then(response => this.dictionary = response.data.dictionary)
+            this.axios.get('/api/audio/').then(response => this.audio = response.data.audio)
         }
     }
 </script>

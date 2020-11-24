@@ -30,7 +30,12 @@ Route::get('/auth/login/facebook/callback', 'SocialController@handleProviderCall
 Route::get('/books', 'BookController@getAllBooks');
 Route::get('/books/{book_name}', 'BookController@book');
 Route::post('/bookrequest', 'BookController@getUserData');
-Route::get('/mybook/{id}', 'BookController@download');
+Route::get('/downloadbook/{id}', 'BookController@download');
+
+// BOOKS
+Route::get('/audio', 'BookController@getAllBooks');
+Route::get('/audio/{book_name}', 'BookController@book');
+Route::get('/myaudio/{id}', 'BookController@download');
 
 
 // VIDEOS
@@ -74,6 +79,11 @@ Route::post('/savePost', 'PostController@savePost');
 Route::post('/postImageUploader', 'ImageController@postImageUploader');
 
 
+// Audios
+Route::apiResource('audio', 'AudioController');
+Route::get('/audiophile/{audio_name}', 'AudioController@audio');
+Route::get('/audiop/{audio_name}', 'AudioController@getEdit');
+
 
 Route::post('/saveVideo', 'CourseController@store');
 Route::apiResource('dictionary', 'DictionaryController'); //Dictionary
@@ -107,14 +117,6 @@ Route::group(['middleware' => 'auth:api'], function(){
  Route::put('/bookEdit/{id}', 'BookController@editBook');
  Route::delete('delBook/{id}', 'BookController@delete');
 
-//  COMMENTS
-Route::post('/saveComment/{id}', 'CommentController@storeComment');
-Route::get('/comments', 'CommentController@getAllComments');
-Route::get('/postComment', 'CommentController@getCommentsForAPost');
-ROute::get('/{user_id}/{post_id}/comment/', 'CommentController@getUserCommentInPost');
-Route::get('/edit/{id}', 'CommentController@edit');
-Route::put('/editComment/{id}', 'CommentController@editComment');
-Route::delete('/delComment', 'CommentController@deleteComment');
 
 // LANGUAGES
 Route::post('/language-save', 'LanguageController@store');
