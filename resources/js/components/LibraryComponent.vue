@@ -168,7 +168,7 @@ a:hover {
 }
 .column3 {
     float: left;
-    width: 50%;
+    width: 33.3%;
     padding: 5px;
     background-color: rgb(253, 253, 253);
 }

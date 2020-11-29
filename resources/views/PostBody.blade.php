@@ -13,14 +13,13 @@
     @endif
     <meta name="twitter:image:src" content="{{ url($imgSrc) }}">
     <meta name="twitter:site" content="@stephen29322578"><meta name="twitter:creator" content="@stephen29322578">
-        
     <title>Earth and Mankind - {{$post->title}}</title>
     
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     <link href="{{ asset('css/materialize.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/lVidProject.css') }}" rel="stylesheet">
     <link href="https://cdn.materialdesignicons.com/4.5.95/css/materialdesignicons.min.css" rel="stylesheet">
-        
+    
     <!-- Fonts -->
     <link href="{{ asset('fonts/material-icons.css') }}" rel="stylesheet">
     <style>

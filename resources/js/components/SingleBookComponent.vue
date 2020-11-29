@@ -149,7 +149,7 @@
 }
 </style>
 <script>
-const flwKey = "FLWPUBK_TEST-c3606186e728ae45ab138b0abb981fb2-X";
+const flwKey = "FLWPUBK-e30d071e2637b534cd80d4309fa97362-X";
 export default {
     data() {
         return {
