@@ -14,7 +14,7 @@ class CreateAmountPreviewBookToBooks extends Migration
     public function up()
     {
         Schema::table('books', function (Blueprint $table) {
-            $table->string('amount')->nullable();
+            $table->integer('amount')->nullable();
             $table->string('preview')->nullable();
         });
     }

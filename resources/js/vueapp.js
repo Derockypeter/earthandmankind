@@ -38,7 +38,7 @@ import Footer from './components/FooterComponent.vue'
 import Login from './components/LoginComponent.vue'
 // import Register from './components/RegisterComponent.vue'
 import Video from './components/Video.vue'
-// import Password from './components/PasswordResetForm.vue'
+import Password from './components/PasswordResetForm.vue'
 import FBCallback from './components/FBCallback.vue'
 import Dictionary from './components/DictionaryComponent.vue'
 import SingleBook from './components/SingleBookComponent.vue'
@@ -430,15 +430,15 @@ const router = new VueRouter ({
         //         title: "Earth and Mankind - Register"
         //     }
         // },
-        // {
-        //     path: '/password_reset/:token',
-        //     name: 'reset_password',
-        //     component: Password,
-        //     props: {},
-        //     meta: {
-        //         title: "Earth and Mankind - Password Reset"
-        //     }
-        // },
+        {
+            path: '/password_reset/:token',
+            name: 'reset_password',
+            component: Password,
+            props: {},
+            meta: {
+                title: "Earth and Mankind - Password Reset"
+            }
+        },
         {
             path: '/api/auth/login/facebook/callback?code',
             name: 'fbLogin',

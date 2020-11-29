@@ -3,7 +3,10 @@
         <div class="articles">
             <div class="main-container">
                 <h1>Create A new Book</h1>
-                <div v-if="message" class="alert">{{ message }}</div>
+                <div class="alert" v-if="messer">{{messer}}</div>
+                <ul v-if="message.length > 0" class="collection">
+                    <li class="red lighten-3 white-text collection-item" v-for="mess in message" :key="mess">{{ mess }}</li>
+                </ul>
                 <div class="row">
                     <form
                         class="col s12"
@@ -18,6 +21,7 @@
                                     id="name"
                                     type="text"
                                     class="validate"
+                                    required
                                 />
                             </div>
                             <div class="input-field col s6">
@@ -26,6 +30,7 @@
                                     placeholder="Description"
                                     v-model="book.description"
                                     class="validate materialize-textarea"
+                                    required
                                 ></textarea>
                             </div>
                         </div>
@@ -44,6 +49,7 @@
                                         name="image"
                                         type="text"
                                         placeholder="Upload book cover"
+                                        required
                                     />
                                 </div>
                             </div>
@@ -61,6 +67,7 @@
                                         name="path"
                                         type="text"
                                         placeholder="Upload Book"
+                                        required
                                     />
                                 </div>
                             </div>
@@ -129,13 +136,19 @@
         </div>
     </div>
 </template>
-<style scoped></style>
+<style scoped>
+    .alert {
+        background-color: rgb(248, 196, 196);
+        border-color: aliceblue;
+    }
+</style>
 <script>
 export default {
     data() {
         return {
             saving: false,
-            message: false,
+            message: [],
+            messer: false,
             book: {
                 name: "",
                 description: "",
@@ -171,21 +184,26 @@ export default {
                 data.append("path", this.book.path);
                 data.append("amount", this.book.amount);
                 data.append("preview", this.book.preview);
-                
+
                 let uri = "http://127.0.0.1:8000/api/saveBook";
                 this.axios
                     .post(uri, data)
                     .then(response => {
-                        this.$router.push({ name: "admin" });
+                        console.log(response);
+                        if (response.data.error) {
+                            this.message = response.data.error;
+                            this.messer = false;
+                            this.saving = false;
+                        } else if (response.data.status == "success") {
+                            this.$router.push({ name: "admin" });
+                        }
                     })
                     .catch(e => {
-                        this.message =
-                            e.response ||
-                            "There was an issue creating the book.";
+                        console.log(e);
                         this.saving = false;
                     });
             } else {
-                this.message = "Invalid data, fill out all fields";
+                this.messer = "Invalid data, fill out all required fields";
                 this.saving = false;
             }
         },

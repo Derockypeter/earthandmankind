@@ -10,8 +10,8 @@
                 <div class="col l4 offset-l2 s12">
                     <h5 class="grey-text">Explore Again</h5>
                     <ul style="text-decoration: underline">
-                        <li><router-link :to="{name: 'mankindvideos'}" class="blue-text text-darken-3">Videos</router-link></li>
-                        <li><router-link :to="{name: 'mankind-audio'}" class="blue-text text-darken-3">Audio</router-link></li>
+                        <li><router-link :to="{name: 'videos'}" class="blue-text text-darken-3">Videos</router-link></li>
+                        <li><router-link :to="{name: 'audio'}" class="blue-text text-darken-3">Audio</router-link></li>
                         <li><router-link :to="{name: 'article'}" class="blue-text text-darken-3">Articles</router-link></li>
                         <li><router-link :to="{name: 'library'}" class="blue-text text-darken-3">Library</router-link></li>
                         

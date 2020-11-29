@@ -17,10 +17,8 @@
                 </div>
             </div>
             <div class="row dictHeader" v-else>
-                <div class="col s12 l8">
-                    <h1>{{ book.name }}</h1>
-                </div>
                 <div class="col s12">
+                    <h1>{{ book.name }}</h1>
                     <img
                         :src="'/books/images/' + book.image"
                         alt=""
@@ -41,13 +39,16 @@
                         >
                             Buy Now
                         </a>
-                        <a v-else
+                        <a
+                            v-else
                             class="btn btn-small downloadBook waves waves-effect grey darken-4"
                             @click.prevent="download(book.id)"
                             :disabled="downloading"
-                            >{{ downloading ? 'Downloading...' : 'Download' }}</a
+                            >{{
+                                downloading ? "Downloading..." : "Download"
+                            }}</a
                         >
-                        
+
                         <!-- <a
                         :href="'path/' + book.path"
                             :download="book.name"
@@ -75,6 +76,11 @@
                         </a>
                     </p>
                 </div>
+                <!-- <div class="col s12 l4 middle">
+                    <div>
+                        <h6>Related books</h6>
+                    </div>
+                </div> -->
             </div>
 
             <!-- Modal Structure -->
@@ -90,7 +96,7 @@
                                         id="name"
                                         type="text"
                                         class="validate"
-                                        v-model="form.names"
+                                        v-model="form.name"
                                     />
                                     <label for="first_name">Names</label>
                                 </div>
@@ -104,17 +110,6 @@
                                     <label for="email">Email</label>
                                 </div>
                             </div>
-                            <input type="hidden" v-model="form.amount" />
-                            <input
-                                type="hidden"
-                                v-model="form.currency"
-                                value="NGN"
-                            />
-                            <input
-                                type="hidden"
-                                name="reference"
-                                v-model="form.reference"
-                            />
                             <h6>
                                 <em>
                                     Please close this form after successful
@@ -122,17 +117,12 @@
                                 >
                             </h6>
                         </form>
-                        <paystack
+
+                        <a
                             class="btn waves waves effect green lighten-2"
-                            :amount="form.amount * 100"
-                            :email="form.email"
-                            :paystackkey="form.paystackkey"
-                            :reference="reference"
-                            :callback="processPayment"
-                            :close="close"
+                            @click="makePayment"
+                            >Make payment</a
                         >
-                            Make Payment
-                        </paystack>
                     </div>
                 </div>
             </div>
@@ -143,13 +133,14 @@
 .articles {
     margin-top: 2vh;
     box-shadow: 13px 13px 20px grey;
+    height:100%;
 }
-/* .nav-wrapper{
-        width: 500px;
-        float: right;
-        border: thin solid;
-        border-radius: 20px;
-    } */
+.middle {
+    padding:20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 .chip:hover {
     cursor: pointer;
 }
@@ -158,8 +149,7 @@
 }
 </style>
 <script>
-import paystack from "vue-paystack";
-
+const flwKey = "FLWPUBK_TEST-c3606186e728ae45ab138b0abb981fb2-X";
 export default {
     data() {
         return {
@@ -169,16 +159,15 @@ export default {
             payed: false,
             verifypayment: false,
             form: {
-                names: "",
-                email: "",
-                amount: "",
-                currency: "NGN",
-                paystackkey: "pk_test_84576da9ef7d7315cc8269cadd09c39ce01608f7" //paystack public key
-            }
+                name: "",
+                email: ""
+            },
+            flwKey: flwKey,
+            currency: "USD",
+            country: "NG",
+            paymentMethod: "",
+
         };
-    },
-    components: {
-        paystack
     },
     computed: {
         reference() {
@@ -190,7 +179,8 @@ export default {
                     Math.floor(Math.random() * possible.length)
                 );
             return text;
-        }
+        },
+        
     },
     mounted() {
         let book_uri = `/api/books/${this.$route.params.bookname}`;
@@ -207,33 +197,48 @@ export default {
                 console.log(err);
             });
     },
-    methods: {
-        processPayment(response) {
-            this.verifypayment = true;
-            document.addEventListener("DOMContentLoaded", function() {
-                var elems = document.querySelectorAll(".modal");
-                var instances = M.Modal.init(elems, options);
-                instances.close();
-            });
-            fetch("/api/bookrequest", {
-                method: "post",
-                body: JSON.stringify(response),
-                headers: {
-                    "Content-Type": "application/json;charset=utf-8"
+    created() {
+        const script = document.createElement("script");
+        script.src = "https://checkout.flutterwave.com/v3.js";
+        document.getElementsByTagName("head")[0].appendChild(script);
+        if(window.location.search){
+            this.axios.post("/api/bookrequest", window.location.search)
+            .then(response => {
+                if(!response.data.data){
+                    return "";
+                }
+                else if (response.data.data.status == "successful") {
+                    this.payed = true;
                 }
             })
-                .then(res => res.json())
-                .then(json => {
-                    // console.log(json)
-                    if (json.data.status == "success") {
-                        this.verifypayment = false;
-                        this.payed = true;
-                    }
-                })
-                .catch(err => console.log(err));
-        },
-        close: () => {
-            console.log("You closed checkout page");
+            .catch(err => console.log(err));
+        }
+    },
+    methods: {
+        makePayment() {
+            window.FlutterwaveCheckout({
+                public_key: this.flwKey,
+                tx_ref: this.reference,
+                amount: this.book.amount,
+                currency: this.currency,
+                payment_options: this.payment_method,
+                customer: {
+                    name: this.form.name,
+                    email: this.form.email
+                },
+                redirect_url: `${this.book.name}`,
+                callback(data) {
+                    console.log(data)
+                },
+                onclose: function() {
+                    console.log('closed checkout page')
+                },
+                customizations: {
+                    title: "Earthandmankind",
+                    description: "Payment for book purchase"
+                    // logo:
+                }
+            });
         },
         download(id) {
             this.downloading = true;
@@ -252,9 +257,8 @@ export default {
                 link.click();
                 setTimeout(() => {
                     this.downloading = false;
-                }, 3000)
+                }, 3000);
             });
-            
         }
     }
 };

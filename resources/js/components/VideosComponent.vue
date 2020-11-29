@@ -86,13 +86,13 @@
                                                         }
                                                     }"
                                                 >
-                                                    <span class="right"
+                                                    <!-- <span class="right"
                                                         ><i
                                                             class="material-icons smaller"
                                                             >play_circle_outline</i
                                                         >
                                                         preview</span
-                                                    >
+                                                    > -->
                                                 </router-link>
                                             </div>
                                         </div>

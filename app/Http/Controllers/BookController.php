@@ -31,19 +31,18 @@ class BookController extends Controller
             $input = $request->all();
             if($request->hasFile('preview')){
                 $input['preview'] = $request->preview->getClientOriginalName();
-                $request->preview->move(public_path('books/preview'), $input['preview']);
+                $request->preview->move(public_path('books/preview/'), $input['preview']);
             }
             $input['path'] = $request->path->getClientOriginalName();
             $input['image'] = Str::slug($request->name).'.'.$input['image']->getClientOriginalExtension() ;
 
-            $request->path->move(public_path('books/path'), $input['path']);
+            $request->path->move(public_path('/books/path/'),$input['path']);
             
             ini_set('memory_limit','256M');
-            \Image::make($request->file('image'))->resize(500, 590)->save(public_path('books/images/').$input['image']);
+            \Image::make($request->file('image'))->resize(500, 590)->save(public_path('/books/images/').$input['image']);
 
             $book = Book::insert($input);
-            
-            return response()->json(['message' => 'Book Uploaded Successfully', 'Created' => $book], 200);
+            return response()->json(['message' => 'Book Uploaded Successfully', 'Created' => $book, 'status' => 'success'], 200);
         }       
     }
 
@@ -209,30 +208,33 @@ class BookController extends Controller
 
     // Makes an api call to paystack to verify payment
     public function getUserData(Request $request){
+        
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.paystack.co/transaction/verify/$request->reference",
+            CURLOPT_URL => "https://api.flutterwave.com/v3/transactions/$request->transaction_id/verify",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => array(
-            "Authorization: Bearer ".\Config::get('paystack.secretKey'),
-            "Cache-Control: no-cache",
+                "Content-Type: application/json",
+                "Authorization: Bearer ".config('flutterwave.secretKey'),
+                "Cache-Control: no-cache",
             ),
-        ));
+          ));
+          
     
         $response = curl_exec($curl);
         $err = curl_error($curl);
         curl_close($curl);
         
         if ($err) {
-            dd( "cURL Error #:" . $err);
+            echo "cURL Error #:" . $err;
         } else {
             echo $response;
-            // return response()->json($response);
         }
     }
         

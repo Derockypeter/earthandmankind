@@ -68,12 +68,12 @@
                                                         book.language.language
                                                     }}</em
                                                 >
-                                                <em
-                                                    class="right"
+                                                <span
+                                                    class="right green-text"
                                                     v-show="book.amount"
-                                                    >&#8358;{{
+                                                    >Get a copy for &#36;{{
                                                         book.amount
-                                                    }}</em
+                                                    }}</span
                                                 >
                                             </p>
                                             <h6 class="grey-text">

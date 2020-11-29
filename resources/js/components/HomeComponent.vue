@@ -26,10 +26,9 @@
                     <p class="lead">
                         Our life, began
                         when the consciousness of God was inserted into the
-                        unconscious death and this action gave birth to life
-                        and the first living beings. It is as a result of
-                        the successful evolution and integration in life from death
-                        that a lighter state of being termed earth was
+                        unconscious death and this action gave birth to life.
+                        It is as a result of the successful integration and evolution in life from death
+                        that a lighter and brighter state of being termed earth was
                         achieved from which mankind; the culminated specie
                         or kind of being from the product of God and earth
                         was made, to further the ultimate purpose of life.
