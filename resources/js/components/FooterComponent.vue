@@ -5,7 +5,7 @@
                 <div class="col l6 s12">
                     <h5 class="grey-text text-darken-3">For Reactions: </h5>
                     <p class="grey-text text-darken-4"><b>Send us a mail:</b> <br> theearthandmankind@gmail.com, <br>infor@earthandmankind.org</p>
-                    <p class="grey-text text-darken-4"><b>Social media:</b> <a class="mdi mdi-facebook fa-2x" href="https://web.facebook.com/groups/129279075377325"></a> <a  class="mdi mdi-youtube fa-2x"></a>  </p>
+                    <p class="grey-text text-darken-4"><b>Social media:</b> <a class="mdi mdi-facebook fa-2x" href="https://web.facebook.com/groups/129279075377325"></a> <a href="" class="mdi mdi-youtube fa-2x"></a>  </p>
                 </div>
                 <div class="col l4 offset-l2 s12">
                     <h5 class="grey-text">Explore Again</h5>

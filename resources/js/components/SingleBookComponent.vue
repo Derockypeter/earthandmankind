@@ -37,7 +37,7 @@
                             class="btn waves waves effect black btn-small modal-trigger"
                             href="#openForm"
                         >
-                            Buy Now
+                            Get a copy for &#36;{{ book.amount }}
                         </a>
                         <a
                             v-else
@@ -133,10 +133,10 @@
 .articles {
     margin-top: 2vh;
     box-shadow: 13px 13px 20px grey;
-    height:100%;
+    height: 100%;
 }
 .middle {
-    padding:20px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -165,8 +165,7 @@ export default {
             flwKey: flwKey,
             currency: "USD",
             country: "NG",
-            paymentMethod: "",
-
+            paymentMethod: ""
         };
     },
     computed: {
@@ -179,8 +178,7 @@ export default {
                     Math.floor(Math.random() * possible.length)
                 );
             return text;
-        },
-        
+        }
     },
     mounted() {
         let book_uri = `/api/books/${this.$route.params.bookname}`;
@@ -201,17 +199,17 @@ export default {
         const script = document.createElement("script");
         script.src = "https://checkout.flutterwave.com/v3.js";
         document.getElementsByTagName("head")[0].appendChild(script);
-        if(window.location.search){
-            this.axios.post("/api/bookrequest", window.location.search)
-            .then(response => {
-                if(!response.data.data){
-                    return "";
-                }
-                else if (response.data.data.status == "successful") {
-                    this.payed = true;
-                }
-            })
-            .catch(err => console.log(err));
+        if (window.location.search) {
+            this.axios
+                .post("/api/bookrequest", window.location.search)
+                .then(response => {
+                    if (!response.data.data) {
+                        return "";
+                    } else if (response.data.data.status == "successful") {
+                        this.payed = true;
+                    }
+                })
+                .catch(err => console.log(err));
         }
     },
     methods: {
@@ -228,10 +226,10 @@ export default {
                 },
                 redirect_url: `${this.book.name}`,
                 callback(data) {
-                    console.log(data)
+                    console.log(data);
                 },
                 onclose: function() {
-                    console.log('closed checkout page')
+                    console.log("closed checkout page");
                 },
                 customizations: {
                     title: "Earthandmankind",

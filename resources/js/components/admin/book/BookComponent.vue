@@ -116,7 +116,7 @@
                     <div class="card-content">
                         <span
                             class="card-title activator grey-text text-darken-4 font-1"
-                            >{{ book.name
+                            >{{ book.name.substr(0, 20)
                             }}<i class="material-icons right"
                                 >more_vert</i
                             ></span

@@ -21,6 +21,9 @@
                                     <option v-for="option in options" :key="option.id" v-bind:value="option.id">{{ option.language }}</option>
                                 </select>
                             </div>
+                            <div class="input-field col s6">
+                                <input v-model="book.amount" id="amount" type="text" class="validate">
+                            </div>
                             <!-- <div class="file-field input-field col s4">
                                 <div class="btn">
                                     <span>File</span>
