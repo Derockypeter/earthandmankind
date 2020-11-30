@@ -185,11 +185,11 @@ export default {
                 data.append("amount", this.book.amount);
                 data.append("preview", this.book.preview);
 
-                let uri = "http://127.0.0.1:8000/api/saveBook";
+                let uri = "/api/saveBook";
                 this.axios
                     .post(uri, data)
                     .then(response => {
-                        console.log(response);
+                        // console.log(response);
                         if (response.data.error) {
                             this.message = response.data.error;
                             this.messer = false;
@@ -199,7 +199,7 @@ export default {
                         }
                     })
                     .catch(e => {
-                        console.log(e);
+                        // console.log(e);
                         this.saving = false;
                     });
             } else {

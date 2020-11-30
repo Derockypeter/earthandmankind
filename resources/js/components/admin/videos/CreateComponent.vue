@@ -148,7 +148,7 @@
       let uri = '/api/languages';
       this.axios.get(uri).then(response => {
 		this.options = response.data;
-		console.log(response.data)
+		// console.log(response.data)
       });
       M.AutoInit();
     },
@@ -177,7 +177,7 @@
                     this.saving = false
 				})
 				.catch(error => {
-                    this.message = error.response || 'Invalid'
+                    // this.message = error.response || 'Invalid'
                     this.saving = false
 				})
 			
