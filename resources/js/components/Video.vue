@@ -19,6 +19,8 @@
             <div class="articles">
                 <div class="main-container">
                     <div v-for="video in videos" :key="video.id">
+                        <h4>{{ video.videos[0].name }}</h4>
+
                         <video class="responsive-video" controls>
                             <source
                                 :src="'/videos/' + video.videos[0].video"
@@ -26,7 +28,7 @@
                             />
                         </video>
 
-						<h4>{{ video.videos[0].name}}</h4>
+                        <p>{{ video.description }}</p>
                     </div>
                 </div>
             </div>
@@ -58,6 +60,7 @@ export default {
         this.axios
             .get(video_uri)
             .then(response => {
+                this.loaded = true;
                 let a = response.data.course[0].to_learn;
                 this.to_learns = a
                     .replace(/([.?!])\s*(?=[A-Z])/g, "$1|")
@@ -68,11 +71,10 @@ export default {
                     .split("|");
                 // console.log(response);
                 this.videos = response.data.course;
-                this.previews = response.data.preview[0].videoName;
-                this.allVideo = response.data.othervids;
-                this.loaded = true;
+                // this.previews = response.data.preview[0].videoName;
+                // this.allVideo = response.data.othervids;
             })
-            .catch(err => console.log(err.response));
+            .catch(err => console.log(err));
     },
     mounted() {
         M.AutoInit();

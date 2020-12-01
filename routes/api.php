@@ -114,7 +114,7 @@ Route::group(['middleware' => 'auth:api'], function(){
  // BOOKS
  Route::post('/saveBook', 'BookController@store');
  Route::get('/book/{id}', 'BookController@edit');
- Route::put('/bookEdit/{id}', 'BookController@editBook');
+ Route::put('/bookEdit/{id}', 'BookController@update');
  Route::delete('delBook/{id}', 'BookController@delete');
 
 

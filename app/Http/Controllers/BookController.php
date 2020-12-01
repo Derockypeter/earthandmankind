@@ -70,7 +70,6 @@ class BookController extends Controller
                 'image' => $book->image,
                 'name' => $book->name,
             ];
-            // return response()->json(['book' => $book], 200);
         }
         else{
             return 0;
@@ -84,94 +83,17 @@ class BookController extends Controller
         return response()->json($book);
     }
     // Editing a book
-    public function editBook(Request $request, $id)
+    public function update(Request $request, $bookId)
     {
-        $request->validate([
-            'name' => 'required|unique:books',
-            'description' => 'required|unique:books',
-            'language' => 'required',
-            'path' => 'required',
-            'path.*' => 'file|mimes:ppt,pptx,doc,docx,pdf,xls,xlsx|max:20000',
-            'preview' => 'nullable', 'file|mimes:ppt,pptx,doc,docx,pdf,xls,xlsx|max:20000',
-            'amount' => 'nullable',
-            'image' => 'required',
-            'image.*' => 'mimes:jpeg,png,jpg,gif,svg|max:2048'
-        ]);
+        $book = Book::where('id', $bookId)->first();
+        $book->name = $request->name;
+        $book->description = $request->description;
+        $book->language_id = $request->language_id;
+        $book->amount = $request->amount;
 
-        $bookToUpdate = Book::where('id', $id)->first();
-
-        if($request->hasFile('path' && 'image' && 'preview'))
-        {
-            $file = $request->file('path');
-            $file1 = $request->file('preview');
-            $file2 = $request->file('image');
-            $name = $file->getClientOriginalName();
-            $name1 = $file1->getClientOriginalName();
-            $name2 = $file2->getClientOriginalName();
-            $file->move(public_path('books/path'), $name);
-            $file2->move(public_path('books/images'), $name2);
-            $file1->move(public_path('books/preview'), $name1);
-
-            $pathToDelete = public_path("books/path/{$book->path}");
-            if (Book::exists($pathToDelete))
-            {
-                unlink($pathToDelete);
-            }
-            $imageToDelete = public_path("books/path/{$book->path}");
-            if (Book::exists($imageToDelete))
-            {
-                unlink($imageToDelete);
-            }
-            $bookToUpdate->path = $name;
-            $bookToUpdate->image = $name2;
-            $bookToUpdate->language = $request->language;
-            $bookToUpdate->description = $request->description;
-            $bookToUpdate->name = $request->name;
-
-        }
-        elseif ($request->hasFile('path')) 
-        {
-            $file = $request->file('path');
-            $name = $file->getClientOriginalName();
-            $file->move(public_path('books/path'), $name);
-            $pathToDelete = public_path("books/path/{$book->path}");
-            if (Book::exists($pathToDelete))
-            {
-                unlink($pathToDelete);
-            }
-
-            $bookToUpdate->path = $name;
-            $bookToUpdate->language = $request->language;
-            $bookToUpdate->description = $request->description;
-            $bookToUpdate->name = $request->name;
-
-        }
-        elseif ($request->hasFile('path')) 
-        {
-            $file2 = $request->file('image');
-            $name2 = $file2->getClientOriginalName();
-            $file2->move(public_path('books/images'), $name2);
-            $imageToDelete = public_path("books/images/{$book->image}");
-            if (Book::exists($imageToDelete))
-            {
-                unlink($imageToDelete);
-            }
-            
-            $bookToUpdate->image = $name2;
-            $bookToUpdate->language = $request->language;
-            $bookToUpdate->description = $request->description;
-            $bookToUpdate->name = $request->name;
-
-        }
-        else{
-            $bookToUpdate->language = $request->language;
-            $bookToUpdate->description = $request->description;
-            $bookToUpdate->name = $request->name;
-            // $bookToUpdate->save();
-        }
-
-        $bookToUpdate->save();
-        return response()->json($bookToUpdate);
+        $book->save();
+       
+        return response()->json(['book' => $book, 'status' => 200]);
     }
     // Deleting a Book
     public function delete($id)

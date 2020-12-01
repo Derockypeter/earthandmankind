@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="col s12" style="padding-top:30px;">
                     <p class="lead">
-                        God is the term given to lightest and brightest state of being
+                        God is the term given to the lightest and brightest state of being
                         with its consciousness, while death is the term
                         given to the hardest and darkest state of being with no
                         consciousness. 
