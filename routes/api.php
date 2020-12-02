@@ -86,12 +86,12 @@ Route::get('/audiop/{audio_name}', 'AudioController@getEdit');
 
 
 Route::post('/saveVideo', 'CourseController@store');
-Route::apiResource('dictionary', 'DictionaryController'); //Dictionary
 
-
+Route::get('gallery', 'ImageGalleryController@general');
 Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/users','UserController@index');
     Route::get('users/{user}','UserController@show');
+    Route::apiResource('image-gallery', 'ImageGalleryController'); //Dictionary
 
      // VIDEOS
  Route::put('/updateVideo/{video_id}', 'VideoController@editVid');

@@ -10,7 +10,7 @@
                             <li><router-link :to="{ name:'home'}">HOME</router-link></li>
                             <li><router-link :to="{ name:'library'}">LIBRARY</router-link></li>
                             <li><router-link :to="{ name:'article'}">ARTICLES</router-link></li>
-                            <li><router-link :to="{name: 'dictionary'}">DICTIONARY</router-link></li>
+                            <li><router-link :to="{name: 'videos'}">VIDEOS</router-link></li>
                             <li><router-link :to="{name: 'contact'}">CONTACT</router-link></li>
                             
 
@@ -32,7 +32,7 @@
                 <li><router-link :to="{ name:'home'}">HOME</router-link></li>
                 <li><router-link :to="{ name:'library'}">LIBRARY</router-link></li>
                 <li><router-link :to="{ name:'article'}">ARTICLES</router-link></li>
-                <li><router-link :to="{name: 'dictionary'}">DICTIONARY</router-link></li>
+                <li><router-link :to="{name: 'videos'}">VIDEOS</router-link></li>
                 <li><router-link :to="{name: 'contact'}">CONTACT</router-link></li>
                 
 

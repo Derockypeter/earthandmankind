@@ -18,63 +18,59 @@
             </div>
             <div class="row dictHeader" v-else>
                 <div class="col s12">
-                    <h1>{{ book.name }}</h1>
-                    <img
-                        :src="'/books/images/' + book.image"
-                        alt=""
-                        srcset=""
-                        height="300"
-                    />
-                    <p></p>
-                    <p>{{ book.description }}</p>
-                    <p v-if="payed">
-                        Your book is ready to download. Thanks for purchasing
-                    </p>
+                    <h1 class="fSize">{{ book.name }}</h1>
+                    <div class="col s12 l6">
+                        <img
+                            :src="'/books/images/' + book.image"
+                            alt=""
+                            srcset=""
+                            class="responsive-img"
+                            height="300"
+                        />
+                        
+                    </div>
+                    <div class="col s12 l6">
+                        <p>{{ book.description }}</p>
+                        <span class="buttonPayment">
+                            <a
+                                v-if="!payed"
+                                class="btn waves waves effect black btn-small modal-trigger"
+                                href="#openForm"
+                            >
+                                Get for &#36;{{ book.amount }}
+                            </a>
+                            <a
+                                v-else
+                                class="btn btn-small downloadBook waves waves-effect grey darken-4"
+                                @click.prevent="download(book.id)"
+                                :disabled="downloading"
+                                >{{
+                                    downloading ? "Downloading..." : "Download"
+                                }}</a
+                            >
 
-                    <p>
-                        <a
-                            v-if="!payed"
-                            class="btn waves waves effect black btn-small modal-trigger"
-                            href="#openForm"
-                        >
-                            Get a copy for &#36;{{ book.amount }}
-                        </a>
-                        <a
-                            v-else
-                            class="btn btn-small downloadBook waves waves-effect grey darken-4"
-                            @click.prevent="download(book.id)"
-                            :disabled="downloading"
-                            >{{
-                                downloading ? "Downloading..." : "Download"
-                            }}</a
-                        >
-
-                        <!-- <a
-                        :href="'path/' + book.path"
-                            :download="book.name"
-                            v-if="!payed"
-                            class="btn btn-small downloadBook waves waves-effect grey darken-4"
-                            :href="'preview/' + book.preview"
-                            >Preview</a
-                        > -->
-
-                        <a
-                            class="preloader-wrapper active"
-                            v-if="verifypayment"
-                        >
-                            <div class="spinner-layer spinner-red-only">
-                                <div class="circle-clipper left">
-                                    <div class="circle"></div>
+                            <a
+                                class="preloader-wrapper active"
+                                v-if="verifypayment"
+                            >
+                                <div class="spinner-layer spinner-red-only">
+                                    <div class="circle-clipper left">
+                                        <div class="circle"></div>
+                                    </div>
+                                    <div class="gap-patch">
+                                        <div class="circle"></div>
+                                    </div>
+                                    <div class="circle-clipper right">
+                                        <div class="circle"></div>
+                                    </div>
                                 </div>
-                                <div class="gap-patch">
-                                    <div class="circle"></div>
-                                </div>
-                                <div class="circle-clipper right">
-                                    <div class="circle"></div>
-                                </div>
-                            </div>
-                        </a>
-                    </p>
+                            </a>
+                        </span>
+                        <p v-if="payed">
+                            Your book is ready to download. Thanks for purchasing
+                        </p>
+                    </div>
+                    
                 </div>
                 <!-- <div class="col s12 l4 middle">
                     <div>
@@ -91,7 +87,7 @@
                     <div class="row">
                         <form class="col s12">
                             <div class="row">
-                                <div class="input-field col s6">
+                                <div class="input-field col s12 l6">
                                     <input
                                         id="name"
                                         type="text"
@@ -100,7 +96,7 @@
                                     />
                                     <label for="first_name">Names</label>
                                 </div>
-                                <div class="input-field col s6">
+                                <div class="input-field col s12 l6">
                                     <input
                                         id="email"
                                         type="email"
@@ -146,6 +142,12 @@
 }
 .dictHeader h1 {
     margin-top: 0px;
+}
+.fSize {
+    font-size: 1.5em;
+}
+.buttonPayment {
+
 }
 </style>
 <script>

@@ -2,7 +2,7 @@
     <div class="container">
         <div class="articles">
             <div class="main-container">
-                <h1>Edit Dictionary</h1>
+                <h1>Edit Image</h1>
                 <div v-if="message" class="alert">{{ message }}</div>
                 <div v-if="! loaded" class="progress">
                     <div class="indeterminate"></div>

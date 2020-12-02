@@ -2,27 +2,53 @@
     <div class="container">
         <div class="articles">
             <div class="main-container">
-                <h1>Create Word</h1>
+                <h1>Add Image</h1>
                 <div v-if="message" class="alert">{{ message }}</div>
                 <div class="row">
-                    <form class="col s12" @submit="createDictionary" enctype="multipart/form-data">
+                    <form
+                        class="col s12"
+                        @submit="addImage"
+                        enctype="multipart/form-data"
+                    >
                         <div class="row">
                             <div class="input-field col s12">
-                                <input placeholder="Enter Word" v-model="dictionary.word" id="word" type="text" class="validate">
+                                <input
+                                    placeholder="Enter Description"
+                                    v-model="images.desc"
+                                    id="name"
+                                    type="text"
+                                    class="validate"
+                                />
                             </div>
                         </div>
                         <div class="row">
-                            <div class="input-field col s12">
-                                <tinymce v-model="dictionary.meanings"
-                                    :plugins="myPlugins" 
-                                    :toolbar ="myToolbar1"
-                                >
-                                </tinymce>   
+                            <div class="file-field input-field col s12">
+                                <div class="btn">
+                                    <span>File</span>
+                                    <input
+                                        type="file"
+                                        v-on:change="onImageChange"
+                                    />
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input
+                                        class="file-path validate"
+                                        name="image"
+                                        type="text"
+                                        placeholder="Upload Image"
+                                        required
+                                    />
+                                </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col s12">
-                                <button class="btn waves waves-effect grey">Create Dictionary</button>
+                                <div class="input-field col s12">
+                                    <input class="validate" v-model="images.tags" placeholder="tags"/>
+                                </div>
+                                <button class="btn waves waves-effect green lighten-1" :disabled="saving">
+                                    {{ saving ? 'Uploading Image..' : 'Create Image' }}
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -31,44 +57,51 @@
         </div>
     </div>
 </template>
-<style scoped>
-   
-</style>
+<style scoped></style>
 <script>
-import Editor from '@tinymce/tinymce-vue';
-  export default {
+export default {
     data() {
-		return {
+        return {
             saving: false,
             message: false,
-            dictionary: {
-                word: "",
-                meanings: "",
+            images: {
+                name: null,
+                desc: "",
+                tags: "",
             },
-            myToolbar1: 'undo redo | bold italic underline preview | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link',
-            myPlugins: "link code preview imagetools insertdatetime paste spellchecker autosave autoresize",
-            
-		}
-    },
-    components: {
-         'tinymce': Editor // <- Important part
+        };
     },
     methods: {
-		createDictionary(evt) {
+        addImage(evt) {
             evt.preventDefault();
-            this.saving = true
-            if(this.dictionary.word != '' && this.dictionary.meanings != ''){
-                let uri = '/api/dictionary';
-                this.axios.post(uri, this.dictionary)
-                .then((response) => {
-                    M.toast({html: response.data.message})
-                    this.$router.push({name: 'admin'});
-                }).catch((error) => {
-                    this.message = error.response.data.message || 'There was an issue creating the dictionary.';
-                    this.saving = false
-                })
+            this.saving = true;
+            if (this.images.desc != "" && this.images.name != "") {
+                let uri = "/api/image-gallery";
+                let formData = new FormData;
+                formData.append('name', this.images.name);
+                formData.append('desc', this.images.desc)
+                formData.append('tags', this.images.tags)
+                this.axios
+                    .post(uri, formData)
+                    .then(response => {
+                        if (response.data.status == 200){
+                            M.toast({ html: response.data.message });
+                   
+                            this.$router.push({ name: "admin" });
+                        }
+                    })
+                    .catch(error => {
+                        this.message =
+                            "There was an issue creating the image.";
+                        this.saving = false;
+                    });
             }
-		},
+        },
+        onImageChange(event) {
+            if (!event.target.files.length) return;
+
+            this.images.name = event.target.files[0];
+        },
     }
-  }
+};
 </script>

@@ -27,7 +27,7 @@
              <div class="col m1">
             </div>
             <div class="col m3 product-box big-text">
-                <a href='/admin/dictionary'>Dictionary<span class="badge"> ({{dictionary.length}})</span></a>
+                <a href='/admin/images'>Images<span class="badge"> ({{images.length}})</span></a>
             </div>
         </div>
         <div class="row">
@@ -50,7 +50,7 @@
                 books: [],
                 users : [],
                 audio: [],
-                dictionary: [],
+                images: [],
             }
         },
         mounted() {
@@ -59,7 +59,7 @@
             this.axios.get('/api/languages/').then(response => this.languages = response.data)
             this.axios.get('/api/books/').then(response => this.books = response.data)
             this.axios.get('/api/courses/').then(response => this.courses = response.data)
-            this.axios.get('/api/dictionary/').then(response => this.dictionary = response.data.dictionary)
+            this.axios.get('/api/image-gallery/').then(response => this.images = response.data.image_gallery)
             this.axios.get('/api/audio/').then(response => this.audio = response.data.audio)
         }
     }

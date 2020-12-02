@@ -13,6 +13,9 @@ import 'materialize-css/dist/js/materialize.min'
 import M from 'materialize-css/dist/css/materialize.min.css'
 import 'materialize-css/dist/fonts/material-icons.css'
 
+import "viewerjs/dist/viewer.css";
+import Viewer from "v-viewer";
+
 library.add(faFacebook, faTwitter, faEnvelope, faWhatsapp)
 Vue.use(VueAxios, axios)
 Vue.use(VueHead)
@@ -20,6 +23,7 @@ Vue.use(VueRouter)
 // Vue.use(VueSocialSharing);
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.use(M)
+Vue.use(Viewer)
 
 Vue.config.productionTip = true
 
@@ -40,7 +44,7 @@ import Login from './components/LoginComponent.vue'
 import Video from './components/Video.vue'
 import Password from './components/PasswordResetForm.vue'
 import FBCallback from './components/FBCallback.vue'
-import Dictionary from './components/DictionaryComponent.vue'
+import Gallery from './components/GalleryComponent.vue'
 import SingleBook from './components/SingleBookComponent.vue'
 import Videos from './components/VideosComponent.vue'
 import Audios from './components/AudioComponent.vue'
@@ -73,9 +77,9 @@ import EditBook from './components/admin/book/EditComponent.vue'
 import CreateBook from './components/admin/book/CreateComponent.vue'
 import IndexBook from './components/admin/book/BookComponent.vue'
 
-import EditDictionary from './components/admin/dictionary/EditComponent.vue'
-import CreateDictionary from './components/admin/dictionary/CreateComponent.vue'
-import IndexDictionary from './components/admin/dictionary/DictionaryComponent.vue'
+import EditImgGallery from './components/admin/dictionary/EditComponent.vue'
+import CreateImgGallery from './components/admin/dictionary/CreateComponent.vue'
+import IndexImgGallery from './components/admin/dictionary/ImageComponent.vue'
 
 
 import EditAudio from './components/admin/audio/EditComponent.vue'
@@ -133,12 +137,12 @@ const router = new VueRouter ({
             },
         },
         {
-            path: '/dictionary',
-            name: 'dictionary',
-            component: Dictionary,
+            path: '/gallery',
+            name: 'gallery',
+            component: Gallery,
             meta: {
                 auth: false,
-                title: 'Earth and Mankind - Dictionary'
+                title: 'Earth and Mankind - Gallery'
             }
         },
         {
@@ -256,7 +260,7 @@ const router = new VueRouter ({
                 
             },
             meta: {
-                title: "Earth and Mankind - Edit Books"
+                title: "Earth and Mankind - Edit Video"
             }
         },
         {
@@ -302,36 +306,36 @@ const router = new VueRouter ({
             }
         },
         {
-            path: '/admin/create-dictionary',
-            name: 'create-dictionary',
-            component: CreateDictionary,
+            path: '/admin/create-gallery',
+            name: 'create-gallery',
+            component: CreateImgGallery,
             props: {
 
             },
             meta: {
-                title: "Earth and Mankind - Create Dictionary"
+                title: "Earth and Mankind - Create Gallery"
             }
         },
         {
-            path: '/admin/edit-dictionary/:id',
-            name: 'edit-dictionary',
-            component: EditDictionary,
+            path: '/admin/edit-gallery/:id',
+            name: 'edit-gallery',
+            component: EditImgGallery,
             props: {
                 
             },
             meta: {
-                title: "Earth and Mankind - Edit Dictionary"
+                title: "Earth and Mankind - Edit gallery"
             }
         },
         {
             path: '/admin/index',
-            name: 'index-dictionary',
-            component: IndexDictionary,
+            name: 'index-gallery',
+            component: IndexImgGallery,
             props: {
                 
             },
             meta: {
-                title: "Earth and Mankind - Dictionary"
+                title: "Earth and Mankind - image gallery"
             }
         },
         {
@@ -504,6 +508,9 @@ const app = new Vue({
             },
             immediate: true
         }
+    },
+    mounted() {
+        
     },
 	router
 })

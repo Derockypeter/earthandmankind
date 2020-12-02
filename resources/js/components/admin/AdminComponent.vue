@@ -10,7 +10,7 @@
                         <li><a @click="setComponent('videos')">Videos</a></li>
                         <li><a @click="setComponent('books')">Books</a></li>
                         <li><a @click="setComponent('users')">Users</a></li>
-                        <li><a @click="setComponent('dictionary')">Dictionary</a></li>
+                        <li><a @click="setComponent('images')">Images</a></li>
                         <li><a @click="setComponent('audio')">Audio</a></li>
                         <li title="Register an admin"><a @click="setComponent('register')">Register</a></li>
                     </ul>
@@ -47,7 +47,7 @@ import Posts from './post/PostComponent'
 import languages from './language/LanguageComponent'
 import Videos from './videos/VideoComponent'
 import Books from './book/BookComponent'
-import Dictionary from './dictionary/DictionaryComponent'
+import Images from './dictionary/ImageComponent'
 import Register from './RegisterComponent'
 import Audio from './audio/AudioComponent'
 import Axios from 'axios'
@@ -66,8 +66,9 @@ export default {
         languages,
         Videos,
         Books,
-        Dictionary,
+        Images,
         Register,
+        Audio
     },
     beforeMount() {
         this.setComponent(this.$route.params.page)
@@ -98,9 +99,9 @@ export default {
                     this.activeComponent = Books
                     this.$router.push({name: 'admin-pages', params: {page: 'books'}})
                     break;
-                case "dictionary":
-                    this.activeComponent = Dictionary
-                    this.$router.push({name: 'admin-pages', params: {page: 'dictionary'}})
+                case "images":
+                    this.activeComponent = Images
+                    this.$router.push({name: 'admin-pages', params: {page: 'images'}})
                     break;
                 case "audio":
                     this.activeComponent = Audio
