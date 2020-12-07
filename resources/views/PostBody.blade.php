@@ -8,10 +8,10 @@
     <meta property="og:description" content="{{$post->title}}" />
     <meta property="og:url" content="{{ Request::url()  }}" />
     <meta property="og:type" content="article" />
-    @if ($imgSrc)
-        <meta property="og:image" content="{{ url($imgSrc) }}" />
+    @if ($final)
+        <meta property="og:image" content="{{ url($final) }}" />
     @endif
-    <meta name="twitter:image:src" content="{{ url($imgSrc) }}">
+    {{-- <meta name="twitter:image:src" content="{{ url($imgSrc) }}"> --}}
     <meta name="twitter:site" content="@stephen29322578"><meta name="twitter:creator" content="@stephen29322578">
     <title>Earth and Mankind - {{$post->title}}</title>
     

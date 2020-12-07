@@ -23,18 +23,9 @@ class ImageController extends Controller
            if ($request->hasFile('image')) {
                 $images = $request->image->getClientOriginalName();
                 $images = time().'_'.$images; // Add current time before image name
-
-                $path = $request->file('image')->storeAs(
-                    'public/posts', $images
-                );
-                $path = $request->file('image')->store('public');
-                // $path = $images->store('posts/images');
-                // $uploader = new Image(); 
-                // $uploader->image = $images;
-                // $uploader->save();
-                // dd(Storage::url($path));
-
-                return response()->json(['location' => Storage::url($path)]);
+                $path = $request->image->move(public_path('/posts/images/'),$images);
+                $pathe = ("/posts/images/").$images;
+                return response()->json(['location' => $pathe]);
 
             }
         }

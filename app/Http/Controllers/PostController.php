@@ -90,9 +90,9 @@ class PostController extends Controller
         foreach ($img as $key) {
             $final = $key->getAttribute('src');
             $path = urldecode('images/tmp.jpg');
-            $imgSrc =  $this->base64_to_jpeg($final, $path);
+            // $imgSrc =  $this->base64_to_jpeg($final, $path);
         }
-        return view('PostBody', compact('post', 'imgSrc'));
+;        return view('PostBody', compact('post', 'final'));
     }
     // Getting all the post for admin
     public function getAllPost()
