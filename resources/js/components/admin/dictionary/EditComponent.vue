@@ -59,7 +59,7 @@ import Editor from '@tinymce/tinymce-vue';
 				setTimeout(() => {
                     this.loaded = true;
                     this.dictionary = response.data.dictionary;
-                    console.log(response.data)
+                    // console.log(response.data)
                 }, 5000);
 			});
     },

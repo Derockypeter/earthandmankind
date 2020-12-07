@@ -7,7 +7,7 @@
                     <td>Name</td>
                     <td>Email</td>
                     <td>Joined</td>
-                    <td>Subscribed</td>
+                    <!-- <td>Subscribed</td> -->
                 </tr>
             </thead>
             <tbody>
@@ -17,7 +17,7 @@
                     <td>{{user.email}}</td>
                     <td>{{(user.created_at).substr(0, 10)}}</td>
                     
-                    <td>{{user.premium}}</td>
+                    <!-- <td>{{user.premium}}</td> -->
                     <!-- <td v-else-if="user.premium.status != null">{{user.premium.status}}</td> -->
 
                 </tr>
@@ -35,7 +35,8 @@
         },
         beforeMount() {
             this.axios.get('/api/users/').then(response => {this.users = response.data
-            console.log(response.data)}) 
+            // console.log(response.data)
+            }) 
         },
     }
     </script>

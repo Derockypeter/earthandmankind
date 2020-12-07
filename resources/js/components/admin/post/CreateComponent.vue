@@ -148,7 +148,6 @@
             let uri = '/api/savePost';
             if (this.post.title != "" && this.post.body != "" && this.post.language_id != "" && this.post.featured != "")
             {
-                console.log(this.post)
 
                 const data = new FormData();
                 data.append('title', this.post.title)
@@ -159,23 +158,23 @@
                 this.axios.post(uri, data)
                     .then((response) => {
                         if (response.data.errors) {
-                            this.message = response.data.errors || 'Error while creating post'
+                            this.message = 'Error while creating post'
                             this.saving = false
                         }
                         else {
                             M.toast({html: 'Post created'})
                             this.$router.push({name: 'admin'});
                         }
-                        console.log(response)
+                        // console.log(response)
                     })
                     .catch(err => {
-                        this.message = err.response.data || 'Error while creating post'
+                        this.message = 'Error while creating post'
+                        console.log(err);
                         this.saving = false
                     });
             }
             else if(this.post.title != "" && this.post.body != "" && this.post.language_id != "" && this.post.featured == "")
             {
-                console.log(this.post)
 
                 const data = new FormData();
                 data.append('title', this.post.title)
@@ -185,17 +184,17 @@
                 this.axios.post(uri, data)
                 .then((response) => {
                     if (response.data.errors) {
-                            this.message = response.data.errors || 'Error while creating post'
+                            this.message = 'Error while creating post'
                             this.saving = false
                         }
                         else {
                             M.toast({html: 'Post created'})
                             this.$router.push({name: 'admin'});
                         }
-                        console.log(response)
+                        // console.log(response)
                 })
                 .catch(err => {
-                    this.message = err.response.data || 'Error while creating post'
+                    this.message = 'Error while creating post'
                     this.saving = false
                 });
     

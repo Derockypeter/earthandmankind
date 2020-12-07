@@ -109,7 +109,7 @@ export default {
                     this.audios = response.data.audio;
                 }, 1000);
             })
-            .catch(err => console.error.response.data.data);
+            .catch(err => consolelog(err));
     },
     methods: {
         deleteAudio(id) {

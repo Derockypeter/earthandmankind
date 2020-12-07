@@ -35,6 +35,9 @@
                         </div>
                     </div>
                 </div>
+                <div class="col s12 m7" v-if="audios.lenght <= 0">
+                    <marquee>Audios are on the way</marquee>
+                </div>
             </div>
         </div>
     </div>

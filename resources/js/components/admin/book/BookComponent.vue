@@ -99,7 +99,7 @@ export default {
                     this.books = response.data;
                 }, 5000);
             })
-            .catch(err => console.error.response.data.data);
+            .catch(err => console.log(error));
     },
     methods: {
         deleteBook(id) {

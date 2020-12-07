@@ -89,7 +89,6 @@
                 setTimeout(() => {
                     this.loaded = true
                     this.videos = response.data[0];
-                    console.log(response.data)
                 }, 5000);
             });
             let uri2 = '/api/languages';

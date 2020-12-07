@@ -70,7 +70,7 @@ export default {
                 this.galleries = response.data.image_gallery;
                 this.loaded = true;
             })
-            .catch(err => console.log(err.response.data));
+            .catch(err => console.log(err));
     },
     methods: {
         deleteGallery(id) {

@@ -70,11 +70,10 @@
                 setTimeout(() => {
                     this.loaded = true;
                     this.courses = response.data;
-                    console.log(response)
                 }, 5000);
             })
             .catch(err => 
-                console.error.response.data
+                console.log(err)
             )
         },
         methods: {
@@ -83,7 +82,6 @@
                 this.saving = true
                 let uri = `/api/deleteCourse/${id}`;
                 this.axios.delete(uri).then(response => {
-                    console.log(response)
                     this.courses.splice(this.courses.findIndex(video => video.id === id), 1);
                     this.saving = false
                 }).catch(err => {

@@ -148,7 +148,6 @@
       let uri = '/api/languages';
       this.axios.get(uri).then(response => {
 		this.options = response.data;
-		// console.log(response.data)
       });
       M.AutoInit();
     },

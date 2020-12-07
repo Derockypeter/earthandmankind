@@ -63,7 +63,7 @@
                 
             })
             .catch(err => 
-                console.error(response.data.data)
+                console.log(err)
             )
         },
         methods: {
@@ -75,7 +75,7 @@
                 .then(response => {
                     this.languages.splice(this.languages.findIndex(language => language.id === id), 1);
                 }).catch(err => {
-                    console.error(err)
+                    console.log(err)
                     // this.$router.push({ name: '404' });
                 }).then(
                     this.saving = false

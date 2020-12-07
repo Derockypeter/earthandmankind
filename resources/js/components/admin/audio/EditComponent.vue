@@ -52,7 +52,7 @@
                 setTimeout(() => {
                     this.loaded = true;
                     this.audio = response.data;
-                    console.log(response)
+                    // console.log(response)
                 }, 5000);
 			});
 			let uri2 = '/api/languages';
