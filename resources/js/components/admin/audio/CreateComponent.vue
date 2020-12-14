@@ -146,7 +146,7 @@ export default {
                     .post(uri, data)
                     .then(response => {
                         if (response.data == 200) {
-                            this.$router.replace({ name: "admin" });
+                            this.$router.replace({ name: "admin" }).catch(()=>{});
                         }
                         else if(response.data.error){
                             this.message = response.data.error

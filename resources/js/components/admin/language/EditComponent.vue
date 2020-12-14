@@ -42,7 +42,7 @@
                 let uri = `/api/update/${this.$route.params.id}`;
                 this.axios.put(uri, this.language).then((response) => {
                     this.success = 'Updated succesfuly'
-                    this.$router.push({name: 'admin'});
+                    this.$router.push({name: 'admin'}).catch(()=>{});
                 }).catch(error => {console.log(error)});
             },
         }

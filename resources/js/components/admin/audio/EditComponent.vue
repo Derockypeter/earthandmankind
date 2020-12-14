@@ -67,7 +67,7 @@
                 let uri = `/api/audio/${this.$route.params.id}`;
                 this.axios.put(uri, this.audio)
                     .then((response) => {
-                        this.$router.push({name: 'admin'});
+                        this.$router.push({name: 'admin'}).catch(()=>{});
                     })
                     .catch((e) => {
                         this.message = e.response.data || 'There was an issue updating the book.';

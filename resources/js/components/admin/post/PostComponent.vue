@@ -83,7 +83,7 @@
                    setTimeout(() => {
                     this.loaded = true;
                     this.posts = res.data.data;
-                    console.log(res);
+                    // console.log(res);
                     this.meta_data.last_page_url = res.data.last_page_url;
                     this.meta_data.current_page = res.data.current_page;
                     this.meta_data.prev_page_url = res.data.prev_page_url; 
@@ -100,7 +100,6 @@
                 let uri = `/api/deletePost/${id}`;
                 this.axios.delete(uri)
                 .then((response) => {
-                    console.log(response)
                     this.posts.splice(this.posts.findIndex(post => post.id === id), 1);
                     this.saving = false
                 }).catch( (err) => {

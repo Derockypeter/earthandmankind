@@ -39,10 +39,9 @@ Route::get('/myaudio/{id}', 'BookController@download');
 
 
 // VIDEOS
-Route::get('/getAllVideos', 'VideoController@allVideos');
-Route::get('/courses', 'CourseController@allCourse');
-Route::get('/course/{title}', 'CourseController@course');
-Route::get('/course/{id}', 'CourseController@videos');
+Route::get('/getAllVideos', 'VideoController@index');
+Route::get('/getVideo/{videoName}', 'VideoController@videoName');
+
 
 // POSTS
 Route::get('/posts', 'PostController@getAllPost');
@@ -98,11 +97,6 @@ Route::group(['middleware' => 'auth:api'], function(){
  Route::get('/video/{video_id}', 'VideoController@video'); //Viewing a single video FOR SUBSCRIBED USER
  Route::post('/addVideo', 'VideoController@storeVideo');
  Route::delete('/deleteVideo/{video_id}', 'VideoController@delete');
-
- // COURSE
- Route::get('/editcourse/{id}', 'CourseController@editCourse');
- Route::put('/updatecourse/{id}', 'CourseController@updateCourse');
- Route::delete('/deletecourse/{id}', 'CourseController@deleteCourse');
 
  // POST
  Route::put('/disablePost/{post_id}', 'PostController@disablePost');

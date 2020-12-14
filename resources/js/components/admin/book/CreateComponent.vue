@@ -195,7 +195,7 @@ export default {
                             this.messer = false;
                             this.saving = false;
                         } else if (response.data.status == "success") {
-                            this.$router.push({ name: "admin" });
+                            this.$router.push({ name: "admin" }).catch(()=>{});
                         }
                     })
                     .catch(e => {

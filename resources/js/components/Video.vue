@@ -18,19 +18,18 @@
         <div class="container">
             <div class="articles">
                 <div class="main-container">
-                    <div v-for="video in videos" :key="video.id">
-                        <h4>{{ video.videos[0].name }}</h4>
+                    <div class="row">
+                        <h1 class="headerSize">{{ video.name }}</h1>
 
-                        <video class="responsive-video" controls>
-                            <source
-                                :src="'/videos/' + video.videos[0].video"
-                                type="video/mp4"
-                            />
-                        </video>
-
-                        <p>{{ video.description }}</p>
+                        <div class="col s12 l8 m12">
+                            <div class="video-container">
+                                <iframe width="560" height="315" :src="video.youtubeEmbedUrl" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                        <p>{{ video.about }}</p>
                     </div>
                 </div>
+                
             </div>
         </div>
     </div>
@@ -41,13 +40,7 @@ import AccordionItem from "../components/reusable/Accordion-item";
 export default {
     data() {
         return {
-            video: "",
-            videos: [],
-            previews: [],
-            allVideo: [],
-            isLoggedIn: localStorage.getItem("manKind.jwt"),
-            to_learns: [],
-            requirements: [],
+            video: [],
             loaded: false
         };
     },
@@ -56,23 +49,20 @@ export default {
         AccordionItem
     },
     created() {
-        let video_uri = `/api/course/${this.$route.params.coursename}`;
+        let video_uri = `/api/getVideo/${this.$route.params.coursename}`;
         this.axios
             .get(video_uri)
             .then(response => {
                 this.loaded = true;
-                let a = response.data.course[0].to_learn;
-                this.to_learns = a
-                    .replace(/([.?!])\s*(?=[A-Z])/g, "$1|")
-                    .split("|");
-                let b = response.data.course[0].requirements;
-                this.requirements = b
-                    .replace(/([.?!])\s*(?=[A-Z])/g, "$1|")
-                    .split("|");
-                // console.log(response);
-                this.videos = response.data.course;
-                // this.previews = response.data.preview[0].videoName;
-                // this.allVideo = response.data.othervids;
+                // let a = response.data.course[0].to_learn;
+                // this.to_learns = a
+                //     .replace(/([.?!])\s*(?=[A-Z])/g, "$1|")
+                //     .split("|");
+                // let b = response.data.course[0].requirements;
+                // this.requirements = b
+                //     .replace(/([.?!])\s*(?=[A-Z])/g, "$1|")
+                //     .split("|");
+                this.video = response.data;
             })
             .catch(err => console.log(err));
     },
@@ -182,7 +172,7 @@ i.large {
     font-weight: 600;
     transform: translate(-50%, -50%);
 }
-h6 {
+h6, .headerSize {
     font-weight: 700;
 }
 .paragraph-course-content {
@@ -201,5 +191,8 @@ h6 {
 .smallPreview {
     color: #1e5ebe;
     font-size: 10px;
+}
+.headerSize {
+    font-size: 1.5em;
 }
 </style>

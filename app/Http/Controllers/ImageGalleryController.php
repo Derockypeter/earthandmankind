@@ -67,8 +67,6 @@ class ImageGalleryController extends Controller
                 'tags' => $request->tags,
             ]);
             return response(['image-gallery' => new ImageGalleryResource($image), 'message' => 'Image registered Successfully', 'status' => 200]);
-       
-            return response()->json(['errors' => $data->errors()->all()]);
         }
     }
 

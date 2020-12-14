@@ -122,7 +122,7 @@ export default {
                 .put(uri, this.book)
                 .then(response => {
                     if(response.data.status == 200){
-                        this.$router.push({ name: "admin" });
+                        this.$router.push({ name: "admin" }).catch(()=>{});
                     }
                     else {
                         this.saving = false;

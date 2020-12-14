@@ -18,34 +18,21 @@ class PostController extends Controller
         $posts = new Post();
         $data = Validator::make($request->all(), [
 			'body' => 'required',
-            'title' => 'required|max:300|unique:posts',           
-            'featured' => 'nullable',
+            'title' => 'required|max:300|unique:posts',
             'language_id' => 'required'
         ]);
         if ($data->fails()){
             return response()->json(['errors' => $data->errors()->all()]);
         }
         else {
-            if($request->has('featured')) {
-                $post = $posts->create([
+            $post = $posts->create([
                 'body' => $request->body,
                 'title' => $request->title,
                 'language_id' => $request->language_id,
                 'status' => 'published'
-                ])->featured()->create([
-                    'featured' => $request->featured
-                ]);
-                return response()->json(['post' => $post,'message' => 'success'], 200);
-            }
-            else {
-                $post = $posts->create([
-                    'body' => $request->body,
-                    'title' => $request->title,
-                    'language_id' => $request->language_id,
-                    'status' => 'published'
-                ]);
-                return response()->json(['post' => $post,'message' => 'success'], 200);
-            }  
+            ]);
+            return response()->json(['post' => $post,'message' => 'success'], 200);
+             
         } 
        
 	}	
@@ -129,18 +116,6 @@ class PostController extends Controller
 		else{
 			return 0;
 		}
-    }
-    // Gets all fatured post by latest
-    public function featuredPost()
-    {
-        $featurePosts = new \App\Featured();
-        if ($featurePosts) {
-            $post = $featurePosts->with(['post'])->latest()->take(6)->get();
-            return response()->json($post);
-        }
-        else {
-            return 0;
-        }
     }
      // Disables a Post
 	public function disablePost(Request $request, $post_id)

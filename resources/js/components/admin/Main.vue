@@ -17,7 +17,7 @@
         </div>
         <div class="row">
             <div class="col m3 product-box big-text">
-                <a href='/admin/videos'>Courses<span class="badge"> ({{courses.length}})</span></a>
+                <a href='/admin/videos'>Videos<span class="badge"> ({{videos.length}})</span></a>
             </div>
             <div class="col m1">
             </div>
@@ -46,7 +46,7 @@
                 user : null,
                 languages : [],
                 posts : [],
-                courses: [],
+                videos: [],
                 books: [],
                 users : [],
                 audio: [],
@@ -58,7 +58,7 @@
             this.axios.get('/api/posts/').then(response => this.posts = response.data.data)
             this.axios.get('/api/languages/').then(response => this.languages = response.data)
             this.axios.get('/api/books/').then(response => this.books = response.data)
-            this.axios.get('/api/courses/').then(response => this.courses = response.data)
+            this.axios.get('/api/getAllVideos/').then(response => this.videos = response.data)
             this.axios.get('/api/image-gallery/').then(response => this.images = response.data.image_gallery)
             this.axios.get('/api/audio/').then(response => this.audio = response.data.audio)
         }

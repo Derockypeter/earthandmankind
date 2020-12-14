@@ -49,7 +49,7 @@
             this.axios.post(uri, this.lang)
             .then((response) => {
                 M.toast({html: 'Language created'})
-				this.$router.push({name: 'admin'});
+				this.$router.push({name: 'admin'}).catch(()=>{});
 			})
 			.catch(err => {
                 this.message = err.response.data || 'Error encountered'

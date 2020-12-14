@@ -121,7 +121,7 @@
                 let uri = `/api/post/${this.$route.params.id}`;
 				this.axios.put(uri, this.post).then((response) => {
 					M.toast({html: 'Post updated'})
-					this.$router.push({name: 'admin'});
+					this.$router.push({name: 'admin'}).catch(()=>{});
 				}).catch(err => {
                     this.message = err.response.data
                     this.saving = false

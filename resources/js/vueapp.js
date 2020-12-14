@@ -70,8 +70,6 @@ import IndexLanguage from './components/admin/language/LanguageComponent.vue'
 import EditVideo from './components/admin/videos/EditComponent.vue'
 import CreateVideo from './components/admin/videos/CreateComponent.vue'
 import IndexVideo from './components/admin/videos/VideoComponent.vue'
-import Addvideo from './components/admin/videos/Addvideo.vue'
-import CourseVid from './components/admin/videos/CourseVideos.vue'
 
 import EditBook from './components/admin/book/EditComponent.vue'
 import CreateBook from './components/admin/book/CreateComponent.vue'
@@ -184,28 +182,6 @@ const router = new VueRouter ({
             },
             meta: {
                 title: 'Earth and Mankind - Create Post'
-            }
-        },
-        {
-            path: '/admin/addvid/:id',
-            name: 'add-video',
-            component: Addvideo,
-            props: {
-
-            },
-            meta: {
-                title: 'Earth and Mankind - Add Video'
-              }
-        },
-        {
-            path: '/admin/course/:id',
-            name: 'coursevid',
-            component: CourseVid,
-            props: {
-                
-            },
-            meta: {
-                title: 'Earth and Mankind - Course'
             }
         },
         {

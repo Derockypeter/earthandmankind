@@ -69,7 +69,7 @@ import Editor from '@tinymce/tinymce-vue';
             let uri = `/api/dictionary/${this.$route.params.id}`;
             this.axios.put(uri, this.dictionary).then((response) => {
                 M.toast({html: 'Dictionary updated'})
-                this.$router.push({name: 'admin'});
+                this.$router.push({name: 'admin'}).catch(()=>{});
             }).catch(err => {
                 this.message = err.response.data.errors
                 this.saving = false

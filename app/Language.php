@@ -12,12 +12,4 @@ class Language extends Model
     {
         return $this->hasOne(\App\Post::class);
     }
-    public function bible()
-    {
-        return $this->hasOne(\App\Book::class);
-    }
-    public function course() 
-    {
-        return $this->hasOne(\App\Course::class);
-    }
 }

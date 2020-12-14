@@ -87,7 +87,7 @@ export default {
                         if (response.data.status == 200){
                             M.toast({ html: response.data.message });
                    
-                            this.$router.push({ name: "admin" });
+                            this.$router.push({ name: "admin" }).catch(()=>{});
                         }
                     })
                     .catch(error => {

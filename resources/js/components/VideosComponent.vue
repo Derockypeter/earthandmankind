@@ -42,15 +42,14 @@
                                                     name: 'course',
                                                     params: {
                                                         coursename:
-                                                            video.coursename
+                                                            video.name
                                                     }
                                                 }"
                                             >
                                                 <div class="card-image">
                                                     <img
                                                         :src="
-                                                            '/courseImages/' +
-                                                                video.image
+                                                            `https://img.youtube.com/vi/${video.youtubeEmbedUrl}/hqdefault.jpg`
                                                         "
                                                         alt="preview image"
                                                     />
@@ -61,7 +60,7 @@
                                             </router-link>
                                             <div class="card-content">
                                                 <p class="coursename">
-                                                    {{ video.coursename }}
+                                                    {{ video.name.substr(0, 20) }}..
                                                 </p>
                                                 <p class="bold">
                                                     Created by EarthandMankind
@@ -73,7 +72,7 @@
                                             <div class="card-action">
                                                 <span
                                                     >{{
-                                                        video.videos.length
+                                                        video.length
                                                     }}
                                                     videos</span
                                                 >
@@ -82,7 +81,7 @@
                                                         name: 'course',
                                                         params: {
                                                             coursename:
-                                                                video.coursename
+                                                                video.name
                                                         }
                                                     }"
                                                 >
@@ -120,7 +119,8 @@ export default {
     data() {
         return {
             loaded: false,
-            videos: []
+            videos: [],
+            videoImage: "",
         };
     },
     mounted() {
@@ -128,19 +128,38 @@ export default {
     },
     methods: {
         getAllVideos() {
-            let video_uri = "/api/courses";
+            let video_uri = "/api/getAllVideos";
             this.axios
                 .get(video_uri)
                 .then(response => {
                     setTimeout(() => {
                         this.loaded = true;
-                        this.videos = response.data;
+                        let youtubeId = [];
+                        let a, b, ab;
+                        response.data.forEach((element, index) => {
+                            a = this.extractId(element.youtubeEmbedUrl);
+                            youtubeId.push(a);
+                            for(let x of youtubeId.keys()) {
+                                if (x == index){
+                                    ab = element.youtubeEmbedUrl  = a
+                                }
+                            }
+                            this.videos = response.data
+                        });
+                        
+                        
+                            
                     }, 1000);
                 })
                 .catch(err => {
                     console.log(err);
                 });
-        }
+        },
+        extractId(url){
+            var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+            var match = url.match(regExp);
+            return (match&&match[7].length==11)? match[7] : false;
+        } 
     }
 };
 </script>

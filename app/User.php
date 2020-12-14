@@ -23,13 +23,7 @@ class User extends Authenticatable
         'gender' , 'phone', 'country', 'state',
         'city', 'email', 'password'
     ];
-     /**
-     * A user has many payment relationship
-     */
-    public function premiums()
-    {
-        return $this->hasMany(PremiumUser::class);
-    }
+    
     /**
      * The attributes that should be hidden for arrays.
      *

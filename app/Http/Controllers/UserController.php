@@ -9,10 +9,17 @@ class UserController extends Controller
 {
     public function index()
     {
-        return response()->json(User::with(['premiums'])->get());
+        $user = User::all();
+        return response()->json($user);
     }
     public function show(User $user)
     {
         return response()->json($user);
+    }
+    public function delete($id)
+    {
+        $userToDelete = User::whereId($id)->firstOrFail();
+        $userToDelete->delete();
+        return response()->json(null, 204);
     }
 }

@@ -18,41 +18,26 @@
                     </div>
                 </div>
                 <div v-else class="row">
-    				<h1>Edit Course</h1>
+    				<h1>Edit Video</h1>
                     <div v-if="message" class="alert">{{ message }}</div>
-                    <form class="col s12" @submit.prevent="updateCourse">
-                        <div class="row">
-                            <div class="input-field col s6">
-                                <input id="input-1"
-                                    v-model="videos.coursename"
-                                    name="coursename"
-                                    required type="text" class="validate">
+                    <div class="row">
+                        <form class="col s12" @submit="updateVideo" novalidate>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input v-model="video.name" name="name" required type="text" class="validate" placeholder="Enter name of video">
+                                </div> 
+                                <div class="input-field col s12">
+                                    <input v-model="video.youtubeEmbedUrl" name="youtubeEmbedUrl" required type="text" class="validate" placeholder="//www.youtube.com/embed/Q8TXgCzxEnw?rel=0">
+                                </div>  
                             </div>
-                            <div class="input-field col s6">
-                                <select v-model="videos.language_id" class="browser-default">
-                                    <option value="" disabled selected>Select Language</option>
-                                    <option v-for="option in options" :key="option.id" v-bind:value="option.id">{{ option.language }}</option>
-                                </select>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <textarea v-model="video.about" name="about" required placeholder="About the video" type="text" class="validate materialize-textarea"></textarea>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s6">
-                                <input id="input-1"
-                                    v-model="videos.requirements"
-                                    name="coursename"
-                                    required type="text" class="validate">
-                            </div>
-                            <div class="input-field col s6">
-                                <textarea id="description" class="materialize-textarea" required placeholder="Please enter a description for the course" v-model="videos.to_learn" ></textarea>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <textarea id="description" class="materialize-textarea" required placeholder="Please enter a description for the course" v-model="videos.description" ></textarea>
-                            </div>
-                        </div>
-                        <button class="btn waves-effect" :disabled="saving" type="submit">Edit</button>
-                    </form>
+                                <button :disabled="saving"  class="btn waves-effect center" type="submit">{{ saving ? 'Creating...' : 'Create' }}</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -66,29 +51,16 @@
                 message: false,
                 loaded: false,
                 saving: false,
-                sections: [
-                    {text: 'Section 1', value: '1'},
-                    {text: 'Section 2', value: '2'},
-                    {text: 'Section 3', value: '3'},
-                    {text: 'Section 4', value: '4'},
-                    {text: 'Section 5', value: '5'},
-                    {text: 'Section 6', value: '6'},
-                    {text: 'Section 7', value: '7'},
-                    {text: 'Section 8', value: '8'},
-                    {text: 'Section 9', value: '9'},
-                    {text: 'Section 10', value: '10'},
-
-                ],
-                videos: {},
+                video: [],
                 options: [],
             }
         },
         created() {
-            let uri = `/api/editcourse/${this.$route.params.id}`;
+            let uri = `/api/video/${this.$route.params.id}`;
             this.axios.get(uri).then((response) => {
                 setTimeout(() => {
                     this.loaded = true
-                    this.videos = response.data[0];
+                    this.video = response.data;
                 }, 5000);
             });
             let uri2 = '/api/languages';
@@ -98,14 +70,14 @@
             });
         },
         methods: {
-            updateCourse(evt) {
+            updateVideo(evt) {
                 evt.preventDefault();
                 this.saving = true
-                let uri = `/api/updatecourse/${this.$route.params.id}`;
-                this.axios.put(uri, this.videos).then((response) => {
+                let uri = `/api/updateVideo/${this.$route.params.id}`;
+                this.axios.put(uri, this.video).then((response) => {
                     if(response.data === 1){
-                        this.$router.push({name: 'admin'});
-                        M.toast({html: "Course Updated Successfuly"})
+                        this.$router.push({name: 'admin'}).catch(()=>{});
+                        M.toast({html: "Video Updated Successfuly"})
                     }
                 }).catch(error => {
                     this.message = error 

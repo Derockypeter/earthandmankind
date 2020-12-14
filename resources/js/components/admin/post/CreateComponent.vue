@@ -153,7 +153,7 @@ export default {
                             this.saving = false;
                         } else {
                             M.toast({ html: "Post created" });
-                            this.$router.push({ name: "admin" });
+                            this.$router.push({ name: "admin" }).catch(()=>{});
                         }
                         // console.log(response)
                     })
@@ -181,7 +181,7 @@ export default {
                             this.saving = false;
                         } else {
                             M.toast({ html: "Post created" });
-                            this.$router.push({ name: "admin" });
+                            this.$router.push({ name: "admin" }).catch(()=>{});
                         }
                         // console.log(response)
                     })
