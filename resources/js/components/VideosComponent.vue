@@ -2,9 +2,9 @@
     <div class="container">
         <div class="articles">
             <div class="main-container">
-                <div class="center" v-if="!loaded" style="height:500px">
+                <div class="center" v-if="!loaded" style="height: 500px">
                     <div
-                        style="top:250px"
+                        style="top: 250px"
                         class="preloader-wrapper small active"
                     >
                         <div class="spinner-layer spinner-red-only">
@@ -41,8 +41,7 @@
                                                 :to="{
                                                     name: 'course',
                                                     params: {
-                                                        coursename:
-                                                            video.name
+                                                        coursename: video.name
                                                     }
                                                 }"
                                             >
@@ -60,7 +59,12 @@
                                             </router-link>
                                             <div class="card-content">
                                                 <p class="coursename">
-                                                    {{ video.name.substr(0, 20) }}..
+                                                    {{
+                                                        video.name.substr(
+                                                            0,
+                                                            20
+                                                        )
+                                                    }}..
                                                 </p>
                                                 <p class="bold">
                                                     Created by EarthandMankind
@@ -85,20 +89,13 @@
                                                         }
                                                     }"
                                                 >
-                                                    <!-- <span class="right"
-                                                        ><i
-                                                            class="material-icons smaller"
-                                                            >play_circle_outline</i
-                                                        >
-                                                        preview</span
-                                                    > -->
                                                 </router-link>
                                             </div>
                                         </div>
                                     </div>
                                     <div
                                         v-if="videos.length == 0"
-                                        style="color: grey; font-size: 30px; text-align: center;"
+                                        style="color: grey; font-size: 30px; text-align: center"
                                     >
                                         <marquee
                                             >VIDEOS ARE COMING SOON</marquee
@@ -120,7 +117,7 @@ export default {
         return {
             loaded: false,
             videos: [],
-            videoImage: "",
+            videoImage: ""
         };
     },
     mounted() {
@@ -135,31 +132,28 @@ export default {
                     setTimeout(() => {
                         this.loaded = true;
                         let youtubeId = [];
-                        let a, b, ab;
+                        let idHolder, newYoutubeEmbedurl;
                         response.data.forEach((element, index) => {
-                            a = this.extractId(element.youtubeEmbedUrl);
-                            youtubeId.push(a);
-                            for(let x of youtubeId.keys()) {
-                                if (x == index){
-                                    ab = element.youtubeEmbedUrl  = a
+                            idHolder = this.extractId(element.youtubeEmbedUrl);
+                            youtubeId.push(idHolder);
+                            for (let x of youtubeId.keys()) {
+                                if (x == index) {
+                                    newYoutubeEmbedurl = element.youtubeEmbedUrl = a;
                                 }
                             }
-                            this.videos = response.data
+                            this.videos = response.data;
                         });
-                        
-                        
-                            
                     }, 1000);
                 })
                 .catch(err => {
                     console.log(err);
                 });
         },
-        extractId(url){
+        extractId(url) {
             var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
             var match = url.match(regExp);
-            return (match&&match[7].length==11)? match[7] : false;
-        } 
+            return match && match[7].length == 11 ? match[7] : false;
+        }
     }
 };
 </script>
