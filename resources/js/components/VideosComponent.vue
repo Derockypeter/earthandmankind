@@ -138,7 +138,7 @@ export default {
                             youtubeId.push(idHolder);
                             for (let x of youtubeId.keys()) {
                                 if (x == index) {
-                                    newYoutubeEmbedurl = element.youtubeEmbedUrl = a;
+                                    newYoutubeEmbedurl = element.youtubeEmbedUrl = idHolder;
                                 }
                             }
                             this.videos = response.data;

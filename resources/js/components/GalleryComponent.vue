@@ -50,7 +50,7 @@ export default {
     },
     created() {
         this.axios.get("api/gallery").then(response => {
-            console.log(response);
+            // console.log(response);
             this.galleries = response.data.image_gallery;
             let image = [];
             response.data.image_gallery.forEach(element => {

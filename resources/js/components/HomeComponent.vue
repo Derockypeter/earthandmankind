@@ -40,11 +40,6 @@
                 </div>
             </div>
         </div>
-        
-        <!-- <CategorySelection
-            :featurePosts="featurePosts"
-            :books="books"
-        ></CategorySelection> -->
     </main>
 </template>
 <style scoped>
@@ -55,36 +50,14 @@
 }
 </style>
 <script>
-import CategorySelection from "./CategorySectionComponent";
 export default {
     props: [],
     data() {
         return {
-            featurePosts: [],
-            books: []
         };
     },
     created() {
         M.AutoInit();
-        // For Books
-        let book_uri = "/api/books";
-        this.axios
-            .get(book_uri)
-            .then(response => {
-                this.books = response.data.data;
-            })
-            .catch(err => {});
-
-        let featuredPost = `/api/featuredPost`;
-        this.axios
-            .get(featuredPost)
-            .then(response => {
-                this.featurePosts = response.data;
-            })
-            .catch(err => {});
     },
-    components: {
-        CategorySelection
-    }
 };
 </script>
