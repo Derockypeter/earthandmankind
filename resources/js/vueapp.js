@@ -11,8 +11,10 @@ import { faFacebook, faTwitter, faWhatsapp } from '@fortawesome/free-brands-svg-
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import 'materialize-css/dist/js/materialize.min'
 import M from 'materialize-css/dist/css/materialize.min.css'
-import 'materialize-css/dist/fonts/material-icons.css'
+// import 'materialize-css/dist/fonts/material-icons.css'
 
+import DatePicker from "vue2-datepicker";
+import "vue2-datepicker/index.css";
 import "viewerjs/dist/viewer.css";
 import Viewer from "v-viewer";
 
@@ -24,6 +26,7 @@ Vue.use(VueRouter)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.use(M)
 Vue.use(Viewer)
+Vue.component('date-picker', DatePicker)
 
 Vue.config.productionTip = true
 
@@ -47,7 +50,7 @@ import Gallery from './components/GalleryComponent.vue'
 import SingleBook from './components/SingleBookComponent.vue'
 import Videos from './components/VideosComponent.vue'
 import Audios from './components/AudioComponent.vue'
-
+import Tour from './components/Tour.vue'
 
 
 
@@ -65,6 +68,10 @@ import IndexPost from './components/admin/post/PostComponent.vue'
 import EditLanguage from './components/admin/language/EditComponent.vue'
 import CreateLanguage from './components/admin/language/CreateComponent.vue'
 import IndexLanguage from './components/admin/language/LanguageComponent.vue'
+
+import EditTour from './components/admin/tour/EditComponent.vue'
+import CreateTour from './components/admin/tour/CreateComponent.vue'
+import IndexTour from './components/admin/tour/TourComponent.vue'
 
 import EditVideo from './components/admin/videos/EditComponent.vue'
 import CreateVideo from './components/admin/videos/CreateComponent.vue'
@@ -143,6 +150,15 @@ const router = new VueRouter ({
             }
         },
         {
+            path: '/tour',
+            name: 'tour',
+            component: Tour,
+            meta: {
+                auth: false,
+                title: 'Earth and Mankind - Tours'
+            }
+        },
+        {
             path: '/registerasAdminPortal',
             name: 'adminRegex',
             component: AdminRegister,
@@ -216,6 +232,29 @@ const router = new VueRouter ({
                 title: "Earth and Mankind - Create Language"
             }
         },
+
+        
+        {
+            path: '/admin/edit/:id',
+            name: 'edit-tour',
+            component: EditTour,
+            props: {
+                
+            },
+            meta: {
+                title: 'Earth and Mankind - Edit Tour'
+            }
+        },
+        {
+            path: '/admin/create-tour',
+            name: 'create-tour',
+            component: CreateTour,
+            props: {},
+            meta: {
+                title: "Earth and Mankind - Create Tour"
+            }
+        },
+
         {
             path: '/admin/video/index',
             name: 'index-video',

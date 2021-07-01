@@ -26,6 +26,13 @@ Route::post('/adminRegister', 'AuthController@adminRegister');
 Route::get('/login/facebook', 'SocialController@redirectToProvider');
 Route::get('/auth/login/facebook/callback', 'SocialController@handleProviderCallback');
 
+Route::get('/tour', 'TourController@index');
+Route::post('/tour', 'TourController@store');
+Route::get('/tour/edit/{id}', 'TourController@show');
+Route::put('/tour/update/{id}', 'TourController@update');
+Route::delete('/delTour/{id}', 'TourController@destroy');
+
+Route::get('/tour/10', 'TourController@latestTen');
 // BOOKS
 Route::get('/books', 'BookController@getAllBooks');
 Route::get('/books/{book_name}', 'BookController@book');
@@ -118,7 +125,9 @@ Route::get('/edit/{id}', 'LanguageController@edit');
 Route::put('/update/{id}', 'LanguageController@update');
 Route::delete('/delLang/{id}', 'LanguageController@delete');
 
-   
+// Tour
+
+
     
 });
 
