@@ -25,7 +25,7 @@
                             alt=""
                             srcset=""
                             class="responsive-img"
-                            height="300"
+                            height="50px"
                         />
                         
                     </div>
@@ -66,6 +66,7 @@
                                 </div>
                             </a>
                         </span>
+                        <h6>You get a copy of the book plus an audio book.</h6>
                         <p v-if="payed">
                             Your book is ready to download. Thanks for purchasing
                         </p>
@@ -145,9 +146,6 @@
 }
 .fSize {
     font-size: 1.5em;
-}
-.buttonPayment {
-
 }
 </style>
 <script>
@@ -252,7 +250,7 @@ export default {
                 );
                 const link = document.createElement("a");
                 link.href = url;
-                link.setAttribute("download", `${this.book.name}.pdf`);
+                link.setAttribute("download", `${this.book.name}.zip`);
                 document.body.appendChild(link);
                 link.click();
                 setTimeout(() => {

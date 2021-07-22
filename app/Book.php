@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Book extends Model
 {
     protected $fillable = [
-        'name', 'description', 'image', 'path'
+        'name', 'description', 'image', 'path', 'audio_path'
     ];
 
     public function language()

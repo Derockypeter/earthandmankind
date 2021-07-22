@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use App\Book;
 use Validator;
 use Storage;
+use ZipArchive;
 
 class BookController extends Controller
 {
@@ -21,7 +22,9 @@ class BookController extends Controller
             'image' => 'required',
             'amount' => 'nullable',
             'preview' => 'nullable',
-            'image.*' => 'mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'image.*' => 'mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'audio_path' => 'nullable',
+            'audio_path.*' => 'file|mimes:application/octet-stream,audio/mpeg,mpga,mp3,wav|max:50000',
         ]);
         if($validation->fails())
         {
@@ -33,7 +36,14 @@ class BookController extends Controller
                 $input['preview'] = $request->preview->getClientOriginalName();
                 $request->preview->move(public_path('books/preview/'), $input['preview']);
             }
-            $input['path'] = $request->path->getClientOriginalName();
+
+           
+            $name = $request->name;
+            if($request->hasFile('audio_path')){
+                $input['audio_path'] = Str::slug($request->name).'.'.$input['audio_path']->getClientOriginalExtension();
+                $request->audio_path->move(public_path('audio/audio_path'), $input['audio_path']);
+            }
+            $input['path'] = Str::slug($request->name).'.'.$input['path']->getClientOriginalExtension();
             $input['image'] = Str::slug($request->name).'.'.$input['image']->getClientOriginalExtension() ;
 
             $request->path->move(public_path('/books/path/'),$input['path']);
@@ -69,6 +79,8 @@ class BookController extends Controller
                 'description' => $book->description,
                 'image' => $book->image,
                 'name' => $book->name,
+                'path' => $book->path,
+                'audioPath' => $book->audio_path,
             ];
         }
         else{
@@ -123,9 +135,22 @@ class BookController extends Controller
     // Download the book
     public function download($id){
         $book = Book::whereId($id)->first();
-        $pathToFile = public_path('books/path/').$book->path;
+        $pathToFile = './books/path/'.$book->path;
+        $pathToAudio = './audio/audio_path/'.$book->audio_path;
         $name = $book->name;
-        return response()->download($pathToFile, $name);
+        $files = array($pathToFile, $pathToAudio);
+        $zipname = "'$book->name.zip'";
+        $zip = new ZipArchive;
+        $zip->open($zipname, ZipArchive::CREATE);
+        foreach ($files as $file) {
+            $zip->addFile($file, );
+        }
+        if (count($zip) > 2) {
+            $zip->deleteIndex(0);
+            $zip->deleteIndex(1);
+        }
+        $zip->close();
+        return response()->download($zipname);
     }
 
     // Makes an api call to paystack to verify payment

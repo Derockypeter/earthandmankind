@@ -71,63 +71,83 @@
                                     />
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="input-field col s6">
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input
+                                    placeholder="Amount"
+                                    v-model="book.amount"
+                                    id="amount"
+                                    type="text"
+                                    class="validate"
+                                />
+                            </div>
+                            <div class="file-field input-field col s6">
+                                <div class="btn purple lighten-4">
+                                    <span>File</span>
                                     <input
-                                        placeholder="Amount"
-                                        v-model="book.amount"
-                                        id="amount"
-                                        type="text"
-                                        class="validate"
+                                        type="file"
+                                        v-on:change="onPreviewChange"
                                     />
                                 </div>
-                                <div class="file-field input-field col s6">
-                                    <div class="btn purple lighten-4">
-                                        <span>File</span>
-                                        <input
-                                            type="file"
-                                            v-on:change="onPreviewChange"
-                                        />
-                                    </div>
-                                    <div class="file-path-wrapper">
-                                        <input
-                                            class="file-path validate"
-                                            name="path"
-                                            type="text"
-                                            placeholder="Upload Book Preview"
-                                        />
-                                    </div>
+                                <div class="file-path-wrapper">
+                                    <input
+                                        class="file-path validate"
+                                        name="path"
+                                        type="text"
+                                        placeholder="Upload Book Preview"
+                                    />
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="input-field col s7">
-                                    <select
-                                        class="browser-default"
-                                        v-model="book.language_id"
-                                    >
-                                        <option value="" disabled selected
-                                            >Select language for this
-                                            book</option
-                                        >
-                                        <option
-                                            v-for="option in options"
-                                            :key="option.id"
-                                            v-bind:value="option.id"
-                                            >{{ option.language }}</option
-                                        >
-                                    </select>
+                        </div>
+                        <div class="row">
+                            <div class="file-field input-field col s6">
+                                <div class="btn">
+                                    <span>File</span>
+                                    <input
+                                        type="file"
+                                        v-on:change="onAudioChange"
+                                    />
                                 </div>
-                                <div class="col s5">
-                                    <button
-                                        :disabled="saving"
-                                        class="btn waves-effect"
-                                        type="submit"
-                                    >
-                                        {{
-                                            saving ? "Publishing..." : "Publish"
-                                        }}
-                                    </button>
+                                <div class="file-path-wrapper">
+                                    <input
+                                        class="file-path validate"
+                                        name="path"
+                                        type="text"
+                                        placeholder="Upload Audio for this book"
+                                        required
+                                    />
                                 </div>
+                            </div>
+                            <div class="input-field col s6">
+                                <select
+                                    class="browser-default"
+                                    v-model="book.language_id"
+                                >
+                                    <option value="" disabled selected
+                                        >Select language for this
+                                        book</option
+                                    >
+                                    <option
+                                        v-for="option in options"
+                                        :key="option.id"
+                                        v-bind:value="option.id"
+                                        >{{ option.language }}</option
+                                    >
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s5">
+                                <button
+                                    :disabled="saving"
+                                    class="btn waves-effect"
+                                    type="submit"
+                                >
+                                    {{
+                                        saving ? "Publishing..." : "Publish"
+                                    }}
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -156,7 +176,8 @@ export default {
                 language_id: "",
                 path: "",
                 amount: "",
-                preview: ""
+                preview: "",
+                audioBook: ""
             },
             options: []
         };
@@ -184,6 +205,7 @@ export default {
                 data.append("path", this.book.path);
                 data.append("amount", this.book.amount);
                 data.append("preview", this.book.preview);
+                data.append("audio_path", this.book.audioBook);
 
                 let uri = "/api/saveBook";
                 this.axios
@@ -221,7 +243,13 @@ export default {
             if (!event.target.files.length) return;
 
             this.book.preview = event.target.files[0];
+        },
+        onAudioChange(event) {
+            if (!event.target.files.length) return;
+
+            this.book.audioBook = event.target.files[0];
         }
+
     }
 };
 </script>
